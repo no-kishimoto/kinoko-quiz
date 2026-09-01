@@ -18,15 +18,19 @@ from src.quiz import QuizSession, create_quiz_session
 
 APP_CSS = """
 .gradio-container { background: #fff8dc; font-family: sans-serif; }
-.main-title { text-align: center; color: #e85d04; font-size: 3rem; }
-.center-text { text-align: center; }
+.main-title { text-align: center; color: #000000 !important; font-size: 3rem; }
+.main-title * { color: #000000 !important; }
+.center-text { text-align: center; color: #000000 !important; }
+.center-text * { color: #000000 !important; }
 .hint-card {
     background: #e7f7ff;
     border: 4px solid #43a5d5;
     border-radius: 20px;
+    color: #000000 !important;
     padding: 12px 20px;
     font-size: 1.25rem;
 }
+.hint-card * { color: #000000 !important; }
 .big-feedback {
     background: #ffffff !important;
     border: 6px solid #ff9f1c !important;
