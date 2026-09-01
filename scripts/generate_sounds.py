@@ -47,12 +47,19 @@ def silence(duration: float) -> list[float]:
     return [0.0] * int(SAMPLE_RATE * duration)
 
 
-def buzz(duration: float) -> list[float]:
-    """低い2音を混ぜたブザー音を作る。"""
+def buzzer(frequency: float, duration: float, volume: float = 1.0) -> list[float]:
+    """低くやわらかい、短いクイズ用ブザー音を作る。"""
 
-    first = tone(145, duration, 0.9)
-    second = tone(172, duration, 0.55)
-    return [a + b for a, b in zip(first, second)]
+    count = int(SAMPLE_RATE * duration)
+    fade_count = max(1, int(SAMPLE_RATE * 0.018))
+    samples: list[float] = []
+    for index in range(count):
+        envelope = min(1.0, index / fade_count, (count - index - 1) / fade_count)
+        elapsed = index / SAMPLE_RATE
+        fundamental = math.sin(2 * math.pi * frequency * elapsed)
+        overtone = 0.17 * math.sin(2 * math.pi * frequency * 3 * elapsed)
+        samples.append((fundamental + overtone) * AMPLITUDE * volume * max(0.0, envelope))
+    return samples
 
 
 def write_wav(path: Path, samples: list[float]) -> None:
@@ -70,7 +77,7 @@ def write_wav(path: Path, samples: list[float]) -> None:
 
 def main() -> None:
     pingpong = bell(1_318.5, 0.22, 0.82) + silence(0.06) + bell(1_046.5, 0.36)
-    wrong = buzz(0.62)
+    wrong = buzzer(196, 0.18, 0.82) + silence(0.06) + buzzer(147, 0.30)
     write_wav(OUTPUT_DIR / "correct_pingpong.wav", pingpong)
     write_wav(OUTPUT_DIR / "wrong_buzz.wav", wrong)
 
