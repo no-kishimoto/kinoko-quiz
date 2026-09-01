@@ -16,6 +16,7 @@ from src.paths import (
     ZUKAN_IMAGE_DIR,
 )
 from src.quiz import QuizSession, create_quiz_session
+from src.zukan import zukan_detail_text, zukan_page
 
 APP_CSS = """
 .gradio-container { background: #fff8dc; font-family: sans-serif; }
@@ -67,6 +68,9 @@ APP_CSS = """
     position: absolute !important;
 }
 .sound-effect audio { height: 1px !important; width: 1px !important; }
+.zukan-card { background: #ffffff; border: 3px solid #43a5d5; border-radius: 18px; padding: 10px; }
+.zukan-card button { min-height: 56px; font-size: 1.35rem !important; }
+.zukan-detail-image { max-height: 440px !important; }
 @media (min-width: 900px) {
     .quiz-screen { max-height: calc(100vh - 32px); overflow: hidden; }
 }
@@ -159,11 +163,12 @@ def build_app():
 
     with gr.Blocks(title="きのこクイズ") as app:
         session_state = gr.State(value=None)
+        zukan_page_state = gr.State(value=0)
 
         with gr.Column(visible=True) as title_screen:
             gr.Markdown("# 🍄 きのこクイズ", elem_classes="main-title")
             quiz_start = gr.Button("クイズで あそぶ", variant="primary", elem_classes="main-button")
-            gr.Button("きのこ ずかん を みる", interactive=False, elem_classes="main-button")
+            zukan_start = gr.Button("きのこ ずかん を みる", elem_classes="main-button")
 
         with gr.Column(visible=False) as count_screen:
             gr.Markdown("# なんもん あそぶ？", elem_classes="center-text")
@@ -194,6 +199,34 @@ def build_app():
                     )
                     explanation = gr.Markdown(visible=False, elem_classes="explanation-card")
             sound = gr.HTML(value="", elem_classes="sound-effect")
+
+        with gr.Column(visible=False) as zukan_screen:
+            gr.Markdown("# きのこ ずかん", elem_classes="main-title")
+            zukan_page_text = gr.Markdown(elem_classes=["center-text", "progress-text"])
+            card_images = []
+            card_buttons = []
+            with gr.Row():
+                for _ in range(3):
+                    with gr.Column(elem_classes="zukan-card"):
+                        card_images.append(
+                            gr.Image(show_label=False, interactive=False, visible=False, height=260)
+                        )
+                        card_buttons.append(gr.Button("", visible=False))
+            with gr.Row():
+                zukan_previous = gr.Button("まえへ", interactive=False, elem_classes="main-button")
+                zukan_next = gr.Button("つぎへ", interactive=False, elem_classes="main-button")
+            zukan_title_button = gr.Button("タイトルへ もどる", elem_classes="main-button")
+
+        with gr.Column(visible=False) as detail_screen:
+            detail_name = gr.Markdown(elem_classes="main-title")
+            with gr.Row():
+                detail_image = gr.Image(
+                    show_label=False,
+                    interactive=False,
+                    elem_classes="zukan-detail-image",
+                )
+                detail_text = gr.Markdown()
+            zukan_back_button = gr.Button("ずかんへ もどる", elem_classes="main-button")
 
         with gr.Column(visible=False) as result_screen:
             result = gr.Markdown(elem_classes="center-text")
@@ -237,6 +270,88 @@ def build_app():
         ]
         five_button.click(lambda: start_quiz(5), outputs=start_outputs)
         ten_button.click(lambda: start_quiz(10), outputs=start_outputs)
+
+        def show_zukan(index: int):
+            page = zukan_page(kinoko, index)
+            updates = {
+                zukan_page_state: page.index,
+                title_screen: gr.Column(visible=False),
+                zukan_screen: gr.Column(visible=True),
+                zukan_page_text: page.page_text,
+                zukan_previous: gr.Button(interactive=page.has_previous),
+                zukan_next: gr.Button(interactive=page.has_next),
+            }
+            for slot, image_component in enumerate(card_images):
+                if slot < len(page.items):
+                    item = page.items[slot]
+                    updates[image_component] = gr.Image(
+                        value=str(ZUKAN_IMAGE_DIR / item.image_filename), visible=True
+                    )
+                    updates[card_buttons[slot]] = gr.Button(value=item.name, visible=True)
+                else:
+                    updates[image_component] = gr.Image(value=None, visible=False)
+                    updates[card_buttons[slot]] = gr.Button(value="", visible=False)
+            return updates
+
+        zukan_outputs = [
+            zukan_page_state, title_screen, zukan_screen, zukan_page_text,
+            *card_images, *card_buttons, zukan_previous, zukan_next,
+        ]
+        zukan_start.click(lambda: show_zukan(0), outputs=zukan_outputs)
+        zukan_previous.click(
+            lambda index: show_zukan(index - 1),
+            inputs=zukan_page_state,
+            outputs=zukan_outputs,
+        )
+        zukan_next.click(
+            lambda index: show_zukan(index + 1),
+            inputs=zukan_page_state,
+            outputs=zukan_outputs,
+        )
+
+        def show_detail(page_index: int, slot: int):
+            page = zukan_page(kinoko, page_index)
+            if slot >= len(page.items):
+                raise gr.Error("きのこを えらんでね")
+            item = page.items[slot]
+            return {
+                zukan_screen: gr.Column(visible=False),
+                detail_screen: gr.Column(visible=True),
+                detail_name: f"# {item.name}",
+                detail_image: str(ZUKAN_IMAGE_DIR / item.image_filename),
+                detail_text: zukan_detail_text(item, toxicity_text(item)),
+            }
+
+        detail_outputs = [zukan_screen, detail_screen, detail_name, detail_image, detail_text]
+        for slot, button in enumerate(card_buttons):
+            button.click(
+                lambda index, slot=slot: show_detail(index, slot),
+                inputs=zukan_page_state,
+                outputs=detail_outputs,
+            )
+
+        def back_to_zukan(index: int):
+            updates = show_zukan(index)
+            updates[detail_screen] = gr.Column(visible=False)
+            return updates
+
+        zukan_back_button.click(
+            back_to_zukan,
+            inputs=zukan_page_state,
+            outputs=[*zukan_outputs, detail_screen],
+        )
+
+        def zukan_to_title():
+            return {
+                zukan_page_state: 0,
+                zukan_screen: gr.Column(visible=False),
+                title_screen: gr.Column(visible=True),
+            }
+
+        zukan_title_button.click(
+            zukan_to_title,
+            outputs=[zukan_page_state, zukan_screen, title_screen],
+        )
 
         def answer(session: QuizSession | None, choice_index: int):
             if session is None:
