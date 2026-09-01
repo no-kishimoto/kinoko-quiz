@@ -186,13 +186,13 @@ def build_app():
                         gr.Button("", elem_classes="choice") for _ in range(3)
                     ]
                     feedback = gr.HTML(visible=False, elem_classes="big-feedback")
-                    explanation = gr.Markdown(visible=False, elem_classes="explanation-card")
                     next_button = gr.Button(
                         "つぎへ",
                         visible=False,
                         variant="primary",
                         elem_classes="main-button",
                     )
+                    explanation = gr.Markdown(visible=False, elem_classes="explanation-card")
             sound = gr.HTML(value="", elem_classes="sound-effect")
 
         with gr.Column(visible=False) as result_screen:
