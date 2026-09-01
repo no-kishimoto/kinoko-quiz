@@ -206,7 +206,10 @@ def build_app():
 
         with gr.Column(visible=False, elem_classes="zukan-screen") as zukan_screen:
             gr.Markdown("# きのこ ずかん", elem_classes="main-title")
-            zukan_page_text = gr.Markdown(elem_classes=["center-text", "progress-text"])
+            with gr.Row(elem_classes="zukan-nav"):
+                zukan_previous = gr.Button("まえへ", interactive=False, elem_classes="main-button")
+                zukan_page_text = gr.Markdown(elem_classes=["center-text", "progress-text"])
+                zukan_next = gr.Button("つぎへ", interactive=False, elem_classes="main-button")
             card_images = []
             card_buttons = []
             with gr.Row(elem_classes="zukan-grid"):
@@ -222,10 +225,7 @@ def build_app():
                             )
                         )
                         card_buttons.append(gr.Button("", visible=False))
-            with gr.Row(elem_classes="zukan-nav"):
-                zukan_previous = gr.Button("まえへ", interactive=False, elem_classes="main-button")
-                zukan_next = gr.Button("つぎへ", interactive=False, elem_classes="main-button")
-                zukan_title_button = gr.Button("タイトルへ もどる", elem_classes="main-button")
+            zukan_title_button = gr.Button("タイトルへ もどる", elem_classes="main-button")
 
         with gr.Column(visible=False) as detail_screen:
             detail_name = gr.Markdown(elem_classes="main-title")
