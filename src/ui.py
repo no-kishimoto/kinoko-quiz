@@ -22,15 +22,20 @@ APP_CSS = """
 .main-title * { color: #000000 !important; }
 .center-text { text-align: center; color: #000000 !important; }
 .center-text * { color: #000000 !important; }
+.progress-text, .progress-text * {
+    font-size: 1.9rem !important;
+    font-weight: 800 !important;
+}
 .hint-card {
     background: #e7f7ff;
     border: 4px solid #43a5d5;
     border-radius: 20px;
     color: #000000 !important;
     padding: 12px 20px;
-    font-size: 1.25rem;
+    font-size: 1.55rem !important;
 }
 .hint-card * { color: #000000 !important; }
+.hint-card h3 { font-size: 1.85rem !important; }
 .big-feedback {
     background: #ffffff !important;
     border: 6px solid #ff9f1c !important;
@@ -134,7 +139,7 @@ def build_app():
             ten_button = gr.Button("10もん", variant="primary", elem_classes="main-button")
 
         with gr.Column(visible=False) as quiz_screen:
-            progress = gr.Markdown(elem_classes="center-text")
+            progress = gr.Markdown(elem_classes=["center-text", "progress-text"])
             image = gr.Image(show_label=False, interactive=False, height=420)
             hint = gr.Markdown(elem_classes=["center-text", "hint-card"])
             with gr.Row():
