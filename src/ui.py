@@ -56,6 +56,7 @@ APP_CSS = """
 .choice button { min-height: 58px; font-size: 1.45rem !important; }
 .main-button { min-height: 64px; font-size: 1.5rem !important; }
 .explanation-card { font-size: 1.05rem; line-height: 1.35; }
+.sound-effect { display: none !important; }
 @media (min-width: 900px) {
     .quiz-screen { max-height: calc(100vh - 32px); overflow: hidden; }
 }
@@ -177,6 +178,7 @@ def build_app():
                 interactive=False,
                 visible="hidden",
                 buttons=[],
+                elem_classes="sound-effect",
             )
 
         with gr.Column(visible=False) as result_screen:

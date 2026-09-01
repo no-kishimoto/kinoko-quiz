@@ -29,6 +29,20 @@ def tone(frequency: float, duration: float, volume: float = 1.0) -> list[float]:
     return samples
 
 
+def bell(frequency: float, duration: float, volume: float = 1.0) -> list[float]:
+    """短く余韻が消える、ベルらしい音を作る。"""
+
+    count = int(SAMPLE_RATE * duration)
+    samples: list[float] = []
+    for index in range(count):
+        elapsed = index / SAMPLE_RATE
+        envelope = math.exp(-11 * elapsed)
+        fundamental = math.sin(2 * math.pi * frequency * elapsed)
+        overtone = 0.28 * math.sin(2 * math.pi * frequency * 2.01 * elapsed)
+        samples.append((fundamental + overtone) * AMPLITUDE * volume * envelope)
+    return samples
+
+
 def silence(duration: float) -> list[float]:
     return [0.0] * int(SAMPLE_RATE * duration)
 
@@ -55,7 +69,7 @@ def write_wav(path: Path, samples: list[float]) -> None:
 
 
 def main() -> None:
-    pingpong = tone(880, 0.18) + silence(0.06) + tone(1_175, 0.32)
+    pingpong = bell(1_318.5, 0.22, 0.82) + silence(0.06) + bell(1_046.5, 0.36)
     wrong = buzz(0.62)
     write_wav(OUTPUT_DIR / "correct_pingpong.wav", pingpong)
     write_wav(OUTPUT_DIR / "wrong_buzz.wav", wrong)
