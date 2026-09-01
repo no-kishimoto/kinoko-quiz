@@ -70,6 +70,10 @@ APP_CSS = """
 .sound-effect audio { height: 1px !important; width: 1px !important; }
 .zukan-card { background: #ffffff; border: 3px solid #43a5d5; border-radius: 18px; padding: 10px; }
 .zukan-card button { min-height: 56px; font-size: 1.35rem !important; }
+.zukan-screen { margin: 0 auto; max-width: 1200px; }
+.zukan-grid { flex-wrap: nowrap !important; }
+.zukan-image { max-height: 200px !important; }
+.zukan-nav button { min-height: 58px; font-size: 1.2rem !important; }
 .zukan-detail-image { max-height: 440px !important; }
 @media (min-width: 900px) {
     .quiz-screen { max-height: calc(100vh - 32px); overflow: hidden; }
@@ -200,22 +204,28 @@ def build_app():
                     explanation = gr.Markdown(visible=False, elem_classes="explanation-card")
             sound = gr.HTML(value="", elem_classes="sound-effect")
 
-        with gr.Column(visible=False) as zukan_screen:
+        with gr.Column(visible=False, elem_classes="zukan-screen") as zukan_screen:
             gr.Markdown("# きのこ ずかん", elem_classes="main-title")
             zukan_page_text = gr.Markdown(elem_classes=["center-text", "progress-text"])
             card_images = []
             card_buttons = []
-            with gr.Row():
+            with gr.Row(elem_classes="zukan-grid"):
                 for _ in range(3):
-                    with gr.Column(elem_classes="zukan-card"):
+                    with gr.Column(scale=1, min_width=0, elem_classes="zukan-card"):
                         card_images.append(
-                            gr.Image(show_label=False, interactive=False, visible=False, height=260)
+                            gr.Image(
+                                show_label=False,
+                                interactive=False,
+                                visible=False,
+                                height=200,
+                                elem_classes="zukan-image",
+                            )
                         )
                         card_buttons.append(gr.Button("", visible=False))
-            with gr.Row():
+            with gr.Row(elem_classes="zukan-nav"):
                 zukan_previous = gr.Button("まえへ", interactive=False, elem_classes="main-button")
                 zukan_next = gr.Button("つぎへ", interactive=False, elem_classes="main-button")
-            zukan_title_button = gr.Button("タイトルへ もどる", elem_classes="main-button")
+                zukan_title_button = gr.Button("タイトルへ もどる", elem_classes="main-button")
 
         with gr.Column(visible=False) as detail_screen:
             detail_name = gr.Markdown(elem_classes="main-title")
