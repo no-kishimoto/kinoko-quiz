@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 from copy import deepcopy
 from dataclasses import dataclass
 from pathlib import Path
@@ -56,7 +57,16 @@ APP_CSS = """
 .choice button { min-height: 58px; font-size: 1.45rem !important; }
 .main-button { min-height: 64px; font-size: 1.5rem !important; }
 .explanation-card { font-size: 1.05rem; line-height: 1.35; }
-.sound-effect { display: none !important; }
+.sound-effect {
+    height: 1px !important;
+    width: 1px !important;
+    left: -9999px !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+    position: absolute !important;
+}
+.sound-effect audio { height: 1px !important; width: 1px !important; }
 @media (min-width: 900px) {
     .quiz-screen { max-height: calc(100vh - 32px); overflow: hidden; }
 }
@@ -122,6 +132,16 @@ def result_text(session: QuizSession) -> str:
     return text
 
 
+def sound_html(sound_path: Path, nonce: int) -> str:
+    """再生バーを作らず、回答ごとに新しい音声要素を返す。"""
+
+    encoded = base64.b64encode(sound_path.read_bytes()).decode("ascii")
+    return (
+        '<audio autoplay preload="auto" '
+        f'src="data:audio/wav;base64,{encoded}#play-{nonce}"></audio>'
+    )
+
+
 def build_app():
     """全画面と画面遷移を組み立てる。"""
 
@@ -173,13 +193,7 @@ def build_app():
                         variant="primary",
                         elem_classes="main-button",
                     )
-            sound = gr.Audio(
-                autoplay=True,
-                interactive=False,
-                visible="hidden",
-                buttons=[],
-                elem_classes="sound-effect",
-            )
+            sound = gr.HTML(value="", elem_classes="sound-effect")
 
         with gr.Column(visible=False) as result_screen:
             result = gr.Markdown(elem_classes="center-text")
@@ -243,7 +257,7 @@ def build_app():
                 image: str(ZUKAN_IMAGE_DIR / answer_item.image_filename),
                 feedback: gr.HTML(value=f"<div>{message}</div>", visible=True),
                 explanation: gr.Markdown(value=explanation_text(answer_item), visible=True),
-                sound: sound_path.read_bytes(),
+                sound: sound_html(sound_path, updated.current_index),
                 next_button: gr.Button(visible=True),
             }
             updates.update({button: gr.Button(interactive=False) for button in choice_buttons})
