@@ -10,6 +10,14 @@ from data.kinoko_data import Kinoko, load_kinoko, validate_image_assets
 from src.paths import DATA_PATH, QUIZ_IMAGE_DIR, ZUKAN_IMAGE_DIR
 from src.quiz import QuizSession, create_quiz_session
 
+APP_CSS = """
+.gradio-container { background: #fff8dc; font-family: sans-serif; }
+.main-title { text-align: center; color: #e85d04; font-size: 3rem; }
+.center-text { text-align: center; }
+.big-feedback { text-align: center; color: #d62828; font-size: 2rem; }
+.choice button, .main-button { min-height: 72px; font-size: 1.5rem !important; }
+"""
+
 
 @dataclass(frozen=True)
 class QuestionView:
@@ -79,15 +87,7 @@ def build_app():
     validate_image_assets(kinoko, ZUKAN_IMAGE_DIR)
     validate_image_assets(kinoko, QUIZ_IMAGE_DIR)
 
-    css = """
-    .gradio-container { background: #fff8dc; font-family: sans-serif; }
-    .main-title { text-align: center; color: #e85d04; font-size: 3rem; }
-    .center-text { text-align: center; }
-    .big-feedback { text-align: center; color: #d62828; font-size: 2rem; }
-    .choice button, .main-button { min-height: 72px; font-size: 1.5rem !important; }
-    """
-
-    with gr.Blocks(title="きのこクイズ", css=css) as app:
+    with gr.Blocks(title="きのこクイズ") as app:
         session_state = gr.State(value=None)
 
         with gr.Column(visible=True) as title_screen:
