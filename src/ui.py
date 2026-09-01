@@ -7,7 +7,13 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from data.kinoko_data import Kinoko, load_kinoko, validate_image_assets
-from src.paths import DATA_PATH, QUIZ_IMAGE_DIR, ZUKAN_IMAGE_DIR
+from src.paths import (
+    CORRECT_SOUND_PATH,
+    DATA_PATH,
+    QUIZ_IMAGE_DIR,
+    WRONG_SOUND_PATH,
+    ZUKAN_IMAGE_DIR,
+)
 from src.quiz import QuizSession, create_quiz_session
 
 APP_CSS = """
@@ -86,6 +92,9 @@ def build_app():
     kinoko = load_kinoko(DATA_PATH)
     validate_image_assets(kinoko, ZUKAN_IMAGE_DIR)
     validate_image_assets(kinoko, QUIZ_IMAGE_DIR)
+    for sound_path in (CORRECT_SOUND_PATH, WRONG_SOUND_PATH):
+        if not sound_path.is_file():
+            raise RuntimeError(f"missing sound asset: {sound_path}")
 
     with gr.Blocks(title="きのこクイズ") as app:
         session_state = gr.State(value=None)
@@ -110,6 +119,12 @@ def build_app():
                 ]
             feedback = gr.Markdown(visible=False, elem_classes="big-feedback")
             explanation = gr.Markdown(visible=False)
+            sound = gr.Audio(
+                autoplay=True,
+                interactive=False,
+                visible="hidden",
+                buttons=[],
+            )
             next_button = gr.Button("つぎへ", visible=False, variant="primary", elem_classes="main-button")
 
         with gr.Column(visible=False) as result_screen:
@@ -139,6 +154,7 @@ def build_app():
                 hint: view.hint,
                 feedback: gr.Markdown(value="", visible=False),
                 explanation: gr.Markdown(value="", visible=False),
+                sound: None,
                 next_button: gr.Button(visible=False),
             }
             updates.update({
@@ -149,7 +165,7 @@ def build_app():
 
         start_outputs = [
             session_state, count_screen, quiz_screen, progress, image, hint,
-            *choice_buttons, feedback, explanation, next_button,
+            *choice_buttons, feedback, explanation, sound, next_button,
         ]
         five_button.click(lambda: start_quiz(5), outputs=start_outputs)
         ten_button.click(lambda: start_quiz(10), outputs=start_outputs)
@@ -168,12 +184,16 @@ def build_app():
                 image: str(ZUKAN_IMAGE_DIR / answer_item.image_filename),
                 feedback: gr.Markdown(value=message, visible=True),
                 explanation: gr.Markdown(value=explanation_text(answer_item), visible=True),
+                sound: str(CORRECT_SOUND_PATH if answer_result.is_correct else WRONG_SOUND_PATH),
                 next_button: gr.Button(visible=True),
             }
             updates.update({button: gr.Button(interactive=False) for button in choice_buttons})
             return updates
 
-        answer_outputs = [session_state, image, *choice_buttons, feedback, explanation, next_button]
+        answer_outputs = [
+            session_state, image, *choice_buttons, feedback, explanation, sound,
+            next_button,
+        ]
         for index, button in enumerate(choice_buttons):
             button.click(
                 lambda session, index=index: answer(session, index),
@@ -201,6 +221,7 @@ def build_app():
                 hint: view.hint,
                 feedback: gr.Markdown(value="", visible=False),
                 explanation: gr.Markdown(value="", visible=False),
+                sound: None,
                 next_button: gr.Button(visible=False),
             }
             updates.update({
@@ -211,7 +232,7 @@ def build_app():
 
         next_outputs = [
             session_state, quiz_screen, result_screen, result, progress, image,
-            hint, *choice_buttons, feedback, explanation, next_button,
+            hint, *choice_buttons, feedback, explanation, sound, next_button,
         ]
         next_button.click(go_next, inputs=session_state, outputs=next_outputs)
 
