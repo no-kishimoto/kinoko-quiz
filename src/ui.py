@@ -74,7 +74,21 @@ APP_CSS = """
 .zukan-grid { flex-wrap: nowrap !important; }
 .zukan-image { max-height: 200px !important; }
 .zukan-nav button { min-height: 58px; font-size: 1.2rem !important; }
-.zukan-detail-image { max-height: 440px !important; }
+.detail-screen { margin: 0 auto; max-width: 1200px; }
+.detail-content { align-items: flex-start; }
+.zukan-detail-image { max-height: 420px !important; }
+.detail-info {
+    background: #ffffff;
+    border: 3px solid #43a5d5;
+    border-radius: 18px;
+    color: #000000 !important;
+    font-size: 1.15rem !important;
+    line-height: 1.4 !important;
+    padding: 12px 20px;
+}
+.detail-info * { color: #000000 !important; }
+.detail-info h3 { color: #e85d04 !important; font-size: 1.35rem !important; margin: 8px 0 2px !important; }
+.detail-info p { margin: 0 0 10px !important; }
 @media (min-width: 900px) {
     .quiz-screen { max-height: calc(100vh - 32px); overflow: hidden; }
 }
@@ -227,15 +241,17 @@ def build_app():
                         card_buttons.append(gr.Button("", visible=False))
             zukan_title_button = gr.Button("タイトルへ もどる", elem_classes="main-button")
 
-        with gr.Column(visible=False) as detail_screen:
+        with gr.Column(visible=False, elem_classes="detail-screen") as detail_screen:
             detail_name = gr.Markdown(elem_classes="main-title")
-            with gr.Row():
-                detail_image = gr.Image(
-                    show_label=False,
-                    interactive=False,
-                    elem_classes="zukan-detail-image",
-                )
-                detail_text = gr.Markdown()
+            with gr.Row(elem_classes="detail-content"):
+                with gr.Column(scale=1):
+                    detail_image = gr.Image(
+                        show_label=False,
+                        interactive=False,
+                        elem_classes="zukan-detail-image",
+                    )
+                with gr.Column(scale=1):
+                    detail_text = gr.Markdown(elem_classes="detail-info")
             zukan_back_button = gr.Button("ずかんへ もどる", elem_classes="main-button")
 
         with gr.Column(visible=False) as result_screen:
