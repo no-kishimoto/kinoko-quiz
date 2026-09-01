@@ -20,7 +20,24 @@ APP_CSS = """
 .gradio-container { background: #fff8dc; font-family: sans-serif; }
 .main-title { text-align: center; color: #e85d04; font-size: 3rem; }
 .center-text { text-align: center; }
-.big-feedback { text-align: center; color: #d62828; font-size: 2rem; }
+.hint-card {
+    background: #e7f7ff;
+    border: 4px solid #43a5d5;
+    border-radius: 20px;
+    padding: 12px 20px;
+    font-size: 1.25rem;
+}
+.big-feedback {
+    background: #ffffff !important;
+    border: 6px solid #ff9f1c !important;
+    border-radius: 24px !important;
+    color: #c1121f !important;
+    font-size: 2.3rem !important;
+    font-weight: 800 !important;
+    padding: 22px !important;
+    text-align: center !important;
+}
+.big-feedback * { color: #c1121f !important; }
 .choice button, .main-button { min-height: 72px; font-size: 1.5rem !important; }
 """
 
@@ -52,7 +69,10 @@ def question_view(session: QuizSession, quiz_image_dir: Path = QUIZ_IMAGE_DIR) -
     return QuestionView(
         progress=session.progress_text,
         image=str(quiz_image_dir / question.answer.image_filename),
-        hint=f"{toxicity_text(question.answer)}　／　{question.answer.quiz_hint}",
+        hint=(
+            f"### どくの ヒント\n{toxicity_text(question.answer)} だよ。\n\n"
+            f"### かたちの ヒント\n{question.answer.quiz_hint}。"
+        ),
         choices=tuple(choice.name for choice in question.choices),
     )
 
@@ -112,12 +132,12 @@ def build_app():
         with gr.Column(visible=False) as quiz_screen:
             progress = gr.Markdown(elem_classes="center-text")
             image = gr.Image(show_label=False, interactive=False, height=420)
-            hint = gr.Markdown(elem_classes="center-text")
+            hint = gr.Markdown(elem_classes=["center-text", "hint-card"])
             with gr.Row():
                 choice_buttons = [
                     gr.Button("", elem_classes="choice") for _ in range(3)
                 ]
-            feedback = gr.Markdown(visible=False, elem_classes="big-feedback")
+            feedback = gr.HTML(visible=False, elem_classes="big-feedback")
             explanation = gr.Markdown(visible=False)
             sound = gr.Audio(
                 autoplay=True,
@@ -152,7 +172,7 @@ def build_app():
                 progress: view.progress,
                 image: view.image,
                 hint: view.hint,
-                feedback: gr.Markdown(value="", visible=False),
+                feedback: gr.HTML(value="", visible=False),
                 explanation: gr.Markdown(value="", visible=False),
                 sound: None,
                 next_button: gr.Button(visible=False),
@@ -178,13 +198,18 @@ def build_app():
             selected = question.choices[choice_index]
             answer_result = updated.answer(selected.key)
             answer_item = answer_result.answer
-            message = "# せいかい！" if answer_result.is_correct else f"# せいかいは {answer_item.name}"
+            message = (
+                "せいかい！"
+                if answer_result.is_correct
+                else f"せいかいは {answer_item.name}"
+            )
+            sound_path = CORRECT_SOUND_PATH if answer_result.is_correct else WRONG_SOUND_PATH
             updates = {
                 session_state: updated,
                 image: str(ZUKAN_IMAGE_DIR / answer_item.image_filename),
-                feedback: gr.Markdown(value=message, visible=True),
+                feedback: gr.HTML(value=f"<div>{message}</div>", visible=True),
                 explanation: gr.Markdown(value=explanation_text(answer_item), visible=True),
-                sound: str(CORRECT_SOUND_PATH if answer_result.is_correct else WRONG_SOUND_PATH),
+                sound: sound_path.read_bytes(),
                 next_button: gr.Button(visible=True),
             }
             updates.update({button: gr.Button(interactive=False) for button in choice_buttons})
@@ -219,7 +244,7 @@ def build_app():
                 progress: view.progress,
                 image: view.image,
                 hint: view.hint,
-                feedback: gr.Markdown(value="", visible=False),
+                feedback: gr.HTML(value="", visible=False),
                 explanation: gr.Markdown(value="", visible=False),
                 sound: None,
                 next_button: gr.Button(visible=False),
