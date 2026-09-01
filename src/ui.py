@@ -25,17 +25,23 @@ APP_CSS = """
 .progress-text, .progress-text * {
     font-size: 1.9rem !important;
     font-weight: 800 !important;
+    margin: 0 !important;
 }
+.quiz-layout { align-items: stretch; }
+.quiz-left, .quiz-right { gap: 12px !important; }
+.quiz-image { max-height: 330px !important; }
 .hint-card {
     background: #e7f7ff;
     border: 4px solid #43a5d5;
     border-radius: 20px;
     color: #000000 !important;
-    padding: 12px 20px;
-    font-size: 1.55rem !important;
+    padding: 8px 16px;
+    font-size: 1.35rem !important;
 }
 .hint-card * { color: #000000 !important; }
-.hint-card h3 { font-size: 1.85rem !important; }
+.hint-card h3 { font-size: 1.55rem !important; margin: 0 0 2px !important; }
+.hint-card p { margin: 0 0 8px !important; }
+.hint-card p:last-child { margin-bottom: 0 !important; }
 .big-feedback {
     background: #ffffff !important;
     border: 6px solid #ff9f1c !important;
@@ -47,7 +53,12 @@ APP_CSS = """
     text-align: center !important;
 }
 .big-feedback * { color: #c1121f !important; }
-.choice button, .main-button { min-height: 72px; font-size: 1.5rem !important; }
+.choice button { min-height: 58px; font-size: 1.45rem !important; }
+.main-button { min-height: 64px; font-size: 1.5rem !important; }
+.explanation-card { font-size: 1.05rem; line-height: 1.35; }
+@media (min-width: 900px) {
+    .quiz-screen { max-height: calc(100vh - 32px); overflow: hidden; }
+}
 """
 
 
@@ -138,23 +149,35 @@ def build_app():
             five_button = gr.Button("5もん", variant="primary", elem_classes="main-button")
             ten_button = gr.Button("10もん", variant="primary", elem_classes="main-button")
 
-        with gr.Column(visible=False) as quiz_screen:
+        with gr.Column(visible=False, elem_classes="quiz-screen") as quiz_screen:
             progress = gr.Markdown(elem_classes=["center-text", "progress-text"])
-            image = gr.Image(show_label=False, interactive=False, height=420)
-            hint = gr.Markdown(elem_classes=["center-text", "hint-card"])
-            with gr.Row():
-                choice_buttons = [
-                    gr.Button("", elem_classes="choice") for _ in range(3)
-                ]
-            feedback = gr.HTML(visible=False, elem_classes="big-feedback")
-            explanation = gr.Markdown(visible=False)
+            with gr.Row(elem_classes="quiz-layout"):
+                with gr.Column(scale=1, elem_classes="quiz-left"):
+                    image = gr.Image(
+                        show_label=False,
+                        interactive=False,
+                        height=330,
+                        elem_classes="quiz-image",
+                    )
+                    hint = gr.Markdown(elem_classes=["center-text", "hint-card"])
+                with gr.Column(scale=1, elem_classes="quiz-right"):
+                    choice_buttons = [
+                        gr.Button("", elem_classes="choice") for _ in range(3)
+                    ]
+                    feedback = gr.HTML(visible=False, elem_classes="big-feedback")
+                    explanation = gr.Markdown(visible=False, elem_classes="explanation-card")
+                    next_button = gr.Button(
+                        "つぎへ",
+                        visible=False,
+                        variant="primary",
+                        elem_classes="main-button",
+                    )
             sound = gr.Audio(
                 autoplay=True,
                 interactive=False,
                 visible="hidden",
                 buttons=[],
             )
-            next_button = gr.Button("つぎへ", visible=False, variant="primary", elem_classes="main-button")
 
         with gr.Column(visible=False) as result_screen:
             result = gr.Markdown(elem_classes="center-text")
