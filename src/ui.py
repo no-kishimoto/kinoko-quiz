@@ -12,12 +12,12 @@ from src.paths import (
     CORRECT_SOUND_PATH,
     DATA_PATH,
     QUIZ_IMAGE_DIR,
-    SEARCH_SCENE_PATH,
+    SEARCH_SCENE_DIR,
     WRONG_SOUND_PATH,
     ZUKAN_IMAGE_DIR,
 )
 from src.quiz import QuizSession, create_quiz_session
-from src.search import SearchSession, marked_scene, status_text, targets_text
+from src.search import SEARCH_QUESTIONS, SearchSession, create_search_session, marked_scene, status_text, targets_text
 from src.zukan import zukan_detail_text, zukan_page
 
 APP_CSS = """
@@ -190,8 +190,9 @@ def build_app():
     kinoko = load_kinoko(DATA_PATH)
     validate_image_assets(kinoko, ZUKAN_IMAGE_DIR)
     validate_image_assets(kinoko, QUIZ_IMAGE_DIR)
-    if not SEARCH_SCENE_PATH.is_file():
-        raise RuntimeError(f"missing search scene asset: {SEARCH_SCENE_PATH}")
+    missing_search_scenes = [item.image_filename for item in SEARCH_QUESTIONS if not (SEARCH_SCENE_DIR / item.image_filename).is_file()]
+    if missing_search_scenes:
+        raise RuntimeError(f"missing search scene assets: {', '.join(missing_search_scenes)}")
     for sound_path in (CORRECT_SOUND_PATH, WRONG_SOUND_PATH):
         if not sound_path.is_file():
             raise RuntimeError(f"missing sound asset: {sound_path}")
@@ -304,12 +305,13 @@ def build_app():
         )
 
         def start_search():
-            session = SearchSession()
+            session = create_search_session()
+            scene_path = SEARCH_SCENE_DIR / session.question.image_filename
             return {
                 search_state: session,
                 title_screen: gr.Column(visible=False),
                 search_screen: gr.Column(visible=True),
-                search_scene: marked_scene(SEARCH_SCENE_PATH, session),
+                search_scene: marked_scene(scene_path, session),
                 search_status: status_text(session),
                 search_targets: targets_text(session),
             }
@@ -331,13 +333,14 @@ def build_app():
                     search_state: session,
                     search_status: status_text(session),
                 }
-            with Image.open(SEARCH_SCENE_PATH) as scene:
+            scene_path = SEARCH_SCENE_DIR / session.question.image_filename
+            with Image.open(scene_path) as scene:
                 width, height = scene.size
             updated = deepcopy(session)
             found = updated.find_at(index[0] / width, index[1] / height)
             return {
                 search_state: updated,
-                search_scene: marked_scene(SEARCH_SCENE_PATH, updated),
+                search_scene: marked_scene(scene_path, updated),
                 search_status: status_text(updated, found),
                 search_targets: targets_text(updated),
             }
