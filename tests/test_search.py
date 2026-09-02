@@ -1,32 +1,42 @@
 """きのこ探しのあたり判定と進行テスト。"""
 
+from pathlib import Path
 import random
 
-from src.search import SEARCH_QUESTIONS, SearchSession, create_search_session, status_text, targets_text
+from data.kinoko_data import load_kinoko
+from src.search import create_search_session, render_scene, status_text
+
+ROOT = Path(__file__).parents[1]
+KINOKO = load_kinoko(ROOT / "data" / "kinoko.json")
+BACKGROUNDS = (ROOT / "assets" / "images" / "search" / "backgrounds" / "roots.png",)
 
 
-def test_finds_each_target_once():
-    session = SearchSession(SEARCH_QUESTIONS[0])
+def test_finds_only_the_specified_target():
+    session = create_search_session(KINOKO, BACKGROUNDS, random.Random(1))
 
-    for target in session.question.targets:
-        assert session.find_at(target.x, target.y) == target
-    assert session.is_finished
-    assert session.found_count == 3
-    first = session.question.targets[0]
-    assert session.find_at(first.x, first.y) is None
-
-
-def test_missing_click_does_not_change_progress():
-    session = SearchSession(SEARCH_QUESTIONS[0])
-
-    assert session.find_at(0.01, 0.01) is None
-    assert session.found_count == 0
-    assert "あと 3こ" in status_text(session)
-    assert "まだだよ" in targets_text(session)
+    decoy = session.decoys[0]
+    assert session.choose_at(decoy.x, decoy.y) is False
+    assert not session.is_correct
+    assert session.choose_at(session.target.x, session.target.y) is True
+    assert session.is_correct
+    assert session.choose_at(session.target.x, session.target.y) is False
 
 
-def test_has_fifteen_questions_and_can_choose_one():
-    assert len(SEARCH_QUESTIONS) == 15
-    session = create_search_session(rng=random.Random(3))
-    assert session.question in SEARCH_QUESTIONS
-    assert len(session.question.targets) == 3
+def test_missing_click_keeps_question_open():
+    session = create_search_session(KINOKO, BACKGROUNDS, random.Random(1))
+
+    assert session.choose_at(0.01, 0.01) is False
+    assert not session.is_correct
+    assert "もりの なか" in status_text(session)
+
+
+def test_can_choose_all_thirty_mushrooms_and_render_scene():
+    seen = set()
+    for seed in range(1000):
+        session = create_search_session(KINOKO, BACKGROUNDS, random.Random(seed))
+        seen.add(session.target.item.key)
+    assert seen == {item.key for item in KINOKO}
+
+    session = create_search_session(KINOKO, BACKGROUNDS, random.Random(4))
+    image = render_scene(session, ROOT / "assets" / "images" / "zukan")
+    assert image.size[0] > 0

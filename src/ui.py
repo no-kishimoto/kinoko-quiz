@@ -1,6 +1,7 @@
 """Gradio Blocksによるクイズ画面。"""
 
 import base64
+import random
 from copy import deepcopy
 from dataclasses import dataclass
 from pathlib import Path
@@ -12,12 +13,12 @@ from src.paths import (
     CORRECT_SOUND_PATH,
     DATA_PATH,
     QUIZ_IMAGE_DIR,
-    SEARCH_SCENE_DIR,
+    SEARCH_BACKGROUND_DIR,
     WRONG_SOUND_PATH,
     ZUKAN_IMAGE_DIR,
 )
 from src.quiz import QuizSession, create_quiz_session
-from src.search import SEARCH_QUESTIONS, SearchSession, create_search_session, marked_scene, status_text, targets_text
+from src.search import SearchSession, create_search_session, prompt_text, render_scene, status_text
 from src.zukan import zukan_detail_text, zukan_page
 
 APP_CSS = """
@@ -190,9 +191,9 @@ def build_app():
     kinoko = load_kinoko(DATA_PATH)
     validate_image_assets(kinoko, ZUKAN_IMAGE_DIR)
     validate_image_assets(kinoko, QUIZ_IMAGE_DIR)
-    missing_search_scenes = [item.image_filename for item in SEARCH_QUESTIONS if not (SEARCH_SCENE_DIR / item.image_filename).is_file()]
-    if missing_search_scenes:
-        raise RuntimeError(f"missing search scene assets: {', '.join(missing_search_scenes)}")
+    search_backgrounds = tuple(sorted(SEARCH_BACKGROUND_DIR.glob("*.png")))
+    if len(search_backgrounds) < 3:
+        raise RuntimeError("at least three search background assets are required")
     for sound_path in (CORRECT_SOUND_PATH, WRONG_SOUND_PATH):
         if not sound_path.is_file():
             raise RuntimeError(f"missing sound asset: {sound_path}")
@@ -276,6 +277,7 @@ def build_app():
 
         with gr.Column(visible=False, elem_classes="search-screen") as search_screen:
             gr.Markdown("# きのこ さがし", elem_classes="main-title")
+            search_prompt = gr.Markdown(elem_classes="center-text")
             search_status = gr.Markdown(elem_classes=["center-text", "search-status"])
             with gr.Row(elem_classes="search-layout"):
                 with gr.Column(scale=3):
@@ -286,7 +288,7 @@ def build_app():
                         elem_classes="search-scene",
                     )
                 with gr.Column(scale=1):
-                    search_targets = gr.Markdown(elem_classes="search-targets")
+                    search_next_button = gr.Button("つぎの もんだい", visible=False, variant="primary", elem_classes="main-button")
                     search_title_button = gr.Button("タイトルへ もどる", elem_classes="main-button")
 
         with gr.Column(visible=False) as result_screen:
@@ -305,22 +307,22 @@ def build_app():
         )
 
         def start_search():
-            session = create_search_session()
-            scene_path = SEARCH_SCENE_DIR / session.question.image_filename
+            session = create_search_session(kinoko, search_backgrounds)
             return {
                 search_state: session,
                 title_screen: gr.Column(visible=False),
                 search_screen: gr.Column(visible=True),
-                search_scene: marked_scene(scene_path, session),
+                search_scene: render_scene(session, ZUKAN_IMAGE_DIR),
+                search_prompt: prompt_text(session),
                 search_status: status_text(session),
-                search_targets: targets_text(session),
+                search_next_button: gr.Button(visible=False),
             }
 
         search_start.click(
             start_search,
             outputs=[
                 search_state, title_screen, search_screen, search_scene,
-                search_status, search_targets,
+                search_prompt, search_status, search_next_button,
             ],
         )
 
@@ -333,22 +335,27 @@ def build_app():
                     search_state: session,
                     search_status: status_text(session),
                 }
-            scene_path = SEARCH_SCENE_DIR / session.question.image_filename
-            with Image.open(scene_path) as scene:
+            with Image.open(session.background_path) as scene:
                 width, height = scene.size
             updated = deepcopy(session)
-            found = updated.find_at(index[0] / width, index[1] / height)
+            found = updated.choose_at(index[0] / width, index[1] / height)
             return {
                 search_state: updated,
-                search_scene: marked_scene(scene_path, updated),
-                search_status: status_text(updated, found),
-                search_targets: targets_text(updated),
+                search_scene: render_scene(updated, ZUKAN_IMAGE_DIR),
+                search_status: status_text(updated, clicked=True),
+                search_next_button: gr.Button(visible=found),
+                sound: sound_html(CORRECT_SOUND_PATH, random.randint(1, 999999)) if found else None,
             }
 
         search_scene.select(
             search_click,
             inputs=search_state,
-            outputs=[search_state, search_scene, search_status, search_targets],
+            outputs=[search_state, search_scene, search_status, search_next_button, sound],
+        )
+
+        search_next_button.click(
+            start_search,
+            outputs=[search_state, title_screen, search_screen, search_scene, search_prompt, search_status, search_next_button],
         )
 
         def search_to_title():
