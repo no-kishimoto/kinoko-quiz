@@ -1,21 +1,23 @@
 """Gradio Blocksによるクイズ画面。"""
 
-from __future__ import annotations
-
 import base64
 from copy import deepcopy
 from dataclasses import dataclass
 from pathlib import Path
+
+from PIL import Image
 
 from data.kinoko_data import Kinoko, load_kinoko, validate_image_assets
 from src.paths import (
     CORRECT_SOUND_PATH,
     DATA_PATH,
     QUIZ_IMAGE_DIR,
+    SEARCH_SCENE_PATH,
     WRONG_SOUND_PATH,
     ZUKAN_IMAGE_DIR,
 )
 from src.quiz import QuizSession, create_quiz_session
+from src.search import SearchSession, marked_scene, status_text, targets_text
 from src.zukan import zukan_detail_text, zukan_page
 
 APP_CSS = """
@@ -89,6 +91,19 @@ APP_CSS = """
 .detail-info * { color: #000000 !important; }
 .detail-info h3 { color: #e85d04 !important; font-size: 1.35rem !important; margin: 8px 0 2px !important; }
 .detail-info p { margin: 0 0 10px !important; }
+.search-screen { margin: 0 auto; max-width: 1120px; }
+.search-layout { align-items: center; }
+.search-scene { cursor: crosshair !important; }
+.search-targets {
+    background: #e7f7ff;
+    border: 4px solid #43a5d5;
+    border-radius: 20px;
+    color: #000000 !important;
+    font-size: 1.35rem !important;
+    padding: 10px 18px;
+}
+.search-targets * { color: #000000 !important; }
+.search-status { min-height: 88px; }
 @media (min-width: 900px) {
     .quiz-screen { max-height: calc(100vh - 32px); overflow: hidden; }
 }
@@ -175,6 +190,8 @@ def build_app():
     kinoko = load_kinoko(DATA_PATH)
     validate_image_assets(kinoko, ZUKAN_IMAGE_DIR)
     validate_image_assets(kinoko, QUIZ_IMAGE_DIR)
+    if not SEARCH_SCENE_PATH.is_file():
+        raise RuntimeError(f"missing search scene asset: {SEARCH_SCENE_PATH}")
     for sound_path in (CORRECT_SOUND_PATH, WRONG_SOUND_PATH):
         if not sound_path.is_file():
             raise RuntimeError(f"missing sound asset: {sound_path}")
@@ -182,10 +199,12 @@ def build_app():
     with gr.Blocks(title="きのこクイズ") as app:
         session_state = gr.State(value=None)
         zukan_page_state = gr.State(value=0)
+        search_state = gr.State(value=None)
 
         with gr.Column(visible=True) as title_screen:
             gr.Markdown("# 🍄 きのこクイズ", elem_classes="main-title")
             quiz_start = gr.Button("クイズで あそぶ", variant="primary", elem_classes="main-button")
+            search_start = gr.Button("きのこ さがし", variant="primary", elem_classes="main-button")
             zukan_start = gr.Button("きのこ ずかん を みる", elem_classes="main-button")
 
         with gr.Column(visible=False) as count_screen:
@@ -254,6 +273,21 @@ def build_app():
                     detail_text = gr.Markdown(elem_classes="detail-info")
             zukan_back_button = gr.Button("ずかんへ もどる", elem_classes="main-button")
 
+        with gr.Column(visible=False, elem_classes="search-screen") as search_screen:
+            gr.Markdown("# きのこ さがし", elem_classes="main-title")
+            search_status = gr.Markdown(elem_classes=["center-text", "search-status"])
+            with gr.Row(elem_classes="search-layout"):
+                with gr.Column(scale=3):
+                    search_scene = gr.Image(
+                        show_label=False,
+                        interactive=False,
+                        height=600,
+                        elem_classes="search-scene",
+                    )
+                with gr.Column(scale=1):
+                    search_targets = gr.Markdown(elem_classes="search-targets")
+                    search_title_button = gr.Button("タイトルへ もどる", elem_classes="main-button")
+
         with gr.Column(visible=False) as result_screen:
             result = gr.Markdown(elem_classes="center-text")
             title_button = gr.Button("タイトルへ もどる", variant="primary", elem_classes="main-button")
@@ -267,6 +301,63 @@ def build_app():
         quiz_start.click(
             show_count_screen,
             outputs=[title_screen, count_screen],
+        )
+
+        def start_search():
+            session = SearchSession()
+            return {
+                search_state: session,
+                title_screen: gr.Column(visible=False),
+                search_screen: gr.Column(visible=True),
+                search_scene: marked_scene(SEARCH_SCENE_PATH, session),
+                search_status: status_text(session),
+                search_targets: targets_text(session),
+            }
+
+        search_start.click(
+            start_search,
+            outputs=[
+                search_state, title_screen, search_screen, search_scene,
+                search_status, search_targets,
+            ],
+        )
+
+        def search_click(session: SearchSession | None, evt: gr.SelectData):
+            if session is None:
+                raise gr.Error("きのこ さがしを はじめてね")
+            index = evt.index
+            if not isinstance(index, tuple) or len(index) != 2:
+                return {
+                    search_state: session,
+                    search_status: status_text(session),
+                }
+            with Image.open(SEARCH_SCENE_PATH) as scene:
+                width, height = scene.size
+            updated = deepcopy(session)
+            found = updated.find_at(index[0] / width, index[1] / height)
+            return {
+                search_state: updated,
+                search_scene: marked_scene(SEARCH_SCENE_PATH, updated),
+                search_status: status_text(updated, found),
+                search_targets: targets_text(updated),
+            }
+
+        search_scene.select(
+            search_click,
+            inputs=search_state,
+            outputs=[search_state, search_scene, search_status, search_targets],
+        )
+
+        def search_to_title():
+            return {
+                search_state: None,
+                search_screen: gr.Column(visible=False),
+                title_screen: gr.Column(visible=True),
+            }
+
+        search_title_button.click(
+            search_to_title,
+            outputs=[search_state, search_screen, title_screen],
         )
 
         def start_quiz(count: int):
