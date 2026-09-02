@@ -10,19 +10,19 @@ from src.zukan import PAGE_SIZE, page_count, zukan_detail_text, zukan_page
 DATA_PATH = Path(__file__).parents[1] / "data" / "kinoko.json"
 
 
-def test_splits_twenty_one_mushrooms_into_seven_pages():
+def test_splits_thirty_mushrooms_into_ten_pages():
     kinoko = load_kinoko(DATA_PATH)
 
-    assert page_count(kinoko) == 7
+    assert page_count(kinoko) == 10
     first = zukan_page(kinoko, 0)
-    last = zukan_page(kinoko, 6)
+    last = zukan_page(kinoko, 9)
 
     assert len(first.items) == PAGE_SIZE
-    assert first.page_text == "1 / 7"
+    assert first.page_text == "1 / 10"
     assert not first.has_previous
     assert first.has_next
     assert len(last.items) == PAGE_SIZE
-    assert last.page_text == "7 / 7"
+    assert last.page_text == "10 / 10"
     assert last.has_previous
     assert not last.has_next
 
@@ -31,7 +31,7 @@ def test_bounds_page_index_and_rejects_invalid_page_size():
     kinoko = load_kinoko(DATA_PATH)
 
     assert zukan_page(kinoko, -1).index == 0
-    assert zukan_page(kinoko, 99).index == 6
+    assert zukan_page(kinoko, 99).index == 9
     with pytest.raises(ValueError, match="at least 1"):
         page_count(kinoko, 0)
 
