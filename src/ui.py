@@ -18,6 +18,7 @@ from src.paths import (
     ZUKAN_IMAGE_DIR,
 )
 from src.quiz import QuizSession, create_quiz_session
+from src.math_game import AdditionSession, create_addition_session
 from src.search import SearchSession, create_search_session, prompt_text, render_scene, status_text
 from src.zukan import zukan_detail_text, zukan_page
 
@@ -105,6 +106,8 @@ APP_CSS = """
 }
 .search-targets * { color: #000000 !important; }
 .search-status { min-height: 88px; }
+.math-equation, .math-equation * { font-size: 3.2rem !important; font-weight: 800 !important; color: #000000 !important; text-align: center; }
+.math-mushrooms, .math-mushrooms * { font-size: 3rem !important; line-height: 1.5 !important; text-align: center; }
 @media (min-width: 900px) {
     .quiz-screen { max-height: calc(100vh - 32px); overflow: hidden; }
 }
@@ -200,12 +203,14 @@ def build_app():
 
     with gr.Blocks(title="きのこクイズ") as app:
         session_state = gr.State(value=None)
+        math_state = gr.State(value=None)
         zukan_page_state = gr.State(value=0)
         search_state = gr.State(value=None)
 
         with gr.Column(visible=True) as title_screen:
             gr.Markdown("# 🍄 きのこクイズ", elem_classes="main-title")
             quiz_start = gr.Button("クイズで あそぶ", variant="primary", elem_classes="main-button")
+            math_start = gr.Button("たしざんで あそぶ", variant="primary", elem_classes="main-button")
             search_start = gr.Button("きのこ さがし", variant="primary", elem_classes="main-button")
             zukan_start = gr.Button("きのこ ずかん を みる", elem_classes="main-button")
 
@@ -238,6 +243,14 @@ def build_app():
                     )
                     explanation = gr.Markdown(visible=False, elem_classes="explanation-card")
             sound = gr.HTML(value="", elem_classes="sound-effect")
+
+        with gr.Column(visible=False, elem_classes="quiz-screen") as math_screen:
+            math_progress = gr.Markdown(elem_classes=["center-text", "progress-text"])
+            math_equation = gr.Markdown(elem_classes="math-equation")
+            math_mushrooms = gr.Markdown(elem_classes="math-mushrooms")
+            math_choice_buttons = [gr.Button("", elem_classes="choice") for _ in range(3)]
+            math_feedback = gr.HTML(visible=False, elem_classes="big-feedback")
+            math_next_button = gr.Button("つぎへ", visible=False, variant="primary", elem_classes="main-button")
 
         with gr.Column(visible=False, elem_classes="zukan-screen") as zukan_screen:
             gr.Markdown("# きのこ ずかん", elem_classes="main-title")
@@ -304,6 +317,85 @@ def build_app():
         quiz_start.click(
             show_count_screen,
             outputs=[title_screen, count_screen],
+        )
+
+        def math_mushrooms_text(session: AdditionSession) -> str:
+            question = session.question
+            return f"🍄 " * question.left + "＋　" + f"🍄 " * question.right
+
+        def start_math():
+            session = create_addition_session()
+            question = session.question
+            updates = {
+                math_state: session,
+                title_screen: gr.Column(visible=False),
+                math_screen: gr.Column(visible=True),
+                math_progress: session.progress_text,
+                math_equation: f"# {question.left} ＋ {question.right} ＝ ？",
+                math_mushrooms: math_mushrooms_text(session),
+                math_feedback: gr.HTML(value="", visible=False),
+                math_next_button: gr.Button(visible=False),
+                sound: None,
+            }
+            updates.update({button: gr.Button(value=str(value), interactive=True) for button, value in zip(math_choice_buttons, question.choices)})
+            return updates
+
+        math_start.click(
+            start_math,
+            outputs=[math_state, title_screen, math_screen, math_progress, math_equation, math_mushrooms, *math_choice_buttons, math_feedback, math_next_button, sound],
+        )
+
+        def answer_math(session: AdditionSession | None, choice_index: int):
+            if session is None:
+                raise gr.Error("たしざんを はじめてね")
+            updated = deepcopy(session)
+            correct = updated.answer(updated.question.choices[choice_index])
+            message = "せいかい！" if correct else f"せいかいは {updated.question.answer}"
+            sound_path = CORRECT_SOUND_PATH if correct else WRONG_SOUND_PATH
+            updates = {
+                math_state: updated,
+                math_feedback: gr.HTML(value=f"<div>{message}</div>", visible=True),
+                math_next_button: gr.Button(visible=True),
+                sound: sound_html(sound_path, updated.current_index + 1000),
+            }
+            updates.update({button: gr.Button(interactive=False) for button in math_choice_buttons})
+            return updates
+
+        for index, button in enumerate(math_choice_buttons):
+            button.click(
+                lambda session, index=index: answer_math(session, index),
+                inputs=math_state,
+                outputs=[math_state, *math_choice_buttons, math_feedback, math_next_button, sound],
+            )
+
+        def next_math(session: AdditionSession | None):
+            if session is None:
+                raise gr.Error("たしざんを はじめてね")
+            updated = deepcopy(session)
+            if updated.next_question():
+                return {
+                    math_state: updated,
+                    math_screen: gr.Column(visible=False),
+                    result_screen: gr.Column(visible=True),
+                    result: f"# たしざんの けっか\n\nぜんぶで 5もん\n\nせいかいは {updated.correct_count}もん",
+                }
+            question = updated.question
+            updates = {
+                math_state: updated,
+                math_progress: updated.progress_text,
+                math_equation: f"# {question.left} ＋ {question.right} ＝ ？",
+                math_mushrooms: math_mushrooms_text(updated),
+                math_feedback: gr.HTML(value="", visible=False),
+                math_next_button: gr.Button(visible=False),
+                sound: None,
+            }
+            updates.update({button: gr.Button(value=str(value), interactive=True) for button, value in zip(math_choice_buttons, question.choices)})
+            return updates
+
+        math_next_button.click(
+            next_math,
+            inputs=math_state,
+            outputs=[math_state, math_screen, result_screen, result, math_progress, math_equation, math_mushrooms, *math_choice_buttons, math_feedback, math_next_button, sound],
         )
 
         def start_search():
@@ -554,13 +646,14 @@ def build_app():
         def return_to_title():
             return {
                 session_state: None,
+                math_state: None,
                 result_screen: gr.Column(visible=False),
                 title_screen: gr.Column(visible=True),
             }
 
         title_button.click(
             return_to_title,
-            outputs=[session_state, result_screen, title_screen],
+            outputs=[session_state, math_state, result_screen, title_screen],
         )
 
     return app
