@@ -24,3 +24,13 @@ def test_counts_correct_answer_and_requires_next():
     assert session.answer(session.question.answer)
     assert session.correct_count == 1
     assert session.next_question() is False
+
+
+def test_hides_mushroom_count_on_fifth_question():
+    session = create_addition_session(random.Random(5))
+
+    for _ in range(4):
+        assert session.shows_mushrooms
+        session.answer(session.question.answer)
+        session.next_question()
+    assert not session.shows_mushrooms

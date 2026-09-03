@@ -39,6 +39,12 @@ class AdditionSession:
     def progress_text(self) -> str:
         return f"もんだい {self.current_index + 1} / {len(self.questions)}"
 
+    @property
+    def shows_mushrooms(self) -> bool:
+        """5問目だけは、数えるヒントを表示しない。"""
+
+        return self.current_index < len(self.questions) - 1
+
     def answer(self, selected: int) -> bool:
         if self.answered:
             raise RuntimeError("current question is already answered")

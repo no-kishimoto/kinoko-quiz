@@ -296,7 +296,9 @@ def build_app():
                 with gr.Column(scale=3):
                     search_scene = gr.Image(
                         show_label=False,
-                        interactive=False,
+                        interactive=True,
+                        sources=None,
+                        buttons=[],
                         height=600,
                         elem_classes="search-scene",
                     )
@@ -320,6 +322,8 @@ def build_app():
         )
 
         def math_mushrooms_text(session: AdditionSession) -> str:
+            if not session.shows_mushrooms:
+                return ""
             question = session.question
             return f"🍄 " * question.left + "＋　" + f"🍄 " * question.right
 
@@ -332,7 +336,9 @@ def build_app():
                 math_screen: gr.Column(visible=True),
                 math_progress: session.progress_text,
                 math_equation: f"# {question.left} ＋ {question.right} ＝ ？",
-                math_mushrooms: math_mushrooms_text(session),
+                math_mushrooms: gr.Markdown(
+                    value=math_mushrooms_text(session), visible=session.shows_mushrooms
+                ),
                 math_feedback: gr.HTML(value="", visible=False),
                 math_next_button: gr.Button(visible=False),
                 sound: None,
@@ -384,7 +390,9 @@ def build_app():
                 math_state: updated,
                 math_progress: updated.progress_text,
                 math_equation: f"# {question.left} ＋ {question.right} ＝ ？",
-                math_mushrooms: math_mushrooms_text(updated),
+                math_mushrooms: gr.Markdown(
+                    value=math_mushrooms_text(updated), visible=updated.shows_mushrooms
+                ),
                 math_feedback: gr.HTML(value="", visible=False),
                 math_next_button: gr.Button(visible=False),
                 sound: None,
@@ -422,10 +430,10 @@ def build_app():
             if session is None:
                 raise gr.Error("きのこ さがしを はじめてね")
             index = evt.index
-            if not isinstance(index, tuple) or len(index) != 2:
+            if not isinstance(index, (tuple, list)) or len(index) != 2:
                 return {
                     search_state: session,
-                    search_status: status_text(session),
+                    search_status: "## きのこを クリックしてね。",
                 }
             with Image.open(session.background_path) as scene:
                 width, height = scene.size
