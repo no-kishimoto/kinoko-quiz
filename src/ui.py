@@ -51,10 +51,10 @@ APP_CSS = """
     border-radius: 20px;
     color: #000000 !important;
     padding: 8px 16px;
-    font-size: 1.35rem !important;
+    font-size: 1.55rem !important;
 }
 .hint-card * { color: #000000 !important; }
-.hint-card h3 { font-size: 1.55rem !important; margin: 0 0 2px !important; }
+.hint-card h3 { font-size: 1.8rem !important; margin: 0 0 2px !important; }
 .hint-card p { margin: 0 0 8px !important; }
 .hint-card p:last-child { margin-bottom: 0 !important; }
 .big-feedback {
@@ -68,9 +68,9 @@ APP_CSS = """
     text-align: center !important;
 }
 .big-feedback * { color: #c1121f !important; }
-.choice button { min-height: 58px; font-size: 1.45rem !important; }
+.choice button { min-height: 64px; font-size: 1.65rem !important; }
 .main-button { min-height: 64px; font-size: 1.5rem !important; }
-.explanation-card { font-size: 1.05rem; line-height: 1.35; }
+.explanation-card { font-size: 1.3rem; line-height: 1.45; }
 .sound-effect {
     height: 1px !important;
     width: 1px !important;
@@ -251,6 +251,7 @@ def build_app():
                         elem_classes="main-button",
                     )
                     explanation = gr.Markdown(visible=False, elem_classes="explanation-card")
+                    quiz_title_button = gr.Button("タイトルへ もどる", elem_classes="main-button")
             sound = gr.HTML(value="", elem_classes="sound-effect")
 
         with gr.Column(visible=False, elem_classes="quiz-screen") as math_screen:
@@ -506,6 +507,18 @@ def build_app():
         ]
         five_button.click(lambda: start_quiz(5), outputs=start_outputs)
         ten_button.click(lambda: start_quiz(10), outputs=start_outputs)
+
+        def quiz_to_title():
+            return {
+                session_state: None,
+                quiz_screen: gr.Column(visible=False),
+                title_screen: gr.Column(visible=True),
+            }
+
+        quiz_title_button.click(
+            quiz_to_title,
+            outputs=[session_state, quiz_screen, title_screen],
+        )
 
         def show_zukan(index: int):
             page = zukan_page(kinoko, index)
