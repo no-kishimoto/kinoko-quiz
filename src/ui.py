@@ -51,10 +51,10 @@ APP_CSS = """
     border-radius: 20px;
     color: #000000 !important;
     padding: 8px 16px;
-    font-size: 1.55rem !important;
+    font-size: 1.5rem !important;
 }
-.hint-card * { color: #000000 !important; }
-.hint-card h3 { font-size: 1.8rem !important; margin: 0 0 2px !important; }
+.hint-card * { color: #000000 !important; font-size: 1.5rem !important; }
+.hint-card h3 { margin: 0 0 2px !important; }
 .hint-card p { margin: 0 0 8px !important; }
 .hint-card p:last-child { margin-bottom: 0 !important; }
 .big-feedback {
@@ -68,8 +68,8 @@ APP_CSS = """
     text-align: center !important;
 }
 .big-feedback * { color: #c1121f !important; }
-.choice button { min-height: 64px; font-size: 1.65rem !important; }
-.main-button { min-height: 64px; font-size: 1.5rem !important; }
+.choice, .choice *, .main-button, .main-button * { font-size: 1.5rem !important; }
+.choice, .main-button { min-height: 64px; }
 .explanation-card { font-size: 1.3rem; line-height: 1.45; }
 .sound-effect {
     height: 1px !important;

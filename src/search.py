@@ -17,7 +17,8 @@ class SearchPlacement:
     item: Kinoko
     x: float
     y: float
-    radius: float = 0.055
+    # 見た目より少し広い当たり判定。小さいきのこでも遊びやすくする。
+    radius: float = 0.11
 
     def contains(self, x: float, y: float) -> bool:
         return (x - self.x) ** 2 + (y - self.y) ** 2 <= self.radius ** 2
