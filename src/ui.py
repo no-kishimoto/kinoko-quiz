@@ -28,6 +28,15 @@ APP_CSS = """
 .main-title * { color: #000000 !important; }
 .center-text { text-align: center; color: #000000 !important; }
 .center-text * { color: #000000 !important; }
+.result-text, .result-text * {
+    color: #000000 !important;
+    font-size: 2.15rem !important;
+    font-weight: 800 !important;
+    line-height: 1.55 !important;
+}
+.result-text h1, .result-text h2, .result-text h3 {
+    font-size: 2.65rem !important;
+}
 .progress-text, .progress-text * {
     font-size: 1.9rem !important;
     font-weight: 800 !important;
@@ -307,7 +316,7 @@ def build_app():
                     search_title_button = gr.Button("タイトルへ もどる", elem_classes="main-button")
 
         with gr.Column(visible=False) as result_screen:
-            result = gr.Markdown(elem_classes="center-text")
+            result = gr.Markdown(elem_classes=["center-text", "result-text"])
             title_button = gr.Button("タイトルへ もどる", variant="primary", elem_classes="main-button")
 
         def show_count_screen():
