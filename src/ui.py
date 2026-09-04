@@ -372,7 +372,8 @@ def build_app():
                 math_state: updated,
                 math_feedback: gr.HTML(value=f"<div>{message}</div>", visible=True),
                 math_next_button: gr.Button(visible=True),
-                sound: sound_html(sound_path, updated.current_index + 1000),
+                # 同じ問題を遊び直しても、毎回かならず新しい音声として再生する。
+                sound: sound_html(sound_path, random.randint(1, 999999)),
             }
             updates.update({button: gr.Button(interactive=False) for button in math_choice_buttons})
             return updates
@@ -454,7 +455,10 @@ def build_app():
                 search_scene: render_scene(updated, ZUKAN_IMAGE_DIR),
                 search_status: status_text(updated, clicked=True),
                 search_next_button: gr.Button(visible=found),
-                sound: sound_html(CORRECT_SOUND_PATH, random.randint(1, 999999)) if found else None,
+                sound: sound_html(
+                    CORRECT_SOUND_PATH if found else WRONG_SOUND_PATH,
+                    random.randint(1, 999999),
+                ),
             }
 
         search_scene.select(
