@@ -11,16 +11,16 @@ ROOT = Path(__file__).parents[1]
 ITEMS = load_ready_subject_items(ROOT / "data" / "shokubutsu.json")
 
 
-def test_first_ten_plants_have_both_game_images():
+def test_ready_plants_have_both_game_images():
     for item in ITEMS:
         assert (ROOT / "assets" / "images" / "shokubutsu" / "zukan" / item.image_filename).is_file()
         assert (ROOT / "assets" / "images" / "shokubutsu" / "quiz" / item.image_filename).is_file()
 
 
-def test_first_ten_plants_work_in_quiz_zukan_and_search():
+def test_ready_plants_work_in_quiz_zukan_and_search():
     quiz = create_quiz_session(ITEMS, 5, random.Random(2))
     assert all(question.answer.key in question.choice_keys for question in quiz.questions)
-    assert page_count(ITEMS) == 4
+    assert page_count(ITEMS) == 7
     assert len(zukan_page(ITEMS, 0).items) == 3
 
     backgrounds = (ROOT / "assets" / "images" / "search" / "backgrounds" / "roots.png",)
