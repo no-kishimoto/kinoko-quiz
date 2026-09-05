@@ -9,7 +9,7 @@ from pathlib import Path
 from PIL import Image
 
 from data.kinoko_data import Kinoko, load_kinoko, validate_image_assets
-from data.subject_data import load_subject_names
+from data.subject_data import SubjectItem, load_ready_subject_items, load_subject_names
 from src.paths import (
     CORRECT_SOUND_PATH,
     DATA_PATH,
@@ -17,6 +17,8 @@ from src.paths import (
     QUIZ_IMAGE_DIR,
     SEARCH_BACKGROUND_DIR,
     SHOKUBUTSU_DATA_PATH,
+    SHOKUBUTSU_QUIZ_IMAGE_DIR,
+    SHOKUBUTSU_ZUKAN_IMAGE_DIR,
     WRONG_SOUND_PATH,
     ZUKAN_IMAGE_DIR,
 )
@@ -151,13 +153,17 @@ def question_view(session: QuizSession, quiz_image_dir: Path = QUIZ_IMAGE_DIR) -
     """回答前の問題表示を作る。"""
 
     question = session.current_question
+    if isinstance(question.answer, Kinoko):
+        hint = (
+            f"### どくの ヒント\n{toxicity_text(question.answer)} だよ。\n\n"
+            f"### かたちの ヒント\n{question.answer.quiz_hint}。"
+        )
+    else:
+        hint = f"### かたちの ヒント\n{question.answer.quiz_hint}"
     return QuestionView(
         progress=session.progress_text,
         image=str(quiz_image_dir / question.answer.image_filename),
-        hint=(
-            f"### どくの ヒント\n{toxicity_text(question.answer)} だよ。\n\n"
-            f"### かたちの ヒント\n{question.answer.quiz_hint}。"
-        ),
+        hint=hint,
         choices=tuple(choice.name for choice in question.choices),
     )
 
@@ -165,6 +171,8 @@ def question_view(session: QuizSession, quiz_image_dir: Path = QUIZ_IMAGE_DIR) -
 def explanation_text(item: Kinoko) -> str:
     """回答後の短い解説を作る。"""
 
+    if not isinstance(item, Kinoko):
+        return f"### {item.name}\n\n{item.zukan_text}"
     return (
         f"### {item.name}\n\n"
         f"**はえる ばしょ**　{item.habitat}\n\n"
@@ -181,8 +189,10 @@ def result_text(session: QuizSession) -> str:
         f"ぜんぶで {session.total_questions}もん\n\n"
         f"せいかいは {session.correct_count}もん"
     )
-    if session.correct_count == session.total_questions:
+    if session.correct_count == session.total_questions and isinstance(session.questions[0].answer, Kinoko):
         text += "\n\n## これで きみも きのこ はかせだ！！"
+    elif session.correct_count == session.total_questions:
+        text += "\n\n## ぜんもん せいかい！ すごい！"
     return text
 
 
@@ -206,9 +216,14 @@ def build_app():
 
     kinoko = load_kinoko(DATA_PATH)
     shokubutsu = load_subject_names(SHOKUBUTSU_DATA_PATH)
+    ready_shokubutsu = load_ready_subject_items(SHOKUBUTSU_DATA_PATH)
     konchuu = load_subject_names(KONCHUU_DATA_PATH)
     validate_image_assets(kinoko, ZUKAN_IMAGE_DIR)
     validate_image_assets(kinoko, QUIZ_IMAGE_DIR)
+    for item in ready_shokubutsu:
+        for directory in (SHOKUBUTSU_ZUKAN_IMAGE_DIR, SHOKUBUTSU_QUIZ_IMAGE_DIR):
+            if not (directory / item.image_filename).is_file():
+                raise RuntimeError(f"missing shokubutsu image: {directory / item.image_filename}")
     search_backgrounds = tuple(sorted(SEARCH_BACKGROUND_DIR.glob("*.png")))
     if len(search_backgrounds) < 3:
         raise RuntimeError("at least three search background assets are required")
@@ -216,7 +231,13 @@ def build_app():
         if not sound_path.is_file():
             raise RuntimeError(f"missing sound asset: {sound_path}")
 
+    def subject_values(subject: str):
+        if subject == "shokubutsu":
+            return ready_shokubutsu, SHOKUBUTSU_QUIZ_IMAGE_DIR, SHOKUBUTSU_ZUKAN_IMAGE_DIR, "🌱"
+        return kinoko, QUIZ_IMAGE_DIR, ZUKAN_IMAGE_DIR, "🍄"
+
     with gr.Blocks(title="きのこクイズ") as app:
+        active_subject_state = gr.State(value="kinoko")
         session_state = gr.State(value=None)
         math_state = gr.State(value=None)
         zukan_page_state = gr.State(value=0)
@@ -229,7 +250,7 @@ def build_app():
             konchuu_subject_button = gr.Button("🪲 こんちゅう", variant="primary", elem_classes="main-button")
 
         with gr.Column(visible=False) as title_screen:
-            gr.Markdown("# 🍄 きのこクイズ", elem_classes="main-title")
+            title_heading = gr.Markdown("# 🍄 きのこクイズ", elem_classes="main-title")
             quiz_start = gr.Button("クイズで あそぶ", variant="primary", elem_classes="main-button")
             math_start = gr.Button("たしざんで あそぶ", variant="primary", elem_classes="main-button")
             search_start = gr.Button("きのこ さがし", variant="primary", elem_classes="main-button")
@@ -254,10 +275,13 @@ def build_app():
             gr.Markdown("### クイズと ずかんは、えを そろえてから はじめるよ。", elem_classes="center-text")
             konchuu_back_button = gr.Button("なかまを えらびなおす", elem_classes="main-button")
 
-        def show_kinoko_title():
+        def show_game_menu(subject: str):
+            icon, label = ("🍄", "きのこ") if subject == "kinoko" else ("🌱", "しょくぶつ")
             return {
+                active_subject_state: subject,
                 subject_screen: gr.Column(visible=False),
                 title_screen: gr.Column(visible=True),
+                title_heading: f"# {icon} {label}クイズ",
             }
 
         def show_subject_list(screen):
@@ -274,9 +298,11 @@ def build_app():
                 konchuu_screen: gr.Column(visible=False),
             }
 
-        kinoko_subject_button.click(show_kinoko_title, outputs=[subject_screen, title_screen])
+        kinoko_subject_button.click(
+            lambda: show_game_menu("kinoko"), outputs=[active_subject_state, subject_screen, title_screen, title_heading]
+        )
         shokubutsu_subject_button.click(
-            lambda: show_subject_list(shokubutsu_screen), outputs=[subject_screen, shokubutsu_screen]
+            lambda: show_game_menu("shokubutsu"), outputs=[active_subject_state, subject_screen, title_screen, title_heading]
         )
         konchuu_subject_button.click(
             lambda: show_subject_list(konchuu_screen), outputs=[subject_screen, konchuu_screen]
@@ -327,7 +353,7 @@ def build_app():
             math_next_button = gr.Button("つぎへ", visible=False, variant="primary", elem_classes="main-button")
 
         with gr.Column(visible=False, elem_classes="zukan-screen") as zukan_screen:
-            gr.Markdown("# きのこ ずかん", elem_classes="main-title")
+            zukan_heading = gr.Markdown("# きのこ ずかん", elem_classes="main-title")
             with gr.Row(elem_classes="zukan-nav"):
                 zukan_previous = gr.Button("まえへ", interactive=False, elem_classes="main-button")
                 zukan_page_text = gr.Markdown(elem_classes=["center-text", "progress-text"])
@@ -395,13 +421,14 @@ def build_app():
             outputs=[title_screen, count_screen],
         )
 
-        def math_mushrooms_text(session: AdditionSession) -> str:
+        def math_mushrooms_text(session: AdditionSession, subject: str) -> str:
             if not session.shows_mushrooms:
                 return ""
             question = session.question
-            return f"🍄 " * question.left + "＋　" + f"🍄 " * question.right
+            symbol = subject_values(subject)[3]
+            return f"{symbol} " * question.left + "＋　" + f"{symbol} " * question.right
 
-        def start_math():
+        def start_math(subject: str):
             session = create_addition_session()
             question = session.question
             updates = {
@@ -411,7 +438,7 @@ def build_app():
                 math_progress: session.progress_text,
                 math_equation: f"# {question.left} ＋ {question.right} ＝ ？",
                 math_mushrooms: gr.Markdown(
-                    value=math_mushrooms_text(session), visible=session.shows_mushrooms
+                    value=math_mushrooms_text(session, subject), visible=session.shows_mushrooms
                 ),
                 math_feedback: gr.HTML(value="", visible=False),
                 math_next_button: gr.Button(visible=False),
@@ -422,6 +449,7 @@ def build_app():
 
         math_start.click(
             start_math,
+            inputs=active_subject_state,
             outputs=[math_state, title_screen, math_screen, math_progress, math_equation, math_mushrooms, *math_choice_buttons, math_feedback, math_next_button, sound],
         )
 
@@ -449,7 +477,7 @@ def build_app():
                 outputs=[math_state, *math_choice_buttons, math_feedback, math_next_button, sound],
             )
 
-        def next_math(session: AdditionSession | None):
+        def next_math(session: AdditionSession | None, subject: str):
             if session is None:
                 raise gr.Error("たしざんを はじめてね")
             updated = deepcopy(session)
@@ -466,7 +494,7 @@ def build_app():
                 math_progress: updated.progress_text,
                 math_equation: f"# {question.left} ＋ {question.right} ＝ ？",
                 math_mushrooms: gr.Markdown(
-                    value=math_mushrooms_text(updated), visible=updated.shows_mushrooms
+                    value=math_mushrooms_text(updated, subject), visible=updated.shows_mushrooms
                 ),
                 math_feedback: gr.HTML(value="", visible=False),
                 math_next_button: gr.Button(visible=False),
@@ -477,17 +505,18 @@ def build_app():
 
         math_next_button.click(
             next_math,
-            inputs=math_state,
+            inputs=[math_state, active_subject_state],
             outputs=[math_state, math_screen, result_screen, result, math_progress, math_equation, math_mushrooms, *math_choice_buttons, math_feedback, math_next_button, sound],
         )
 
-        def start_search():
-            session = create_search_session(kinoko, search_backgrounds)
+        def start_search(subject: str):
+            items, _, zukan_dir, _ = subject_values(subject)
+            session = create_search_session(items, search_backgrounds)
             return {
                 search_state: session,
                 title_screen: gr.Column(visible=False),
                 search_screen: gr.Column(visible=True),
-                search_scene: render_scene(session, ZUKAN_IMAGE_DIR),
+                search_scene: render_scene(session, zukan_dir),
                 search_prompt: prompt_text(session),
                 search_status: status_text(session),
                 search_next_button: gr.Button(visible=False),
@@ -495,13 +524,14 @@ def build_app():
 
         search_start.click(
             start_search,
+            inputs=active_subject_state,
             outputs=[
                 search_state, title_screen, search_screen, search_scene,
                 search_prompt, search_status, search_next_button,
             ],
         )
 
-        def search_click(session: SearchSession | None, evt: gr.SelectData):
+        def search_click(session: SearchSession | None, subject: str, evt: gr.SelectData):
             if session is None:
                 raise gr.Error("きのこ さがしを はじめてね")
             index = evt.index
@@ -516,7 +546,7 @@ def build_app():
             found = updated.choose_at(index[0] / width, index[1] / height)
             return {
                 search_state: updated,
-                search_scene: render_scene(updated, ZUKAN_IMAGE_DIR),
+                search_scene: render_scene(updated, subject_values(subject)[2]),
                 search_status: status_text(updated, clicked=True),
                 search_next_button: gr.Button(visible=found),
                 sound: sound_html(
@@ -527,12 +557,13 @@ def build_app():
 
         search_scene.select(
             search_click,
-            inputs=search_state,
+            inputs=[search_state, active_subject_state],
             outputs=[search_state, search_scene, search_status, search_next_button, sound],
         )
 
         search_next_button.click(
             start_search,
+            inputs=active_subject_state,
             outputs=[search_state, title_screen, search_screen, search_scene, search_prompt, search_status, search_next_button],
         )
 
@@ -548,9 +579,10 @@ def build_app():
             outputs=[search_state, search_screen, title_screen],
         )
 
-        def start_quiz(count: int):
-            session = create_quiz_session(kinoko, count)
-            view = question_view(session)
+        def start_quiz(count: int, subject: str):
+            items, quiz_dir, _, _ = subject_values(subject)
+            session = create_quiz_session(items, count)
+            view = question_view(session, quiz_dir)
             updates = {
                 session_state: session,
                 count_screen: gr.Column(visible=False),
@@ -573,8 +605,8 @@ def build_app():
             session_state, count_screen, quiz_screen, progress, image, hint,
             *choice_buttons, feedback, explanation, sound, next_button,
         ]
-        five_button.click(lambda: start_quiz(5), outputs=start_outputs)
-        ten_button.click(lambda: start_quiz(10), outputs=start_outputs)
+        five_button.click(lambda subject: start_quiz(5, subject), inputs=active_subject_state, outputs=start_outputs)
+        ten_button.click(lambda subject: start_quiz(10, subject), inputs=active_subject_state, outputs=start_outputs)
 
         def quiz_to_title():
             return {
@@ -588,12 +620,15 @@ def build_app():
             outputs=[session_state, quiz_screen, title_screen],
         )
 
-        def show_zukan(index: int):
-            page = zukan_page(kinoko, index)
+        def show_zukan(index: int, subject: str):
+            items, _, zukan_dir, _ = subject_values(subject)
+            page = zukan_page(items, index)
+            label = "きのこ" if subject == "kinoko" else "しょくぶつ"
             updates = {
                 zukan_page_state: page.index,
                 title_screen: gr.Column(visible=False),
                 zukan_screen: gr.Column(visible=True),
+                zukan_heading: f"# {label} ずかん",
                 zukan_page_text: page.page_text,
                 zukan_previous: gr.Button(interactive=page.has_previous),
                 zukan_next: gr.Button(interactive=page.has_next),
@@ -602,7 +637,7 @@ def build_app():
                 if slot < len(page.items):
                     item = page.items[slot]
                     updates[image_component] = gr.Image(
-                        value=str(ZUKAN_IMAGE_DIR / item.image_filename), visible=True
+                        value=str(zukan_dir / item.image_filename), visible=True
                     )
                     updates[card_buttons[slot]] = gr.Button(value=item.name, visible=True)
                 else:
@@ -611,23 +646,24 @@ def build_app():
             return updates
 
         zukan_outputs = [
-            zukan_page_state, title_screen, zukan_screen, zukan_page_text,
+            zukan_page_state, title_screen, zukan_screen, zukan_heading, zukan_page_text,
             *card_images, *card_buttons, zukan_previous, zukan_next,
         ]
-        zukan_start.click(lambda: show_zukan(0), outputs=zukan_outputs)
+        zukan_start.click(lambda subject: show_zukan(0, subject), inputs=active_subject_state, outputs=zukan_outputs)
         zukan_previous.click(
-            lambda index: show_zukan(index - 1),
-            inputs=zukan_page_state,
+            lambda index, subject: show_zukan(index - 1, subject),
+            inputs=[zukan_page_state, active_subject_state],
             outputs=zukan_outputs,
         )
         zukan_next.click(
-            lambda index: show_zukan(index + 1),
-            inputs=zukan_page_state,
+            lambda index, subject: show_zukan(index + 1, subject),
+            inputs=[zukan_page_state, active_subject_state],
             outputs=zukan_outputs,
         )
 
-        def show_detail(page_index: int, slot: int):
-            page = zukan_page(kinoko, page_index)
+        def show_detail(page_index: int, subject: str, slot: int):
+            items, _, zukan_dir, _ = subject_values(subject)
+            page = zukan_page(items, page_index)
             if slot >= len(page.items):
                 raise gr.Error("きのこを えらんでね")
             item = page.items[slot]
@@ -635,26 +671,26 @@ def build_app():
                 zukan_screen: gr.Column(visible=False),
                 detail_screen: gr.Column(visible=True),
                 detail_name: f"# {item.name}",
-                detail_image: str(ZUKAN_IMAGE_DIR / item.image_filename),
-                detail_text: zukan_detail_text(item, toxicity_text(item)),
+                detail_image: str(zukan_dir / item.image_filename),
+                detail_text: zukan_detail_text(item, toxicity_text(item)) if isinstance(item, Kinoko) else item.zukan_text,
             }
 
         detail_outputs = [zukan_screen, detail_screen, detail_name, detail_image, detail_text]
         for slot, button in enumerate(card_buttons):
             button.click(
-                lambda index, slot=slot: show_detail(index, slot),
-                inputs=zukan_page_state,
+                lambda index, subject, slot=slot: show_detail(index, subject, slot),
+                inputs=[zukan_page_state, active_subject_state],
                 outputs=detail_outputs,
             )
 
-        def back_to_zukan(index: int):
-            updates = show_zukan(index)
+        def back_to_zukan(index: int, subject: str):
+            updates = show_zukan(index, subject)
             updates[detail_screen] = gr.Column(visible=False)
             return updates
 
         zukan_back_button.click(
             back_to_zukan,
-            inputs=zukan_page_state,
+            inputs=[zukan_page_state, active_subject_state],
             outputs=[*zukan_outputs, detail_screen],
         )
 
@@ -670,7 +706,7 @@ def build_app():
             outputs=[zukan_page_state, zukan_screen, title_screen],
         )
 
-        def answer(session: QuizSession | None, choice_index: int):
+        def answer(session: QuizSession | None, subject: str, choice_index: int):
             if session is None:
                 raise gr.Error("クイズを はじめてね")
             updated = deepcopy(session)
@@ -686,7 +722,7 @@ def build_app():
             sound_path = CORRECT_SOUND_PATH if answer_result.is_correct else WRONG_SOUND_PATH
             updates = {
                 session_state: updated,
-                image: str(ZUKAN_IMAGE_DIR / answer_item.image_filename),
+                image: str(subject_values(subject)[2] / answer_item.image_filename),
                 feedback: gr.HTML(value=f"<div>{message}</div>", visible=True),
                 explanation: gr.Markdown(value=explanation_text(answer_item), visible=True),
                 sound: sound_html(sound_path, updated.current_index),
@@ -701,12 +737,12 @@ def build_app():
         ]
         for index, button in enumerate(choice_buttons):
             button.click(
-                lambda session, index=index: answer(session, index),
-                inputs=session_state,
+                lambda session, subject, index=index: answer(session, subject, index),
+                inputs=[session_state, active_subject_state],
                 outputs=answer_outputs,
             )
 
-        def go_next(session: QuizSession | None):
+        def go_next(session: QuizSession | None, subject: str):
             if session is None:
                 raise gr.Error("クイズを はじめてね")
             updated = deepcopy(session)
@@ -718,7 +754,7 @@ def build_app():
                     result_screen: gr.Column(visible=True),
                     result: result_text(updated),
                 }
-            view = question_view(updated)
+            view = question_view(updated, subject_values(subject)[1])
             updates = {
                 session_state: updated,
                 progress: view.progress,
@@ -739,7 +775,7 @@ def build_app():
             session_state, quiz_screen, result_screen, result, progress, image,
             hint, *choice_buttons, feedback, explanation, sound, next_button,
         ]
-        next_button.click(go_next, inputs=session_state, outputs=next_outputs)
+        next_button.click(go_next, inputs=[session_state, active_subject_state], outputs=next_outputs)
 
         def return_to_title():
             return {
