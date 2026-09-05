@@ -692,7 +692,7 @@ def build_app():
                 detail_screen: gr.Column(visible=True),
                 detail_name: f"# {item.name}",
                 detail_image: str(zukan_dir / item.image_filename),
-                detail_text: zukan_detail_text(item, toxicity_text(item)) if isinstance(item, Kinoko) else item.zukan_text,
+                detail_text: zukan_detail_text(item, toxicity_text(item) if isinstance(item, Kinoko) else None),
             }
 
         detail_outputs = [zukan_screen, detail_screen, detail_name, detail_image, detail_text]

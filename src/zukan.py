@@ -7,6 +7,7 @@ from math import ceil
 from typing import Sequence
 
 from data.kinoko_data import Kinoko
+from data.subject_data import SubjectItem
 
 PAGE_SIZE = 3
 
@@ -59,8 +60,19 @@ def zukan_page(
     )
 
 
-def zukan_detail_text(item: Kinoko, toxicity_label: str) -> str:
+def zukan_detail_text(item: Kinoko | SubjectItem, toxicity_label: str | None = None) -> str:
     """図鑑詳細で見せる、子ども向けの説明を作る。"""
+
+    if isinstance(item, SubjectItem):
+        return "\n\n".join(
+            (
+                f"### とくちょう\n{item.quiz_hint}",
+                f"### ずかんメモ\n{item.zukan_text}",
+            )
+        )
+
+    if toxicity_label is None:
+        raise ValueError("kinoko detail requires a toxicity label")
 
     sections = [
         f"### はえる ばしょ\n{item.habitat}",

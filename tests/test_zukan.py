@@ -5,6 +5,7 @@ from pathlib import Path
 import pytest
 
 from data.kinoko_data import load_kinoko
+from data.subject_data import load_ready_subject_items
 from src.zukan import PAGE_SIZE, page_count, zukan_detail_text, zukan_page
 
 DATA_PATH = Path(__file__).parents[1] / "data" / "kinoko.json"
@@ -43,3 +44,14 @@ def test_detail_includes_cooking_only_when_available():
 
     assert "### たべかた" in zukan_detail_text(edible, "どくなし")
     assert "### たべかた" not in zukan_detail_text(unknown, "どくが あるか わかっていない")
+
+
+def test_subject_detail_has_feature_and_encyclopedia_note():
+    item = load_ready_subject_items(DATA_PATH.with_name("shokubutsu.json"))[0]
+
+    detail = zukan_detail_text(item)
+
+    assert "### とくちょう" in detail
+    assert "### ずかんメモ" in detail
+    assert item.quiz_hint in detail
+    assert item.zukan_text in detail
