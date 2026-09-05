@@ -20,7 +20,7 @@ def test_ready_insects_have_both_game_images():
 def test_ready_insects_work_in_quiz_zukan_and_search():
     quiz = create_quiz_session(ITEMS, 5, random.Random(2))
     assert all(question.answer.key in question.choice_keys for question in quiz.questions)
-    assert page_count(ITEMS) == 7
+    assert page_count(ITEMS) == 10
     assert len(zukan_page(ITEMS, 0).items) == 3
 
     backgrounds = (ROOT / "assets" / "images" / "search" / "backgrounds" / "roots.png",)

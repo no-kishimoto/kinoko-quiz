@@ -18,6 +18,14 @@
   {"key":"tentoumushi","name":"テントウムシ","quiz_hint":"あかい まるい からだに くろい てん。","zukan_text":"あかい はねに くろい てんが ある、ちいさな むしだよ。"},
   {"key":"batta","name":"バッタ","quiz_hint":"ながい うしろあしで ぴょん。","zukan_text":"ながい うしろあしで、ぐんと とおくへ とぶよ。"},
   {"key":"koorogi","name":"コオロギ","quiz_hint":"ながい ひげと うしろあし。ちゃいろい からだ。","zukan_text":"あきの よるに きれいな こえで なく むしだよ。"},
-  {"key":"suzumushi","name":"スズムシ"}, {"key":"hotaru","name":"ホタル"}, {"key":"kamemushi","name":"カメムシ"}, {"key":"suzumebachi","name":"スズメバチ"}, {"key":"kanabun","name":"カナブン"},
-  {"key":"hae","name":"ハエ"}, {"key":"ka","name":"カ"}, {"key":"nijiirokuwagata","name":"ニジイロクワガタ"}, {"key":"girafanokogirikuwagata","name":"ギラファノコギリクワガタ"}, {"key":"goliathus_goliatus","name":"ゴライアスオオツノハナムグリ"}
+  {"key":"suzumushi","name":"スズムシ","quiz_hint":"とても ながい ひげ。くろい からだ。","zukan_text":"すずのような きれいな こえで なく むし。あきに きこえるよ。"},
+  {"key":"hotaru","name":"ホタル","quiz_hint":"おしりが みどりいろに ひかる。","zukan_text":"よるに おしりを ぴかぴか ひからせる むしだよ。"},
+  {"key":"kamemushi","name":"カメムシ","quiz_hint":"たてみたいな みどりの からだ。","zukan_text":"みどりの たてみたいな からだ。びっくりすると においを だすことが あるよ。"},
+  {"key":"suzumebachi","name":"スズメバチ","quiz_hint":"おおきな きいろと くろの しま。","zukan_text":"おおきな ハチ。きいろと くろの しまもようが めじるしだよ。"},
+  {"key":"kanabun","name":"カナブン","quiz_hint":"みどりに ぴかぴか ひかる からだ。","zukan_text":"きんぞくみたいに みどりに ひかる むし。きの みつが だいすきだよ。"},
+  {"key":"hae","name":"ハエ","quiz_hint":"あかちゃいろの おおきな め。すきとおる はね。","zukan_text":"とても はやく とぶ むし。おおきな めで まわりを よく みているよ。"},
+  {"key":"ka","name":"カ","quiz_hint":"とても ほそい からだと ながい あし。","zukan_text":"ほそい からだと ながい あしを もつ、ちいさな むしだよ。"},
+  {"key":"nijiirokuwagata","name":"ニジイロクワガタ","quiz_hint":"にじみたいに いろいろな いろに ひかる。","zukan_text":"からだが にじいろに ひかる、うつくしい クワガタだよ。"},
+  {"key":"girafanokogirikuwagata","name":"ギラファノコギリクワガタ","quiz_hint":"とても とても ながい ノコギリみたいな あご。","zukan_text":"せかいでも とても ながい あごを もつ ノコギリクワガタだよ。"},
+  {"key":"goliathus_goliatus","name":"ゴライアスオオツノハナムグリ","quiz_hint":"しろと くろの おおきな からだ。","zukan_text":"せかいでも とても おもい ハナムグリの なかま。しろと くろの もようが あるよ。"}
 ]
