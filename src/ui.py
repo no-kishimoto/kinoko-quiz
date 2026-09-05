@@ -248,7 +248,7 @@ def build_app():
         with gr.Column(visible=False) as konchuu_screen:
             gr.Markdown("# 🪲 こんちゅう", elem_classes="main-title")
             gr.Markdown(
-                "## 30しゅるいを えらんだよ\n\n" + "　・　".join(konchuu),
+                f"## {len(konchuu)}しゅるいを えらんだよ\n\n" + "　・　".join(konchuu),
                 elem_classes="subject-list",
             )
             gr.Markdown("### クイズと ずかんは、えを そろえてから はじめるよ。", elem_classes="center-text")

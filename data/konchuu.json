@@ -1,8 +1,8 @@
 [
   {"key":"kabutomushi","name":"カブトムシ"}, {"key":"hercules_ookabuto","name":"ヘラクレスオオカブト"}, {"key":"caucasus_ookabuto","name":"コーカサスオオカブト"}, {"key":"ookuwagata","name":"オオクワガタ"}, {"key":"nokogirikuwagata","name":"ノコギリクワガタ"},
   {"key":"miyamakuwagata","name":"ミヤマクワガタ"}, {"key":"kokuwagata","name":"コクワガタ"}, {"key":"hiratakuwagata","name":"ヒラタクワガタ"}, {"key":"ogon_onikuwagata","name":"オオゴンオニクワガタ"}, {"key":"kamikirimushi","name":"カミキリムシ"},
-  {"key":"kamakiri","name":"カマキリ"}, {"key":"tonbo","name":"トンボ"}, {"key":"agehachou","name":"アゲハチョウ"}, {"key":"monshirochou","name":"モンシロチョウ"}, {"key":"semi","name":"セミ"},
+  {"key":"kamakiri","name":"カマキリ"}, {"key":"oniyanma","name":"オニヤンマ"}, {"key":"agehachou","name":"アゲハチョウ"}, {"key":"monshirochou","name":"モンシロチョウ"}, {"key":"aburazemi","name":"アブラゼミ"},
   {"key":"ari","name":"アリ"}, {"key":"mitsubachi","name":"ミツバチ"}, {"key":"tentoumushi","name":"テントウムシ"}, {"key":"batta","name":"バッタ"}, {"key":"koorogi","name":"コオロギ"},
-  {"key":"suzumushi","name":"スズムシ"}, {"key":"hotaru","name":"ホタル"}, {"key":"kogane_mushi","name":"コガネムシ"}, {"key":"kamemushi","name":"カメムシ"}, {"key":"suzumebachi","name":"スズメバチ"},
-  {"key":"kanabun","name":"カナブン"}, {"key":"ga","name":"ガ"}, {"key":"hae","name":"ハエ"}, {"key":"ka","name":"カ"}, {"key":"gokiburi","name":"ゴキブリ"}
+  {"key":"suzumushi","name":"スズムシ"}, {"key":"hotaru","name":"ホタル"}, {"key":"kamemushi","name":"カメムシ"}, {"key":"suzumebachi","name":"スズメバチ"}, {"key":"kanabun","name":"カナブン"},
+  {"key":"hae","name":"ハエ"}, {"key":"ka","name":"カ"}
 ]
