@@ -10,7 +10,8 @@ def test_shokubutsu_selection_has_forty_unique_names():
     names = load_subject_names(ROOT / "data" / "shokubutsu.json")
     assert len(names) == 40
     assert len(names) == len(set(names))
-    assert {"はえとりぐさ", "うつぼかずら", "モウセンゴケ"} <= set(names)
+    assert {"オクラ", "はえとりぐさ", "うつぼかずら", "モウセンゴケ", "ブルーベリー"} <= set(names)
+    assert "しだ" not in names
 
 
 def test_konchuu_selection_has_thirty_unique_names():
