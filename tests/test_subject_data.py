@@ -32,8 +32,8 @@ def test_konchuu_selection_has_twenty_nine_unique_names():
     assert {"トンボ", "セミ", "コガネムシ", "ガ", "ゴキブリ"}.isdisjoint(names)
 
 
-def test_first_nine_insects_are_ready_for_games():
+def test_first_nineteen_insects_are_ready_for_games():
     items = load_ready_subject_items(ROOT / "data" / "konchuu.json")
-    assert len(items) == 9
+    assert len(items) == 19
     assert items[0].name == "カブトムシ"
-    assert items[-1].name == "カミキリムシ"
+    assert items[-1].name == "コオロギ"

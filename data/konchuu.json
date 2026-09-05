@@ -8,8 +8,16 @@
   {"key":"kokuwagata","name":"コクワガタ","quiz_hint":"ちいさめで くろい。あごは みじかい。","zukan_text":"みぢかに みつけやすい クワガタ。からだは ちいさめでも げんきだよ。"},
   {"key":"ogon_onikuwagata","name":"オウゴンオニクワガタ","quiz_hint":"きんいろに ひかる からだ。おおきな あご。","zukan_text":"きんいろに みえる うつくしい クワガタ。あたたかい くにに すんでいるよ。"},
   {"key":"kamikirimushi","name":"カミキリムシ","quiz_hint":"とても ながい 2ほんの ひげ。","zukan_text":"からだより ながい ひげを もつ むし。きの なかで そだつ なかまも いるよ。"},
-  {"key":"kamakiri","name":"カマキリ"}, {"key":"oniyanma","name":"オニヤンマ"}, {"key":"agehachou","name":"アゲハチョウ"}, {"key":"monshirochou","name":"モンシロチョウ"}, {"key":"aburazemi","name":"アブラゼミ"},
-  {"key":"ari","name":"アリ"}, {"key":"mitsubachi","name":"ミツバチ"}, {"key":"tentoumushi","name":"テントウムシ"}, {"key":"batta","name":"バッタ"}, {"key":"koorogi","name":"コオロギ"},
+  {"key":"kamakiri","name":"カマキリ","quiz_hint":"かまみたいな まえあし。みどりの からだ。","zukan_text":"かまみたいな まえあしで、ほかの むしを つかまえるよ。"},
+  {"key":"oniyanma","name":"オニヤンマ","quiz_hint":"くろと きいろの しまもよう。おおきな め。","zukan_text":"にほんで とても おおきな トンボ。くろと きいろの しまが めじるしだよ。"},
+  {"key":"agehachou","name":"アゲハチョウ","quiz_hint":"きいろと くろの おおきな はね。","zukan_text":"きいろと くろの もようが きれいな チョウ。うしろの はねに しっぽが あるよ。"},
+  {"key":"monshirochou","name":"モンシロチョウ","quiz_hint":"しろい はねに くろい まる。","zukan_text":"はたけや はなばたけで よく みつかる、しろい チョウだよ。"},
+  {"key":"aburazemi","name":"アブラゼミ","quiz_hint":"ちゃいろい からだ。すきとおる はね。","zukan_text":"なつに おおきな こえで なく セミ。きに とまっているよ。"},
+  {"key":"ari","name":"アリ","quiz_hint":"くろくて からだが 3つに わかれる。","zukan_text":"ちいさな からだで、なかまと いっしょに えさを はこぶよ。"},
+  {"key":"mitsubachi","name":"ミツバチ","quiz_hint":"きいろと くろの しま。ふわふわの からだ。","zukan_text":"はなの みつを あつめる ハチ。からだには ふわふわの けが あるよ。"},
+  {"key":"tentoumushi","name":"テントウムシ","quiz_hint":"あかい まるい からだに くろい てん。","zukan_text":"あかい はねに くろい てんが ある、ちいさな むしだよ。"},
+  {"key":"batta","name":"バッタ","quiz_hint":"ながい うしろあしで ぴょん。","zukan_text":"ながい うしろあしで、ぐんと とおくへ とぶよ。"},
+  {"key":"koorogi","name":"コオロギ","quiz_hint":"ながい ひげと うしろあし。ちゃいろい からだ。","zukan_text":"あきの よるに きれいな こえで なく むしだよ。"},
   {"key":"suzumushi","name":"スズムシ"}, {"key":"hotaru","name":"ホタル"}, {"key":"kamemushi","name":"カメムシ"}, {"key":"suzumebachi","name":"スズメバチ"}, {"key":"kanabun","name":"カナブン"},
   {"key":"hae","name":"ハエ"}, {"key":"ka","name":"カ"}, {"key":"nijiirokuwagata","name":"ニジイロクワガタ"}, {"key":"girafanokogirikuwagata","name":"ギラファノコギリクワガタ"}, {"key":"goliathus_goliatus","name":"ゴライアスオオツノハナムグリ"}
 ]
