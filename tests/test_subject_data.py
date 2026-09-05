@@ -18,4 +18,5 @@ def test_konchuu_selection_has_thirty_unique_names():
     names = load_subject_names(ROOT / "data" / "konchuu.json")
     assert len(names) == 30
     assert len(names) == len(set(names))
-    assert {"カブトムシ", "クワガタムシ", "オオクワガタ"} <= set(names)
+    assert {"カブトムシ", "ヘラクレスオオカブト", "コーカサスオオカブト", "オオゴンオニクワガタ"} <= set(names)
+    assert {"クワガタムシ", "アカアシクワガタ", "コカブトムシ"}.isdisjoint(names)
