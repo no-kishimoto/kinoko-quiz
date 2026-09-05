@@ -25,6 +25,8 @@ from src.paths import (
 
 DEFAULT_HIGHLIGHT = Highlight("いろの ぶぶん", 0.5, 0.45, 0.14)
 SHOKUBUTSU_HIGHLIGHTS = {
+    # きいろい花と、しろいわた毛を一度に見せる。
+    "tanpopo": Highlight("はなと わたげ", 0.5, 0.25, 0.34),
     # うつぼかずららしさが分かる、中央につり下がったつぼを見せる。
     "utsubokazura": Highlight("つぼの ぶぶん", 0.5, 0.73, 0.19),
 }
