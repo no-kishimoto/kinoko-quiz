@@ -23,6 +23,12 @@ from src.paths import (
     SHOKUBUTSU_ZUKAN_IMAGE_DIR,
 )
 
+DEFAULT_HIGHLIGHT = Highlight("いろの ぶぶん", 0.5, 0.45, 0.14)
+SHOKUBUTSU_HIGHLIGHTS = {
+    # うつぼかずららしさが分かる、中央につり下がったつぼを見せる。
+    "utsubokazura": Highlight("つぼの ぶぶん", 0.5, 0.73, 0.19),
+}
+
 
 def is_background(pixel: tuple[int, int, int, int]) -> bool:
     red, green, blue, alpha = pixel
@@ -50,13 +56,24 @@ def make_background_transparent(path: Path) -> None:
     image.save(path, format="PNG", optimize=True)
 
 
-def rebuild_subject_assets(data_path: Path, zukan_dir: Path, quiz_dir: Path) -> None:
+def rebuild_subject_assets(
+    data_path: Path,
+    zukan_dir: Path,
+    quiz_dir: Path,
+    highlights: dict[str, Highlight] | None = None,
+) -> None:
     for item in load_ready_subject_items(data_path):
         source = zukan_dir / item.image_filename
         make_background_transparent(source)
-        save_quiz_image(source, Highlight("いろの ぶぶん", 0.5, 0.45, 0.14), quiz_dir / item.image_filename)
+        highlight = (highlights or {}).get(item.key, DEFAULT_HIGHLIGHT)
+        save_quiz_image(source, highlight, quiz_dir / item.image_filename)
 
 
 if __name__ == "__main__":
-    rebuild_subject_assets(SHOKUBUTSU_DATA_PATH, SHOKUBUTSU_ZUKAN_IMAGE_DIR, SHOKUBUTSU_QUIZ_IMAGE_DIR)
+    rebuild_subject_assets(
+        SHOKUBUTSU_DATA_PATH,
+        SHOKUBUTSU_ZUKAN_IMAGE_DIR,
+        SHOKUBUTSU_QUIZ_IMAGE_DIR,
+        SHOKUBUTSU_HIGHLIGHTS,
+    )
     rebuild_subject_assets(KONCHUU_DATA_PATH, KONCHUU_ZUKAN_IMAGE_DIR, KONCHUU_QUIZ_IMAGE_DIR)
