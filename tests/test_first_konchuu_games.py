@@ -1,6 +1,8 @@
 from pathlib import Path
 import random
 
+from PIL import Image
+
 from data.subject_data import load_ready_subject_items
 from src.quiz import create_quiz_session
 from src.search import create_search_session, render_scene
@@ -13,8 +15,11 @@ ITEMS = load_ready_subject_items(ROOT / "data" / "konchuu.json")
 
 def test_ready_insects_have_both_game_images():
     for item in ITEMS:
-        assert (ROOT / "assets" / "images" / "konchuu" / "zukan" / item.image_filename).is_file()
+        image_path = ROOT / "assets" / "images" / "konchuu" / "zukan" / item.image_filename
+        assert image_path.is_file()
         assert (ROOT / "assets" / "images" / "konchuu" / "quiz" / item.image_filename).is_file()
+        with Image.open(image_path) as image:
+            assert image.convert("RGBA").getpixel((0, 0))[3] == 0
 
 
 def test_ready_insects_work_in_quiz_zukan_and_search():
