@@ -20,3 +20,4 @@ def test_konchuu_selection_has_thirty_unique_names():
     assert len(names) == len(set(names))
     assert {"カブトムシ", "ヘラクレスオオカブト", "コーカサスオオカブト", "オオゴンオニクワガタ"} <= set(names)
     assert {"クワガタムシ", "アカアシクワガタ", "コカブトムシ"}.isdisjoint(names)
+    assert {"スズメバチ", "カナブン", "ガ", "ハエ", "カ", "ゴキブリ"} <= set(names)
