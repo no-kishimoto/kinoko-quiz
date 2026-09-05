@@ -1,5 +1,8 @@
 [
-  {"key":"sakura","name":"さくら"}, {"key":"tanpopo","name":"たんぽぽ"}, {"key":"himawari","name":"ひまわり"}, {"key":"asagao","name":"あさがお"}, {"key":"chuurippu","name":"チューリップ"},
+  {"key":"sakura","name":"さくら","quiz_hint":"うすい ピンクや しろの はな。はなびらは 5まい。","zukan_text":"はるに きに たくさん さく はな。はなびらが ひらひら おちるよ。"},
+  {"key":"tanpopo","name":"たんぽぽ","quiz_hint":"きいろい まるい はな。あとで しろい わたげに なる。","zukan_text":"みちばたや くさちに さく はな。わたげは かぜに のって とんでいくよ。"},
+  {"key":"himawari","name":"ひまわり","quiz_hint":"おおきな きいろい はな。まんなかは ちゃいろ。","zukan_text":"なつに さく、せの たかい はな。ひとつに みえる はなは、ちいさな はなが たくさん あつまっているよ。"},
+  {"key":"asagao","name":"あさがお"}, {"key":"chuurippu","name":"チューリップ"},
   {"key":"bara","name":"ばら"}, {"key":"saracenia","name":"サラセニア"}, {"key":"shirotsumekusa","name":"しろつめくさ"}, {"key":"nekopanjya","name":"ねこじゃらし"}, {"key":"donguri","name":"どんぐり"},
   {"key":"ninjin","name":"にんじん"}, {"key":"tomato","name":"トマト"}, {"key":"kyuuri","name":"きゅうり"}, {"key":"kabocha","name":"かぼちゃ"}, {"key":"jagaimo","name":"じゃがいも"},
   {"key":"tamanegi","name":"たまねぎ"}, {"key":"daikon","name":"だいこん"}, {"key":"piiman","name":"ピーマン"}, {"key":"toumorokoshi","name":"とうもろこし"}, {"key":"edamame","name":"えだまめ"},
