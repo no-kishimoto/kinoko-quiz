@@ -14,6 +14,8 @@ from src.paths import (
     CORRECT_SOUND_PATH,
     DATA_PATH,
     KONCHUU_DATA_PATH,
+    KONCHUU_QUIZ_IMAGE_DIR,
+    KONCHUU_ZUKAN_IMAGE_DIR,
     QUIZ_IMAGE_DIR,
     SEARCH_BACKGROUND_DIR,
     SHOKUBUTSU_DATA_PATH,
@@ -218,12 +220,17 @@ def build_app():
     shokubutsu = load_subject_names(SHOKUBUTSU_DATA_PATH)
     ready_shokubutsu = load_ready_subject_items(SHOKUBUTSU_DATA_PATH)
     konchuu = load_subject_names(KONCHUU_DATA_PATH)
+    ready_konchuu = load_ready_subject_items(KONCHUU_DATA_PATH)
     validate_image_assets(kinoko, ZUKAN_IMAGE_DIR)
     validate_image_assets(kinoko, QUIZ_IMAGE_DIR)
     for item in ready_shokubutsu:
         for directory in (SHOKUBUTSU_ZUKAN_IMAGE_DIR, SHOKUBUTSU_QUIZ_IMAGE_DIR):
             if not (directory / item.image_filename).is_file():
                 raise RuntimeError(f"missing shokubutsu image: {directory / item.image_filename}")
+    for item in ready_konchuu:
+        for directory in (KONCHUU_ZUKAN_IMAGE_DIR, KONCHUU_QUIZ_IMAGE_DIR):
+            if not (directory / item.image_filename).is_file():
+                raise RuntimeError(f"missing konchuu image: {directory / item.image_filename}")
     search_backgrounds = tuple(sorted(SEARCH_BACKGROUND_DIR.glob("*.png")))
     if len(search_backgrounds) < 3:
         raise RuntimeError("at least three search background assets are required")
@@ -234,6 +241,8 @@ def build_app():
     def subject_values(subject: str):
         if subject == "shokubutsu":
             return ready_shokubutsu, SHOKUBUTSU_QUIZ_IMAGE_DIR, SHOKUBUTSU_ZUKAN_IMAGE_DIR, "🌱"
+        if subject == "konchuu":
+            return ready_konchuu, KONCHUU_QUIZ_IMAGE_DIR, KONCHUU_ZUKAN_IMAGE_DIR, "🪲"
         return kinoko, QUIZ_IMAGE_DIR, ZUKAN_IMAGE_DIR, "🍄"
 
     with gr.Blocks(title="きのこクイズ") as app:
@@ -276,7 +285,11 @@ def build_app():
             konchuu_back_button = gr.Button("なかまを えらびなおす", elem_classes="main-button")
 
         def show_game_menu(subject: str):
-            icon, label = ("🍄", "きのこ") if subject == "kinoko" else ("🌱", "しょくぶつ")
+            icon, label = {
+                "kinoko": ("🍄", "きのこ"),
+                "shokubutsu": ("🌱", "しょくぶつ"),
+                "konchuu": ("🪲", "こんちゅう"),
+            }[subject]
             return {
                 active_subject_state: subject,
                 subject_screen: gr.Column(visible=False),
@@ -305,7 +318,7 @@ def build_app():
             lambda: show_game_menu("shokubutsu"), outputs=[active_subject_state, subject_screen, title_screen, title_heading]
         )
         konchuu_subject_button.click(
-            lambda: show_subject_list(konchuu_screen), outputs=[subject_screen, konchuu_screen]
+            lambda: show_game_menu("konchuu"), outputs=[active_subject_state, subject_screen, title_screen, title_heading]
         )
         for button in (subject_back_button, shokubutsu_back_button, konchuu_back_button):
             button.click(
@@ -623,7 +636,7 @@ def build_app():
         def show_zukan(index: int, subject: str):
             items, _, zukan_dir, _ = subject_values(subject)
             page = zukan_page(items, index)
-            label = "きのこ" if subject == "kinoko" else "しょくぶつ"
+            label = {"kinoko": "きのこ", "shokubutsu": "しょくぶつ", "konchuu": "こんちゅう"}[subject]
             updates = {
                 zukan_page_state: page.index,
                 title_screen: gr.Column(visible=False),

@@ -30,3 +30,10 @@ def test_konchuu_selection_has_thirty_unique_names():
     assert {"クワガタムシ", "アカアシクワガタ", "コカブトムシ"}.isdisjoint(names)
     assert {"オニヤンマ", "アブラゼミ", "スズメバチ", "カナブン", "ハエ", "カ", "ニジイロクワガタ", "ギラファノコギリクワガタ", "ゴライアスオオツノハナムグリ"} <= set(names)
     assert {"トンボ", "セミ", "コガネムシ", "ガ", "ゴキブリ"}.isdisjoint(names)
+
+
+def test_first_ten_insects_are_ready_for_games():
+    items = load_ready_subject_items(ROOT / "data" / "konchuu.json")
+    assert len(items) == 10
+    assert items[0].name == "カブトムシ"
+    assert items[-1].name == "カミキリムシ"
