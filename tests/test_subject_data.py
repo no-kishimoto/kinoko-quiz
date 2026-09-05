@@ -14,12 +14,12 @@ def test_shokubutsu_selection_has_forty_unique_names():
     assert {"しだ", "すみれ"}.isdisjoint(names)
 
 
-def test_first_twenty_plants_are_ready_for_games():
+def test_first_thirty_plants_are_ready_for_games():
     items = load_ready_subject_items(ROOT / "data" / "shokubutsu.json")
-    assert len(items) == 20
+    assert len(items) == 30
     assert items[0].name == "さくら"
     assert items[9].name == "どんぐり"
-    assert items[-1].name == "えだまめ"
+    assert items[-1].name == "メロン"
 
 
 def test_konchuu_selection_has_thirty_unique_names():

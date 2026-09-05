@@ -19,8 +19,16 @@
   {"key":"piiman","name":"ピーマン","quiz_hint":"みどりで つやつや。なかは からっぽみたい。","zukan_text":"しろい ちいさな はなから、みどりの みが できる やさい。"},
   {"key":"toumorokoshi","name":"とうもろこし","quiz_hint":"きいろい つぶが ならんでいる。みどりの はで つつまれている。","zukan_text":"ながい くきに そだつ やさい。みの つぶは 1つずつが たねだよ。"},
   {"key":"edamame","name":"えだまめ","quiz_hint":"みどりの さやの なかに、まるい まめが いる。","zukan_text":"だいずが まだ わかいときに たべる やさい。さやの なかに まめが ならんでいるよ。"},
-  {"key":"okura","name":"オクラ"}, {"key":"ringo","name":"りんご"}, {"key":"mikan","name":"みかん"}, {"key":"banana","name":"バナナ"}, {"key":"ichigo","name":"いちご"},
-  {"key":"budou","name":"ぶどう"}, {"key":"momo","name":"もも"}, {"key":"nashi","name":"なし"}, {"key":"suika","name":"すいか"}, {"key":"meron","name":"メロン"},
+  {"key":"okura","name":"オクラ","quiz_hint":"みどりで ながい さや。きると ほしの かたち。","zukan_text":"みどりの さやを たべる やさい。なかに まるい たねが ならんでいるよ。"},
+  {"key":"ringo","name":"りんご","quiz_hint":"まるくて あかい み。うえに くぼみと へたが ある。","zukan_text":"きに なる くだもの。あかや きいろなど、いろいろな いろが あるよ。"},
+  {"key":"mikan","name":"みかん","quiz_hint":"まるくて オレンジいろ。かわが むきやすい。","zukan_text":"きに なる くだもの。なかは いくつかの ふくろに わかれているよ。"},
+  {"key":"banana","name":"バナナ","quiz_hint":"ながくて きいろ。かわを むいて たべる。","zukan_text":"あたたかい ところで そだつ くだもの。おおきな はっぱの ある しょくぶつに なるよ。"},
+  {"key":"ichigo","name":"いちご","quiz_hint":"あかくて ちいさな つぶつぶが ある。みどりの へた。","zukan_text":"しろい はなから できる くだもの。あかい ところの つぶつぶが たねだよ。"},
+  {"key":"budou","name":"ぶどう","quiz_hint":"まるい みが たくさん くっついている。","zukan_text":"つるを のばして そだつ くだもの。むらさきや みどりの みが あるよ。"},
+  {"key":"momo","name":"もも","quiz_hint":"まるくて ピンク。かわに うぶげが ある。","zukan_text":"はるに ピンクの はなが さく きに なる くだもの。"},
+  {"key":"nashi","name":"なし","quiz_hint":"まるくて ちゃいろ。あまくて みずみずしい。","zukan_text":"きに なる くだもの。シャリシャリした たべごこちが とくちょうだよ。"},
+  {"key":"suika","name":"すいか","quiz_hint":"おおきくて まるい。みどりの しまもよう。","zukan_text":"なつに たべる くだもの。あかい なかみに くろい たねが あるよ。"},
+  {"key":"meron","name":"メロン","quiz_hint":"まるくて あみめもよう。あまい におい。","zukan_text":"つるを のばして そだつ くだもの。なかには たくさんの たねが あるよ。"},
   {"key":"kaki","name":"かき"}, {"key":"haetorigusa","name":"はえとりぐさ"}, {"key":"utsubokazura","name":"うつぼかずら"}, {"key":"mousengoke","name":"モウセンゴケ"}, {"key":"saboten","name":"サボテン"},
   {"key":"matsu","name":"まつ"}, {"key":"ichou","name":"いちょう"}, {"key":"momiji","name":"もみじ"}, {"key":"take","name":"たけ"}, {"key":"blueberry","name":"ブルーベリー"}
 ]
