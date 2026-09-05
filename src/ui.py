@@ -295,6 +295,8 @@ def build_app():
                 subject_screen: gr.Column(visible=False),
                 title_screen: gr.Column(visible=True),
                 title_heading: f"# {icon} {label}クイズ",
+                search_start: gr.Button(f"{label} さがし", variant="primary"),
+                zukan_start: gr.Button(f"{label} ずかん を みる"),
             }
 
         def show_subject_list(screen):
@@ -312,13 +314,16 @@ def build_app():
             }
 
         kinoko_subject_button.click(
-            lambda: show_game_menu("kinoko"), outputs=[active_subject_state, subject_screen, title_screen, title_heading]
+            lambda: show_game_menu("kinoko"),
+            outputs=[active_subject_state, subject_screen, title_screen, title_heading, search_start, zukan_start],
         )
         shokubutsu_subject_button.click(
-            lambda: show_game_menu("shokubutsu"), outputs=[active_subject_state, subject_screen, title_screen, title_heading]
+            lambda: show_game_menu("shokubutsu"),
+            outputs=[active_subject_state, subject_screen, title_screen, title_heading, search_start, zukan_start],
         )
         konchuu_subject_button.click(
-            lambda: show_game_menu("konchuu"), outputs=[active_subject_state, subject_screen, title_screen, title_heading]
+            lambda: show_game_menu("konchuu"),
+            outputs=[active_subject_state, subject_screen, title_screen, title_heading, search_start, zukan_start],
         )
         for button in (subject_back_button, shokubutsu_back_button, konchuu_back_button):
             button.click(
@@ -402,7 +407,7 @@ def build_app():
             zukan_back_button = gr.Button("ずかんへ もどる", elem_classes="main-button")
 
         with gr.Column(visible=False, elem_classes="search-screen") as search_screen:
-            gr.Markdown("# きのこ さがし", elem_classes="main-title")
+            search_heading = gr.Markdown("# きのこ さがし", elem_classes="main-title")
             search_prompt = gr.Markdown(elem_classes="center-text")
             search_status = gr.Markdown(elem_classes=["center-text", "search-status"])
             with gr.Row(elem_classes="search-layout"):
@@ -525,10 +530,12 @@ def build_app():
         def start_search(subject: str):
             items, _, zukan_dir, _ = subject_values(subject)
             session = create_search_session(items, search_backgrounds)
+            label = {"kinoko": "きのこ", "shokubutsu": "しょくぶつ", "konchuu": "こんちゅう"}[subject]
             return {
                 search_state: session,
                 title_screen: gr.Column(visible=False),
                 search_screen: gr.Column(visible=True),
+                search_heading: f"# {label} さがし",
                 search_scene: render_scene(session, zukan_dir),
                 search_prompt: prompt_text(session),
                 search_status: status_text(session),
@@ -540,18 +547,18 @@ def build_app():
             inputs=active_subject_state,
             outputs=[
                 search_state, title_screen, search_screen, search_scene,
-                search_prompt, search_status, search_next_button,
+                search_heading, search_prompt, search_status, search_next_button,
             ],
         )
 
         def search_click(session: SearchSession | None, subject: str, evt: gr.SelectData):
             if session is None:
-                raise gr.Error("きのこ さがしを はじめてね")
+                raise gr.Error("さがしを はじめてね")
             index = evt.index
             if not isinstance(index, (tuple, list)) or len(index) != 2:
                 return {
                     search_state: session,
-                    search_status: "## きのこを クリックしてね。",
+                    search_status: "## えを クリックしてね。",
                 }
             with Image.open(session.background_path) as scene:
                 width, height = scene.size
@@ -577,7 +584,7 @@ def build_app():
         search_next_button.click(
             start_search,
             inputs=active_subject_state,
-            outputs=[search_state, title_screen, search_screen, search_scene, search_prompt, search_status, search_next_button],
+            outputs=[search_state, title_screen, search_screen, search_scene, search_heading, search_prompt, search_status, search_next_button],
         )
 
         def search_to_title():
@@ -678,7 +685,7 @@ def build_app():
             items, _, zukan_dir, _ = subject_values(subject)
             page = zukan_page(items, page_index)
             if slot >= len(page.items):
-                raise gr.Error("きのこを えらんでね")
+                raise gr.Error("えを えらんでね")
             item = page.items[slot]
             return {
                 zukan_screen: gr.Column(visible=False),
