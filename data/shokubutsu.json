@@ -29,6 +29,14 @@
   {"key":"nashi","name":"なし","quiz_hint":"まるくて ちゃいろ。あまくて みずみずしい。","zukan_text":"きに なる くだもの。シャリシャリした たべごこちが とくちょうだよ。"},
   {"key":"suika","name":"すいか","quiz_hint":"おおきくて まるい。みどりの しまもよう。","zukan_text":"なつに たべる くだもの。あかい なかみに くろい たねが あるよ。"},
   {"key":"meron","name":"メロン","quiz_hint":"まるくて あみめもよう。あまい におい。","zukan_text":"つるを のばして そだつ くだもの。なかには たくさんの たねが あるよ。"},
-  {"key":"kaki","name":"かき"}, {"key":"haetorigusa","name":"はえとりぐさ"}, {"key":"utsubokazura","name":"うつぼかずら"}, {"key":"mousengoke","name":"モウセンゴケ"}, {"key":"saboten","name":"サボテン"},
-  {"key":"matsu","name":"まつ"}, {"key":"ichou","name":"いちょう"}, {"key":"momiji","name":"もみじ"}, {"key":"take","name":"たけ"}, {"key":"blueberry","name":"ブルーベリー"}
+  {"key":"kaki","name":"かき","quiz_hint":"オレンジいろで まるい み。うえに みどりの へた。","zukan_text":"あきに きに なる くだもの。あまくて やわらかい みになるよ。"},
+  {"key":"haetorigusa","name":"はえとりぐさ","quiz_hint":"はが パクッと とじる。まわりに とげみたいな け。","zukan_text":"むしが はに ふれると、はを パクッと とじる しょくぶつ。"},
+  {"key":"utsubokazura","name":"うつぼかずら","quiz_hint":"ふくろみたいな はが ぶらさがる。ふたが ある。","zukan_text":"むしを つかまえる しょくぶつ。ふくろの なかに むしが おちるよ。"},
+  {"key":"mousengoke","name":"モウセンゴケ","quiz_hint":"はに キラキラした ねばねばが ある。","zukan_text":"ねばねばした はで むしを つかまえる しょくぶつ。"},
+  {"key":"saboten","name":"サボテン","quiz_hint":"みどりで まるい。ちくちくした とげが ある。","zukan_text":"あめの すくない ところでも そだつ しょくぶつ。からだに みずを ためるよ。"},
+  {"key":"matsu","name":"まつ","quiz_hint":"ほそくて とがった は。ちゃいろい まつぼっくり。","zukan_text":"1ねんじゅう みどりの はを つけている き。まつぼっくりの なかに たねが あるよ。"},
+  {"key":"ichou","name":"いちょう","quiz_hint":"うちわみたいな は。あきに きいろく なる。","zukan_text":"あきに はが きいろく なる おおきな き。はは うちわの ような かたちだよ。"},
+  {"key":"momiji","name":"もみじ","quiz_hint":"てのひらみたいな は。あきに あかく なる。","zukan_text":"あきに はが あかや オレンジに なる き。はの かたちは てのひらみたいだよ。"},
+  {"key":"take","name":"たけ","quiz_hint":"まっすぐ のびる みどりの くき。ふしが ある。","zukan_text":"とても はやく のびる しょくぶつ。くきには きっちり ならんだ ふしが あるよ。"},
+  {"key":"blueberry","name":"ブルーベリー","quiz_hint":"ちいさくて まるい あおむらさきの み。","zukan_text":"きに なる ちいさな くだもの。いくつも かたまって みのるよ。"}
 ]
