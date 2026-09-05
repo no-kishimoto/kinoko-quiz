@@ -4,6 +4,8 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA_PATH = PROJECT_ROOT / "data" / "kinoko.json"
+SHOKUBUTSU_DATA_PATH = PROJECT_ROOT / "data" / "shokubutsu.json"
+KONCHUU_DATA_PATH = PROJECT_ROOT / "data" / "konchuu.json"
 QUIZ_IMAGE_DIR = PROJECT_ROOT / "assets" / "images" / "quiz"
 ZUKAN_IMAGE_DIR = PROJECT_ROOT / "assets" / "images" / "zukan"
 SEARCH_BACKGROUND_DIR = PROJECT_ROOT / "assets" / "images" / "search" / "backgrounds"

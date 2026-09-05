@@ -1,0 +1,10 @@
+[
+  {"key":"sakura","name":"さくら"}, {"key":"tanpopo","name":"たんぽぽ"}, {"key":"himawari","name":"ひまわり"}, {"key":"asagao","name":"あさがお"}, {"key":"chuurippu","name":"チューリップ"},
+  {"key":"bara","name":"ばら"}, {"key":"sumire","name":"すみれ"}, {"key":"shirotsumekusa","name":"しろつめくさ"}, {"key":"nekopanjya","name":"ねこじゃらし"}, {"key":"donguri","name":"どんぐり"},
+  {"key":"matsu","name":"まつ"}, {"key":"ichou","name":"いちょう"}, {"key":"momiji","name":"もみじ"}, {"key":"take","name":"たけ"}, {"key":"sugi","name":"すぎ"},
+  {"key":"shida","name":"しだ"}, {"key":"koke","name":"こけ"}, {"key":"saboten","name":"サボテン"}, {"key":"aro_e","name":"アロエ"}, {"key":"haetorigusa","name":"はえとりぐさ"},
+  {"key":"utsubokazura","name":"うつぼかずら"}, {"key":"mousengoke","name":"モウセンゴケ"}, {"key":"ninjin","name":"にんじん"}, {"key":"tomato","name":"トマト"}, {"key":"kyuuri","name":"きゅうり"},
+  {"key":"kabocha","name":"かぼちゃ"}, {"key":"jagaimo","name":"じゃがいも"}, {"key":"tamanegi","name":"たまねぎ"}, {"key":"daikon","name":"だいこん"}, {"key":"piiman","name":"ピーマン"},
+  {"key":"toumorokoshi","name":"とうもろこし"}, {"key":"edamame","name":"えだまめ"}, {"key":"ringo","name":"りんご"}, {"key":"mikan","name":"みかん"}, {"key":"banana","name":"バナナ"},
+  {"key":"ichigo","name":"いちご"}, {"key":"budou","name":"ぶどう"}, {"key":"momo","name":"もも"}, {"key":"nashi","name":"なし"}, {"key":"suika","name":"すいか"}
+]

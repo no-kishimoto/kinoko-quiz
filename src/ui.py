@@ -9,11 +9,14 @@ from pathlib import Path
 from PIL import Image
 
 from data.kinoko_data import Kinoko, load_kinoko, validate_image_assets
+from data.subject_data import load_subject_names
 from src.paths import (
     CORRECT_SOUND_PATH,
     DATA_PATH,
+    KONCHUU_DATA_PATH,
     QUIZ_IMAGE_DIR,
     SEARCH_BACKGROUND_DIR,
+    SHOKUBUTSU_DATA_PATH,
     WRONG_SOUND_PATH,
     ZUKAN_IMAGE_DIR,
 )
@@ -117,6 +120,7 @@ APP_CSS = """
 .search-status { min-height: 88px; }
 .math-equation, .math-equation * { font-size: 3.2rem !important; font-weight: 800 !important; color: #000000 !important; text-align: center; }
 .math-mushrooms, .math-mushrooms * { font-size: 3rem !important; line-height: 1.5 !important; text-align: center; }
+.subject-list, .subject-list * { color: #000000 !important; font-size: 1.35rem !important; line-height: 1.65 !important; }
 @media (min-width: 900px) {
     .quiz-screen { max-height: calc(100vh - 32px); overflow: hidden; }
 }
@@ -201,6 +205,8 @@ def build_app():
         raise RuntimeError("gradio is required to run the app") from exc
 
     kinoko = load_kinoko(DATA_PATH)
+    shokubutsu = load_subject_names(SHOKUBUTSU_DATA_PATH)
+    konchuu = load_subject_names(KONCHUU_DATA_PATH)
     validate_image_assets(kinoko, ZUKAN_IMAGE_DIR)
     validate_image_assets(kinoko, QUIZ_IMAGE_DIR)
     search_backgrounds = tuple(sorted(SEARCH_BACKGROUND_DIR.glob("*.png")))
@@ -216,12 +222,70 @@ def build_app():
         zukan_page_state = gr.State(value=0)
         search_state = gr.State(value=None)
 
-        with gr.Column(visible=True) as title_screen:
+        with gr.Column(visible=True) as subject_screen:
+            gr.Markdown("# なにで あそぶ？", elem_classes="main-title")
+            kinoko_subject_button = gr.Button("🍄 きのこ", variant="primary", elem_classes="main-button")
+            shokubutsu_subject_button = gr.Button("🌱 しょくぶつ", variant="primary", elem_classes="main-button")
+            konchuu_subject_button = gr.Button("🪲 こんちゅう", variant="primary", elem_classes="main-button")
+
+        with gr.Column(visible=False) as title_screen:
             gr.Markdown("# 🍄 きのこクイズ", elem_classes="main-title")
             quiz_start = gr.Button("クイズで あそぶ", variant="primary", elem_classes="main-button")
             math_start = gr.Button("たしざんで あそぶ", variant="primary", elem_classes="main-button")
             search_start = gr.Button("きのこ さがし", variant="primary", elem_classes="main-button")
             zukan_start = gr.Button("きのこ ずかん を みる", elem_classes="main-button")
+            subject_back_button = gr.Button("なかまを えらびなおす", elem_classes="main-button")
+
+        with gr.Column(visible=False) as shokubutsu_screen:
+            gr.Markdown("# 🌱 しょくぶつ", elem_classes="main-title")
+            gr.Markdown(
+                "## 40しゅるいを えらんだよ\n\n" + "　・　".join(shokubutsu),
+                elem_classes="subject-list",
+            )
+            gr.Markdown("### クイズと ずかんは、えを そろえてから はじめるよ。", elem_classes="center-text")
+            shokubutsu_back_button = gr.Button("なかまを えらびなおす", elem_classes="main-button")
+
+        with gr.Column(visible=False) as konchuu_screen:
+            gr.Markdown("# 🪲 こんちゅう", elem_classes="main-title")
+            gr.Markdown(
+                "## 30しゅるいを えらんだよ\n\n" + "　・　".join(konchuu),
+                elem_classes="subject-list",
+            )
+            gr.Markdown("### クイズと ずかんは、えを そろえてから はじめるよ。", elem_classes="center-text")
+            konchuu_back_button = gr.Button("なかまを えらびなおす", elem_classes="main-button")
+
+        def show_kinoko_title():
+            return {
+                subject_screen: gr.Column(visible=False),
+                title_screen: gr.Column(visible=True),
+            }
+
+        def show_subject_list(screen):
+            return {
+                subject_screen: gr.Column(visible=False),
+                screen: gr.Column(visible=True),
+            }
+
+        def show_subject_picker():
+            return {
+                subject_screen: gr.Column(visible=True),
+                title_screen: gr.Column(visible=False),
+                shokubutsu_screen: gr.Column(visible=False),
+                konchuu_screen: gr.Column(visible=False),
+            }
+
+        kinoko_subject_button.click(show_kinoko_title, outputs=[subject_screen, title_screen])
+        shokubutsu_subject_button.click(
+            lambda: show_subject_list(shokubutsu_screen), outputs=[subject_screen, shokubutsu_screen]
+        )
+        konchuu_subject_button.click(
+            lambda: show_subject_list(konchuu_screen), outputs=[subject_screen, konchuu_screen]
+        )
+        for button in (subject_back_button, shokubutsu_back_button, konchuu_back_button):
+            button.click(
+                show_subject_picker,
+                outputs=[subject_screen, title_screen, shokubutsu_screen, konchuu_screen],
+            )
 
         with gr.Column(visible=False) as count_screen:
             gr.Markdown("# なんもん あそぶ？", elem_classes="center-text")
