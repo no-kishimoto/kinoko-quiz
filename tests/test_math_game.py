@@ -4,7 +4,7 @@ import random
 
 import pytest
 
-from src.math_game import KANJI_NUMERALS, create_addition_session
+from src.math_game import KANJI_NUMERALS, create_addition_session, create_subtraction_session
 
 
 def test_creates_additions_without_carrying():
@@ -14,6 +14,17 @@ def test_creates_additions_without_carrying():
     assert all(question.answer <= 9 for question in session.questions)
     assert all(question.answer in question.choices for question in session.questions)
     assert all(len(set(question.choices)) == 3 for question in session.questions)
+
+
+def test_creates_single_digit_subtractions_without_negative_answers():
+    session = create_subtraction_session(random.Random(9))
+
+    assert len(session.questions) == 10
+    assert session.game_name == "ひきざん"
+    assert all(question.operation == "subtraction" for question in session.questions)
+    assert all(0 <= question.answer <= 9 for question in session.questions)
+    assert all(question.left >= question.right for question in session.questions)
+    assert all(question.answer in question.choices for question in session.questions)
 
 
 def test_counts_correct_answer_and_requires_next():

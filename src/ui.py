@@ -25,7 +25,7 @@ from src.paths import (
     ZUKAN_IMAGE_DIR,
 )
 from src.quiz import QuizSession, create_quiz_session
-from src.math_game import AdditionSession, create_addition_session
+from src.math_game import ArithmeticSession, create_addition_session, create_subtraction_session
 from src.search import SearchSession, create_search_session, prompt_text, render_scene, status_text
 from src.zukan import zukan_detail_text, zukan_page
 
@@ -262,6 +262,7 @@ def build_app():
             title_heading = gr.Markdown("# 🍄 きのこクイズ", elem_classes="main-title")
             quiz_start = gr.Button("クイズで あそぶ", variant="primary", elem_classes="main-button")
             math_start = gr.Button("たしざんで あそぶ", variant="primary", elem_classes="main-button")
+            subtraction_start = gr.Button("ひきざんで あそぶ", variant="primary", elem_classes="main-button")
             search_start = gr.Button("きのこ さがし", variant="primary", elem_classes="main-button")
             zukan_start = gr.Button("きのこ ずかん を みる", elem_classes="main-button")
             subject_back_button = gr.Button("なかまを えらびなおす", elem_classes="main-button")
@@ -439,22 +440,22 @@ def build_app():
             outputs=[title_screen, count_screen],
         )
 
-        def math_icons_text(session: AdditionSession, subject: str) -> str:
+        def math_icons_text(session: ArithmeticSession, subject: str) -> str:
             if not session.shows_icons:
                 return ""
             question = session.question
             symbol = subject_values(subject)[3]
-            return f"{symbol} " * question.left + "＋　" + f"{symbol} " * question.right
+            return f"{symbol} " * question.left + f"{question.symbol}　" + f"{symbol} " * question.right
 
-        def start_math(subject: str):
-            session = create_addition_session()
+        def start_math(subject: str, operation: str):
+            session = create_addition_session() if operation == "addition" else create_subtraction_session()
             question = session.question
             updates = {
                 math_state: session,
                 title_screen: gr.Column(visible=False),
                 math_screen: gr.Column(visible=True),
                 math_progress: session.progress_text,
-                math_equation: f"# {session.display_number(question.left)} ＋ {session.display_number(question.right)} ＝ ？",
+                math_equation: f"# {session.display_number(question.left)} {question.symbol} {session.display_number(question.right)} ＝ ？",
                 math_mushrooms: gr.Markdown(
                     value=math_icons_text(session, subject), visible=session.shows_icons
                 ),
@@ -466,14 +467,19 @@ def build_app():
             return updates
 
         math_start.click(
-            start_math,
+            lambda subject: start_math(subject, "addition"),
+            inputs=active_subject_state,
+            outputs=[math_state, title_screen, math_screen, math_progress, math_equation, math_mushrooms, *math_choice_buttons, math_feedback, math_next_button, sound],
+        )
+        subtraction_start.click(
+            lambda subject: start_math(subject, "subtraction"),
             inputs=active_subject_state,
             outputs=[math_state, title_screen, math_screen, math_progress, math_equation, math_mushrooms, *math_choice_buttons, math_feedback, math_next_button, sound],
         )
 
-        def answer_math(session: AdditionSession | None, choice_index: int):
+        def answer_math(session: ArithmeticSession | None, choice_index: int):
             if session is None:
-                raise gr.Error("たしざんを はじめてね")
+                raise gr.Error("けいさんを はじめてね")
             updated = deepcopy(session)
             correct = updated.answer(updated.question.choices[choice_index])
             message = "せいかい！" if correct else f"せいかいは {updated.question.answer}"
@@ -495,22 +501,22 @@ def build_app():
                 outputs=[math_state, *math_choice_buttons, math_feedback, math_next_button, sound],
             )
 
-        def next_math(session: AdditionSession | None, subject: str):
+        def next_math(session: ArithmeticSession | None, subject: str):
             if session is None:
-                raise gr.Error("たしざんを はじめてね")
+                raise gr.Error("けいさんを はじめてね")
             updated = deepcopy(session)
             if updated.next_question():
                 return {
                     math_state: updated,
                     math_screen: gr.Column(visible=False),
                     result_screen: gr.Column(visible=True),
-                    result: f"# たしざんの けっか\n\nぜんぶで {len(updated.questions)}もん\n\nせいかいは {updated.correct_count}もん",
+                    result: f"# {updated.game_name}の けっか\n\nぜんぶで {len(updated.questions)}もん\n\nせいかいは {updated.correct_count}もん",
                 }
             question = updated.question
             updates = {
                 math_state: updated,
                 math_progress: updated.progress_text,
-                math_equation: f"# {updated.display_number(question.left)} ＋ {updated.display_number(question.right)} ＝ ？",
+                math_equation: f"# {updated.display_number(question.left)} {question.symbol} {updated.display_number(question.right)} ＝ ？",
                 math_mushrooms: gr.Markdown(
                     value=math_icons_text(updated, subject), visible=updated.shows_icons
                 ),
