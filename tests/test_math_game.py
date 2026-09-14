@@ -4,13 +4,13 @@ import random
 
 import pytest
 
-from src.math_game import create_addition_session
+from src.math_game import KANJI_NUMERALS, create_addition_session
 
 
 def test_creates_additions_without_carrying():
     session = create_addition_session(random.Random(3))
 
-    assert len(session.questions) == 5
+    assert len(session.questions) == 10
     assert all(question.answer <= 9 for question in session.questions)
     assert all(question.answer in question.choices for question in session.questions)
     assert all(len(set(question.choices)) == 3 for question in session.questions)
@@ -26,11 +26,22 @@ def test_counts_correct_answer_and_requires_next():
     assert session.next_question() is False
 
 
-def test_hides_mushroom_count_on_fifth_question():
+def test_uses_icons_only_on_specified_questions_and_kanji_on_last_three():
     session = create_addition_session(random.Random(5))
 
     for _ in range(4):
-        assert session.shows_mushrooms
+        assert session.shows_icons
+        assert not session.uses_kanji_numerals
         session.answer(session.question.answer)
         session.next_question()
-    assert not session.shows_mushrooms
+    for _ in range(3):
+        assert not session.shows_icons
+        assert not session.uses_kanji_numerals
+        session.answer(session.question.answer)
+        session.next_question()
+    for _ in range(3):
+        assert session.shows_icons
+        assert session.uses_kanji_numerals
+        assert session.display_number(session.question.left) in KANJI_NUMERALS
+        session.answer(session.question.answer)
+        session.next_question()

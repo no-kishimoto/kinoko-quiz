@@ -439,8 +439,8 @@ def build_app():
             outputs=[title_screen, count_screen],
         )
 
-        def math_mushrooms_text(session: AdditionSession, subject: str) -> str:
-            if not session.shows_mushrooms:
+        def math_icons_text(session: AdditionSession, subject: str) -> str:
+            if not session.shows_icons:
                 return ""
             question = session.question
             symbol = subject_values(subject)[3]
@@ -454,15 +454,15 @@ def build_app():
                 title_screen: gr.Column(visible=False),
                 math_screen: gr.Column(visible=True),
                 math_progress: session.progress_text,
-                math_equation: f"# {question.left} ＋ {question.right} ＝ ？",
+                math_equation: f"# {session.display_number(question.left)} ＋ {session.display_number(question.right)} ＝ ？",
                 math_mushrooms: gr.Markdown(
-                    value=math_mushrooms_text(session, subject), visible=session.shows_mushrooms
+                    value=math_icons_text(session, subject), visible=session.shows_icons
                 ),
                 math_feedback: gr.HTML(value="", visible=False),
                 math_next_button: gr.Button(visible=False),
                 sound: None,
             }
-            updates.update({button: gr.Button(value=str(value), interactive=True) for button, value in zip(math_choice_buttons, question.choices)})
+            updates.update({button: gr.Button(value=session.display_number(value), interactive=True) for button, value in zip(math_choice_buttons, question.choices)})
             return updates
 
         math_start.click(
@@ -504,21 +504,21 @@ def build_app():
                     math_state: updated,
                     math_screen: gr.Column(visible=False),
                     result_screen: gr.Column(visible=True),
-                    result: f"# たしざんの けっか\n\nぜんぶで 5もん\n\nせいかいは {updated.correct_count}もん",
+                    result: f"# たしざんの けっか\n\nぜんぶで {len(updated.questions)}もん\n\nせいかいは {updated.correct_count}もん",
                 }
             question = updated.question
             updates = {
                 math_state: updated,
                 math_progress: updated.progress_text,
-                math_equation: f"# {question.left} ＋ {question.right} ＝ ？",
+                math_equation: f"# {updated.display_number(question.left)} ＋ {updated.display_number(question.right)} ＝ ？",
                 math_mushrooms: gr.Markdown(
-                    value=math_mushrooms_text(updated, subject), visible=updated.shows_mushrooms
+                    value=math_icons_text(updated, subject), visible=updated.shows_icons
                 ),
                 math_feedback: gr.HTML(value="", visible=False),
                 math_next_button: gr.Button(visible=False),
                 sound: None,
             }
-            updates.update({button: gr.Button(value=str(value), interactive=True) for button, value in zip(math_choice_buttons, question.choices)})
+            updates.update({button: gr.Button(value=updated.display_number(value), interactive=True) for button, value in zip(math_choice_buttons, question.choices)})
             return updates
 
         math_next_button.click(

@@ -6,7 +6,8 @@ import random
 from dataclasses import dataclass
 
 
-QUESTION_COUNT = 5
+QUESTION_COUNT = 10
+KANJI_NUMERALS = ("〇", "一", "二", "三", "四", "五", "六", "七", "八", "九")
 
 
 @dataclass(frozen=True)
@@ -40,10 +41,21 @@ class AdditionSession:
         return f"もんだい {self.current_index + 1} / {len(self.questions)}"
 
     @property
-    def shows_mushrooms(self) -> bool:
-        """5問目だけは、数えるヒントを表示しない。"""
+    def shows_icons(self) -> bool:
+        """1〜4問目と8〜10問目は、数えるアイコンを表示する。"""
 
-        return self.current_index < len(self.questions) - 1
+        return self.current_index < 4 or self.current_index >= 7
+
+    @property
+    def uses_kanji_numerals(self) -> bool:
+        """8〜10問目は、漢数字で数を読む問題にする。"""
+
+        return self.current_index >= 7
+
+    def display_number(self, number: int) -> str:
+        """問題の段階に応じて、算用数字か漢数字で数を表示する。"""
+
+        return KANJI_NUMERALS[number] if self.uses_kanji_numerals else str(number)
 
     def answer(self, selected: int) -> bool:
         if self.answered:
