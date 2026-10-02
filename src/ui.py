@@ -21,7 +21,6 @@ from src.paths import (
     SHOKUBUTSU_DATA_PATH,
     SHOKUBUTSU_QUIZ_IMAGE_DIR,
     SHOKUBUTSU_ZUKAN_IMAGE_DIR,
-    WRONG_SOUND_PATH,
     ZUKAN_IMAGE_DIR,
 )
 from src.quiz import QuizSession, create_quiz_session
@@ -234,7 +233,7 @@ def build_app():
     search_backgrounds = tuple(sorted(SEARCH_BACKGROUND_DIR.glob("*.png")))
     if len(search_backgrounds) < 3:
         raise RuntimeError("at least three search background assets are required")
-    for sound_path in (CORRECT_SOUND_PATH, WRONG_SOUND_PATH):
+    for sound_path in (CORRECT_SOUND_PATH,):
         if not sound_path.is_file():
             raise RuntimeError(f"missing sound asset: {sound_path}")
 
@@ -484,13 +483,12 @@ def build_app():
             updated = deepcopy(session)
             correct = updated.answer(updated.question.choices[choice_index])
             message = "せいかい！" if correct else f"せいかいは {updated.question.answer}"
-            sound_path = CORRECT_SOUND_PATH if correct else WRONG_SOUND_PATH
             updates = {
                 math_state: updated,
                 math_feedback: gr.HTML(value=f"<div>{message}</div>", visible=True),
                 math_next_button: gr.Button(visible=True),
                 # 同じ問題を遊び直しても、毎回かならず新しい音声として再生する。
-                sound: sound_html(sound_path, random.randint(1, 999999)),
+                sound: sound_html(CORRECT_SOUND_PATH, random.randint(1, 999999)) if correct else None,
             }
             updates.update({button: gr.Button(interactive=False) for button in math_choice_buttons})
             return updates
@@ -577,10 +575,7 @@ def build_app():
                 search_scene: render_scene(updated, subject_values(subject)[2]),
                 search_status: status_text(updated, clicked=True),
                 search_next_button: gr.Button(visible=found),
-                sound: sound_html(
-                    CORRECT_SOUND_PATH if found else WRONG_SOUND_PATH,
-                    random.randint(1, 999999),
-                ),
+                sound: sound_html(CORRECT_SOUND_PATH, random.randint(1, 999999)) if found else None,
             }
 
         search_scene.select(
@@ -779,13 +774,12 @@ def build_app():
                 if answer_result.is_correct
                 else f"せいかいは {answer_item.name}"
             )
-            sound_path = CORRECT_SOUND_PATH if answer_result.is_correct else WRONG_SOUND_PATH
             updates = {
                 session_state: updated,
                 image: str(subject_values(subject)[2] / answer_item.image_filename),
                 feedback: gr.HTML(value=f"<div>{message}</div>", visible=True),
                 explanation: gr.Markdown(value=explanation_text(answer_item), visible=True),
-                sound: sound_html(sound_path, updated.current_index),
+                sound: sound_html(CORRECT_SOUND_PATH, updated.current_index) if answer_result.is_correct else None,
                 next_button: gr.Button(visible=True),
             }
             updates.update({button: gr.Button(interactive=False) for button in choice_buttons})
