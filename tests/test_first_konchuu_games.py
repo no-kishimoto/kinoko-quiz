@@ -22,6 +22,16 @@ def test_ready_insects_have_both_game_images():
             assert image.convert("RGBA").getpixel((0, 0))[3] == 0
 
 
+def test_monshirochou_white_wings_remain_opaque():
+    for directory in (
+        ROOT / "assets" / "images" / "konchuu" / "zukan",
+        ROOT / "assets" / "images" / "konchuu" / "quiz",
+    ):
+        with Image.open(directory / "monshirochou.png") as image:
+            # 左の白い羽の中心。背景だけを透明にし、羽は消さない。
+            assert image.convert("RGBA").getpixel((300, 400))[3] >= 245
+
+
 def test_ready_insects_work_in_quiz_zukan_and_search():
     quiz = create_quiz_session(ITEMS, 5, random.Random(2))
     assert all(question.answer.key in question.choice_keys for question in quiz.questions)
