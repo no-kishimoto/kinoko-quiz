@@ -409,6 +409,7 @@ def build_app():
 
         with gr.Column(visible=False, elem_classes="search-screen") as search_screen:
             search_heading = gr.Markdown("# きのこ さがし", elem_classes="main-title")
+            search_progress = gr.Markdown(elem_classes=["center-text", "progress-text"])
             search_prompt = gr.Markdown(elem_classes="center-text")
             search_status = gr.Markdown(elem_classes=["center-text", "search-status"])
             with gr.Row(elem_classes="search-layout"):
@@ -542,6 +543,7 @@ def build_app():
                 title_screen: gr.Column(visible=False),
                 search_screen: gr.Column(visible=True),
                 search_heading: f"# {label} さがし",
+                search_progress: session.progress_text,
                 search_scene: render_scene(session, zukan_dir),
                 search_prompt: prompt_text(session),
                 search_status: status_text(session),
@@ -553,7 +555,7 @@ def build_app():
             inputs=active_subject_state,
             outputs=[
                 search_state, title_screen, search_screen, search_scene,
-                search_heading, search_prompt, search_status, search_next_button,
+                search_heading, search_progress, search_prompt, search_status, search_next_button,
             ],
         )
 
@@ -587,10 +589,42 @@ def build_app():
             outputs=[search_state, search_scene, search_status, search_next_button, sound],
         )
 
+        def next_search(session: SearchSession | None, subject: str):
+            if session is None or not session.is_correct:
+                raise gr.Error("みつけてから つぎへ すすもう")
+            if session.is_last_question:
+                label = {"kinoko": "きのこ", "shokubutsu": "しょくぶつ", "konchuu": "こんちゅう"}[subject]
+                return {
+                    search_state: session,
+                    search_screen: gr.Column(visible=False),
+                    result_screen: gr.Column(visible=True),
+                    result: (
+                        f"# {label} さがしの けっか\n\n"
+                        f"ぜんぶで {session.total_questions}もん\n\n"
+                        f"せいかいは {session.correct_count}もん"
+                    ),
+                }
+            items, _, zukan_dir, _ = subject_values(subject)
+            updated = create_search_session(
+                items,
+                search_backgrounds,
+                current_index=session.current_index + 1,
+                correct_count=session.correct_count,
+            )
+            return {
+                search_state: updated,
+                search_progress: updated.progress_text,
+                search_scene: render_scene(updated, zukan_dir),
+                search_prompt: prompt_text(updated),
+                search_status: status_text(updated),
+                search_next_button: gr.Button(visible=False),
+                sound: None,
+            }
+
         search_next_button.click(
-            start_search,
-            inputs=active_subject_state,
-            outputs=[search_state, title_screen, search_screen, search_scene, search_heading, search_prompt, search_status, search_next_button],
+            next_search,
+            inputs=[search_state, active_subject_state],
+            outputs=[search_state, search_screen, result_screen, result, search_progress, search_scene, search_prompt, search_status, search_next_button, sound],
         )
 
         def search_to_title():
@@ -807,13 +841,14 @@ def build_app():
             return {
                 session_state: None,
                 math_state: None,
+                search_state: None,
                 result_screen: gr.Column(visible=False),
                 title_screen: gr.Column(visible=True),
             }
 
         title_button.click(
             return_to_title,
-            outputs=[session_state, math_state, result_screen, title_screen],
+            outputs=[session_state, math_state, search_state, result_screen, title_screen],
         )
 
     return app

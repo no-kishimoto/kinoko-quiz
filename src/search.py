@@ -11,6 +11,8 @@ from PIL import Image, ImageDraw
 
 from data.kinoko_data import Kinoko
 
+QUESTION_COUNT = 5
+
 
 @dataclass(frozen=True)
 class SearchPlacement:
@@ -29,7 +31,21 @@ class SearchSession:
     background_path: Path
     target: SearchPlacement
     decoys: tuple[SearchPlacement, SearchPlacement]
+    current_index: int = 0
+    correct_count: int = 0
     is_correct: bool = False
+
+    @property
+    def total_questions(self) -> int:
+        return QUESTION_COUNT
+
+    @property
+    def progress_text(self) -> str:
+        return f"もんだい {self.current_index + 1} / {self.total_questions}"
+
+    @property
+    def is_last_question(self) -> bool:
+        return self.current_index + 1 >= self.total_questions
 
     @property
     def placements(self) -> tuple[SearchPlacement, SearchPlacement, SearchPlacement]:
@@ -40,6 +56,7 @@ class SearchSession:
             return False
         if self.target.contains(x, y):
             self.is_correct = True
+            self.correct_count += 1
             return True
         return False
 
@@ -54,6 +71,8 @@ def create_search_session(
     kinoko: Sequence[Kinoko],
     backgrounds: Sequence[Path],
     rng: random.Random | None = None,
+    current_index: int = 0,
+    correct_count: int = 0,
 ) -> SearchSession:
     """30種類から1つを指定し、ほか2つをまぎれこませる。"""
 
@@ -69,7 +88,13 @@ def create_search_session(
         SearchPlacement(chosen[1], *positions[1]),
         SearchPlacement(chosen[2], *positions[2]),
     )
-    return SearchSession(background_path=randomizer.choice(list(backgrounds)), target=target, decoys=decoys)
+    return SearchSession(
+        background_path=randomizer.choice(list(backgrounds)),
+        target=target,
+        decoys=decoys,
+        current_index=current_index,
+        correct_count=correct_count,
+    )
 
 
 def prompt_text(session: SearchSession) -> str:

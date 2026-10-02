@@ -19,6 +19,7 @@ def test_finds_only_the_specified_target():
     assert not session.is_correct
     assert session.choose_at(session.target.x, session.target.y) is True
     assert session.is_correct
+    assert session.correct_count == 1
     assert session.choose_at(session.target.x, session.target.y) is False
 
 
@@ -40,3 +41,13 @@ def test_can_choose_all_thirty_mushrooms_and_render_scene():
     session = create_search_session(KINOKO, BACKGROUNDS, random.Random(4))
     image = render_scene(session, ROOT / "assets" / "images" / "zukan")
     assert image.size[0] > 0
+
+
+def test_search_game_has_five_questions_and_counts_each_correct_answer():
+    session = create_search_session(KINOKO, BACKGROUNDS, random.Random(8), current_index=4, correct_count=4)
+
+    assert session.total_questions == 5
+    assert session.progress_text == "もんだい 5 / 5"
+    assert session.is_last_question
+    assert session.choose_at(session.target.x, session.target.y)
+    assert session.correct_count == 5
