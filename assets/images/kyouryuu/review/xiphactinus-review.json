@@ -1,0 +1,64 @@
+{
+  "status": "awaiting_image_and_description_review",
+  "quiz_specification_status": "confirmed",
+  "quiz_specification_confirmation_date": "2026-10-04",
+  "mode": "built-in image_gen",
+  "game_integration": "not applied; existing runtime data, assets and UI preserved",
+  "source_verification_date": "2026-10-04",
+  "source_images": [
+    {
+      "role": "museum skeleton anatomy reference",
+      "title": "Western Australian Museum — Bony Fish",
+      "page_url": "https://museum.wa.gov.au/marine-reptiles/photo-galleries/bony-fish/",
+      "image_url": "https://www.museum.wa.gov.au/marine-reptiles/sites/default/files/styles/article_full_width/public/1280px-xiphactinus_audax_skeleton.jpg",
+      "credit": "Ninjatacoshell; photograph of a cast at the North American Museum of Ancient Life"
+    },
+    {
+      "role": "articulated skull anatomy reference",
+      "title": "Mike Everhart — Xiphactinus audax",
+      "page_url": "https://oceansofkansas.com/Xiphac.html",
+      "image_url": "https://oceansofkansas.com/Xiphactinus/xfish3.jpg",
+      "note": "1989 Gove County articulated skull, prepared in 2007; artificial eye ignored"
+    },
+    {
+      "role": "head profile and jaw proportions reference",
+      "title": "S. Prentice — University Geological Survey of Kansas, Volume VI, Plate XXXIII",
+      "page_url": "https://oceansofkansas.com/Xiphac.html",
+      "image_url": "https://oceansofkansas.com/Xiphactinus/prentice.jpg"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "assets/images/kyouryuu/review/xiphactinus-reconstruction-v2.png",
+      "prompt": "Use case: precise-object-edit\nAsset type: corrected Xiphactinus audax reconstruction for a preschool natural-history quiz, approval preview\nInput images: Image 1 is the existing full-body illustration to edit, a blue-silver fish facing LEFT on white. Preserve its rendering style and body. Image 2 is an official Western Australian Museum photo of a Xiphactinus skeleton, anatomy reference only. Image 3 is paleontologist Mike Everhart's articulated Xiphactinus skull photograph, anatomy reference only; the added toy eye is not anatomical. Image 4 is S. Prentice's Xiphactinus skull plate from the University Geological Survey of Kansas, the key anatomical reference for jaw proportions; do not copy any lettering.\nPrimary request: correct ONLY the fish's head and jaws to match the distinctive short deep bulldog-like Xiphactinus skull rather than a generic pointy-snouted fish. The front profile must be visibly concave/recessed above the upper jaw: the high forehead drops down into a short blunt upturned upper-jaw/premaxilla region. The lower jaw is deep, robust, curved upward, and its bony front clearly projects forward beyond the upper jaw's bony front, forming a prominent jutting chin. Preserve the very large irregular conical fangs in both jaws; a few long upper fangs can project beyond the chin, as shown in the anatomical plate. Keep the eye in its correct position behind the premaxilla. Show the mouth only moderately open, about 20 degrees, so the underbite and chin are unmistakable. Match the anatomical proportions of the reference plate, not an exaggerated piranha or fantasy monster.\nScene/backdrop: plain opaque white studio background, consistent with the existing game image.\nComposition: single full-body fish facing LEFT, centered horizontally, entire tail and all fins visible, generous blank margins of at least 8 percent on every side. No close-up inset and no multi-panel layout.\nStyle: detailed natural-history digital illustration, same blue-silver scales and cream belly as the original, clear readable shapes, appropriate for a 4-year-old.\nConstraints: preserve the existing body, scale texture, fins, forked tail, colors, lighting and medium. Change only head/skull outline, jaw projection, gape and dentition needed to correct the anatomy. No text, labels, watermark, stone slab, museum wall, gore, prey or other animals.",
+      "intent": "correct recessed forehead and jutting lower jaw while retaining original illustration style"
+    },
+    {
+      "path": "assets/images/kyouryuu/review/xiphactinus-skeleton-v2.png",
+      "prompt": "Use case: scientific-educational\nAsset type: Xiphactinus audax skeleton specimen image for an educational quiz, approval preview\nInput images: Image 1 is the official Western Australian Museum photo of a mounted Xiphactinus skeleton; use this for vertebrae, ribs and fin rays. Image 2 is the photographed articulated skull from paleontologist Mike Everhart's own collection; use skull shape, but ignore the added artificial eye. Image 3 is S. Prentice's University Geological Survey of Kansas skull anatomy plate; use its real head and jaw anatomy. Image 4 is the newly corrected living reconstruction; use ONLY the LEFT-facing orientation and overall fish pose, not its skin.\nPrimary request: produce one high-quality full-body reconstructed museum skeleton of Xiphactinus audax with articulated bones and the corrected short deep head. Plain light ivory background. Brown-tan fossil bones in side view, head at LEFT and forked caudal fin at RIGHT. The high cranial roof transitions through a recessed concave area into a short blunt upper jaw; the very deep upcurved lower jaw projects forward beyond the bony upper jaw. Large irregular conical fangs in both jaws, with a few larger upper premaxillary teeth. Small natural orbital opening, no eyeballs. Mouth moderately open around 20 degrees; avoid wide monster gape. Skull must be recognizable as this bony fish, not a dinosaur skull. Long fish vertebral column, many thin ribs, bony fin rays forming dorsal, anal, pectoral/pelvic and forked tail fins. Follow the specimen and anatomy diagram rather than inventing limb bones.\nComposition/framing: one entire skeleton only, true lateral view, centered in a landscape 3:2 canvas, generous at least 8 percent empty margin on each side. Every tooth, snout tip, fin ray, and tail must be inside the frame.\nStyle/medium: detailed museum-specimen photography-like natural-history illustration, clear bones suitable for a four-year-old comparing body shapes. Subtle dimensional lighting.\nConstraints: no flesh, skin, scales, living eyes, rocks, fossil slab, labels, text, lettering, logos, people, aquarium scenery or extra animals. No two-panel composition. No mounted crocodile or shark. If support is necessary, a minimal unobtrusive thin museum support rod only. Background is opaque, not transparent.",
+      "intent": "reconstructed mounted skeleton consistent with skull references"
+    }
+  ],
+  "confirmed_game_specification": {
+    "subject_label": "🦖きょうりゅう",
+    "proposed_species_count": 18,
+    "additional_candidates_file": "data/kyouryuu_candidates.json",
+    "question_image": "骨のある生き物は骨格標本、骨のない生き物は化石標本",
+    "incomplete_skeleton_policy": "研究資料に基づいて不足部分を補った復元骨格標本を使用する",
+    "background_policy": "骨格標本・化石標本・復元画像は背景透過。既存の標本画像もすべて変更する。",
+    "choices": "名前の文字3択",
+    "answer_display_order": [
+      "正誤表示",
+      "正しい名前",
+      "特徴",
+      "復元画像",
+      "つぎへ"
+    ],
+    "boneless_specimen_formats": {
+      "ammonite": "殻の化石標本",
+      "trilobite": "外骨格の化石標本",
+      "anomalocaris": "体の形が残った化石標本（脊椎動物の骨格ではない）",
+      "ottoia": "体の形が残った化石標本（脊椎動物の骨格ではない）"
+    }
+  }
+}

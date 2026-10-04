@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>10しゅるいの ふくげんがぞうの かくにん</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #fff8df; color: #111; font: 20px/1.7 system-ui,sans-serif; }
+    main { max-width: 1400px; margin: auto; padding: 24px; }
+    h1 { margin: 0; font-size: clamp(26px,3.5vw,38px); }
+    h2 { margin: 0; font-size: 27px; }
+    h3 { font-size: 22px; margin: 10px 0; }
+    p { margin: 10px 0 18px; }
+    .controls, nav { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+    button { padding: 10px 20px; border: 2px solid #2589b7; border-radius: 12px; font: inherit; color: #111; background: white; cursor: pointer; }
+    button[aria-pressed="true"] { background: #dff5ff; }
+    button:focus-visible, a:focus-visible { outline: 4px solid #c85000; outline-offset: 3px; }
+    a { color: #075f92; }
+    article { margin: 24px 0; padding: 20px; border: 3px solid #43a5d5; border-radius: 18px; background: white; scroll-margin-top: 16px; }
+    .images { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+    figure { margin: 0; min-width: 0; }
+    figcaption { text-align: center; font-weight: 700; }
+    .image-area { height: 300px; margin-top: 8px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: #71bce6; overflow: hidden; }
+    .image-area img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+    main[data-background="white"] .image-area { background: white; }
+    main[data-background="dark"] .image-area { background: #25343d; }
+    main[data-background="checker"] .image-area { background-color: white; background-image: conic-gradient(#ddd 25%,white 0 50%,#ddd 0 75%,white 0); background-size: 24px 24px; }
+    .note { font-size: 17px; }
+    @media (max-width: 900px) { main { padding: 16px; } .images { grid-template-columns: 1fr; } article { padding: 16px; } }
+  </style>
+</head>
+<body>
+  <main id="review" data-background="blue">
+    <h1>10しゅるいの ふくげんがぞうの かくにん</h1>
+    <p>まえの え・こっかくや かせき・とうめいにした えを ならべています。あたらしい えは、ゲームには まだ つかっていません。</p>
+    <div class="controls" aria-label="はいけいの いろ">
+      <button type="button" data-background="blue" aria-pressed="true">あお</button>
+      <button type="button" data-background="white" aria-pressed="false">しろ</button>
+      <button type="button" data-background="dark" aria-pressed="false">くろ</button>
+      <button type="button" data-background="checker" aria-pressed="false">チェック</button>
+    </div>
+    <nav id="links" aria-label="しゅるいを えらぶ"></nav>
+    <section id="cards" aria-label="10しゅるいの いちらん"></section>
+    <p class="note">せつめいと こっかく・かせきの がぞうは かくにんずみです。みぎの とうめいにした えを、あらためて かくにんしてください。</p>
+    <p><a href="../additions.html">ついかした 8しゅるいへ</a> ／ <a href="../../search-backgrounds/index.html">ちそうの はいけいへ</a></p>
+  </main>
+  <script>
+    const main = document.getElementById('review');
+    document.querySelectorAll('button[data-background]').forEach(button => {
+      button.addEventListener('click', () => {
+        main.dataset.background = button.dataset.background;
+        document.querySelectorAll('button[data-background]').forEach(other =>
+          other.setAttribute('aria-pressed', String(other === button)));
+      });
+    });
+    function makeFigure(label, source, alt) {
+      const figure = document.createElement('figure');
+      const caption = document.createElement('figcaption');
+      caption.textContent = label;
+      const area = document.createElement('div');
+      area.className = 'image-area';
+      const image = document.createElement('img');
+      image.src = source;
+      image.alt = alt;
+      area.append(image);
+      figure.append(caption, area);
+      return figure;
+    }
+    async function loadReview() {
+      const response = await fetch('review.json');
+      if (!response.ok) throw new Error('review unavailable');
+      const record = await response.json();
+      record.items.forEach((item, index) => {
+        const link = document.createElement('a');
+        link.href = '#' + item.key;
+        link.textContent = item.name;
+        document.getElementById('links').append(link);
+        const article = document.createElement('article');
+        article.id = item.key;
+        const heading = document.createElement('h2');
+        heading.textContent = String(index + 1) + '. ' + item.name;
+        const description = document.createElement('p');
+        description.textContent = item.zukan_text;
+        const images = document.createElement('div');
+        images.className = 'images';
+        images.append(
+          makeFigure('まえの え', item.source_image, item.name + 'の まえの え'),
+          makeFigure('こっかく・かせき', item.specimen_image, item.name + 'の こっかくや かせき'),
+          makeFigure('とうめいにした え', item.review_image, item.name + 'の とうめいにした え'));
+        article.append(heading, description, images);
+        document.getElementById('cards').append(article);
+      });
+    }
+    loadReview().catch(() => {
+      document.getElementById('cards').textContent = 'がぞうを よみこめませんでした。ページを ひらきなおしてください。';
+    });
+  </script>
+</body>
+</html>

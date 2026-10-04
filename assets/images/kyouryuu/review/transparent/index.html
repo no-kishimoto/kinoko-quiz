@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>きょうりゅうの がぞう かくにん</title>
+<style>
+:root{color-scheme:light;--stage:#d7efff}
+*{box-sizing:border-box}body{margin:0;background:#fff8dd;color:#17202b;font-family:system-ui,sans-serif}
+header{position:sticky;top:0;z-index:2;padding:16px 24px;background:#fff8dd;border-bottom:2px solid #e3c677}
+h1{font-size:24px;margin:0 0 8px}p{line-height:1.7;margin:6px 0}nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+button{border:2px solid #69758b;border-radius:12px;background:white;padding:10px 18px;font:inherit;cursor:pointer}
+button[aria-pressed="true"]{border-color:#0076a8;box-shadow:0 0 0 2px #0076a8}
+main{max-width:1200px;margin:auto;padding:20px}
+article{margin-bottom:26px;padding:20px;background:white;border-radius:18px;border:2px solid #d7c68c}
+h2{margin:0 0 14px;font-size:24px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}article{scroll-margin-top:220px}
+figure{margin:0}figcaption{font-size:18px;font-weight:bold;margin-bottom:8px}
+.stage{height:350px;border-radius:12px;background:var(--stage);overflow:hidden;border:1px solid #888}
+.stage img{width:100%;height:100%;object-fit:contain}
+body.checker .stage{background:conic-gradient(#eee 25%,white 0 50%,#eee 0 75%,white 0);background-size:24px 24px}
+.notes{margin-top:14px;font-size:18px}.hint{font-weight:bold}.status{font-size:16px;color:#385166}
+@media(max-width:650px){header{position:static;padding:14px}.pair{grid-template-columns:1fr}.stage{height:280px}main{padding:12px}article{padding:12px;scroll-margin-top:12px}}
+</style>
+</head>
+<body>
+<header>
+<h1>きょうりゅうの がぞう かくにん</h1>
+<p>10しゅるいの こっかく・かせきの はいけいを とうめいに しました。</p>
+<p class="status">10しゅるいの こっかく・かせき がぞうと せつめいを かくにんずみです。ゲームには まだ はんえいしていません。</p>
+<nav aria-label="はいけいの いろ">
+<button data-bg="#d7efff" aria-pressed="true">あお</button>
+<button data-bg="#ffffff" aria-pressed="false">しろ</button>
+<button data-bg="#263445" aria-pressed="false">くらい いろ</button>
+<button data-bg="checker" aria-pressed="false">とうめいを かくにん</button>
+</nav>
+</header>
+<main id="gallery"><p>よみこみちゅう…</p></main>
+<script>
+document.querySelectorAll('[data-bg]').forEach(button=>button.addEventListener('click',()=>{
+ document.querySelectorAll('[data-bg]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+ const bg=button.dataset.bg;
+ document.body.classList.toggle('checker',bg==='checker');
+ if(bg!=='checker')document.documentElement.style.setProperty('--stage',bg);
+}));
+async function build(){
+ const response=await fetch('../../../../../data/kyouryuu.json');
+ if(!response.ok)throw new Error('がぞうを よみこめませんでした。');
+ const entries=await response.json();
+ const overridesResponse=await fetch('review-overrides.json');
+ if(!overridesResponse.ok)throw new Error('なおした せつめいを よみこめませんでした。');
+ const overrides=await overridesResponse.json();
+ const edits=new Map(overrides.items.map(item=>[item.key,item]));
+ const gallery=document.getElementById('gallery');gallery.replaceChildren();
+ entries.forEach((original,index)=>{
+  const entry={...original,...edits.get(original.key)};
+  const article=document.createElement('article');article.id=entry.key;
+  const title=document.createElement('h2');title.textContent=(index+1)+' / '+entries.length+'　'+entry.name;article.append(title);
+  const pair=document.createElement('div');pair.className='pair';
+  for(const [label,path] of [[entry.reference_label||'いまの がぞう',entry.reference_image||'../../fossil/'+entry.key+'.png'],[entry.review_label||'とうめいに した がぞう',entry.review_image||entry.key+'-fossil-v1.png']]){
+   const figure=document.createElement('figure');
+   const caption=document.createElement('figcaption');caption.textContent=label;
+   const stage=document.createElement('div');stage.className='stage';
+   const image=document.createElement('img');image.src=path;image.alt=entry.name+' '+label;
+   stage.append(image);figure.append(caption,stage);pair.append(figure);
+  }
+  article.append(pair);
+  const notes=document.createElement('div');notes.className='notes';
+  const hint=document.createElement('p');hint.className='hint';hint.textContent='ヒント：'+entry.quiz_hint;
+  const explanation=document.createElement('p');explanation.textContent=entry.zukan_text;
+  notes.append(hint,explanation);article.append(notes);gallery.append(article);
+ });
+ if(location.hash){
+  document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView({block:'start'});
+ }
+}
+build().catch(error=>{document.getElementById('gallery').textContent=error.message;});
+</script>
+</body>
+</html>

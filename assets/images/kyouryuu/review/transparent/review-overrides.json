@@ -1,0 +1,130 @@
+{
+  "status": "existing_10_images_and_descriptions_approved",
+  "game_integration": "not applied",
+  "notes": "Sea reptiles is an educational umbrella term, not a single taxonomic clade. Two claws refers to each forelimb of Tyrannosaurus, not the hind feet.",
+  "sources": [
+    {
+      "topic": "Tyrannosaurus two functional hand claws",
+      "url": "https://www.amnh.org/explore/news-blogs/t-rex-third-claw"
+    },
+    {
+      "topic": "Tyrannosaurus bipedal skeleton",
+      "url": "https://naturalhistory.si.edu/explore/dinosaurs-fossils/nations-t-rex"
+    },
+    {
+      "topic": "Pteranodon belongs to pterosaurs",
+      "url": "https://www.nhm.ac.uk/discover/the-truth-about-pterosaurs.html"
+    },
+    {
+      "topic": "Sea-reptile umbrella terminology includes plesiosaurs and mosasaurs",
+      "url": "https://www2.pref.fukui.lg.jp/press/atfiles/pad91625806451fE.pdf"
+    }
+  ],
+  "items": [
+    {
+      "key": "pachycephalosaurus",
+      "name": "パキケファロサウルス",
+      "quiz_hint": "あたまが ぶあつく まるい。",
+      "zukan_text": "あたまの うえが とても かたい きょうりゅう。なかまと あたまを くらべたかも しれないよ。",
+      "image_status": "approved",
+      "description_status": "approved",
+      "approval_date": "2026-10-04",
+      "review_image": "pachycephalosaurus-fossil-v1.png"
+    },
+    {
+      "key": "brachiosaurus",
+      "name": "ブラキオサウルス",
+      "quiz_hint": "とても ながい くび。まえあしが ながい。",
+      "zukan_text": "とても おおきな くさを たべる きょうりゅう。ながい くびで たかい きの はを たべたよ。",
+      "image_status": "approved",
+      "description_status": "approved",
+      "approval_date": "2026-10-04",
+      "review_image": "brachiosaurus-fossil-v1.png"
+    },
+    {
+      "key": "tyrannosaurus",
+      "name": "ティラノサウルス",
+      "quiz_hint": "おおきな あたまと するどい は。",
+      "zukan_text": "とても おおきな にくを たべる きょうりゅう。ちいさな まえあしに、にほんの つめが あるよ。",
+      "image_status": "approved",
+      "description_status": "approved",
+      "approval_date": "2026-10-04",
+      "reference_image": "tyrannosaurus-fossil-v1.png",
+      "reference_label": "まえの とうめい がぞう",
+      "review_image": "tyrannosaurus-fossil-v3.png",
+      "review_label": "あしを なおした がぞう"
+    },
+    {
+      "key": "stegosaurus",
+      "name": "ステゴサウルス",
+      "quiz_hint": "せなかに おおきな いた。しっぽに とげ。",
+      "zukan_text": "せなかに ならんだ いたが めじるしの くさを たべる きょうりゅう。しっぽの とげで じぶんを まもったよ。",
+      "image_status": "approved",
+      "description_status": "approved",
+      "approval_date": "2026-10-04",
+      "review_image": "stegosaurus-fossil-v1.png"
+    },
+    {
+      "key": "triceratops",
+      "name": "トリケラトプス",
+      "quiz_hint": "かおに 3ぼんの つの。おおきな えり。",
+      "zukan_text": "3ぼんの つのと おおきな えりが かっこいい くさを たべる きょうりゅう。",
+      "image_status": "approved",
+      "description_status": "approved",
+      "approval_date": "2026-10-04",
+      "review_image": "triceratops-fossil-v1.png"
+    },
+    {
+      "key": "pteranodon",
+      "name": "プテラノドン",
+      "quiz_hint": "ながい くちばしと おおきな はね。",
+      "zukan_text": "そらを とんだ よくりゅうの なかまだよ。ながい くちばしが めじるしだよ。",
+      "image_status": "approved",
+      "description_status": "approved",
+      "approval_date": "2026-10-04",
+      "review_image": "pteranodon-fossil-v1.png"
+    },
+    {
+      "key": "plesiosaurus",
+      "name": "プレシオサウルス",
+      "quiz_hint": "とても ながい くび。ひれみたいな あし。",
+      "zukan_text": "うみを およいだ かいりゅうの なかまだよ。ながい くびと、4つの ひれが めじるしだよ。",
+      "image_status": "approved",
+      "description_status": "approved",
+      "approval_date": "2026-10-04",
+      "review_image": "plesiosaurus-fossil-v1.png"
+    },
+    {
+      "key": "mosasaurus",
+      "name": "モササウルス",
+      "quiz_hint": "おおきな くちと するどい は。",
+      "zukan_text": "うみを およいだ かいりゅうの なかまだよ。おおきな くちと、するどい はが めじるしだよ。",
+      "image_status": "approved",
+      "description_status": "approved",
+      "approval_date": "2026-10-04",
+      "review_image": "mosasaurus-fossil-v1.png"
+    },
+    {
+      "key": "ammonite",
+      "name": "アンモナイト",
+      "quiz_hint": "うずまきの かたちの から。",
+      "zukan_text": "うみで くらした むかしの いきもの。うずまきの からが めじるしだよ。",
+      "image_status": "approved",
+      "description_status": "approved",
+      "approval_date": "2026-10-04",
+      "review_image": "ammonite-fossil-v1.png"
+    },
+    {
+      "key": "xiphactinus",
+      "name": "シファクティヌス",
+      "quiz_hint": "おおきな くちと とがった は。",
+      "zukan_text": "むかしの うみを およいだ おおきな さかなの なかまだよ。おおきな くちと、とがった はが めじるしだよ。",
+      "image_status": "approved",
+      "description_status": "approved",
+      "approval_date": "2026-10-04",
+      "review_image": "xiphactinus-fossil-v1.png"
+    }
+  ],
+  "approval_date": "2026-10-04",
+  "approval_scope": "Only existing 10 specimen images and the descriptions displayed on the review page. Living reconstruction transparency and the 8 additions still require review."
+}
