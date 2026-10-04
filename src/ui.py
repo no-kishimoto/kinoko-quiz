@@ -16,6 +16,9 @@ from src.paths import (
     KONCHUU_DATA_PATH,
     KONCHUU_QUIZ_IMAGE_DIR,
     KONCHUU_ZUKAN_IMAGE_DIR,
+    KYOURYUU_DATA_PATH,
+    KYOURYUU_FOSSIL_IMAGE_DIR,
+    KYOURYUU_RECONSTRUCTION_IMAGE_DIR,
     QUIZ_IMAGE_DIR,
     SEARCH_BACKGROUND_DIR,
     SHOKUBUTSU_DATA_PATH,
@@ -76,6 +79,9 @@ APP_CSS = """
 .big-feedback * { color: #c1121f !important; }
 .choice, .choice *, .main-button, .main-button * { font-size: 1.5rem !important; }
 .choice, .main-button { min-height: 64px; }
+.dinosaur-choices { margin-top: 0 !important; }
+.dinosaur-choices img { object-fit: contain !important; background: #ffffff !important; }
+.dinosaur-choices button { font-size: 1.05rem !important; }
 .explanation-card { font-size: 1.3rem; line-height: 1.45; }
 .sound-effect {
     height: 1px !important;
@@ -220,6 +226,8 @@ def build_app():
     ready_shokubutsu = load_ready_subject_items(SHOKUBUTSU_DATA_PATH)
     konchuu = load_subject_names(KONCHUU_DATA_PATH)
     ready_konchuu = load_ready_subject_items(KONCHUU_DATA_PATH)
+    kyouryuu = load_subject_names(KYOURYUU_DATA_PATH)
+    ready_kyouryuu = load_ready_subject_items(KYOURYUU_DATA_PATH)
     validate_image_assets(kinoko, ZUKAN_IMAGE_DIR)
     validate_image_assets(kinoko, QUIZ_IMAGE_DIR)
     for item in ready_shokubutsu:
@@ -230,6 +238,10 @@ def build_app():
         for directory in (KONCHUU_ZUKAN_IMAGE_DIR, KONCHUU_QUIZ_IMAGE_DIR):
             if not (directory / item.image_filename).is_file():
                 raise RuntimeError(f"missing konchuu image: {directory / item.image_filename}")
+    for item in ready_kyouryuu:
+        for directory in (KYOURYUU_FOSSIL_IMAGE_DIR, KYOURYUU_RECONSTRUCTION_IMAGE_DIR):
+            if not (directory / item.image_filename).is_file():
+                raise RuntimeError(f"missing kyouryuu image: {directory / item.image_filename}")
     search_backgrounds = tuple(sorted(SEARCH_BACKGROUND_DIR.glob("*.png")))
     if len(search_backgrounds) < 3:
         raise RuntimeError("at least three search background assets are required")
@@ -242,6 +254,8 @@ def build_app():
             return ready_shokubutsu, SHOKUBUTSU_QUIZ_IMAGE_DIR, SHOKUBUTSU_ZUKAN_IMAGE_DIR, "🌱"
         if subject == "konchuu":
             return ready_konchuu, KONCHUU_QUIZ_IMAGE_DIR, KONCHUU_ZUKAN_IMAGE_DIR, "🪲"
+        if subject == "kyouryuu":
+            return ready_kyouryuu, KYOURYUU_FOSSIL_IMAGE_DIR, KYOURYUU_RECONSTRUCTION_IMAGE_DIR, "🦖"
         return kinoko, QUIZ_IMAGE_DIR, ZUKAN_IMAGE_DIR, "🍄"
 
     with gr.Blocks(title="きのこクイズ") as app:
@@ -256,6 +270,7 @@ def build_app():
             kinoko_subject_button = gr.Button("🍄 きのこ", variant="primary", elem_classes="main-button")
             shokubutsu_subject_button = gr.Button("🌱 しょくぶつ", variant="primary", elem_classes="main-button")
             konchuu_subject_button = gr.Button("🪲 こんちゅう", variant="primary", elem_classes="main-button")
+            kyouryuu_subject_button = gr.Button("🦖 きょうりゅう", variant="primary", elem_classes="main-button")
 
         with gr.Column(visible=False) as title_screen:
             title_heading = gr.Markdown("# 🍄 きのこクイズ", elem_classes="main-title")
@@ -289,6 +304,7 @@ def build_app():
                 "kinoko": ("🍄", "きのこ"),
                 "shokubutsu": ("🌱", "しょくぶつ"),
                 "konchuu": ("🪲", "こんちゅう"),
+                "kyouryuu": ("🦖", "きょうりゅう"),
             }[subject]
             return {
                 active_subject_state: subject,
@@ -325,6 +341,10 @@ def build_app():
             lambda: show_game_menu("konchuu"),
             outputs=[active_subject_state, subject_screen, title_screen, title_heading, search_start, zukan_start],
         )
+        kyouryuu_subject_button.click(
+            lambda: show_game_menu("kyouryuu"),
+            outputs=[active_subject_state, subject_screen, title_screen, title_heading, search_start, zukan_start],
+        )
         for button in (subject_back_button, shokubutsu_back_button, konchuu_back_button):
             button.click(
                 show_subject_picker,
@@ -351,6 +371,16 @@ def build_app():
                     choice_buttons = [
                         gr.Button("", elem_classes="choice") for _ in range(3)
                     ]
+                    dinosaur_choices = gr.Gallery(
+                        show_label=False,
+                        columns=3,
+                        rows=1,
+                        height=260,
+                        object_fit="contain",
+                        interactive=True,
+                        visible=False,
+                        elem_classes="dinosaur-choices",
+                    )
                     feedback = gr.HTML(visible=False, elem_classes="big-feedback")
                     next_button = gr.Button(
                         "つぎへ",
@@ -535,7 +565,7 @@ def build_app():
         def start_search(subject: str):
             items, _, zukan_dir, _ = subject_values(subject)
             session = create_search_session(items, search_backgrounds)
-            label = {"kinoko": "きのこ", "shokubutsu": "しょくぶつ", "konchuu": "こんちゅう"}[subject]
+            label = {"kinoko": "きのこ", "shokubutsu": "しょくぶつ", "konchuu": "こんちゅう", "kyouryuu": "きょうりゅう"}[subject]
             return {
                 search_state: session,
                 title_screen: gr.Column(visible=False),
@@ -588,7 +618,7 @@ def build_app():
             if session is None or not session.is_correct:
                 raise gr.Error("みつけてから つぎへ すすもう")
             if session.is_last_question:
-                label = {"kinoko": "きのこ", "shokubutsu": "しょくぶつ", "konchuu": "こんちゅう"}[subject]
+                label = {"kinoko": "きのこ", "shokubutsu": "しょくぶつ", "konchuu": "こんちゅう", "kyouryuu": "きょうりゅう"}[subject]
                 return {
                     search_state: session,
                     search_screen: gr.Column(visible=False),
@@ -638,6 +668,7 @@ def build_app():
             items, quiz_dir, _, _ = subject_values(subject)
             session = create_quiz_session(items, count)
             view = question_view(session, quiz_dir)
+            is_dinosaur_quiz = subject == "kyouryuu"
             updates = {
                 session_state: session,
                 count_screen: gr.Column(visible=False),
@@ -649,16 +680,24 @@ def build_app():
                 explanation: gr.Markdown(value="", visible=False),
                 sound: None,
                 next_button: gr.Button(visible=False),
+                dinosaur_choices: gr.Gallery(
+                    value=[
+                        (str(KYOURYUU_RECONSTRUCTION_IMAGE_DIR / choice.image_filename), choice.name)
+                        for choice in session.current_question.choices
+                    ] if is_dinosaur_quiz else None,
+                    visible=is_dinosaur_quiz,
+                    interactive=is_dinosaur_quiz,
+                ),
             }
             updates.update({
-                button: gr.Button(value=name, interactive=True)
+                button: gr.Button(value=name, interactive=True, visible=not is_dinosaur_quiz)
                 for button, name in zip(choice_buttons, view.choices)
             })
             return updates
 
         start_outputs = [
             session_state, count_screen, quiz_screen, progress, image, hint,
-            *choice_buttons, feedback, explanation, sound, next_button,
+            *choice_buttons, dinosaur_choices, feedback, explanation, sound, next_button,
         ]
         five_button.click(lambda subject: start_quiz(5, subject), inputs=active_subject_state, outputs=start_outputs)
         ten_button.click(lambda subject: start_quiz(10, subject), inputs=active_subject_state, outputs=start_outputs)
@@ -678,7 +717,7 @@ def build_app():
         def show_zukan(index: int, subject: str):
             items, _, zukan_dir, _ = subject_values(subject)
             page = zukan_page(items, index)
-            label = {"kinoko": "きのこ", "shokubutsu": "しょくぶつ", "konchuu": "こんちゅう"}[subject]
+            label = {"kinoko": "きのこ", "shokubutsu": "しょくぶつ", "konchuu": "こんちゅう", "kyouryuu": "きょうりゅう"}[subject]
             updates = {
                 zukan_page_state: page.index,
                 title_screen: gr.Column(visible=False),
@@ -781,12 +820,13 @@ def build_app():
                 explanation: gr.Markdown(value=explanation_text(answer_item), visible=True),
                 sound: sound_html(CORRECT_SOUND_PATH, updated.current_index) if answer_result.is_correct else None,
                 next_button: gr.Button(visible=True),
+                dinosaur_choices: gr.Gallery(interactive=False),
             }
             updates.update({button: gr.Button(interactive=False) for button in choice_buttons})
             return updates
 
         answer_outputs = [
-            session_state, image, *choice_buttons, feedback, explanation, sound,
+            session_state, image, *choice_buttons, dinosaur_choices, feedback, explanation, sound,
             next_button,
         ]
         for index, button in enumerate(choice_buttons):
@@ -795,6 +835,18 @@ def build_app():
                 inputs=[session_state, active_subject_state],
                 outputs=answer_outputs,
             )
+
+        def answer_dinosaur(session: QuizSession | None, evt: gr.SelectData):
+            index = evt.index
+            if not isinstance(index, int):
+                raise gr.Error("えを えらんでね")
+            return answer(session, "kyouryuu", index)
+
+        dinosaur_choices.select(
+            answer_dinosaur,
+            inputs=session_state,
+            outputs=answer_outputs,
+        )
 
         def go_next(session: QuizSession | None, subject: str):
             if session is None:
@@ -818,16 +870,24 @@ def build_app():
                 explanation: gr.Markdown(value="", visible=False),
                 sound: None,
                 next_button: gr.Button(visible=False),
+                dinosaur_choices: gr.Gallery(
+                    value=[
+                        (str(KYOURYUU_RECONSTRUCTION_IMAGE_DIR / choice.image_filename), choice.name)
+                        for choice in updated.current_question.choices
+                    ] if subject == "kyouryuu" else None,
+                    visible=subject == "kyouryuu",
+                    interactive=subject == "kyouryuu",
+                ),
             }
             updates.update({
-                button: gr.Button(value=name, interactive=True)
+                button: gr.Button(value=name, interactive=True, visible=subject != "kyouryuu")
                 for button, name in zip(choice_buttons, view.choices)
             })
             return updates
 
         next_outputs = [
             session_state, quiz_screen, result_screen, result, progress, image,
-            hint, *choice_buttons, feedback, explanation, sound, next_button,
+            hint, *choice_buttons, dinosaur_choices, feedback, explanation, sound, next_button,
         ]
         next_button.click(go_next, inputs=[session_state, active_subject_state], outputs=next_outputs)
 
