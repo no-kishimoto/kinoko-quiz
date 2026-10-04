@@ -37,3 +37,28 @@ def test_all_twenty_nine_insects_are_ready_for_games():
     assert len(items) == 29
     assert items[0].name == "カブトムシ"
     assert items[-1].name == "ゴライアスオオツノハナムグリ"
+
+
+def test_kyouryuu_selection_has_ten_unique_names():
+    names = load_subject_names(ROOT / "data" / "kyouryuu.json")
+    assert len(names) == 10
+    assert len(names) == len(set(names))
+    assert {
+        "パキケファロサウルス",
+        "ブラキオサウルス",
+        "ティラノサウルス",
+        "ステゴサウルス",
+        "トリケラトプス",
+        "プテラノドン",
+        "プレシオサウルス",
+        "モササウルス",
+        "アンモナイト",
+        "シファクティヌス",
+    } == set(names)
+
+
+def test_all_ten_prehistoric_animals_are_ready_for_games():
+    items = load_ready_subject_items(ROOT / "data" / "kyouryuu.json")
+    assert len(items) == 10
+    assert items[0].name == "パキケファロサウルス"
+    assert items[-1].name == "シファクティヌス"
