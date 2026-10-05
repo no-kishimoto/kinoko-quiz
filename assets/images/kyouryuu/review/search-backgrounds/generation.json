@@ -1,0 +1,50 @@
+{
+  "status": "both_background_images_approved",
+  "approval_date": "2026-10-05",
+  "approval_scope": "Both displayed strata background images. Gameplay approval is recorded in SPEC 16.8; approval does not imply game integration.",
+  "created_date": "2026-10-05",
+  "generation_mode": "built_in_image_gen",
+  "game_integration": "Used by the Gradio fossil search mode on 2026-10-05; the review page remains non-playable.",
+  "gradio_verification": {
+    "date": "2026-10-05",
+    "test_suite": "74 passed",
+    "browser_checks": "Read-only image click; silent retry; correct target circle; completed 0.64-second audio playback; repeated click keeps audio and Next; five distinct targets; final 5/5 result; title return and audio clear.",
+    "tested_viewport": [1280, 900],
+    "result_screenshot": "gradio-result.jpg"
+  },
+  "verification": {
+    "date": "2026-10-05",
+    "dimensions_per_background": [1448, 1086],
+    "alpha_extrema_per_background": [255, 255],
+    "browser_review": "Both backgrounds and all six example overlays loaded; background-only and overlay toggles checked.",
+    "test_suite": "42 passed",
+    "screenshot": "review-with-specimens.jpg"
+  },
+  "approved_design": {
+    "background_count": 2,
+    "style": "Bright illustrated cliffs showing horizontally layered strata",
+    "random_selection": "per question"
+  },
+  "review_page": "assets/images/kyouryuu/review/search-backgrounds/index.html",
+  "provenance": "AI-generated illustrated environments, not photographs or age-specific geological reconstructions. Fossil overlays on the review page are examples only, not playable game integration.",
+  "images": [
+    {
+      "key": "strata-sandstone-v1",
+      "title": "ちそう 1",
+      "prompt": "Use case: stylized-concept\nAsset type: background image for a fossil-finding game for a 4-year-old, no interactive subjects baked into the background.\nPrimary request: a bright, friendly illustrated cliff face with clear horizontal bands of geological strata.\nStyle/medium: polished hand-painted educational game illustration, gentle natural stone textures, soft edges and sunny cheerful lighting, not a photograph and not an infographic.\nComposition/framing: landscape 4:3 image, the nearly front-facing layered cliff fills most of the frame; broad open areas across the whole cliff face to overlay three small separately provided fossil specimen cutouts later. Keep vegetation to a thin rim at the very top and a small amount of gravel at the bottom. Clearly recognizable, continuous horizontal layers. Low-to-medium texture contrast so small detailed fossil overlays will be visible.\nConstraints: render ONLY the environment. No fossils, bones, skeletons, dinosaurs, animals, people, tools, signs, targets, marked circles, letters, text, labels, logos, watermarks or borders. Opaque full-scene background, no transparency. Not a literal age-specific geological reconstruction. Both variants should look cohesive as a pair.\n\nScene/backdrop: a broad pale sandstone cliff with soft cream, buff, pale peach and light ochre horizontal layers; subtle rounded ledges, sparse grass on the upper rim. Gentle warm daylight. Most of the rock surface is light rather than deep brown, for contrast with warm-brown fossil cutouts. No cave or hole, no foreground object dominating the playable cliff face.",
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-a2776abf-3525-499d-ad4d-7b26f2792b45.png",
+      "saved_path": "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/search-backgrounds/strata-sandstone-v1.png",
+      "image_status": "approved",
+      "image_approval_date": "2026-10-05"
+    },
+    {
+      "key": "strata-limestone-v1",
+      "title": "ちそう 2",
+      "prompt": "Use case: stylized-concept\nAsset type: background image for a fossil-finding game for a 4-year-old, no interactive subjects baked into the background.\nPrimary request: a bright, friendly illustrated cliff face with clear horizontal bands of geological strata.\nStyle/medium: polished hand-painted educational game illustration, gentle natural stone textures, soft edges and sunny cheerful lighting, not a photograph and not an infographic.\nComposition/framing: landscape 4:3 image, the nearly front-facing layered cliff fills most of the frame; broad open areas across the whole cliff face to overlay three small separately provided fossil specimen cutouts later. Keep vegetation to a thin rim at the very top and a small amount of gravel at the bottom. Clearly recognizable, continuous horizontal layers. Low-to-medium texture contrast so small detailed fossil overlays will be visible.\nConstraints: render ONLY the environment. No fossils, bones, skeletons, dinosaurs, animals, people, tools, signs, targets, marked circles, letters, text, labels, logos, watermarks or borders. Opaque full-scene background, no transparency. Not a literal age-specific geological reconstruction. Both variants should look cohesive as a pair.\n\nScene/backdrop: a broad pale limestone and clay cliff with light grey, cream and faint cool-grey horizontal layers. Slightly different band thicknesses and gently wavy ledges from the sandstone variant; subtle small smooth stones along the foot and sparse grass on the upper rim. Clear soft daylight. Keep the dominant cliff plane pale cool-neutral so warm-brown fossil cutouts will contrast. No dramatic deep ravine, no cave or hole, no foreground object dominating the playable cliff face.",
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-fc7e7ebc-f087-44d2-a273-f867afd69f57.png",
+      "saved_path": "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/search-backgrounds/strata-limestone-v1.png",
+      "image_status": "approved",
+      "image_approval_date": "2026-10-05"
+    }
+  ]
+}

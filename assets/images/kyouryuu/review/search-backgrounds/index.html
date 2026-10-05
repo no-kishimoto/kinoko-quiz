@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>かせきさがし — ちそうの かくにん</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #fff8df; color: #171717; font: 20px/1.6 system-ui, sans-serif; }
+    main { max-width: 1440px; margin: auto; padding: 24px; }
+    h1 { margin: 0 0 12px; font-size: clamp(26px, 4vw, 38px); }
+    h2 { margin: 0; font-size: 26px; }
+    p { margin: 8px 0 16px; }
+    .controls { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0; }
+    button { border: 2px solid #2384a9; border-radius: 12px; padding: 12px 20px; font: inherit; font-weight: 700; color: #171717; background: white; cursor: pointer; }
+    button[aria-pressed="true"] { background: #dff5ff; }
+    button:focus-visible { outline: 4px solid #d85000; outline-offset: 3px; }
+    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    article { background: white; border: 2px solid #d2b57a; border-radius: 18px; padding: 16px; }
+    .scene { position: relative; margin-top: 12px; overflow: hidden; border-radius: 10px; background: #e9e4d9; }
+    .background { display: block; width: 100%; height: auto; }
+    .fossil { display: none; position: absolute; width: 13.5%; height: 18%; object-fit: contain; transform: translate(-50%, -85%); pointer-events: none; }
+    .with-fossils .fossil { display: block; }
+    .fossil-a { left: 28%; top: 48%; }
+    .fossil-b { left: 66%; top: 42%; }
+    .fossil-c { left: 53%; top: 72%; }
+    .note { font-size: 17px; }
+    a { color: #075f92; }
+    @media (max-width: 900px) { .cards { grid-template-columns: 1fr; } main { padding: 16px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>かせきさがし — ちそうの かくにん</h1>
+    <p>2まいの はいけいを かくにんする ページです。ゲームには まだ はんえいしていません。</p>
+    <div class="controls" aria-label="かくにんの しかた">
+      <button type="button" id="background-only" aria-pressed="true">はいけいだけ</button>
+      <button type="button" id="show-fossils" aria-pressed="false">かせきを のせてみる</button>
+    </div>
+    <div class="cards" id="cards">
+      <article>
+        <h2>ちそう 1</h2>
+        <div class="scene">
+          <img class="background" src="strata-sandstone-v1.png" alt="あかるい ちゃいろと クリームいろの ちそう">
+          <img class="fossil fossil-a" src="../transparent/tyrannosaurus-fossil-v3.png" alt="ティラノサウルスの こっかくの れい">
+          <img class="fossil fossil-b" src="../transparent/ammonite-fossil-v1.png" alt="アンモナイトの かせきの れい">
+          <img class="fossil fossil-c" src="../transparent/trilobite-fossil-v2.png" alt="サンヨウチュウの かせきの れい">
+        </div>
+      </article>
+      <article>
+        <h2>ちそう 2</h2>
+        <div class="scene">
+          <img class="background" src="strata-limestone-v1.png" alt="あかるい はいいろと クリームいろの ちそう">
+          <img class="fossil fossil-a" src="../transparent/tyrannosaurus-fossil-v3.png" alt="ティラノサウルスの こっかくの れい">
+          <img class="fossil fossil-b" src="../transparent/ammonite-fossil-v1.png" alt="アンモナイトの かせきの れい">
+          <img class="fossil fossil-c" src="../transparent/trilobite-fossil-v2.png" alt="サンヨウチュウの かせきの れい">
+        </div>
+      </article>
+    </div>
+    <p class="note">かせきを のせた えは、みえかたの かくにんようです。クリックして あそぶ ゲームでは ありません。</p>
+    <p class="note">ちそうは イラストです。ほんものの はっくつばしょや、いきものの じだいを あらわす えでは ありません。</p>
+    <p><a href="../transparent/additions.html">8しゅるいの がぞうと せつめいへ</a></p>
+  </main>
+  <script>
+    const cards = document.getElementById('cards');
+    const backgroundOnly = document.getElementById('background-only');
+    const showFossils = document.getElementById('show-fossils');
+    function setFossils(visible) {
+      cards.classList.toggle('with-fossils', visible);
+      backgroundOnly.setAttribute('aria-pressed', String(!visible));
+      showFossils.setAttribute('aria-pressed', String(visible));
+    }
+    backgroundOnly.addEventListener('click', () => setFossils(false));
+    showFossils.addEventListener('click', () => setFossils(true));
+  </script>
+</body>
+</html>

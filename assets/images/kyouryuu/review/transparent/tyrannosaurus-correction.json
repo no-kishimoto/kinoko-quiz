@@ -1,0 +1,44 @@
+{
+  "status": "image_and_description_approved",
+  "approval_date": "2026-10-04",
+  "mode": "built-in image_gen",
+  "selected_output": "assets/images/kyouryuu/review/transparent/tyrannosaurus-fossil-v3.png",
+  "originals_preserved": true,
+  "runtime_integration": "not applied",
+  "request": "Correct apparent three-way thigh branching; distinguish two hind legs from pelvic bones; retain two forelimb claws; transparent background.",
+  "sources": [
+    {
+      "topic": "Tyrannosaurus two functional hand claws",
+      "url": "https://www.amnh.org/explore/news-blogs/t-rex-third-claw"
+    },
+    {
+      "topic": "Tyrannosaurus bipedal skeleton",
+      "url": "https://naturalhistory.si.edu/explore/dinosaurs-fossils/nations-t-rex"
+    }
+  ],
+  "iterations": [
+    {
+      "version": 2,
+      "prompt": "Use case: precise-object-edit\nAsset type: transparent PNG of a reconstructed Tyrannosaurus rex skeleton for a preschool natural-history quiz, approval preview.\nInput images: Image 1 is the exact transparent skeleton edit target.\nPrimary request: correct only the malformed pelvic/hindleg anatomy that currently appears to have three thick branches descending from a single hip. Make it unequivocally TWO complete hind legs, left and right, each with exactly ONE femur attached to its own hip socket, one knee, tibia and slender fibula, ankle and foot. Use a slightly staggered stance if needed to distinguish the near leg from the far leg; no shared hip branching into three femurs, no duplicated thigh shafts, no extra leg. Keep the normal pelvic bones (ilium, pubis, ischium) recognizable as pelvic elements, not fabricated extra jointed legs. Preserve anatomically meaningful paired lower-leg bones rather than deleting a real fibula.\nAlso ensure each of the TWO small forelimbs ends in exactly TWO functional clawed fingers. Do not confuse those two hand claws with the three main weight-bearing toes on each hind foot.\nComposition/framing: retain the existing RIGHT-facing full-body skeleton with open toothed skull, tail extending LEFT, brown mineralized bone texture and realistic educational specimen illustration style. Only adjust the hindleg arrangement and hand fingers for accuracy and clarity. All head, tail and foot tips must fit inside the canvas with transparent margin.\nConstraints: actual transparent alpha outside and between bones. All bones remain opaque; no living eyeballs, skin, floor, rock slab, backdrop, gradient, museum stand, labels, text or watermark. Preserve skull/ribcage/spine proportions and current lighting. No extra bones, no third limb, no solid silhouette.",
+      "input": "assets/images/kyouryuu/review/transparent/tyrannosaurus-fossil-v1.png",
+      "output": "assets/images/kyouryuu/review/transparent/tyrannosaurus-fossil-v2.png",
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-0bc366f8-27af-40f8-8502-62a5e0bf103d.png"
+    },
+    {
+      "version": 3,
+      "prompt": "Use case: precise-object-edit\nAsset type: transparent Tyrannosaurus rex reconstructed skeleton, anatomy-correction approval preview.\nInput images: Image 1 is the edit target from the previous iteration.\nPrimary request: make one precise change to the pelvis and upper hind legs. There is STILL a spurious narrow long shaft running alongside the thick near femur, from the right side of the pelvis diagonally down to just behind the near knee. It reads as a THIRD THIGH. REMOVE that duplicate thigh-shaped shaft. Rebuild the pubis as a distinct forward/downward pelvic element under the abdomen, ending in a recognizable expanded pubic boot that stays clearly separated from BOTH knees. Keep the rearward ischium as a pelvic element too. Do not erase normal anatomy: relocate and distinguish the pubis, not create a boneless pelvis.\nLeg layout: exactly one near femur, and exactly one far femur, each in a separate acetabulum. Show the near femur descending more vertically from its hip, the far femur descending slightly backward. TWO and only TWO upper leg shafts terminate in TWO and only TWO knees. Separate the two complete hind legs clearly in side profile, with feet staggered. A femur is a single bone, not a pair of parallel shafts. Tibia and slender fibula are paired LOWER-leg bones, ONLY below the knee.\nInvariants: preserve the RIGHT-facing open-jawed skull, ribs, spine, tail extending LEFT, proportions, brown fossil bone texture, lighting and full-body composition. Keep two tiny forelimbs, each with exactly two functional clawed fingers. Keep three main forward toes on each hind foot. Keep genuine transparent alpha outside and between all bones; all bone surfaces opaque. No backdrop, floor, shadow plane, gradient, rock slab, museum mount, living eyeballs, skin, labels or text. Do not add any extra limb.",
+      "input": "assets/images/kyouryuu/review/transparent/tyrannosaurus-fossil-v2.png",
+      "output": "assets/images/kyouryuu/review/transparent/tyrannosaurus-fossil-v3.png",
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-4987ecf0-7f47-488a-9d24-28d95c7d6895.png"
+    }
+  ],
+  "validation": {
+    "mode": "RGBA",
+    "size": [
+      1536,
+      1024
+    ],
+    "transparent_percent": 75.3,
+    "foreground_alpha_median": 252
+  }
+}

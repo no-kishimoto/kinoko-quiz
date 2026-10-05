@@ -1,0 +1,244 @@
+{
+  "status": "existing_10_specimens_and_descriptions_approved",
+  "approval_date": "2026-10-04",
+  "approved_specimens": ["pachycephalosaurus","brachiosaurus","tyrannosaurus","stegosaurus","triceratops","pteranodon","plesiosaurus","mosasaurus","ammonite","xiphactinus"],
+  "review_overrides": "assets/images/kyouryuu/review/transparent/review-overrides.json",
+  "tyrannosaurus_correction_record": "assets/images/kyouryuu/review/transparent/tyrannosaurus-correction.json",
+  "selected_tyrannosaurus_review_image": "assets/images/kyouryuu/review/transparent/tyrannosaurus-fossil-v3.png",
+  "mode": "built-in image_gen",
+  "background": "true transparent alpha",
+  "game_integration": "not applied; original runtime assets preserved",
+  "confirmation_date": "2026-10-04",
+  "scope": "Existing 10 specimen images, then existing reconstruction images and 8 additions",
+  "outputs": [
+    {
+      "key": "pachycephalosaurus",
+      "prompt": "Use case: background-extraction\nAsset type: transparent reconstructed skeleton specimen PNG for a preschool natural-history quiz, approval preview.\nInput images: Image 1 is the exact existing pachycephalosaurus skeleton image to edit.\nPrimary request: isolate the articulated skeleton by removing the beige rock slab and all background. Pachycephalosaurus dinosaur skeleton with its thick dome-shaped skull; head at LEFT. The thick skull dome and small skull protuberances are opaque bone, not background. Include the entire tail tip that approaches the edge in the source.\nComposition: preserve the existing pose, viewpoint, proportions, brown fossil-bone texture and lighting. One entire skeleton only, centered with small transparent margins. Zoom out slightly if necessary to fit all bones and the complete tail.\nConstraints: change the background to genuine transparent alpha, including every opening between ribs, limbs, vertebrae, jaws and teeth. Do not erase pale bone surfaces that are similar in color to the old background. Preserve all bones, teeth, skull plates and solid bony structures as opaque. Empty skull openings must be transparent; no living eyeballs or skin. No rock matrix, slab, floor, contact-shadow plane, museum scenery, labels, text, logos, watermark, extra animals, or drawn checkerboard. Do not invent a new skeleton, alter the recognizable pose, or replace bones with a flat silhouette.",
+      "source": "assets/images/kyouryuu/fossil/pachycephalosaurus.png",
+      "output": "assets/images/kyouryuu/review/transparent/pachycephalosaurus-fossil-v1.png",
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-3bb0769b-3f84-4ecc-b0be-bddf254c4abc.png"
+    },
+    {
+      "key": "brachiosaurus",
+      "prompt": "Use case: background-extraction\nAsset type: transparent reconstructed skeleton specimen PNG for a preschool natural-history quiz, approval preview.\nInput images: Image 1 is the exact existing brachiosaurus skeleton image to edit.\nPrimary request: isolate the articulated skeleton by removing the beige rock slab and all background. Brachiosaurus skeleton with a very long upright neck, small head at upper LEFT, four long legs and a long tail. Preserve its tall silhouette and the natural bone shapes.\nComposition: preserve the existing pose, viewpoint, proportions, brown fossil-bone texture and lighting. One entire skeleton only, centered with small transparent margins. Zoom out slightly if necessary to fit all bones and the complete tail.\nConstraints: change the background to genuine transparent alpha, including every opening between ribs, limbs, vertebrae, jaws and teeth. Do not erase pale bone surfaces that are similar in color to the old background. Preserve all bones, teeth, skull plates and solid bony structures as opaque. Empty skull openings must be transparent; no living eyeballs or skin. No rock matrix, slab, floor, contact-shadow plane, museum scenery, labels, text, logos, watermark, extra animals, or drawn checkerboard. Do not invent a new skeleton, alter the recognizable pose, or replace bones with a flat silhouette.",
+      "source": "assets/images/kyouryuu/fossil/brachiosaurus.png",
+      "output": "assets/images/kyouryuu/review/transparent/brachiosaurus-fossil-v1.png",
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-11bc846e-baa5-44bd-b2c0-8b94369cf6f4.png"
+    },
+    {
+      "key": "tyrannosaurus",
+      "prompt": "Use case: background-extraction\nAsset type: transparent reconstructed skeleton specimen PNG for a preschool natural-history quiz, approval preview.\nInput images: Image 1 is the exact existing tyrannosaurus skeleton image to edit.\nPrimary request: isolate the articulated skeleton by removing the beige rock slab and all background. Tyrannosaurus skeleton facing RIGHT with a large open-jawed skull, tiny forelimbs, strong hindlimbs, and long tail extending LEFT.\nComposition: preserve the existing pose, viewpoint, proportions, brown fossil-bone texture and lighting. One entire skeleton only, centered with small transparent margins. Zoom out slightly if necessary to fit all bones and the complete tail.\nConstraints: change the background to genuine transparent alpha, including every opening between ribs, limbs, vertebrae, jaws and teeth. Do not erase pale bone surfaces that are similar in color to the old background. Preserve all bones, teeth, skull plates and solid bony structures as opaque. Empty skull openings must be transparent; no living eyeballs or skin. No rock matrix, slab, floor, contact-shadow plane, museum scenery, labels, text, logos, watermark, extra animals, or drawn checkerboard. Do not invent a new skeleton, alter the recognizable pose, or replace bones with a flat silhouette.",
+      "source": "assets/images/kyouryuu/fossil/tyrannosaurus.png",
+      "output": "assets/images/kyouryuu/review/transparent/tyrannosaurus-fossil-v1.png",
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-23c16d6a-7e15-4e17-bbac-bd80b4eee293.png"
+    },
+    {
+      "key": "stegosaurus",
+      "prompt": "Use case: background-extraction\nAsset type: transparent reconstructed skeleton specimen PNG for a preschool natural-history quiz, approval preview.\nInput images: Image 1 is the exact existing stegosaurus skeleton image to edit.\nPrimary request: remove the beige rock slab and isolate the full articulated skeleton. Stegosaurus skeleton, head at LEFT, two rows of solid bony plates on its back, and pointed tail spikes at RIGHT. The entire dorsal plates and tail spikes must remain opaque.\nComposition: preserve the existing skeletal pose, viewpoint, proportions, brown fossil-bone texture and lighting. Center one complete skeleton with enough transparent margin that all horns, tail, beak and wing tips stay inside the canvas.\nConstraints: background must be genuine transparent alpha throughout, including the gaps between ribs, fingers, limbs and vertebrae and inside open jaws. Keep all bone surfaces opaque even when their color is similar to the old background. No living eyeballs, skin, flesh, wing membranes, rock matrix, stone slab, floor, cast-shadow plane, scenery, labels, text, logos, watermark or painted checkerboard. No opaque halo. Do not replace the skeleton with a silhouette or invent a new pose.",
+      "source": "assets/images/kyouryuu/fossil/stegosaurus.png",
+      "output": "assets/images/kyouryuu/review/transparent/stegosaurus-fossil-v1.png",
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-b468f20c-793e-4762-aeea-dc0a7653c82e.png"
+    },
+    {
+      "key": "triceratops",
+      "prompt": "Use case: background-extraction\nAsset type: transparent reconstructed skeleton specimen PNG for a preschool natural-history quiz, approval preview.\nInput images: Image 1 is the exact existing triceratops skeleton image to edit.\nPrimary request: remove the beige rock slab and isolate the full articulated skeleton. Triceratops skeleton facing RIGHT with the large solid bony skull frill, two long brow horns, one nose horn, four limbs and a complete tail. Keep the entire bony frill opaque; only the natural skull openings should be transparent.\nComposition: preserve the existing skeletal pose, viewpoint, proportions, brown fossil-bone texture and lighting. Center one complete skeleton with enough transparent margin that all horns, tail, beak and wing tips stay inside the canvas.\nConstraints: background must be genuine transparent alpha throughout, including the gaps between ribs, fingers, limbs and vertebrae and inside open jaws. Keep all bone surfaces opaque even when their color is similar to the old background. No living eyeballs, skin, flesh, wing membranes, rock matrix, stone slab, floor, cast-shadow plane, scenery, labels, text, logos, watermark or painted checkerboard. No opaque halo. Do not replace the skeleton with a silhouette or invent a new pose.",
+      "source": "assets/images/kyouryuu/fossil/triceratops.png",
+      "output": "assets/images/kyouryuu/review/transparent/triceratops-fossil-v1.png",
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-9811f23c-539d-4106-b8f4-9641a967be6a.png"
+    },
+    {
+      "key": "pteranodon",
+      "prompt": "Use case: background-extraction\nAsset type: transparent reconstructed skeleton specimen PNG for a preschool natural-history quiz, approval preview.\nInput images: Image 1 is the exact existing pteranodon skeleton image to edit.\nPrimary request: remove the beige rock slab and isolate the full articulated skeleton. Pteranodon skeleton with a long toothless skull/beak pointing LEFT, a solid bony crest pointing upper RIGHT, and extended thin wing bones. Preserve every long wing finger, tiny hand claw, foot and toothless jaw. The skull crest must remain opaque.\nComposition: preserve the existing skeletal pose, viewpoint, proportions, brown fossil-bone texture and lighting. Center one complete skeleton with enough transparent margin that all horns, tail, beak and wing tips stay inside the canvas.\nConstraints: background must be genuine transparent alpha throughout, including the gaps between ribs, fingers, limbs and vertebrae and inside open jaws. Keep all bone surfaces opaque even when their color is similar to the old background. No living eyeballs, skin, flesh, wing membranes, rock matrix, stone slab, floor, cast-shadow plane, scenery, labels, text, logos, watermark or painted checkerboard. No opaque halo. Do not replace the skeleton with a silhouette or invent a new pose.",
+      "source": "assets/images/kyouryuu/fossil/pteranodon.png",
+      "output": "assets/images/kyouryuu/review/transparent/pteranodon-fossil-v1.png",
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-496f1f99-ed06-4009-8f51-c61c82a0a0fe.png"
+    },
+    {
+      "key": "plesiosaurus",
+      "prompt": "Use case: background-extraction\nAsset type: transparent reconstructed skeleton specimen PNG for a preschool natural-history quiz, approval preview.\nInput images: Image 1 is the exact existing plesiosaurus skeleton edit target.\nPrimary request: remove the rock slab or white backdrop and isolate the complete articulated skeleton. Plesiosaurus: long neck, small skull pointing LEFT, rib cage, four bony paddle flippers and tail. Preserve every small finger bone in all four flippers.\nComposition: preserve the source pose, viewpoint, proportions, fossil bone texture and bone coloration. Center one full skeleton with a little transparent margin around every extremity.\nConstraints: true transparent alpha everywhere outside the bones and in every opening between ribs, limbs, jaws, teeth, vertebrae and fin rays. Keep pale bone surfaces opaque. No stone matrix, slab, museum stand, floor, shadow plane, living eyeballs, skin, flesh, scenery, text, watermark, simulated checkerboard or opaque halo. Do not change the skeleton into a silhouette or redesign its anatomy.",
+      "source": "assets/images/kyouryuu/fossil/plesiosaurus.png",
+      "output": "assets/images/kyouryuu/review/transparent/plesiosaurus-fossil-v1.png",
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-39ea3327-3805-4ab8-a454-5edcc4258980.png"
+    },
+    {
+      "key": "mosasaurus",
+      "prompt": "Use case: background-extraction\nAsset type: transparent reconstructed skeleton specimen PNG for a preschool natural-history quiz, approval preview.\nInput images: Image 1 is the exact existing mosasaurus skeleton edit target.\nPrimary request: remove the rock slab or white backdrop and isolate the complete articulated skeleton. Mosasaurus: long toothed skull pointing LEFT, long articulated vertebral column, ribs, bony flippers and complete tail. Preserve all fine bones and teeth.\nComposition: preserve the source pose, viewpoint, proportions, fossil bone texture and bone coloration. Center one full skeleton with a little transparent margin around every extremity.\nConstraints: true transparent alpha everywhere outside the bones and in every opening between ribs, limbs, jaws, teeth, vertebrae and fin rays. Keep pale bone surfaces opaque. No stone matrix, slab, museum stand, floor, shadow plane, living eyeballs, skin, flesh, scenery, text, watermark, simulated checkerboard or opaque halo. Do not change the skeleton into a silhouette or redesign its anatomy.",
+      "source": "assets/images/kyouryuu/fossil/mosasaurus.png",
+      "output": "assets/images/kyouryuu/review/transparent/mosasaurus-fossil-v1.png",
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-fa70587f-c885-460a-9d19-20e53d81214a.png"
+    },
+    {
+      "key": "ammonite",
+      "prompt": "Use case: background-extraction\nAsset type: transparent PNG of an ammonite fossil specimen for a preschool natural-history quiz, approval preview.\nInput images: Image 1 is the exact ammonite fossil edit target.\nPrimary request: remove only the surrounding beige rock slab/background, isolating the complete brown coiled fossil shell on genuinely transparent alpha. Preserve the fossil's spiral outline, ribs, mineralized shell texture, light vein/suture markings, coloration, existing direction and photographic rendering. This remains a fossilized shell, not a living animal.\nComposition: a single entire fossil shell, centered, preserve proportions, with a small transparent margin on every side so no portion is clipped.\nConstraints: every part of the shell itself must stay opaque, including light-colored shell markings. Remove the beige matrix outside the shell only. Do not turn the shell white or erase its pale features. No stone slab, floor, backdrop, shadow plane, text, logos, watermark, drawn checkerboard or living tentacles. The background must be true transparent alpha, not a simulated checkerboard.",
+      "source": "assets/images/kyouryuu/fossil/ammonite.png",
+      "output": "assets/images/kyouryuu/review/transparent/ammonite-fossil-v1.png",
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-4ab91a1b-8a66-4872-846f-7735983f9c31.png"
+    },
+    {
+      "key": "xiphactinus",
+      "prompt": "Use case: background-extraction\nAsset type: transparent reconstructed skeleton specimen PNG for a preschool natural-history quiz, approval preview.\nInput images: Image 1 is the exact existing xiphactinus skeleton edit target.\nPrimary request: remove the rock slab or white backdrop and isolate the complete articulated skeleton. Xiphactinus: edit this previously corrected skeleton rather than the earlier fish. Skull at LEFT with a concave forehead profile and projecting lower jaw/chin; full bony fish skeleton, ribs, all fine fin rays and forked tail at RIGHT. Remove the thin metal museum mounting support under the belly as well as the white background. Keep the corrected head shape and all bones.\nComposition: preserve the source pose, viewpoint, proportions, fossil bone texture and bone coloration. Center one full skeleton with a little transparent margin around every extremity.\nConstraints: true transparent alpha everywhere outside the bones and in every opening between ribs, limbs, jaws, teeth, vertebrae and fin rays. Keep pale bone surfaces opaque. No stone matrix, slab, museum stand, floor, shadow plane, living eyeballs, skin, flesh, scenery, text, watermark, simulated checkerboard or opaque halo. Do not change the skeleton into a silhouette or redesign its anatomy.",
+      "source": "assets/images/kyouryuu/review/xiphactinus-skeleton-v2.png",
+      "output": "assets/images/kyouryuu/review/transparent/xiphactinus-fossil-v1.png",
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-15af3ffe-67e7-430d-8c99-11be8ef439a5.png"
+    }
+  ],
+  "alpha_validation": [
+    {
+      "key": "ammonite",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 35.8,
+      "foreground_alpha_median": 253,
+      "alpha_bbox": [
+        37,
+        51,
+        1240,
+        1210
+      ]
+    },
+    {
+      "key": "brachiosaurus",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 82.7,
+      "foreground_alpha_median": 252,
+      "alpha_bbox": [
+        49,
+        16,
+        1242,
+        1224
+      ]
+    },
+    {
+      "key": "mosasaurus",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 85.4,
+      "foreground_alpha_median": 250,
+      "alpha_bbox": [
+        0,
+        23,
+        1253,
+        1214
+      ]
+    },
+    {
+      "key": "pachycephalosaurus",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 82.8,
+      "foreground_alpha_median": 252,
+      "alpha_bbox": [
+        21,
+        16,
+        1254,
+        1254
+      ]
+    },
+    {
+      "key": "plesiosaurus",
+      "size": [
+        1536,
+        1024
+      ],
+      "transparent_percent": 78.7,
+      "foreground_alpha_median": 251,
+      "alpha_bbox": [
+        35,
+        19,
+        1520,
+        1004
+      ]
+    },
+    {
+      "key": "pteranodon",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 83.5,
+      "foreground_alpha_median": 252,
+      "alpha_bbox": [
+        0,
+        23,
+        1222,
+        1230
+      ]
+    },
+    {
+      "key": "stegosaurus",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 78.1,
+      "foreground_alpha_median": 252,
+      "alpha_bbox": [
+        0,
+        19,
+        1238,
+        1214
+      ]
+    },
+    {
+      "key": "triceratops",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 73.7,
+      "foreground_alpha_median": 253,
+      "alpha_bbox": [
+        0,
+        19,
+        1247,
+        1254
+      ]
+    },
+    {
+      "key": "tyrannosaurus",
+      "size": [
+        1536,
+        1024
+      ],
+      "transparent_percent": 74.5,
+      "foreground_alpha_median": 252,
+      "alpha_bbox": [
+        13,
+        11,
+        1522,
+        998
+      ]
+    },
+    {
+      "key": "xiphactinus",
+      "size": [
+        1536,
+        1024
+      ],
+      "transparent_percent": 72.9,
+      "foreground_alpha_median": 252,
+      "alpha_bbox": [
+        28,
+        21,
+        1528,
+        952
+      ]
+    }
+  ],
+  "review_page": "assets/images/kyouryuu/review/transparent/index.html",
+  "remaining_work": [
+    "Transparent living reconstructions",
+    "Images for the 8 candidate additions",
+    "Individual image and full description approvals",
+    "Game integration after approval"
+  ]
+}

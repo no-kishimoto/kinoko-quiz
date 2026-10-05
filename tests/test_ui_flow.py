@@ -68,7 +68,7 @@ def test_search_miss_is_silent_and_does_not_complete_question(app):
     event = gr.SelectData(None, {"index": (0, 0), "value": None})
     updates = callback(app, "search_click")(session, "kinoko", event)
     assert not session.is_correct
-    assert any(isinstance(component, gr.HTML) and value is None for component, value in updates.items())
+    assert any(isinstance(component, gr.HTML) and value == gr.skip() for component, value in updates.items())
     assert any(isinstance(component, gr.Button) and value.visible is False for component, value in updates.items())
 
 

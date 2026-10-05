@@ -1,0 +1,551 @@
+{
+  "created_at": "2026-10-04",
+  "status": "all_8_images_and_descriptions_approved",
+  "verification": {
+    "date": "2026-10-04",
+    "review_tests_passed": 4,
+    "browser_articles": 8,
+    "browser_images_loaded": 16,
+    "transparent_background_and_opaque_subject_check": "passed",
+    "alpha_validation": [
+      {
+        "file": "coelacanth-fossil-v2.png",
+        "size": [
+          1774,
+          887
+        ],
+        "transparent_fraction": 0.6966,
+        "near_opaque_fraction": 0.2351
+      },
+      {
+        "file": "coelacanth-reconstruction-v2.png",
+        "size": [
+          1930,
+          815
+        ],
+        "transparent_fraction": 0.4993,
+        "near_opaque_fraction": 0.4823
+      },
+      {
+        "file": "ankylosaurus-fossil-v2.png",
+        "size": [
+          1536,
+          1024
+        ],
+        "transparent_fraction": 0.7803,
+        "near_opaque_fraction": 0.1929
+      },
+      {
+        "file": "ankylosaurus-reconstruction-v2.png",
+        "size": [
+          1536,
+          1024
+        ],
+        "transparent_fraction": 0.7112,
+        "near_opaque_fraction": 0.2714
+      },
+      {
+        "file": "parasaurolophus-fossil-v2.png",
+        "size": [
+          1536,
+          1024
+        ],
+        "transparent_fraction": 0.787,
+        "near_opaque_fraction": 0.1464
+      },
+      {
+        "file": "parasaurolophus-reconstruction-v2.png",
+        "size": [
+          1536,
+          1024
+        ],
+        "transparent_fraction": 0.7211,
+        "near_opaque_fraction": 0.2564
+      },
+      {
+        "file": "trilobite-fossil-v2.png",
+        "size": [
+          1024,
+          1536
+        ],
+        "transparent_fraction": 0.5009,
+        "near_opaque_fraction": 0.4736
+      },
+      {
+        "file": "trilobite-reconstruction-v2.png",
+        "size": [
+          1312,
+          1199
+        ],
+        "transparent_fraction": 0.6933,
+        "near_opaque_fraction": 0.2518
+      },
+      {
+        "file": "anomalocaris-fossil-v2.png",
+        "size": [
+          1536,
+          1024
+        ],
+        "transparent_fraction": 0.6533,
+        "near_opaque_fraction": 0.3187
+      },
+      {
+        "file": "anomalocaris-reconstruction-v2.png",
+        "size": [
+          1536,
+          1024
+        ],
+        "transparent_fraction": 0.6585,
+        "near_opaque_fraction": 0.3075
+      },
+      {
+        "file": "ottoia-fossil-v2.png",
+        "size": [
+          1536,
+          1024
+        ],
+        "transparent_fraction": 0.6774,
+        "near_opaque_fraction": 0.3072
+      },
+      {
+        "file": "ottoia-reconstruction-v2.png",
+        "size": [
+          1536,
+          1024
+        ],
+        "transparent_fraction": 0.665,
+        "near_opaque_fraction": 0.3188
+      },
+      {
+        "file": "mammoth-fossil-v2.png",
+        "size": [
+          1374,
+          1145
+        ],
+        "transparent_fraction": 0.6858,
+        "near_opaque_fraction": 0.2739
+      },
+      {
+        "file": "mammoth-reconstruction-v2.png",
+        "size": [
+          1374,
+          1145
+        ],
+        "transparent_fraction": 0.5305,
+        "near_opaque_fraction": 0.4319
+      },
+      {
+        "file": "smilodon-fossil-v2.png",
+        "size": [
+          1536,
+          1024
+        ],
+        "transparent_fraction": 0.6902,
+        "near_opaque_fraction": 0.2514
+      },
+      {
+        "file": "smilodon-reconstruction-v2.png",
+        "size": [
+          1536,
+          1024
+        ],
+        "transparent_fraction": 0.5711,
+        "near_opaque_fraction": 0.3991
+      }
+    ]
+  },
+  "game_integration": "Approved names and specimen images are used by Gradio fossil search on 2026-10-05. Reconstruction search remains gated until the existing 10 transparent reconstructions are approved. Quiz and encyclopedia are unchanged.",
+  "full_test_suite": {
+    "passed": 39,
+    "date": "2026-10-04"
+  },
+  "workflow": "Descriptions, skeletal/fossil specimens and living reconstruction images reviewed together for all 8 additions.",
+  "style_request": "Match the already approved first 10 species. User requested style revision during initial image creation.",
+  "style_references": [
+    "tyrannosaurus-fossil-v3.png",
+    "ammonite-fossil-v1.png",
+    "../../reconstruction/tyrannosaurus.png",
+    "../../reconstruction/ammonite.png",
+    "../xiphactinus-reconstruction-v2.png"
+  ],
+  "items": [
+    {
+      "key": "coelacanth",
+      "name": "シーラカンス",
+      "scientific_name": "Latimeria chalumnae",
+      "image_model_status": "confirmed",
+      "description_status": "approved",
+      "description_approval_date": "2026-10-04",
+      "image_status": "approved",
+      "quiz_hint": "ひれの つけねが ふとい。あしの ように みえるよ。",
+      "zukan_text": "むかしから いる さかなの なかま。いまも うみに すんでいるよ。ふとい ひれを うごかして およぐよ。",
+      "source_urls": [
+        "https://www.nhm.ac.uk/discover/coelacanths-the-fish-that-outdid-the-loch-ness-monster.html",
+        "https://ocean.si.edu/ocean-life/fish/coelacanth",
+        "https://australian.museum/learn/animals/fishes/coelacanth-latimeria-chalumnae-smith-1939/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC2840454/"
+      ],
+      "specimen_label": "ふくげん こっかく",
+      "specimen_image": "coelacanth-fossil-v2.png",
+      "reconstruction_image": "coelacanth-reconstruction-v2.png",
+      "review_note": "こっかくは なんこつなどの ぶぶんも おぎなった イラストです。",
+      "image_approval_date": "2026-10-05",
+      "batch_approval_date": "2026-10-05"
+    },
+    {
+      "key": "ankylosaurus",
+      "name": "アンキロサウルス",
+      "quiz_hint": "かたい よろい。しっぽの さきに おおきな かたまり。",
+      "zukan_text": "からだが ほねの よろいで おおわれた きょうりゅう。しょくぶつを たべ、4ほんの あしで あるいたよ。しっぽの さきに おおきな かたまりが あるよ。",
+      "source_urls": [
+        "https://www.nhm.ac.uk/discover/dino-directory/ankylosaurus.html"
+      ],
+      "description_status": "approved",
+      "image_status": "approved",
+      "specimen_label": "ふくげん こっかく",
+      "specimen_image": "ankylosaurus-fossil-v2.png",
+      "reconstruction_image": "ankylosaurus-reconstruction-v2.png",
+      "review_note": "こっかくは たりない ぶぶんを おぎなった イラストです。ふくげんの いろや もようは そうぞうで おぎなっています。",
+      "description_approval_date": "2026-10-05",
+      "image_approval_date": "2026-10-05",
+      "batch_approval_date": "2026-10-05"
+    },
+    {
+      "key": "parasaurolophus",
+      "name": "パラサウロロフス",
+      "quiz_hint": "あたまから うしろへ のびる ながい とさか。",
+      "zukan_text": "ながい とさかの ある きょうりゅう。しょくぶつを たべたよ。2ほんや 4ほんの あしで あるいたよ。",
+      "source_urls": [
+        "https://www.nhm.ac.uk/discover/dino-directory/parasaurolophus.html"
+      ],
+      "description_status": "approved",
+      "image_status": "approved",
+      "specimen_label": "ふくげん こっかく",
+      "specimen_image": "parasaurolophus-fossil-v2.png",
+      "reconstruction_image": "parasaurolophus-reconstruction-v2.png",
+      "review_note": "こっかくは たりない ぶぶんを おぎなった イラストです。ふくげんの いろや もようは そうぞうで おぎなっています。",
+      "description_approval_date": "2026-10-05",
+      "image_approval_date": "2026-10-05",
+      "batch_approval_date": "2026-10-05"
+    },
+    {
+      "key": "trilobite",
+      "name": "サンヨウチュウ",
+      "scientific_name": "Olenoides serratus",
+      "image_model_status": "confirmed",
+      "name_origin_sentence_status": "confirmed",
+      "name_origin_sentence": "まんなか・みぎ・ひだりの 3つに わかれた かたちから、この なまえが ついたよ。",
+      "description_status": "approved",
+      "quiz_hint": "からだに たくさんの ふし。そとが かたい から。",
+      "zukan_text": "むかしの うみで くらした いきもの。まんなか・みぎ・ひだりの 3つに わかれた かたちから、この なまえが ついたよ。たくさんの あしと しょっかくが あったよ。",
+      "source_urls": [
+        "https://www.amnh.org/explore/ology/ology-cards/037-trilobites",
+        "https://www.amnh.org/explore/news-blogs/body-segments-trilobites",
+        "https://burgess-shale.rom.on.ca/fossils/olenoides-serratus/",
+        "https://www.nhm.ac.uk/discover/how-trilobites-conquered-prehistoric-oceans.html"
+      ],
+      "image_status": "approved",
+      "specimen_label": "かせき",
+      "specimen_image": "trilobite-fossil-v2.png",
+      "reconstruction_image": "trilobite-reconstruction-v2.png",
+      "review_note": "かせきは おしつぶされた からだや からを もとに した イラストです。ふくげんの いろは そうぞうで おぎなっています。",
+      "description_approval_date": "2026-10-05",
+      "image_approval_date": "2026-10-05",
+      "batch_approval_date": "2026-10-05"
+    },
+    {
+      "key": "anomalocaris",
+      "name": "アノマロカリス",
+      "quiz_hint": "あたまの まえに とげの ついた 2ほんの うで。",
+      "zukan_text": "とても むかしの うみを およいだ いきもの。おおきな めと、からだの よこに ならぶ ひれが めじるしだよ。",
+      "source_urls": [
+        "https://burgess-shale.rom.on.ca/fossils/anomalocaris-canadensis/"
+      ],
+      "description_status": "approved",
+      "image_status": "approved",
+      "specimen_label": "かせき",
+      "specimen_image": "anomalocaris-fossil-v2.png",
+      "reconstruction_image": "anomalocaris-reconstruction-v2.png",
+      "review_note": "かせきは おしつぶされた からだや からを もとに した イラストです。ふくげんの いろは そうぞうで おぎなっています。",
+      "description_approval_date": "2026-10-05",
+      "image_approval_date": "2026-10-05",
+      "batch_approval_date": "2026-10-05"
+    },
+    {
+      "key": "ottoia",
+      "name": "オットイア",
+      "quiz_hint": "あしの ない ながい からだ。くちの さきを のばせるよ。",
+      "zukan_text": "とても むかしの うみに いた いきもの。ながい からだに たくさんの しわが あるよ。くちの さきを のばしたり、ひっこめたり できたよ。",
+      "source_urls": [
+        "https://burgess-shale.rom.on.ca/fossils/ottoia-prolifica/"
+      ],
+      "description_status": "approved",
+      "image_status": "approved",
+      "specimen_label": "かせき",
+      "specimen_image": "ottoia-fossil-v2.png",
+      "reconstruction_image": "ottoia-reconstruction-v2.png",
+      "review_note": "かせきは おしつぶされた からだや からを もとに した イラストです。ふくげんの いろは そうぞうで おぎなっています。",
+      "description_approval_date": "2026-10-05",
+      "image_approval_date": "2026-10-05",
+      "batch_approval_date": "2026-10-05"
+    },
+    {
+      "key": "mammoth",
+      "name": "マンモス",
+      "scientific_name": "Mammuthus primigenius",
+      "image_model_status": "confirmed",
+      "quiz_hint": "ながく まがった 2ほんの きば。4ほんの あし。",
+      "zukan_text": "むかしの ゾウの なかま。ながい けで おおわれた からだと、ながく まがった きばが めじるしだよ。さむい ところで くらしたよ。",
+      "source_urls": [
+        "https://www.nhm.ac.uk/discover/were-all-mammoths-woolly.html"
+      ],
+      "description_status": "approved",
+      "image_status": "approved",
+      "specimen_label": "ふくげん こっかく",
+      "specimen_image": "mammoth-fossil-v2.png",
+      "reconstruction_image": "mammoth-reconstruction-v2.png",
+      "review_note": "ケナガマンモスを もとに しています。こっかくに はなの ほねは ありません。",
+      "description_approval_date": "2026-10-05",
+      "image_approval_date": "2026-10-05",
+      "batch_approval_date": "2026-10-05"
+    },
+    {
+      "key": "smilodon",
+      "name": "スミロドン",
+      "scientific_name": "Smilodon fatalis",
+      "image_model_status": "confirmed",
+      "quiz_hint": "うえの あごから のびる ながい 2ほんの きば。",
+      "zukan_text": "むかしの ネコの なかま。うえの あごから ながい 2ほんの きばが のびているよ。がっしりした まえあしで えものを おさえたよ。",
+      "source_urls": [
+        "https://tarpits.org/stories/here-kitty-kitty",
+        "https://tarpits.org/stories/smilodon-saber-tooths-and-tigersoh-my"
+      ],
+      "description_status": "approved",
+      "image_status": "approved",
+      "specimen_label": "ふくげん こっかく",
+      "specimen_image": "smilodon-fossil-v2.png",
+      "reconstruction_image": "smilodon-reconstruction-v2.png",
+      "review_note": "スミロドン・ファタリスを もとに しています。けの いろや もようは そうぞうで おぎなっています。",
+      "description_approval_date": "2026-10-05",
+      "image_approval_date": "2026-10-05",
+      "batch_approval_date": "2026-10-05"
+    }
+  ],
+  "outputs": [
+    {
+      "key": "coelacanth",
+      "kind": "fossil",
+      "version": 2,
+      "prompt": "EDIT the FIRST image only: it is the coelacanth specimen to deliver as a single isolated asset. Images 2 and 3 are STYLE references from the already approved first ten specimens in this same educational game, NOT additional subjects. Match their natural-history painted/sculpted illustration finish, precise contours, controlled warm highlights, readable forms, restrained fine detail, three-dimensional shading and consistent illustration density. Avoid harsh gritty photographic noise, waxy toy finish, flat clipart, thick cartoon outlines or decorative fantasy. Preserve species identity, pose, body proportions and diagnostic features of image 1; do not morph it into the reference dinosaur or ammonite. Change pale chalky ivory to the warm golden-ochre/amber-brown mineral specimen palette and crisp bright edge highlights of the approved specimen references. Do NOT make it metallic gold: natural fossil/bone illustration with balanced shadows and subtly textured surface. IMPORTANT anatomical correction: Latimeria skeleton lacks defined conventional abdominal ribs and fully ossified vertebral centra. Remove the repeated long downward-curved abdominal ribs seen below the central rod in image 1, leaving open space in the trunk with a smooth continuous NOTOCHORD, dorsal neural supports and posterior haemal supports, plus properly connected pectoral and pelvic girdles and stout internal fin supports/rays. No typical rib barrel or row of vertebral discs. Retain characteristic skull and trilobed single tail, anterior first dorsal and posterior second dorsal, paired pectoral/pelvic and anal fins. Pale cartilaginous reconstructed portions can be distinguished subtly within the warm specimen palette. Do not change it into a Xiphactinus, salmon or dinosaur. TRUE TRANSPARENT background with alpha. NO reference backgrounds, gradients, glow, halos, floor, cast shadow, studio, black rectangle, labels or text. All opaque subject surfaces and bones retain opacity; gaps and surroundings transparent. Entire animal and all spines/teeth/tail/fin tips fully inside canvas with a visibly empty margin of at least 8% on every side. One target subject only, never make a collage.",
+      "reference_images": [
+        "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-900bb6c5-ef98-4235-af27-e4817455dea5.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/transparent/tyrannosaurus-fossil-v3.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/transparent/ammonite-fossil-v1.png"
+      ],
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-ba4a0fcd-c436-449a-a351-5a50dd0dc9a6.png",
+      "saved_image": "coelacanth-fossil-v2.png"
+    },
+    {
+      "key": "coelacanth",
+      "kind": "reconstruction",
+      "version": 2,
+      "prompt": "EDIT the FIRST image only: it is the coelacanth living reconstruction to deliver as a single isolated asset. Images 2 and 3 are STYLE references from the already approved first ten specimens in this same educational game, NOT additional subjects. Match their natural-history painted/sculpted illustration finish, precise contours, controlled warm highlights, readable forms, restrained fine detail, three-dimensional shading and consistent illustration density. Avoid harsh gritty photographic noise, waxy toy finish, flat clipart, thick cartoon outlines or decorative fantasy. Preserve species identity, pose, body proportions and diagnostic features of image 1; do not morph it into the reference dinosaur or ammonite. Match the reference living reconstructions' detailed yet clearly illustrative natural textures and softly controlled shading, not a photograph or gritty raw scan. Preserve species-appropriate colors and patterns; the palette of a dinosaur must not recolor unrelated animals. The fish MUST stay steel BLUE with off-white irregular speckles, thick fleshy fin lobes and distinctive single three-lobed tail. Repair the top fin tip which is clipped in image 1: draw full intact dorsal fin with clear empty margin above. All blue skin and white spots OPAQUE. TRUE TRANSPARENT background with alpha. NO reference backgrounds, gradients, glow, halos, floor, cast shadow, studio, black rectangle, labels or text. All opaque subject surfaces and bones retain opacity; gaps and surroundings transparent. Entire animal and all spines/teeth/tail/fin tips fully inside canvas with a visibly empty margin of at least 8% on every side. One target subject only, never make a collage.",
+      "reference_images": [
+        "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-d4ba5689-d77a-4574-9486-2e4a2989b49f.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/xiphactinus-reconstruction-v2.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/reconstruction/ammonite.png"
+      ],
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-aa13e13f-12d5-4319-ac02-90a19af62b2a.png",
+      "saved_image": "coelacanth-reconstruction-v2.png"
+    },
+    {
+      "key": "ankylosaurus",
+      "kind": "fossil",
+      "version": 2,
+      "prompt": "EDIT the FIRST image only: it is the ankylosaurus specimen to deliver as a single isolated asset. Images 2 and 3 are STYLE references from the already approved first ten specimens in this same educational game, NOT additional subjects. Match their natural-history painted/sculpted illustration finish, precise contours, controlled warm highlights, readable forms, restrained fine detail, three-dimensional shading and consistent illustration density. Avoid harsh gritty photographic noise, waxy toy finish, flat clipart, thick cartoon outlines or decorative fantasy. Preserve species identity, pose, body proportions and diagnostic features of image 1; do not morph it into the reference dinosaur or ammonite. Change pale chalky ivory to the warm golden-ochre/amber-brown mineral specimen palette and crisp bright edge highlights of the approved specimen references. Do NOT make it metallic gold: natural fossil/bone illustration with balanced shadows and subtly textured surface. TRUE TRANSPARENT background with alpha. NO reference backgrounds, gradients, glow, halos, floor, cast shadow, studio, black rectangle, labels or text. All opaque subject surfaces and bones retain opacity; gaps and surroundings transparent. Entire animal and all spines/teeth/tail/fin tips fully inside canvas with a visibly empty margin of at least 8% on every side. One target subject only, never make a collage.",
+      "reference_images": [
+        "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-8ed959a2-9ef9-40de-9428-74b4c32b6dde.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/transparent/tyrannosaurus-fossil-v3.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/transparent/ammonite-fossil-v1.png"
+      ],
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-3519aa15-cdd2-41da-97c7-128af35f3aad.png",
+      "saved_image": "ankylosaurus-fossil-v2.png"
+    },
+    {
+      "key": "ankylosaurus",
+      "kind": "reconstruction",
+      "version": 2,
+      "prompt": "EDIT the FIRST image only: it is the ankylosaurus living reconstruction to deliver as a single isolated asset. Images 2 and 3 are STYLE references from the already approved first ten specimens in this same educational game, NOT additional subjects. Match their natural-history painted/sculpted illustration finish, precise contours, controlled warm highlights, readable forms, restrained fine detail, three-dimensional shading and consistent illustration density. Avoid harsh gritty photographic noise, waxy toy finish, flat clipart, thick cartoon outlines or decorative fantasy. Preserve species identity, pose, body proportions and diagnostic features of image 1; do not morph it into the reference dinosaur or ammonite. Match the reference living reconstructions' detailed yet clearly illustrative natural textures and softly controlled shading, not a photograph or gritty raw scan. Preserve species-appropriate colors and patterns; the palette of a dinosaur must not recolor unrelated animals. TRUE TRANSPARENT background with alpha. NO reference backgrounds, gradients, glow, halos, floor, cast shadow, studio, black rectangle, labels or text. All opaque subject surfaces and bones retain opacity; gaps and surroundings transparent. Entire animal and all spines/teeth/tail/fin tips fully inside canvas with a visibly empty margin of at least 8% on every side. One target subject only, never make a collage.",
+      "reference_images": [
+        "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-872e1bab-e3be-4850-a3e4-719a3a24e552.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/reconstruction/tyrannosaurus.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/reconstruction/ammonite.png"
+      ],
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-b33a7a32-9394-4625-a09f-0636f648c238.png",
+      "saved_image": "ankylosaurus-reconstruction-v2.png"
+    },
+    {
+      "key": "parasaurolophus",
+      "kind": "fossil",
+      "version": 2,
+      "prompt": "EDIT the FIRST image only: it is the parasaurolophus specimen to deliver as a single isolated asset. Images 2 and 3 are STYLE references from the already approved first ten specimens in this same educational game, NOT additional subjects. Match their natural-history painted/sculpted illustration finish, precise contours, controlled warm highlights, readable forms, restrained fine detail, three-dimensional shading and consistent illustration density. Avoid harsh gritty photographic noise, waxy toy finish, flat clipart, thick cartoon outlines or decorative fantasy. Preserve species identity, pose, body proportions and diagnostic features of image 1; do not morph it into the reference dinosaur or ammonite. Change pale chalky ivory to the warm golden-ochre/amber-brown mineral specimen palette and crisp bright edge highlights of the approved specimen references. Do NOT make it metallic gold: natural fossil/bone illustration with balanced shadows and subtly textured surface. TRUE TRANSPARENT background with alpha. NO reference backgrounds, gradients, glow, halos, floor, cast shadow, studio, black rectangle, labels or text. All opaque subject surfaces and bones retain opacity; gaps and surroundings transparent. Entire animal and all spines/teeth/tail/fin tips fully inside canvas with a visibly empty margin of at least 8% on every side. One target subject only, never make a collage.",
+      "reference_images": [
+        "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-20fc2593-e7de-4503-ba37-13db365f19ca.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/transparent/tyrannosaurus-fossil-v3.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/transparent/ammonite-fossil-v1.png"
+      ],
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-9f8f669b-e9a8-4e3a-be9d-e8bc1538793f.png",
+      "saved_image": "parasaurolophus-fossil-v2.png"
+    },
+    {
+      "key": "parasaurolophus",
+      "kind": "reconstruction",
+      "version": 2,
+      "prompt": "EDIT the FIRST image only: it is the parasaurolophus living reconstruction to deliver as a single isolated asset. Images 2 and 3 are STYLE references from the already approved first ten specimens in this same educational game, NOT additional subjects. Match their natural-history painted/sculpted illustration finish, precise contours, controlled warm highlights, readable forms, restrained fine detail, three-dimensional shading and consistent illustration density. Avoid harsh gritty photographic noise, waxy toy finish, flat clipart, thick cartoon outlines or decorative fantasy. Preserve species identity, pose, body proportions and diagnostic features of image 1; do not morph it into the reference dinosaur or ammonite. Match the reference living reconstructions' detailed yet clearly illustrative natural textures and softly controlled shading, not a photograph or gritty raw scan. Preserve species-appropriate colors and patterns; the palette of a dinosaur must not recolor unrelated animals. TRUE TRANSPARENT background with alpha. NO reference backgrounds, gradients, glow, halos, floor, cast shadow, studio, black rectangle, labels or text. All opaque subject surfaces and bones retain opacity; gaps and surroundings transparent. Entire animal and all spines/teeth/tail/fin tips fully inside canvas with a visibly empty margin of at least 8% on every side. One target subject only, never make a collage.",
+      "reference_images": [
+        "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-fafd8e55-4591-47cf-aaca-9e95963d0548.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/reconstruction/tyrannosaurus.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/reconstruction/ammonite.png"
+      ],
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-6f91b017-abfa-40d5-ac75-99989555b15b.png",
+      "saved_image": "parasaurolophus-reconstruction-v2.png"
+    },
+    {
+      "key": "trilobite",
+      "kind": "fossil",
+      "version": 2,
+      "prompt": "EDIT the FIRST image only: it is the trilobite specimen to deliver as a single isolated asset. Images 2 and 3 are STYLE references from the already approved first ten specimens in this same educational game, NOT additional subjects. Match their natural-history painted/sculpted illustration finish, precise contours, controlled warm highlights, readable forms, restrained fine detail, three-dimensional shading and consistent illustration density. Avoid harsh gritty photographic noise, waxy toy finish, flat clipart, thick cartoon outlines or decorative fantasy. Preserve species identity, pose, body proportions and diagnostic features of image 1; do not morph it into the reference dinosaur or ammonite. Change pale chalky ivory to the warm golden-ochre/amber-brown mineral specimen palette and crisp bright edge highlights of the approved specimen references. Do NOT make it metallic gold: natural fossil/bone illustration with balanced shadows and subtly textured surface. Retain COMPRESSED FOSSIL texture and flattened preserved body/exoskeleton, not a living animal painted gold or a vertebrate skeleton. Do not add bones or ribs. Retain exactly seven thoracic segments, long slender genal spines and the three longitudinal lobes of Olenoides serratus. TRUE TRANSPARENT background with alpha. NO reference backgrounds, gradients, glow, halos, floor, cast shadow, studio, black rectangle, labels or text. All opaque subject surfaces and bones retain opacity; gaps and surroundings transparent. Entire animal and all spines/teeth/tail/fin tips fully inside canvas with a visibly empty margin of at least 8% on every side. One target subject only, never make a collage.",
+      "reference_images": [
+        "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-c84594fd-4e96-48cf-ad69-75072c836c90.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/transparent/tyrannosaurus-fossil-v3.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/transparent/ammonite-fossil-v1.png"
+      ],
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-0d14e432-7008-4ce7-977e-266880a18c4e.png",
+      "saved_image": "trilobite-fossil-v2.png"
+    },
+    {
+      "key": "trilobite",
+      "kind": "reconstruction",
+      "version": 2,
+      "prompt": "EDIT the FIRST image only: it is the trilobite living reconstruction to deliver as a single isolated asset. Images 2 and 3 are STYLE references from the already approved first ten specimens in this same educational game, NOT additional subjects. Match their natural-history painted/sculpted illustration finish, precise contours, controlled warm highlights, readable forms, restrained fine detail, three-dimensional shading and consistent illustration density. Avoid harsh gritty photographic noise, waxy toy finish, flat clipart, thick cartoon outlines or decorative fantasy. Preserve species identity, pose, body proportions and diagnostic features of image 1; do not morph it into the reference dinosaur or ammonite. Match the reference living reconstructions' detailed yet clearly illustrative natural textures and softly controlled shading, not a photograph or gritty raw scan. Preserve species-appropriate colors and patterns; the palette of a dinosaur must not recolor unrelated animals. Retain exactly seven thoracic segments, long slender genal spines and the three longitudinal lobes of Olenoides serratus. TRUE TRANSPARENT background with alpha. NO reference backgrounds, gradients, glow, halos, floor, cast shadow, studio, black rectangle, labels or text. All opaque subject surfaces and bones retain opacity; gaps and surroundings transparent. Entire animal and all spines/teeth/tail/fin tips fully inside canvas with a visibly empty margin of at least 8% on every side. One target subject only, never make a collage.",
+      "reference_images": [
+        "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-ba20bfa4-3fdc-4d4a-a022-6c6b9702b047.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/reconstruction/tyrannosaurus.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/reconstruction/ammonite.png"
+      ],
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-6cf404af-e305-4247-8685-a16bcef7b08e.png",
+      "saved_image": "trilobite-reconstruction-v2.png"
+    },
+    {
+      "key": "anomalocaris",
+      "kind": "fossil",
+      "version": 2,
+      "prompt": "EDIT the FIRST image only: it is the anomalocaris specimen to deliver as a single isolated asset. Images 2 and 3 are STYLE references from the already approved first ten specimens in this same educational game, NOT additional subjects. Match their natural-history painted/sculpted illustration finish, precise contours, controlled warm highlights, readable forms, restrained fine detail, three-dimensional shading and consistent illustration density. Avoid harsh gritty photographic noise, waxy toy finish, flat clipart, thick cartoon outlines or decorative fantasy. Preserve species identity, pose, body proportions and diagnostic features of image 1; do not morph it into the reference dinosaur or ammonite. Change pale chalky ivory to the warm golden-ochre/amber-brown mineral specimen palette and crisp bright edge highlights of the approved specimen references. Do NOT make it metallic gold: natural fossil/bone illustration with balanced shadows and subtly textured surface. Retain COMPRESSED FOSSIL texture and flattened preserved body/exoskeleton, not a living animal painted gold or a vertebrate skeleton. Do not add bones or ribs. TRUE TRANSPARENT background with alpha. NO reference backgrounds, gradients, glow, halos, floor, cast shadow, studio, black rectangle, labels or text. All opaque subject surfaces and bones retain opacity; gaps and surroundings transparent. Entire animal and all spines/teeth/tail/fin tips fully inside canvas with a visibly empty margin of at least 8% on every side. One target subject only, never make a collage.",
+      "reference_images": [
+        "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-2cebc2fc-2a11-4a0d-b32e-76117a5e5875.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/transparent/tyrannosaurus-fossil-v3.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/transparent/ammonite-fossil-v1.png"
+      ],
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-9d553d41-7a0e-47b9-b00b-3be5acb41d2e.png",
+      "saved_image": "anomalocaris-fossil-v2.png"
+    },
+    {
+      "key": "anomalocaris",
+      "kind": "reconstruction",
+      "version": 2,
+      "prompt": "EDIT the FIRST image only: it is the anomalocaris living reconstruction to deliver as a single isolated asset. Images 2 and 3 are STYLE references from the already approved first ten specimens in this same educational game, NOT additional subjects. Match their natural-history painted/sculpted illustration finish, precise contours, controlled warm highlights, readable forms, restrained fine detail, three-dimensional shading and consistent illustration density. Avoid harsh gritty photographic noise, waxy toy finish, flat clipart, thick cartoon outlines or decorative fantasy. Preserve species identity, pose, body proportions and diagnostic features of image 1; do not morph it into the reference dinosaur or ammonite. Match the reference living reconstructions' detailed yet clearly illustrative natural textures and softly controlled shading, not a photograph or gritty raw scan. Preserve species-appropriate colors and patterns; the palette of a dinosaur must not recolor unrelated animals. TRUE TRANSPARENT background with alpha. NO reference backgrounds, gradients, glow, halos, floor, cast shadow, studio, black rectangle, labels or text. All opaque subject surfaces and bones retain opacity; gaps and surroundings transparent. Entire animal and all spines/teeth/tail/fin tips fully inside canvas with a visibly empty margin of at least 8% on every side. One target subject only, never make a collage.",
+      "reference_images": [
+        "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-46ac185c-5ac0-4cab-9130-fa6bf76e59c1.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/reconstruction/tyrannosaurus.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/reconstruction/ammonite.png"
+      ],
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-a708e6d5-7132-4377-bad2-06c84828f6f9.png",
+      "saved_image": "anomalocaris-reconstruction-v2.png"
+    },
+    {
+      "key": "ottoia",
+      "kind": "fossil",
+      "version": 2,
+      "prompt": "EDIT the FIRST image only: it is the ottoia specimen to deliver as a single isolated asset. Images 2 and 3 are STYLE references from the already approved first ten specimens in this same educational game, NOT additional subjects. Match their natural-history painted/sculpted illustration finish, precise contours, controlled warm highlights, readable forms, restrained fine detail, three-dimensional shading and consistent illustration density. Avoid harsh gritty photographic noise, waxy toy finish, flat clipart, thick cartoon outlines or decorative fantasy. Preserve species identity, pose, body proportions and diagnostic features of image 1; do not morph it into the reference dinosaur or ammonite. Change pale chalky ivory to the warm golden-ochre/amber-brown mineral specimen palette and crisp bright edge highlights of the approved specimen references. Do NOT make it metallic gold: natural fossil/bone illustration with balanced shadows and subtly textured surface. Retain COMPRESSED FOSSIL texture and flattened preserved body/exoskeleton, not a living animal painted gold or a vertebrate skeleton. Do not add bones or ribs. TRUE TRANSPARENT background with alpha. NO reference backgrounds, gradients, glow, halos, floor, cast shadow, studio, black rectangle, labels or text. All opaque subject surfaces and bones retain opacity; gaps and surroundings transparent. Entire animal and all spines/teeth/tail/fin tips fully inside canvas with a visibly empty margin of at least 8% on every side. One target subject only, never make a collage.",
+      "reference_images": [
+        "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-d53f9a05-171b-4310-9299-3652a21350be.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/transparent/tyrannosaurus-fossil-v3.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/transparent/ammonite-fossil-v1.png"
+      ],
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-d8758aa7-f090-4edd-b6a1-98d0ea1c812d.png",
+      "saved_image": "ottoia-fossil-v2.png"
+    },
+    {
+      "key": "ottoia",
+      "kind": "reconstruction",
+      "version": 2,
+      "prompt": "EDIT the FIRST image only: it is the ottoia living reconstruction to deliver as a single isolated asset. Images 2 and 3 are STYLE references from the already approved first ten specimens in this same educational game, NOT additional subjects. Match their natural-history painted/sculpted illustration finish, precise contours, controlled warm highlights, readable forms, restrained fine detail, three-dimensional shading and consistent illustration density. Avoid harsh gritty photographic noise, waxy toy finish, flat clipart, thick cartoon outlines or decorative fantasy. Preserve species identity, pose, body proportions and diagnostic features of image 1; do not morph it into the reference dinosaur or ammonite. Match the reference living reconstructions' detailed yet clearly illustrative natural textures and softly controlled shading, not a photograph or gritty raw scan. Preserve species-appropriate colors and patterns; the palette of a dinosaur must not recolor unrelated animals. TRUE TRANSPARENT background with alpha. NO reference backgrounds, gradients, glow, halos, floor, cast shadow, studio, black rectangle, labels or text. All opaque subject surfaces and bones retain opacity; gaps and surroundings transparent. Entire animal and all spines/teeth/tail/fin tips fully inside canvas with a visibly empty margin of at least 8% on every side. One target subject only, never make a collage.",
+      "reference_images": [
+        "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-f03e1fe5-97d1-435e-a413-e76ecfdbbef7.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/reconstruction/tyrannosaurus.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/reconstruction/ammonite.png"
+      ],
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-e40e0945-09f7-40b6-b30f-8725e99e35f7.png",
+      "saved_image": "ottoia-reconstruction-v2.png"
+    },
+    {
+      "key": "mammoth",
+      "kind": "fossil",
+      "version": 2,
+      "prompt": "EDIT the FIRST image only: it is the mammoth specimen to deliver as a single isolated asset. Images 2 and 3 are STYLE references from the already approved first ten specimens in this same educational game, NOT additional subjects. Match their natural-history painted/sculpted illustration finish, precise contours, controlled warm highlights, readable forms, restrained fine detail, three-dimensional shading and consistent illustration density. Avoid harsh gritty photographic noise, waxy toy finish, flat clipart, thick cartoon outlines or decorative fantasy. Preserve species identity, pose, body proportions and diagnostic features of image 1; do not morph it into the reference dinosaur or ammonite. Change pale chalky ivory to the warm golden-ochre/amber-brown mineral specimen palette and crisp bright edge highlights of the approved specimen references. Do NOT make it metallic gold: natural fossil/bone illustration with balanced shadows and subtly textured surface. Two spiraling upper tusks, FOUR columnar legs, NO bony trunk or bony ears. TRUE TRANSPARENT background with alpha. NO reference backgrounds, gradients, glow, halos, floor, cast shadow, studio, black rectangle, labels or text. All opaque subject surfaces and bones retain opacity; gaps and surroundings transparent. Entire animal and all spines/teeth/tail/fin tips fully inside canvas with a visibly empty margin of at least 8% on every side. One target subject only, never make a collage.",
+      "reference_images": [
+        "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-881f1959-f4c8-4e3f-bcdd-ff6536270d7d.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/transparent/tyrannosaurus-fossil-v3.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/transparent/ammonite-fossil-v1.png"
+      ],
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-f70dada4-8422-4ec4-accf-fcc10b79ae8b.png",
+      "saved_image": "mammoth-fossil-v2.png"
+    },
+    {
+      "key": "mammoth",
+      "kind": "reconstruction",
+      "version": 2,
+      "prompt": "EDIT the FIRST image only: it is the mammoth living reconstruction to deliver as a single isolated asset. Images 2 and 3 are STYLE references from the already approved first ten specimens in this same educational game, NOT additional subjects. Match their natural-history painted/sculpted illustration finish, precise contours, controlled warm highlights, readable forms, restrained fine detail, three-dimensional shading and consistent illustration density. Avoid harsh gritty photographic noise, waxy toy finish, flat clipart, thick cartoon outlines or decorative fantasy. Preserve species identity, pose, body proportions and diagnostic features of image 1; do not morph it into the reference dinosaur or ammonite. Match the reference living reconstructions' detailed yet clearly illustrative natural textures and softly controlled shading, not a photograph or gritty raw scan. Preserve species-appropriate colors and patterns; the palette of a dinosaur must not recolor unrelated animals. TRUE TRANSPARENT background with alpha. NO reference backgrounds, gradients, glow, halos, floor, cast shadow, studio, black rectangle, labels or text. All opaque subject surfaces and bones retain opacity; gaps and surroundings transparent. Entire animal and all spines/teeth/tail/fin tips fully inside canvas with a visibly empty margin of at least 8% on every side. One target subject only, never make a collage.",
+      "reference_images": [
+        "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-c9d4078e-d488-4511-a606-dde26f9c26d1.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/reconstruction/tyrannosaurus.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/reconstruction/ammonite.png"
+      ],
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-3a069fe7-b532-4f0f-83ef-7678e3f76ef5.png",
+      "saved_image": "mammoth-reconstruction-v2.png"
+    },
+    {
+      "key": "smilodon",
+      "kind": "fossil",
+      "version": 2,
+      "prompt": "EDIT the FIRST image only: it is the smilodon specimen to deliver as a single isolated asset. Images 2 and 3 are STYLE references from the already approved first ten specimens in this same educational game, NOT additional subjects. Match their natural-history painted/sculpted illustration finish, precise contours, controlled warm highlights, readable forms, restrained fine detail, three-dimensional shading and consistent illustration density. Avoid harsh gritty photographic noise, waxy toy finish, flat clipart, thick cartoon outlines or decorative fantasy. Preserve species identity, pose, body proportions and diagnostic features of image 1; do not morph it into the reference dinosaur or ammonite. Change pale chalky ivory to the warm golden-ochre/amber-brown mineral specimen palette and crisp bright edge highlights of the approved specimen references. Do NOT make it metallic gold: natural fossil/bone illustration with balanced shadows and subtly textured surface. Retain SHORT bobtail, powerful forelimbs, FOUR legs, TWO upper saber canines, no mane or long tiger tail. TRUE TRANSPARENT background with alpha. NO reference backgrounds, gradients, glow, halos, floor, cast shadow, studio, black rectangle, labels or text. All opaque subject surfaces and bones retain opacity; gaps and surroundings transparent. Entire animal and all spines/teeth/tail/fin tips fully inside canvas with a visibly empty margin of at least 8% on every side. One target subject only, never make a collage.",
+      "reference_images": [
+        "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-5a0fcb15-4f1c-442e-bfdc-9617785ec545.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/transparent/tyrannosaurus-fossil-v3.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/review/transparent/ammonite-fossil-v1.png"
+      ],
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-dc023636-f9cc-4d2d-a2bc-fc9ab23b0e6b.png",
+      "saved_image": "smilodon-fossil-v2.png"
+    },
+    {
+      "key": "smilodon",
+      "kind": "reconstruction",
+      "version": 2,
+      "prompt": "EDIT the FIRST image only: it is the smilodon living reconstruction to deliver as a single isolated asset. Images 2 and 3 are STYLE references from the already approved first ten specimens in this same educational game, NOT additional subjects. Match their natural-history painted/sculpted illustration finish, precise contours, controlled warm highlights, readable forms, restrained fine detail, three-dimensional shading and consistent illustration density. Avoid harsh gritty photographic noise, waxy toy finish, flat clipart, thick cartoon outlines or decorative fantasy. Preserve species identity, pose, body proportions and diagnostic features of image 1; do not morph it into the reference dinosaur or ammonite. Match the reference living reconstructions' detailed yet clearly illustrative natural textures and softly controlled shading, not a photograph or gritty raw scan. Preserve species-appropriate colors and patterns; the palette of a dinosaur must not recolor unrelated animals. Retain SHORT bobtail, powerful forelimbs, FOUR legs, TWO upper saber canines, no mane or long tiger tail. TRUE TRANSPARENT background with alpha. NO reference backgrounds, gradients, glow, halos, floor, cast shadow, studio, black rectangle, labels or text. All opaque subject surfaces and bones retain opacity; gaps and surroundings transparent. Entire animal and all spines/teeth/tail/fin tips fully inside canvas with a visibly empty margin of at least 8% on every side. One target subject only, never make a collage.",
+      "reference_images": [
+        "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-a62c0027-afa3-4f6c-96a4-15affc03790c.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/reconstruction/tyrannosaurus.png",
+        "/Users/kishimotonozomi/Documents/Codex/2026-09-01/referenced-chatgpt-conversation-this-is-an/work/kinoko-quiz/assets/images/kyouryuu/reconstruction/ammonite.png"
+      ],
+      "generated_path": "/Users/kishimotonozomi/.codex/generated_images/01a05c1a-a7ff-7c42-afbb-bad627a83a5c/exec-82022f37-8808-45c1-a80a-1c9be0381334.png",
+      "saved_image": "smilodon-reconstruction-v2.png"
+    }
+  ],
+  "approval_date": "2026-10-05",
+  "approval_scope": "All 8 displayed descriptions and both selected v2 images per species. Does not approve undisplayed quiz hints or imply game integration.",
+  "approved_fields": [
+    "zukan_text",
+    "specimen_image",
+    "reconstruction_image"
+  ]
+}

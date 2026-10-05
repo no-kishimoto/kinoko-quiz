@@ -10,6 +10,7 @@ from PIL import Image
 
 from data.kinoko_data import Kinoko, load_kinoko, validate_image_assets
 from data.subject_data import SubjectItem, load_ready_subject_items, load_subject_names
+from src.dinosaur_search import load_dinosaur_search_assets
 from src.paths import (
     CORRECT_SOUND_PATH,
     INCORRECT_SOUND_PATH,
@@ -227,6 +228,7 @@ def build_app():
     ready_konchuu = load_ready_subject_items(KONCHUU_DATA_PATH)
     kyouryuu = load_subject_names(KYOURYUU_DATA_PATH)
     ready_kyouryuu = load_ready_subject_items(KYOURYUU_DATA_PATH)
+    dinosaur_search_assets = load_dinosaur_search_assets()
     validate_image_assets(kinoko, ZUKAN_IMAGE_DIR)
     validate_image_assets(kinoko, QUIZ_IMAGE_DIR)
     for item in ready_shokubutsu:
@@ -257,12 +259,30 @@ def build_app():
             return ready_kyouryuu, KYOURYUU_FOSSIL_IMAGE_DIR, KYOURYUU_RECONSTRUCTION_IMAGE_DIR, "🦖"
         return kinoko, QUIZ_IMAGE_DIR, ZUKAN_IMAGE_DIR, "🍄"
 
+    def search_values(subject: str, mode: str):
+        if subject == "kyouryuu":
+            if mode == "fossil":
+                return dinosaur_search_assets.items, dinosaur_search_assets.backgrounds, dinosaur_search_assets.specimen_images
+            if not dinosaur_search_assets.reconstruction_ready:
+                raise gr.Error("のこりの えを かくにんしてから あそべるよ。")
+            return dinosaur_search_assets.items, search_backgrounds, dinosaur_search_assets.reconstruction_images
+        items, _, zukan_dir, _ = subject_values(subject)
+        return items, search_backgrounds, zukan_dir
+
+    def search_label(subject: str, mode: str) -> str:
+        if subject == "kyouryuu":
+            return "かせきさがし" if mode == "fossil" else "きょうりゅうさがし"
+        label = {"kinoko": "きのこ", "shokubutsu": "しょくぶつ", "konchuu": "こんちゅう"}[subject]
+        return f"{label} さがし"
+
     with gr.Blocks(title="きのこクイズ") as app:
         active_subject_state = gr.State(value="kinoko")
         session_state = gr.State(value=None)
         math_state = gr.State(value=None)
         zukan_page_state = gr.State(value=0)
         search_state = gr.State(value=None)
+        # かくれた画面の中では音声も読み込まれないため、全ゲームで共有する。
+        sound = gr.HTML(value="", elem_classes="sound-effect")
 
         with gr.Column(visible=True) as subject_screen:
             gr.Markdown("# なにで あそぶ？", elem_classes="main-title")
@@ -277,6 +297,12 @@ def build_app():
             math_start = gr.Button("たしざんで あそぶ", variant="primary", elem_classes="main-button")
             subtraction_start = gr.Button("ひきざんで あそぶ", variant="primary", elem_classes="main-button")
             search_start = gr.Button("きのこ さがし", variant="primary", elem_classes="main-button")
+            fossil_start = gr.Button("かせきさがし", visible=False, variant="primary", elem_classes="main-button")
+            dinosaur_search_note = gr.Markdown(
+                "きょうりゅうさがしは、のこりの えを かくにんしてから あそべるよ。",
+                visible=False,
+                elem_classes="center-text",
+            )
             zukan_start = gr.Button("きのこ ずかん を みる", elem_classes="main-button")
             subject_back_button = gr.Button("なかまを えらびなおす", elem_classes="main-button")
 
@@ -310,7 +336,15 @@ def build_app():
                 subject_screen: gr.Column(visible=False),
                 title_screen: gr.Column(visible=True),
                 title_heading: f"# {icon} {label}クイズ",
-                search_start: gr.Button(f"{label} さがし", variant="primary"),
+                search_start: gr.Button(
+                    "きょうりゅうさがし" if subject == "kyouryuu" else f"{label} さがし",
+                    variant="primary",
+                    interactive=subject != "kyouryuu" or dinosaur_search_assets.reconstruction_ready,
+                ),
+                fossil_start: gr.Button(visible=subject == "kyouryuu", interactive=True),
+                dinosaur_search_note: gr.Markdown(
+                    visible=subject == "kyouryuu" and not dinosaur_search_assets.reconstruction_ready,
+                ),
                 zukan_start: gr.Button(f"{label} ずかん を みる"),
             }
 
@@ -328,21 +362,25 @@ def build_app():
                 konchuu_screen: gr.Column(visible=False),
             }
 
+        menu_outputs = [
+            active_subject_state, subject_screen, title_screen, title_heading,
+            search_start, fossil_start, dinosaur_search_note, zukan_start,
+        ]
         kinoko_subject_button.click(
             lambda: show_game_menu("kinoko"),
-            outputs=[active_subject_state, subject_screen, title_screen, title_heading, search_start, zukan_start],
+            outputs=menu_outputs,
         )
         shokubutsu_subject_button.click(
             lambda: show_game_menu("shokubutsu"),
-            outputs=[active_subject_state, subject_screen, title_screen, title_heading, search_start, zukan_start],
+            outputs=menu_outputs,
         )
         konchuu_subject_button.click(
             lambda: show_game_menu("konchuu"),
-            outputs=[active_subject_state, subject_screen, title_screen, title_heading, search_start, zukan_start],
+            outputs=menu_outputs,
         )
         kyouryuu_subject_button.click(
             lambda: show_game_menu("kyouryuu"),
-            outputs=[active_subject_state, subject_screen, title_screen, title_heading, search_start, zukan_start],
+            outputs=menu_outputs,
         )
         for button in (subject_back_button, shokubutsu_back_button, konchuu_back_button):
             button.click(
@@ -392,9 +430,6 @@ def build_app():
                     )
                     explanation = gr.Markdown(visible=False, elem_classes="explanation-card")
                     quiz_title_button = gr.Button("タイトルへ もどる", elem_classes="main-button")
-
-        # すべてのゲーム画面で効果音を再生できるよう、画面の外に置く。
-        sound = gr.HTML(value="", elem_classes="sound-effect")
 
         with gr.Column(visible=False, elem_classes="quiz-screen") as math_screen:
             math_progress = gr.Markdown(elem_classes=["center-text", "progress-text"])
@@ -546,6 +581,7 @@ def build_app():
                     math_screen: gr.Column(visible=False),
                     result_screen: gr.Column(visible=True),
                     result: f"# {updated.game_name}の けっか\n\nぜんぶで {len(updated.questions)}もん\n\nせいかいは {updated.correct_count}もん",
+                    sound: "",
                 }
             question = updated.question
             updates = {
@@ -568,29 +604,38 @@ def build_app():
             outputs=[math_state, math_screen, result_screen, result, math_progress, math_equation, math_mushrooms, *math_choice_buttons, math_feedback, math_next_button, sound],
         )
 
-        def start_search(subject: str):
-            items, _, zukan_dir, _ = subject_values(subject)
-            session = create_search_session(items, search_backgrounds)
-            label = {"kinoko": "きのこ", "shokubutsu": "しょくぶつ", "konchuu": "こんちゅう", "kyouryuu": "きょうりゅう"}[subject]
+        def start_search(subject: str, mode: str | None = None):
+            mode = mode or ("reconstruction" if subject == "kyouryuu" else "default")
+            items, backgrounds, image_sources = search_values(subject, mode)
+            session = create_search_session(
+                items, backgrounds, mode=mode, unique_targets=subject == "kyouryuu",
+            )
             return {
                 search_state: session,
                 title_screen: gr.Column(visible=False),
                 search_screen: gr.Column(visible=True),
-                search_heading: f"# {label} さがし",
+                search_heading: f"# {search_label(subject, mode)}",
                 search_progress: session.progress_text,
-                search_scene: render_scene(session, zukan_dir),
+                search_scene: render_scene(session, image_sources),
                 search_prompt: prompt_text(session),
                 search_status: status_text(session),
                 search_next_button: gr.Button(visible=False),
+                sound: "",
             }
 
+        search_start_outputs = [
+            search_state, title_screen, search_screen, search_scene,
+            search_heading, search_progress, search_prompt, search_status, search_next_button, sound,
+        ]
         search_start.click(
             start_search,
             inputs=active_subject_state,
-            outputs=[
-                search_state, title_screen, search_screen, search_scene,
-                search_heading, search_progress, search_prompt, search_status, search_next_button,
-            ],
+            outputs=search_start_outputs,
+        )
+        fossil_start.click(
+            lambda subject: start_search(subject, "fossil"),
+            inputs=active_subject_state,
+            outputs=search_start_outputs,
         )
 
         def search_click(session: SearchSession | None, subject: str, evt: gr.SelectData):
@@ -600,7 +645,9 @@ def build_app():
             if not isinstance(index, (tuple, list)) or len(index) != 2:
                 return {
                     search_state: session,
-                    search_status: "## えを クリックしてね。",
+                    search_status: status_text(session) if session.is_correct else "## えを クリックしてね。",
+                    search_next_button: gr.Button(visible=session.is_correct),
+                    sound: gr.skip(),
                 }
             with Image.open(session.background_path) as scene:
                 width, height = scene.size
@@ -608,10 +655,10 @@ def build_app():
             found = updated.choose_at(index[0] / width, index[1] / height)
             return {
                 search_state: updated,
-                search_scene: render_scene(updated, subject_values(subject)[2]),
+                search_scene: render_scene(updated, search_values(subject, updated.mode)[2]),
                 search_status: status_text(updated, clicked=True),
                 search_next_button: gr.Button(visible=updated.is_correct),
-                sound: sound_html(CORRECT_SOUND_PATH, random.randint(1, 999999)) if found else None,
+                sound: sound_html(CORRECT_SOUND_PATH, random.randint(1, 999999)) if found else gr.skip(),
             }
 
         search_scene.select(
@@ -624,32 +671,36 @@ def build_app():
             if session is None or not session.is_correct:
                 raise gr.Error("みつけてから つぎへ すすもう")
             if session.is_last_question:
-                label = {"kinoko": "きのこ", "shokubutsu": "しょくぶつ", "konchuu": "こんちゅう", "kyouryuu": "きょうりゅう"}[subject]
+                count_label = "みつけたのは" if subject == "kyouryuu" else "せいかいは"
                 return {
                     search_state: session,
                     search_screen: gr.Column(visible=False),
                     result_screen: gr.Column(visible=True),
                     result: (
-                        f"# {label} さがしの けっか\n\n"
+                        f"# {search_label(subject, session.mode)}の けっか\n\n"
                         f"ぜんぶで {session.total_questions}もん\n\n"
-                        f"せいかいは {session.correct_count}もん"
+                        f"{count_label} {session.correct_count}もん"
                     ),
+                    sound: "",
                 }
-            items, _, zukan_dir, _ = subject_values(subject)
+            items, backgrounds, image_sources = search_values(subject, session.mode)
             updated = create_search_session(
                 items,
-                search_backgrounds,
+                backgrounds,
                 current_index=session.current_index + 1,
                 correct_count=session.correct_count,
+                mode=session.mode,
+                used_target_keys=session.used_target_keys,
+                unique_targets=subject == "kyouryuu",
             )
             return {
                 search_state: updated,
                 search_progress: updated.progress_text,
-                search_scene: render_scene(updated, zukan_dir),
+                search_scene: render_scene(updated, image_sources),
                 search_prompt: prompt_text(updated),
                 search_status: status_text(updated),
                 search_next_button: gr.Button(visible=False),
-                sound: None,
+                sound: "",
             }
 
         search_next_button.click(
@@ -663,11 +714,12 @@ def build_app():
                 search_state: None,
                 search_screen: gr.Column(visible=False),
                 title_screen: gr.Column(visible=True),
+                sound: "",
             }
 
         search_title_button.click(
             search_to_title,
-            outputs=[search_state, search_screen, title_screen],
+            outputs=[search_state, search_screen, title_screen, sound],
         )
 
         def start_quiz(count: int, subject: str):
@@ -717,7 +769,7 @@ def build_app():
 
         quiz_title_button.click(
             quiz_to_title,
-            outputs=[session_state, quiz_screen, title_screen],
+            outputs=[session_state, quiz_screen, title_screen, sound],
         )
 
         def show_zukan(index: int, subject: str):
@@ -803,7 +855,7 @@ def build_app():
 
         zukan_title_button.click(
             zukan_to_title,
-            outputs=[zukan_page_state, zukan_screen, title_screen],
+            outputs=[zukan_page_state, zukan_screen, title_screen, sound],
         )
 
         def answer(session: QuizSession | None, subject: str, choice_index: int):
@@ -867,6 +919,7 @@ def build_app():
                     quiz_screen: gr.Column(visible=False),
                     result_screen: gr.Column(visible=True),
                     result: result_text(updated),
+                    sound: "",
                 }
             view = question_view(updated, subject_values(subject)[1])
             updates = {

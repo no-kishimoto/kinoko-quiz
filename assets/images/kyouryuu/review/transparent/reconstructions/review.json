@@ -1,0 +1,99 @@
+{
+  "status": "paused_by_user_before_image_generation_completed",
+  "pause_date": "2026-10-05",
+  "created_date": "2026-10-05",
+  "game_integration": "not applied",
+  "notes": "Only background extraction; anatomy and illustrative style must be preserved. Displayed descriptions and specimens were already approved; these new living cutout images require approval before use.",
+  "items": [
+    {
+      "key": "pachycephalosaurus",
+      "name": "パキケファロサウルス",
+      "zukan_text": "あたまの うえが とても かたい きょうりゅう。なかまと あたまを くらべたかも しれないよ。",
+      "specimen_image": "../pachycephalosaurus-fossil-v1.png",
+      "source_image": "../../../reconstruction/pachycephalosaurus.png",
+      "review_image": "pachycephalosaurus-reconstruction-v1.png",
+      "image_status": "awaiting_user_review"
+    },
+    {
+      "key": "brachiosaurus",
+      "name": "ブラキオサウルス",
+      "zukan_text": "とても おおきな くさを たべる きょうりゅう。ながい くびで たかい きの はを たべたよ。",
+      "specimen_image": "../brachiosaurus-fossil-v1.png",
+      "source_image": "../../../reconstruction/brachiosaurus.png",
+      "review_image": "brachiosaurus-reconstruction-v1.png",
+      "image_status": "awaiting_user_review"
+    },
+    {
+      "key": "tyrannosaurus",
+      "name": "ティラノサウルス",
+      "zukan_text": "とても おおきな にくを たべる きょうりゅう。ちいさな まえあしに、にほんの つめが あるよ。",
+      "specimen_image": "../tyrannosaurus-fossil-v3.png",
+      "source_image": "../../../reconstruction/tyrannosaurus.png",
+      "review_image": "tyrannosaurus-reconstruction-v1.png",
+      "image_status": "awaiting_user_review"
+    },
+    {
+      "key": "stegosaurus",
+      "name": "ステゴサウルス",
+      "zukan_text": "せなかに ならんだ いたが めじるしの くさを たべる きょうりゅう。しっぽの とげで じぶんを まもったよ。",
+      "specimen_image": "../stegosaurus-fossil-v1.png",
+      "source_image": "../../../reconstruction/stegosaurus.png",
+      "review_image": "stegosaurus-reconstruction-v1.png",
+      "image_status": "awaiting_user_review"
+    },
+    {
+      "key": "triceratops",
+      "name": "トリケラトプス",
+      "zukan_text": "3ぼんの つのと おおきな えりが かっこいい くさを たべる きょうりゅう。",
+      "specimen_image": "../triceratops-fossil-v1.png",
+      "source_image": "../../../reconstruction/triceratops.png",
+      "review_image": "triceratops-reconstruction-v1.png",
+      "image_status": "awaiting_user_review"
+    },
+    {
+      "key": "pteranodon",
+      "name": "プテラノドン",
+      "zukan_text": "そらを とんだ よくりゅうの なかまだよ。ながい くちばしが めじるしだよ。",
+      "specimen_image": "../pteranodon-fossil-v1.png",
+      "source_image": "../../../reconstruction/pteranodon.png",
+      "review_image": "pteranodon-reconstruction-v1.png",
+      "image_status": "awaiting_user_review"
+    },
+    {
+      "key": "plesiosaurus",
+      "name": "プレシオサウルス",
+      "zukan_text": "うみを およいだ かいりゅうの なかまだよ。ながい くびと、4つの ひれが めじるしだよ。",
+      "specimen_image": "../plesiosaurus-fossil-v1.png",
+      "source_image": "../../../reconstruction/plesiosaurus.png",
+      "review_image": "plesiosaurus-reconstruction-v1.png",
+      "image_status": "awaiting_user_review"
+    },
+    {
+      "key": "mosasaurus",
+      "name": "モササウルス",
+      "zukan_text": "うみを およいだ かいりゅうの なかまだよ。おおきな くちと、するどい はが めじるしだよ。",
+      "specimen_image": "../mosasaurus-fossil-v1.png",
+      "source_image": "../../../reconstruction/mosasaurus.png",
+      "review_image": "mosasaurus-reconstruction-v1.png",
+      "image_status": "awaiting_user_review"
+    },
+    {
+      "key": "ammonite",
+      "name": "アンモナイト",
+      "zukan_text": "うみで くらした むかしの いきもの。うずまきの からが めじるしだよ。",
+      "specimen_image": "../ammonite-fossil-v1.png",
+      "source_image": "../../../reconstruction/ammonite.png",
+      "review_image": "ammonite-reconstruction-v1.png",
+      "image_status": "awaiting_user_review"
+    },
+    {
+      "key": "xiphactinus",
+      "name": "シファクティヌス",
+      "zukan_text": "むかしの うみを およいだ おおきな さかなの なかまだよ。おおきな くちと、とがった はが めじるしだよ。",
+      "specimen_image": "../xiphactinus-fossil-v1.png",
+      "source_image": "../../xiphactinus-reconstruction-v2.png",
+      "review_image": "xiphactinus-reconstruction-v1.png",
+      "image_status": "awaiting_user_review"
+    }
+  ]
+}
