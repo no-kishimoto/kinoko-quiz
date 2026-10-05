@@ -15,7 +15,7 @@
     "cooking": "うすく きって、あぶらで いためる",
     "trivia": "しめると かわが ひらき、かわくと とじて ほうしを とばす",
     "highlight": {
-      "part": "しろい あみめもよう",
+      "part": "ほしがたに ひらいた かわ",
       "x": 0.32,
       "y": 0.54,
       "radius": 0.13
@@ -476,7 +476,12 @@
     "similar_kinoko": "たまごたけ",
     "cooking": null,
     "trivia": "あめで しろい つぶが とれてしまうことも ある",
-    "highlight": {"part": "あかい かさの しろい つぶつぶ", "x": 0.5, "y": 0.3, "radius": 0.15}
+    "highlight": {
+      "part": "あかい かさの しろい つぶつぶ",
+      "x": 0.5,
+      "y": 0.2,
+      "radius": 0.16
+    }
   },
   {
     "key": "dokutsurutake",
@@ -493,7 +498,12 @@
     "similar_kinoko": "しろまつたけもどき",
     "cooking": null,
     "trivia": "ようふくを きた つるのように みえることから、このなまえが ついた",
-    "highlight": {"part": "えの うえに ある しろい まく", "x": 0.5, "y": 0.52, "radius": 0.12}
+    "highlight": {
+      "part": "しろく ながい え",
+      "x": 0.5,
+      "y": 0.52,
+      "radius": 0.12
+    }
   },
   {
     "key": "tsukiyotake",
@@ -510,7 +520,12 @@
     "similar_kinoko": "ひらたけ",
     "cooking": null,
     "trivia": "つきの ように ひかると いわれ、このなまえが ついた",
-    "highlight": {"part": "かさの うらの しろい ひだ", "x": 0.48, "y": 0.43, "radius": 0.14}
+    "highlight": {
+      "part": "かさの うらの しろい ひだ",
+      "x": 0.48,
+      "y": 0.43,
+      "radius": 0.14
+    }
   },
   {
     "key": "rappatake",
@@ -527,7 +542,12 @@
     "similar_kinoko": "くろらっぱたけ",
     "cooking": "よく ひを とおして、いためものや スープにする",
     "trivia": "なかが からっぽで、ほんとうの らっぱのように みえる",
-    "highlight": {"part": "なかが からっぽの らっぱ", "x": 0.5, "y": 0.34, "radius": 0.16}
+    "highlight": {
+      "part": "らっぱの あなと ふち",
+      "x": 0.34,
+      "y": 0.19,
+      "radius": 0.15
+    }
   },
   {
     "key": "matsutake",
@@ -544,7 +564,12 @@
     "similar_kinoko": "ばかまつたけ",
     "cooking": "まつたけごはん、すましじる、やきものにする",
     "trivia": "よい においが するので、あきの ごちそうとして しられている",
-    "highlight": {"part": "えに ついた しろい まく", "x": 0.49, "y": 0.55, "radius": 0.13}
+    "highlight": {
+      "part": "ふっくらした かさ",
+      "x": 0.45,
+      "y": 0.24,
+      "radius": 0.17
+    }
   },
   {
     "key": "hiratake",
@@ -561,7 +586,12 @@
     "similar_kinoko": "つきよたけ",
     "cooking": "いためもの、なべもの、スープにする",
     "trivia": "えりんぎと おなじ なかまの きのこ",
-    "highlight": {"part": "よこへ のびた しろい ひだ", "x": 0.44, "y": 0.5, "radius": 0.15}
+    "highlight": {
+      "part": "かいがらのような ひらたい かさ",
+      "x": 0.51,
+      "y": 0.27,
+      "radius": 0.17
+    }
   },
   {
     "key": "kikurage",
@@ -578,7 +608,12 @@
     "similar_kinoko": "あらげきくらげ",
     "cooking": "いためもの、スープ、あえものにする",
     "trivia": "きの みみのように みえるので、きくらげと よばれる",
-    "highlight": {"part": "みみのような ひらひら", "x": 0.5, "y": 0.48, "radius": 0.17}
+    "highlight": {
+      "part": "みみのような ひらひら",
+      "x": 0.5,
+      "y": 0.48,
+      "radius": 0.17
+    }
   },
   {
     "key": "amigasatake",
@@ -595,7 +630,12 @@
     "similar_kinoko": "とがりあみがさたけ",
     "cooking": "よく ひを とおして、いためものや スープにする",
     "trivia": "かさの でこぼこが、あみがさのように みえる",
-    "highlight": {"part": "かさの でこぼこ あみめ", "x": 0.5, "y": 0.3, "radius": 0.16}
+    "highlight": {
+      "part": "かさの でこぼこ あみめ",
+      "x": 0.5,
+      "y": 0.3,
+      "radius": 0.16
+    }
   },
   {
     "key": "suppontake",
@@ -612,6 +652,11 @@
     "similar_kinoko": "きぬがさたけ",
     "cooking": "よく ひを とおして、いためものや スープにする",
     "trivia": "においで むしを よび、ほうしを はこんでもらう",
-    "highlight": {"part": "しろい あみのような え", "x": 0.5, "y": 0.6, "radius": 0.15}
+    "highlight": {
+      "part": "しろい たまごのような ねもと",
+      "x": 0.55,
+      "y": 0.81,
+      "radius": 0.16
+    }
   }
 ]

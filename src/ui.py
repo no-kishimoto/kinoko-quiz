@@ -12,6 +12,7 @@ from data.kinoko_data import Kinoko, load_kinoko, validate_image_assets
 from data.subject_data import SubjectItem, load_ready_subject_items, load_subject_names
 from src.paths import (
     CORRECT_SOUND_PATH,
+    INCORRECT_SOUND_PATH,
     DATA_PATH,
     KONCHUU_DATA_PATH,
     KONCHUU_QUIZ_IMAGE_DIR,
@@ -101,7 +102,7 @@ APP_CSS = """
 .zukan-nav button { min-height: 58px; font-size: 1.2rem !important; }
 .detail-screen { margin: 0 auto; max-width: 1200px; }
 .detail-content { align-items: flex-start; }
-.zukan-detail-image { max-height: 420px !important; }
+.zukan-detail-image img { max-height: 420px !important; object-fit: contain; }
 .detail-info {
     background: #ffffff;
     border: 3px solid #43a5d5;
@@ -130,9 +131,7 @@ APP_CSS = """
 .math-equation, .math-equation * { font-size: 3.2rem !important; font-weight: 800 !important; color: #000000 !important; text-align: center; }
 .math-mushrooms, .math-mushrooms * { font-size: 3rem !important; line-height: 1.5 !important; text-align: center; }
 .subject-list, .subject-list * { color: #000000 !important; font-size: 1.35rem !important; line-height: 1.65 !important; }
-@media (min-width: 900px) {
-    .quiz-screen { max-height: calc(100vh - 32px); overflow: hidden; }
-}
+.quiz-screen { overflow: visible; }
 """
 
 
@@ -245,7 +244,7 @@ def build_app():
     search_backgrounds = tuple(sorted(SEARCH_BACKGROUND_DIR.glob("*.png")))
     if len(search_backgrounds) < 3:
         raise RuntimeError("at least three search background assets are required")
-    for sound_path in (CORRECT_SOUND_PATH,):
+    for sound_path in (CORRECT_SOUND_PATH, INCORRECT_SOUND_PATH):
         if not sound_path.is_file():
             raise RuntimeError(f"missing sound asset: {sound_path}")
 
@@ -355,6 +354,7 @@ def build_app():
             gr.Markdown("# なんもん あそぶ？", elem_classes="center-text")
             five_button = gr.Button("5もん", variant="primary", elem_classes="main-button")
             ten_button = gr.Button("10もん", variant="primary", elem_classes="main-button")
+            count_title_button = gr.Button("タイトルへ もどる", elem_classes="main-button")
 
         with gr.Column(visible=False, elem_classes="quiz-screen") as quiz_screen:
             progress = gr.Markdown(elem_classes=["center-text", "progress-text"])
@@ -377,7 +377,9 @@ def build_app():
                         rows=1,
                         height=260,
                         object_fit="contain",
-                        interactive=True,
+                        interactive=False,
+                        allow_preview=False,
+                        buttons=[],
                         visible=False,
                         elem_classes="dinosaur-choices",
                     )
@@ -390,7 +392,9 @@ def build_app():
                     )
                     explanation = gr.Markdown(visible=False, elem_classes="explanation-card")
                     quiz_title_button = gr.Button("タイトルへ もどる", elem_classes="main-button")
-            sound = gr.HTML(value="", elem_classes="sound-effect")
+
+        # すべてのゲーム画面で効果音を再生できるよう、画面の外に置く。
+        sound = gr.HTML(value="", elem_classes="sound-effect")
 
         with gr.Column(visible=False, elem_classes="quiz-screen") as math_screen:
             math_progress = gr.Markdown(elem_classes=["center-text", "progress-text"])
@@ -399,6 +403,7 @@ def build_app():
             math_choice_buttons = [gr.Button("", elem_classes="choice") for _ in range(3)]
             math_feedback = gr.HTML(visible=False, elem_classes="big-feedback")
             math_next_button = gr.Button("つぎへ", visible=False, variant="primary", elem_classes="main-button")
+            math_title_button = gr.Button("タイトルへ もどる", elem_classes="main-button")
 
         with gr.Column(visible=False, elem_classes="zukan-screen") as zukan_screen:
             zukan_heading = gr.Markdown("# きのこ ずかん", elem_classes="main-title")
@@ -430,6 +435,7 @@ def build_app():
                     detail_image = gr.Image(
                         show_label=False,
                         interactive=False,
+                        height=420,
                         elem_classes="zukan-detail-image",
                     )
                 with gr.Column(scale=1):
@@ -445,8 +451,8 @@ def build_app():
                 with gr.Column(scale=3):
                     search_scene = gr.Image(
                         show_label=False,
-                        interactive=True,
-                        sources=None,
+                        interactive=False,
+                        sources=[],
                         buttons=[],
                         height=600,
                         elem_classes="search-scene",
@@ -518,7 +524,7 @@ def build_app():
                 math_feedback: gr.HTML(value=f"<div>{message}</div>", visible=True),
                 math_next_button: gr.Button(visible=True),
                 # 同じ問題を遊び直しても、毎回かならず新しい音声として再生する。
-                sound: sound_html(CORRECT_SOUND_PATH, random.randint(1, 999999)) if correct else None,
+                sound: sound_html(CORRECT_SOUND_PATH if correct else INCORRECT_SOUND_PATH, random.randint(1, 999999)),
             }
             updates.update({button: gr.Button(interactive=False) for button in math_choice_buttons})
             return updates
@@ -604,7 +610,7 @@ def build_app():
                 search_state: updated,
                 search_scene: render_scene(updated, subject_values(subject)[2]),
                 search_status: status_text(updated, clicked=True),
-                search_next_button: gr.Button(visible=found),
+                search_next_button: gr.Button(visible=updated.is_correct),
                 sound: sound_html(CORRECT_SOUND_PATH, random.randint(1, 999999)) if found else None,
             }
 
@@ -686,7 +692,7 @@ def build_app():
                         for choice in session.current_question.choices
                     ] if is_dinosaur_quiz else None,
                     visible=is_dinosaur_quiz,
-                    interactive=is_dinosaur_quiz,
+                    interactive=False,
                 ),
             }
             updates.update({
@@ -771,11 +777,11 @@ def build_app():
 
         detail_outputs = [zukan_screen, detail_screen, detail_name, detail_image, detail_text]
         for slot, button in enumerate(card_buttons):
-            button.click(
-                lambda index, subject, slot=slot: show_detail(index, subject, slot),
-                inputs=[zukan_page_state, active_subject_state],
-                outputs=detail_outputs,
-            )
+            def open_detail(index, subject, slot=slot):
+                return show_detail(index, subject, slot)
+
+            button.click(open_detail, inputs=[zukan_page_state, active_subject_state], outputs=detail_outputs)
+            card_images[slot].select(open_detail, inputs=[zukan_page_state, active_subject_state], outputs=detail_outputs)
 
         def back_to_zukan(index: int, subject: str):
             updates = show_zukan(index, subject)
@@ -803,6 +809,8 @@ def build_app():
         def answer(session: QuizSession | None, subject: str, choice_index: int):
             if session is None:
                 raise gr.Error("クイズを はじめてね")
+            if session.current_result is not None:
+                return {session_state: session}
             updated = deepcopy(session)
             question = updated.current_question
             selected = question.choices[choice_index]
@@ -818,7 +826,7 @@ def build_app():
                 image: str(subject_values(subject)[2] / answer_item.image_filename),
                 feedback: gr.HTML(value=f"<div>{message}</div>", visible=True),
                 explanation: gr.Markdown(value=explanation_text(answer_item), visible=True),
-                sound: sound_html(CORRECT_SOUND_PATH, updated.current_index) if answer_result.is_correct else None,
+                sound: sound_html(CORRECT_SOUND_PATH if answer_result.is_correct else INCORRECT_SOUND_PATH, random.randint(1, 999999)),
                 next_button: gr.Button(visible=True),
                 dinosaur_choices: gr.Gallery(interactive=False),
             }
@@ -876,7 +884,7 @@ def build_app():
                         for choice in updated.current_question.choices
                     ] if subject == "kyouryuu" else None,
                     visible=subject == "kyouryuu",
-                    interactive=subject == "kyouryuu",
+                    interactive=False,
                 ),
             }
             updates.update({
@@ -897,12 +905,16 @@ def build_app():
                 math_state: None,
                 search_state: None,
                 result_screen: gr.Column(visible=False),
+                math_screen: gr.Column(visible=False),
+                count_screen: gr.Column(visible=False),
+                sound: "",
                 title_screen: gr.Column(visible=True),
             }
 
-        title_button.click(
-            return_to_title,
-            outputs=[session_state, math_state, search_state, result_screen, title_screen],
-        )
+        for button in (title_button, math_title_button, count_title_button):
+            button.click(
+                return_to_title,
+                outputs=[session_state, math_state, search_state, result_screen, math_screen, count_screen, sound, title_screen],
+            )
 
     return app

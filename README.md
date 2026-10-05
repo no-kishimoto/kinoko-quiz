@@ -5,10 +5,13 @@
 - 🍄 きのこ：30しゅるい
 - 🌱 しょくぶつ：40しゅるい
 - 🪲 こんちゅう：29しゅるい
+- 🦖 きょうりゅう：10しゅるい
 
-それぞれで、クイズ・たしざん・さがし・ずかんを あそべます。
+それぞれで、クイズ・たしざん・ひきざん・さがし・ずかんを あそべます。
 
-GodotでつくるPCむけ完成版の土台は、[godot/README.md](godot/README.md) にあります。いまのGradio版は、内容確認用としてそのまま残しています。
+クイズは5もんか10もん、けいさんは10もん、さがしは5もんです。けいさんのさいごの3もんは、かんすうじでも あそべます。
+
+完成を目指しているのは、Python・Gradio版です。Godot版の試作は [godot/README.md](godot/README.md) に残しています。
 
 ## PCでの きどう
 
@@ -28,6 +31,8 @@ python app.py
 ```bash
 .venv/bin/python -m pytest -q
 ```
+
+PCブラウザでの確認項目は [Gradio版の動作確認](docs/GRADIO_CHECKLIST.md) にまとめています。
 
 ## Google Colabでの きどう
 

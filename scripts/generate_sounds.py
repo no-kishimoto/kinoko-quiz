@@ -63,6 +63,8 @@ def write_wav(path: Path, samples: list[float]) -> None:
 def main() -> None:
     pingpong = bell(1_318.5, 0.22, 0.82) + silence(0.06) + bell(1_046.5, 0.36)
     write_wav(OUTPUT_DIR / "correct_pingpong.wav", pingpong)
+    buzzer = tone(180, 0.18, 0.65) + silence(0.08) + tone(180, 0.28, 0.65)
+    write_wav(OUTPUT_DIR / "incorrect_buzzer.wav", buzzer)
 
 
 if __name__ == "__main__":
