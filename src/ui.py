@@ -81,9 +81,7 @@ APP_CSS = """
 .big-feedback * { color: #c1121f !important; }
 .choice, .choice *, .main-button, .main-button * { font-size: 1.5rem !important; }
 .choice, .main-button { min-height: 64px; }
-.dinosaur-choices { margin-top: 0 !important; }
-.dinosaur-choices img { object-fit: contain !important; background: #ffffff !important; }
-.dinosaur-choices button { font-size: 1.05rem !important; }
+.dinosaur-reconstruction img { object-fit: contain !important; }
 .explanation-card { font-size: 1.3rem; line-height: 1.45; }
 .sound-effect {
     height: 1px !important;
@@ -409,26 +407,19 @@ def build_app():
                     choice_buttons = [
                         gr.Button("", elem_classes="choice") for _ in range(3)
                     ]
-                    dinosaur_choices = gr.Gallery(
-                        show_label=False,
-                        columns=3,
-                        rows=1,
-                        height=260,
-                        object_fit="contain",
-                        interactive=False,
-                        allow_preview=False,
-                        buttons=[],
-                        visible=False,
-                        elem_classes="dinosaur-choices",
-                    )
                     feedback = gr.HTML(visible=False, elem_classes="big-feedback")
-                    next_button = gr.Button(
-                        "つぎへ",
-                        visible=False,
-                        variant="primary",
-                        elem_classes="main-button",
-                    )
                     explanation = gr.Markdown(visible=False, elem_classes="explanation-card")
+                    reconstruction = gr.Image(
+                        label="ふくげんした すがた",
+                        interactive=False,
+                        buttons=[],
+                        height=260,
+                        visible=False,
+                        elem_classes="dinosaur-reconstruction",
+                    )
+                    next_button = gr.Button(
+                        "つぎへ", visible=False, variant="primary", elem_classes="main-button"
+                    )
                     quiz_title_button = gr.Button("タイトルへ もどる", elem_classes="main-button")
 
         with gr.Column(visible=False, elem_classes="quiz-screen") as math_screen:
@@ -726,7 +717,6 @@ def build_app():
             items, quiz_dir, _, _ = subject_values(subject)
             session = create_quiz_session(items, count)
             view = question_view(session, quiz_dir)
-            is_dinosaur_quiz = subject == "kyouryuu"
             updates = {
                 session_state: session,
                 count_screen: gr.Column(visible=False),
@@ -738,24 +728,17 @@ def build_app():
                 explanation: gr.Markdown(value="", visible=False),
                 sound: None,
                 next_button: gr.Button(visible=False),
-                dinosaur_choices: gr.Gallery(
-                    value=[
-                        (str(KYOURYUU_RECONSTRUCTION_IMAGE_DIR / choice.image_filename), choice.name)
-                        for choice in session.current_question.choices
-                    ] if is_dinosaur_quiz else None,
-                    visible=is_dinosaur_quiz,
-                    interactive=False,
-                ),
+                reconstruction: gr.Image(value=None, visible=False),
             }
             updates.update({
-                button: gr.Button(value=name, interactive=True, visible=not is_dinosaur_quiz)
+                button: gr.Button(value=name, interactive=True, visible=True)
                 for button, name in zip(choice_buttons, view.choices)
             })
             return updates
 
         start_outputs = [
             session_state, count_screen, quiz_screen, progress, image, hint,
-            *choice_buttons, dinosaur_choices, feedback, explanation, sound, next_button,
+            *choice_buttons, reconstruction, feedback, explanation, sound, next_button,
         ]
         five_button.click(lambda subject: start_quiz(5, subject), inputs=active_subject_state, outputs=start_outputs)
         ten_button.click(lambda subject: start_quiz(10, subject), inputs=active_subject_state, outputs=start_outputs)
@@ -765,11 +748,13 @@ def build_app():
                 session_state: None,
                 quiz_screen: gr.Column(visible=False),
                 title_screen: gr.Column(visible=True),
+                reconstruction: gr.Image(value=None, visible=False),
+                sound: "",
             }
 
         quiz_title_button.click(
             quiz_to_title,
-            outputs=[session_state, quiz_screen, title_screen, sound],
+            outputs=[session_state, quiz_screen, title_screen, sound, reconstruction],
         )
 
         def show_zukan(index: int, subject: str):
@@ -880,13 +865,17 @@ def build_app():
                 explanation: gr.Markdown(value=explanation_text(answer_item), visible=True),
                 sound: sound_html(CORRECT_SOUND_PATH if answer_result.is_correct else INCORRECT_SOUND_PATH, random.randint(1, 999999)),
                 next_button: gr.Button(visible=True),
-                dinosaur_choices: gr.Gallery(interactive=False),
+                reconstruction: gr.Image(
+                    value=str(KYOURYUU_RECONSTRUCTION_IMAGE_DIR / answer_item.image_filename)
+                    if subject == "kyouryuu" else None,
+                    visible=subject == "kyouryuu",
+                ),
             }
             updates.update({button: gr.Button(interactive=False) for button in choice_buttons})
             return updates
 
         answer_outputs = [
-            session_state, image, *choice_buttons, dinosaur_choices, feedback, explanation, sound,
+            session_state, image, *choice_buttons, reconstruction, feedback, explanation, sound,
             next_button,
         ]
         for index, button in enumerate(choice_buttons):
@@ -895,18 +884,6 @@ def build_app():
                 inputs=[session_state, active_subject_state],
                 outputs=answer_outputs,
             )
-
-        def answer_dinosaur(session: QuizSession | None, evt: gr.SelectData):
-            index = evt.index
-            if not isinstance(index, int):
-                raise gr.Error("えを えらんでね")
-            return answer(session, "kyouryuu", index)
-
-        dinosaur_choices.select(
-            answer_dinosaur,
-            inputs=session_state,
-            outputs=answer_outputs,
-        )
 
         def go_next(session: QuizSession | None, subject: str):
             if session is None:
@@ -919,6 +896,7 @@ def build_app():
                     quiz_screen: gr.Column(visible=False),
                     result_screen: gr.Column(visible=True),
                     result: result_text(updated),
+                    reconstruction: gr.Image(value=None, visible=False),
                     sound: "",
                 }
             view = question_view(updated, subject_values(subject)[1])
@@ -931,24 +909,17 @@ def build_app():
                 explanation: gr.Markdown(value="", visible=False),
                 sound: None,
                 next_button: gr.Button(visible=False),
-                dinosaur_choices: gr.Gallery(
-                    value=[
-                        (str(KYOURYUU_RECONSTRUCTION_IMAGE_DIR / choice.image_filename), choice.name)
-                        for choice in updated.current_question.choices
-                    ] if subject == "kyouryuu" else None,
-                    visible=subject == "kyouryuu",
-                    interactive=False,
-                ),
+                reconstruction: gr.Image(value=None, visible=False),
             }
             updates.update({
-                button: gr.Button(value=name, interactive=True, visible=subject != "kyouryuu")
+                button: gr.Button(value=name, interactive=True, visible=True)
                 for button, name in zip(choice_buttons, view.choices)
             })
             return updates
 
         next_outputs = [
             session_state, quiz_screen, result_screen, result, progress, image,
-            hint, *choice_buttons, dinosaur_choices, feedback, explanation, sound, next_button,
+            hint, *choice_buttons, reconstruction, feedback, explanation, sound, next_button,
         ]
         next_button.click(go_next, inputs=[session_state, active_subject_state], outputs=next_outputs)
 

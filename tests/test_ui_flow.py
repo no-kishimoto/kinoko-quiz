@@ -102,3 +102,34 @@ def test_repeated_quiz_selection_does_not_score_twice(app):
     assert len(updates) == 1
     assert next(iter(updates.values())) is quiz
     assert quiz.correct_count == 1
+
+
+@pytest.mark.parametrize("correct", [True, False])
+def test_dinosaur_quiz_uses_names_and_only_shows_current_reconstruction_after_answer(app, correct):
+    from src.paths import KYOURYUU_RECONSTRUCTION_IMAGE_DIR
+
+    updates = callback(app, "start_quiz")(5, "kyouryuu")
+    session = next(value for component, value in updates.items() if isinstance(component, gr.State))
+    reconstruction = next(component for component in updates if isinstance(component, gr.Image) and "dinosaur-reconstruction" in component.elem_classes)
+    choices = [component for component in updates if isinstance(component, gr.Button) and "choice" in component.elem_classes]
+    assert len(choices) == 3
+    assert [updates[button].value for button in choices] == [item.name for item in session.current_question.choices]
+    assert all(updates[button].visible and updates[button].interactive for button in choices)
+    assert updates[reconstruction].value is None and not updates[reconstruction].visible
+    assert not any(isinstance(component, gr.Gallery) for component in app.blocks.values())
+
+    for question_index in range(5):
+        answer_item = session.current_question.answer
+        choice_index = next(i for i, item in enumerate(session.current_question.choices) if (item.key == answer_item.key) == correct)
+        answered = callback(app, "answer")(session, "kyouryuu", choice_index)
+        assert answered[reconstruction].visible
+        displayed = Path(answered[reconstruction].value["path"])
+        assert displayed.name == answer_item.image_filename
+        assert displayed.read_bytes() == (KYOURYUU_RECONSTRUCTION_IMAGE_DIR / answer_item.image_filename).read_bytes()
+        session = next(value for component, value in answered.items() if isinstance(component, gr.State))
+        advanced = callback(app, "go_next")(session, "kyouryuu")
+        assert advanced[reconstruction].value is None and not advanced[reconstruction].visible
+        session = next(value for component, value in advanced.items() if isinstance(component, gr.State))
+        if question_index < 4:
+            assert [advanced[button].value for button in choices] == [item.name for item in session.current_question.choices]
+            assert all(advanced[button].visible and advanced[button].interactive for button in choices)
