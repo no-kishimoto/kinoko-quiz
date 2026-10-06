@@ -89,7 +89,7 @@ KONCHUU_HIGHLIGHTS = {
     "tentoumushi": Highlight("あかい はねの くろいてん", 0.56, 0.34, 0.18),
     "batta": Highlight("おおきな うしろあし", 0.7, 0.4, 0.23),
     "koorogi": Highlight("おおきな うしろあし", 0.62, 0.35, 0.22),
-    "suzumushi": Highlight("ながい しょっかく", 0.3, 0.3, 0.29),
+    "suzumushi": Highlight("まるく ひろい はね", 0.58, 0.55, 0.18),
     "hotaru": Highlight("ひかる おしり", 0.65, 0.76, 0.16),
     "kamemushi": Highlight("たての かたち", 0.5, 0.54, 0.2),
     "suzumebachi": Highlight("おなかの きいろと くろの しま", 0.74, 0.58, 0.18),
