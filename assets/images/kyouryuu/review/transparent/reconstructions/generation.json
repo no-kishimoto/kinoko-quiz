@@ -1,0 +1,166 @@
+{
+  "date": "2026-10-06",
+  "method": "image_gen background removal with original-image references",
+  "items": [
+    {
+      "key": "pachycephalosaurus",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_fraction": 0.765,
+      "opaque_fraction": 0.217,
+      "bbox": [
+        0,
+        21,
+        1241,
+        1254
+      ],
+      "generated_image": "/workspace/generated_images/exec-574dea38-c388-454d-87ef-af0a3b76686a.png"
+    },
+    {
+      "key": "brachiosaurus",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_fraction": 0.791,
+      "opaque_fraction": 0.193,
+      "bbox": [
+        0,
+        21,
+        1244,
+        1214
+      ],
+      "generated_image": "/workspace/generated_images/exec-6bfaeb65-620c-479c-a6ec-8f924f009ee7.png"
+    },
+    {
+      "key": "tyrannosaurus",
+      "size": [
+        1536,
+        1024
+      ],
+      "transparent_fraction": 0.695,
+      "opaque_fraction": 0.285,
+      "bbox": [
+        23,
+        21,
+        1519,
+        1024
+      ],
+      "generated_image": "/workspace/generated_images/exec-7ccc6684-7811-4e2e-9909-87bffb6b9902.png"
+    },
+    {
+      "key": "stegosaurus",
+      "size": [
+        1536,
+        1024
+      ],
+      "transparent_fraction": 0.593,
+      "opaque_fraction": 0.378,
+      "bbox": [
+        0,
+        9,
+        1519,
+        1006
+      ],
+      "generated_image": "/workspace/generated_images/exec-658a6619-76bc-4932-836a-7643bf0baf71.png"
+    },
+    {
+      "key": "triceratops",
+      "size": [
+        1536,
+        1024
+      ],
+      "transparent_fraction": 0.595,
+      "opaque_fraction": 0.382,
+      "bbox": [
+        0,
+        8,
+        1507,
+        1000
+      ],
+      "generated_image": "/workspace/generated_images/exec-6fdd3a0d-8b30-4a8b-8db6-4b70228f5270.png"
+    },
+    {
+      "key": "pteranodon",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_fraction": 0.724,
+      "opaque_fraction": 0.249,
+      "bbox": [
+        0,
+        19,
+        1224,
+        1214
+      ],
+      "generated_image": "/workspace/generated_images/exec-2a53e03a-0e28-470f-a823-bb36ada41eca.png"
+    },
+    {
+      "key": "plesiosaurus",
+      "size": [
+        1354,
+        1161
+      ],
+      "transparent_fraction": 0.871,
+      "opaque_fraction": 0.116,
+      "bbox": [
+        21,
+        19,
+        1333,
+        1119
+      ],
+      "generated_image": "/workspace/generated_images/exec-47cf8fa9-e99c-4ddf-bdfd-9971347ce558.png"
+    },
+    {
+      "key": "mosasaurus",
+      "size": [
+        1774,
+        887
+      ],
+      "transparent_fraction": 0.62,
+      "opaque_fraction": 0.36,
+      "bbox": [
+        48,
+        17,
+        1758,
+        887
+      ],
+      "generated_image": "/workspace/generated_images/exec-255f0044-a124-49cd-800f-73a5272cb15a.png"
+    },
+    {
+      "key": "ammonite",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_fraction": 0.559,
+      "opaque_fraction": 0.404,
+      "bbox": [
+        0,
+        19,
+        1229,
+        1254
+      ],
+      "generated_image": "/workspace/generated_images/exec-3d5b052b-e8ab-4ea8-a0c1-09950fa98f14.png"
+    },
+    {
+      "key": "xiphactinus",
+      "size": [
+        1536,
+        1024
+      ],
+      "transparent_fraction": 0.576,
+      "opaque_fraction": 0.408,
+      "bbox": [
+        19,
+        85,
+        1526,
+        945
+      ],
+      "generated_image": "/workspace/generated_images/exec-11842f4c-301f-4d1b-92af-954d9598cd30.png"
+    }
+  ]
+}

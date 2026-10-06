@@ -1,7 +1,6 @@
 {
-  "status": "paused_by_user_before_image_generation_completed",
-  "pause_date": "2026-10-05",
-  "created_date": "2026-10-05",
+  "status": "all_ten_cutouts_generated_awaiting_user_review",
+  "created_date": "2026-10-06",
   "game_integration": "not applied",
   "notes": "Only background extraction; anatomy and illustrative style must be preserved. Displayed descriptions and specimens were already approved; these new living cutout images require approval before use.",
   "items": [
