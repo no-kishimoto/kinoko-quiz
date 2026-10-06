@@ -81,7 +81,6 @@ APP_CSS = """
 .big-feedback * { color: #c1121f !important; }
 .choice, .choice *, .main-button, .main-button * { font-size: 1.5rem !important; }
 .choice, .main-button { min-height: 64px; }
-.dinosaur-reconstruction img { object-fit: contain !important; }
 .explanation-card { font-size: 1.3rem; line-height: 1.45; }
 .sound-effect {
     height: 1px !important;
@@ -409,14 +408,6 @@ def build_app():
                     ]
                     feedback = gr.HTML(visible=False, elem_classes="big-feedback")
                     explanation = gr.Markdown(visible=False, elem_classes="explanation-card")
-                    reconstruction = gr.Image(
-                        label="ふくげんした すがた",
-                        interactive=False,
-                        buttons=[],
-                        height=260,
-                        visible=False,
-                        elem_classes="dinosaur-reconstruction",
-                    )
                     next_button = gr.Button(
                         "つぎへ", visible=False, variant="primary", elem_classes="main-button"
                     )
@@ -728,7 +719,6 @@ def build_app():
                 explanation: gr.Markdown(value="", visible=False),
                 sound: None,
                 next_button: gr.Button(visible=False),
-                reconstruction: gr.Image(value=None, visible=False),
             }
             updates.update({
                 button: gr.Button(value=name, interactive=True, visible=True)
@@ -738,7 +728,7 @@ def build_app():
 
         start_outputs = [
             session_state, count_screen, quiz_screen, progress, image, hint,
-            *choice_buttons, reconstruction, feedback, explanation, sound, next_button,
+            *choice_buttons, feedback, explanation, sound, next_button,
         ]
         five_button.click(lambda subject: start_quiz(5, subject), inputs=active_subject_state, outputs=start_outputs)
         ten_button.click(lambda subject: start_quiz(10, subject), inputs=active_subject_state, outputs=start_outputs)
@@ -748,13 +738,12 @@ def build_app():
                 session_state: None,
                 quiz_screen: gr.Column(visible=False),
                 title_screen: gr.Column(visible=True),
-                reconstruction: gr.Image(value=None, visible=False),
                 sound: "",
             }
 
         quiz_title_button.click(
             quiz_to_title,
-            outputs=[session_state, quiz_screen, title_screen, sound, reconstruction],
+            outputs=[session_state, quiz_screen, title_screen, sound],
         )
 
         def show_zukan(index: int, subject: str):
@@ -865,17 +854,12 @@ def build_app():
                 explanation: gr.Markdown(value=explanation_text(answer_item), visible=True),
                 sound: sound_html(CORRECT_SOUND_PATH if answer_result.is_correct else INCORRECT_SOUND_PATH, random.randint(1, 999999)),
                 next_button: gr.Button(visible=True),
-                reconstruction: gr.Image(
-                    value=str(KYOURYUU_RECONSTRUCTION_IMAGE_DIR / answer_item.image_filename)
-                    if subject == "kyouryuu" else None,
-                    visible=subject == "kyouryuu",
-                ),
             }
             updates.update({button: gr.Button(interactive=False) for button in choice_buttons})
             return updates
 
         answer_outputs = [
-            session_state, image, *choice_buttons, reconstruction, feedback, explanation, sound,
+            session_state, image, *choice_buttons, feedback, explanation, sound,
             next_button,
         ]
         for index, button in enumerate(choice_buttons):
@@ -896,7 +880,6 @@ def build_app():
                     quiz_screen: gr.Column(visible=False),
                     result_screen: gr.Column(visible=True),
                     result: result_text(updated),
-                    reconstruction: gr.Image(value=None, visible=False),
                     sound: "",
                 }
             view = question_view(updated, subject_values(subject)[1])
@@ -909,7 +892,6 @@ def build_app():
                 explanation: gr.Markdown(value="", visible=False),
                 sound: None,
                 next_button: gr.Button(visible=False),
-                reconstruction: gr.Image(value=None, visible=False),
             }
             updates.update({
                 button: gr.Button(value=name, interactive=True, visible=True)
@@ -919,7 +901,7 @@ def build_app():
 
         next_outputs = [
             session_state, quiz_screen, result_screen, result, progress, image,
-            hint, *choice_buttons, reconstruction, feedback, explanation, sound, next_button,
+            hint, *choice_buttons, feedback, explanation, sound, next_button,
         ]
         next_button.click(go_next, inputs=[session_state, active_subject_state], outputs=next_outputs)
 
