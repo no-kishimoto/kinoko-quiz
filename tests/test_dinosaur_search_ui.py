@@ -1,5 +1,8 @@
 """Gradioのさがし画面で、モードと5問の進行を確かめる。"""
 
+import json
+from src.paths import KYOURYUU_DATA_PATH
+
 from pathlib import Path
 import re
 from types import SimpleNamespace
@@ -74,20 +77,18 @@ def game_factory(monkeypatch):
 
     def make_game(reconstruction_ready=False):
         if reconstruction_ready:
-            # Model the approved complete catalog without using pending files.
+            current_assets = assets
+        else:
+            # Keep the unapproved-image gate covered independently of live approvals.
+            pending = tuple(json.loads(KYOURYUU_DATA_PATH.read_text())[i]["key"] for i in range(10))
             current_assets = SimpleNamespace(
                 items=assets.items,
                 specimen_images=assets.specimen_images,
-                reconstruction_images={
-                    item.key: Path("/approved/living") / item.image_filename
-                    for item in assets.items
-                },
+                reconstruction_images={key: image for key, image in assets.reconstruction_images.items() if key not in pending},
                 backgrounds=assets.backgrounds,
-                reconstruction_ready=True,
-                pending_reconstruction_keys=(),
+                reconstruction_ready=False,
+                pending_reconstruction_keys=pending,
             )
-        else:
-            current_assets = assets
         monkeypatch.setattr(ui, "load_dinosaur_search_assets", lambda: current_assets)
         render_calls = []
 

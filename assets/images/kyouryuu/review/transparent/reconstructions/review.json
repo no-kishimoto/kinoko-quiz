@@ -1,8 +1,8 @@
 {
-  "status": "all_ten_cutouts_generated_awaiting_user_review",
+  "status": "all_ten_reconstructions_approved",
   "created_date": "2026-10-06",
-  "game_integration": "not applied",
-  "notes": "Only background extraction; anatomy and illustrative style must be preserved. Displayed descriptions and specimens were already approved; these new living cutout images require approval before use.",
+  "game_integration": "enabled for dinosaur search",
+  "notes": "All ten transparent reconstruction images approved by user on 2026-10-06. Dinosaur search uses all eighteen approved reconstructions.",
   "items": [
     {
       "key": "pachycephalosaurus",
@@ -11,7 +11,8 @@
       "specimen_image": "../pachycephalosaurus-fossil-v1.png",
       "source_image": "../../../reconstruction/pachycephalosaurus.png",
       "review_image": "pachycephalosaurus-reconstruction-v1.png",
-      "image_status": "awaiting_user_review"
+      "image_status": "approved",
+      "approval_date": "2026-10-06"
     },
     {
       "key": "brachiosaurus",
@@ -20,7 +21,8 @@
       "specimen_image": "../brachiosaurus-fossil-v1.png",
       "source_image": "../../../reconstruction/brachiosaurus.png",
       "review_image": "brachiosaurus-reconstruction-v1.png",
-      "image_status": "awaiting_user_review"
+      "image_status": "approved",
+      "approval_date": "2026-10-06"
     },
     {
       "key": "tyrannosaurus",
@@ -29,7 +31,8 @@
       "specimen_image": "../tyrannosaurus-fossil-v3.png",
       "source_image": "../../../reconstruction/tyrannosaurus.png",
       "review_image": "tyrannosaurus-reconstruction-v1.png",
-      "image_status": "awaiting_user_review"
+      "image_status": "approved",
+      "approval_date": "2026-10-06"
     },
     {
       "key": "stegosaurus",
@@ -38,7 +41,8 @@
       "specimen_image": "../stegosaurus-fossil-v1.png",
       "source_image": "../../../reconstruction/stegosaurus.png",
       "review_image": "stegosaurus-reconstruction-v1.png",
-      "image_status": "awaiting_user_review"
+      "image_status": "approved",
+      "approval_date": "2026-10-06"
     },
     {
       "key": "triceratops",
@@ -47,7 +51,8 @@
       "specimen_image": "../triceratops-fossil-v1.png",
       "source_image": "../../../reconstruction/triceratops.png",
       "review_image": "triceratops-reconstruction-v1.png",
-      "image_status": "awaiting_user_review"
+      "image_status": "approved",
+      "approval_date": "2026-10-06"
     },
     {
       "key": "pteranodon",
@@ -56,7 +61,8 @@
       "specimen_image": "../pteranodon-fossil-v1.png",
       "source_image": "../../../reconstruction/pteranodon.png",
       "review_image": "pteranodon-reconstruction-v1.png",
-      "image_status": "awaiting_user_review"
+      "image_status": "approved",
+      "approval_date": "2026-10-06"
     },
     {
       "key": "plesiosaurus",
@@ -65,7 +71,8 @@
       "specimen_image": "../plesiosaurus-fossil-v1.png",
       "source_image": "../../../reconstruction/plesiosaurus.png",
       "review_image": "plesiosaurus-reconstruction-v1.png",
-      "image_status": "awaiting_user_review"
+      "image_status": "approved",
+      "approval_date": "2026-10-06"
     },
     {
       "key": "mosasaurus",
@@ -74,7 +81,8 @@
       "specimen_image": "../mosasaurus-fossil-v1.png",
       "source_image": "../../../reconstruction/mosasaurus.png",
       "review_image": "mosasaurus-reconstruction-v1.png",
-      "image_status": "awaiting_user_review"
+      "image_status": "approved",
+      "approval_date": "2026-10-06"
     },
     {
       "key": "ammonite",
@@ -83,7 +91,8 @@
       "specimen_image": "../ammonite-fossil-v1.png",
       "source_image": "../../../reconstruction/ammonite.png",
       "review_image": "ammonite-reconstruction-v1.png",
-      "image_status": "awaiting_user_review"
+      "image_status": "approved",
+      "approval_date": "2026-10-06"
     },
     {
       "key": "xiphactinus",
@@ -92,7 +101,9 @@
       "specimen_image": "../xiphactinus-fossil-v1.png",
       "source_image": "../../xiphactinus-reconstruction-v2.png",
       "review_image": "xiphactinus-reconstruction-v1.png",
-      "image_status": "awaiting_user_review"
+      "image_status": "approved",
+      "approval_date": "2026-10-06"
     }
-  ]
+  ],
+  "approval_date": "2026-10-06"
 }

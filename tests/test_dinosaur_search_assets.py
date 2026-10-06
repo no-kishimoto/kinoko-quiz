@@ -20,7 +20,18 @@ def test_search_has_all_eighteen_approved_specimens_and_two_strata_backgrounds()
             assert image.getchannel("A").getextrema()[0] == 0
 
 
-def test_unapproved_existing_reconstructions_are_not_used():
+def test_unapproved_existing_reconstructions_are_not_used(monkeypatch):
+    from src import dinosaur_search
+    read = dinosaur_search._read
+
+    def pending_review(path):
+        record = read(path)
+        if path.name == "review.json" and path.parent.name == "reconstructions":
+            for entry in record["items"]:
+                entry["image_status"] = "awaiting_user_review"
+        return record
+
+    monkeypatch.setattr(dinosaur_search, "_read", pending_review)
     assets = load_dinosaur_search_assets()
     assert not assets.reconstruction_ready
     assert len(assets.pending_reconstruction_keys) == 10
@@ -32,3 +43,14 @@ def test_unapproved_existing_reconstructions_are_not_used():
 def test_image_references_cannot_escape_their_review_directory():
     with pytest.raises(ValueError, match="local PNG"):
         _png_path(Path("."), "../private.png")
+
+
+def test_approved_living_catalog_is_complete_and_ready():
+    assets = load_dinosaur_search_assets()
+    assert assets.reconstruction_ready
+    assert assets.pending_reconstruction_keys == ()
+    assert len(assets.reconstruction_images) == 18
+    assert set(assets.reconstruction_images) == {item.key for item in assets.items}
+    for path in assets.reconstruction_images.values():
+        with Image.open(path) as image:
+            assert image.getchannel("A").getextrema()[0] == 0
