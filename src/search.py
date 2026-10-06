@@ -40,6 +40,7 @@ class SearchSession:
     correct_count: int = 0
     is_correct: bool = False
     mode: str = "default"
+    habitat: str | None = None
     used_target_keys: tuple[str, ...] = ()
 
     @property
@@ -106,6 +107,8 @@ def create_search_session(
     mode: str = "default",
     used_target_keys: Sequence[str] = (),
     unique_targets: bool = False,
+    habitats: Mapping[str, str] | None = None,
+    habitat_backgrounds: Mapping[str, Sequence[Path]] | None = None,
 ) -> SearchSession:
     """1種類を指定し、異なる2種類をまぎれこませる。"""
 
@@ -116,17 +119,27 @@ def create_search_session(
         raise ValueError("at least one search background is required")
     randomizer = rng or random.Random()
     history = tuple(used_target_keys)
-    if unique_targets:
-        eligible = [item for item in items if item.key not in history]
-        if not eligible:
-            raise ValueError("no unused search targets remain")
-        target_item = randomizer.choice(eligible)
-        decoy_items = [item for item in items if item.key != target_item.key]
-        chosen = [target_item, *randomizer.sample(decoy_items, 2)]
-    else:
-        chosen = randomizer.sample(items, 3)
+    eligible = [item for item in items if not unique_targets or item.key not in history]
+    if not eligible:
+        raise ValueError("no unused search targets remain")
+    if (habitats is None) != (habitat_backgrounds is None):
+        raise ValueError("habitats and habitat backgrounds must be supplied together")
+    target_item = randomizer.choice(eligible)
+    habitat = habitats[target_item.key] if habitats is not None else None
+    decoy_items = [
+        item for item in items
+        if item.key != target_item.key and (habitats is None or habitats[item.key] == habitat)
+    ]
+    if len(decoy_items) < 2:
+        raise ValueError("each search habitat needs at least three species")
+    chosen = [target_item, *randomizer.sample(decoy_items, 2)]
+    matching_backgrounds = habitat_backgrounds[habitat] if habitat_backgrounds is not None else backgrounds
+    if not matching_backgrounds:
+        raise ValueError("search habitat needs a matching background")
     radius = 0.14 if mode in _DINOSAUR_MODES else 0.11
     available_positions = _DINOSAUR_POSITIONS if mode in _DINOSAUR_MODES else _POSITIONS
+    if habitat == "land":
+        available_positions = tuple((x, y) for y in (0.53, 0.82) for x in (0.20, 0.50, 0.80))
     positions = _choose_positions(randomizer, available_positions, radius)
     target = SearchPlacement(chosen[0], *positions[0], radius=radius)
     decoys = (
@@ -134,7 +147,8 @@ def create_search_session(
         SearchPlacement(chosen[2], *positions[2], radius=radius),
     )
     return SearchSession(
-        background_path=randomizer.choice(list(backgrounds)),
+        background_path=randomizer.choice(list(matching_backgrounds)),
+        habitat=habitat,
         target=target,
         decoys=decoys,
         current_index=current_index,
@@ -155,6 +169,9 @@ def status_text(session: SearchSession, clicked: bool = False) -> str:
         return "## おしい！ もういちど さがしてみよう。"
     if session.mode == "fossil":
         return "## ちそうの なかを クリックしてね。"
+    if session.habitat is not None:
+        label = {"ancient_forest": "こだいの もり", "ancient_plain": "こだいの へいげん", "primeval_sea": "たいこの うみ"}[session.background_path.stem]
+        return f"## {label}を クリックしてね。"
     return "## もりの なかを クリックしてね。"
 
 

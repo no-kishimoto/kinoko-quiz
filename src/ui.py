@@ -262,9 +262,15 @@ def build_app():
                 return dinosaur_search_assets.items, dinosaur_search_assets.backgrounds, dinosaur_search_assets.specimen_images
             if not dinosaur_search_assets.reconstruction_ready:
                 raise gr.Error("のこりの えを かくにんしてから あそべるよ。")
-            return dinosaur_search_assets.items, search_backgrounds, dinosaur_search_assets.reconstruction_images
+            backgrounds = tuple(path for group in dinosaur_search_assets.living_backgrounds.values() for path in group)
+            return dinosaur_search_assets.items, backgrounds, dinosaur_search_assets.reconstruction_images
         items, _, zukan_dir, _ = subject_values(subject)
         return items, search_backgrounds, zukan_dir
+
+    def search_options(subject: str, mode: str):
+        if subject == "kyouryuu" and mode == "reconstruction":
+            return {"habitats": dinosaur_search_assets.habitats, "habitat_backgrounds": dinosaur_search_assets.living_backgrounds}
+        return {}
 
     def search_label(subject: str, mode: str) -> str:
         if subject == "kyouryuu":
@@ -591,6 +597,7 @@ def build_app():
             items, backgrounds, image_sources = search_values(subject, mode)
             session = create_search_session(
                 items, backgrounds, mode=mode, unique_targets=subject == "kyouryuu",
+                **search_options(subject, mode),
             )
             return {
                 search_state: session,
@@ -674,6 +681,7 @@ def build_app():
                 mode=session.mode,
                 used_target_keys=session.used_target_keys,
                 unique_targets=subject == "kyouryuu",
+                **search_options(subject, session.mode),
             )
             return {
                 search_state: updated,

@@ -1,0 +1,10 @@
+{
+  "created_date": "2026-10-06",
+  "method": "image_gen",
+  "purpose": "user-requested habitat-specific reconstruction search backgrounds",
+  "source_files": {
+    "ancient_forest": "/workspace/generated_images/exec-04407127-fd2d-4713-bcbe-016ec8cbea8d.png",
+    "ancient_plain": "/workspace/generated_images/exec-8aa78bef-397f-47da-ab47-bbc082db7cd4.png",
+    "primeval_sea": "/workspace/generated_images/exec-fcdc6133-0a3d-4ec7-b886-2abe3f94e1f2.png"
+  }
+}

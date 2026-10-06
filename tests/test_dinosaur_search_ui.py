@@ -267,7 +267,10 @@ def test_dinosaur_search_keeps_mode_and_unique_targets_for_five_questions(game_f
     )
     assert updates[heading] == f"# {expected_label}"
     assert session.target.item.name in updates[prompt]
-    assert ("ちそう" if mode == "fossil" else "もり") in updates[status]
+    if mode == "fossil":
+        assert "ちそう" in updates[status]
+    else:
+        assert any(label in updates[status] for label in ("こだいの もり", "こだいの へいげん", "たいこの うみ"))
     assert updates[game.next_button].visible is False
     assert len(session.decoys) == 2
     assert len({placement.item.key for placement in session.placements}) == 3
@@ -283,7 +286,8 @@ def test_dinosaur_search_keeps_mode_and_unique_targets_for_five_questions(game_f
         if mode == "fossil":
             assert session.background_path in game.assets.backgrounds
         else:
-            assert session.background_path.parent == ui.SEARCH_BACKGROUND_DIR
+            assert session.background_path in game.assets.living_backgrounds[session.habitat]
+            assert all(game.assets.habitats[p.item.key] == session.habitat for p in session.placements)
 
         with pytest.raises(gr.Error, match="みつけてから"):
             _invoke(game.next, session, "kyouryuu")

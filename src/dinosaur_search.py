@@ -19,6 +19,8 @@ class DinosaurSearchAssets:
     reconstruction_images: dict[str, Path]
     backgrounds: tuple[Path, ...]
     pending_reconstruction_keys: tuple[str, ...]
+    habitats: dict[str, str]
+    living_backgrounds: dict[str, tuple[Path, ...]]
 
     @property
     def reconstruction_ready(self) -> bool:
@@ -112,8 +114,21 @@ def load_dinosaur_search_assets(root: Path = PROJECT_ROOT) -> DinosaurSearchAsse
     )
     if len(backgrounds) != 2:
         raise ValueError("fossil search needs exactly two approved backgrounds")
+    living_dir = root / "assets/images/kyouryuu/search-backgrounds"
+    living_record = _read(living_dir / "habitats.json")
+    habitats = living_record["habitats"]
+    if set(habitats) != {item.key for item in items} or set(habitats.values()) != {"land", "sea"}:
+        raise ValueError("all eighteen search species need a land or sea habitat")
+    living_backgrounds = {
+        habitat: tuple(_png_path(living_dir, name) for name in names)
+        for habitat, names in living_record["backgrounds"].items()
+    }
+    if set(living_backgrounds) != {"land", "sea"} or len(living_backgrounds["land"]) != 2 or len(living_backgrounds["sea"]) != 1:
+        raise ValueError("living search needs forest, plain and sea backgrounds")
     return DinosaurSearchAssets(
         items=tuple(items),
+        habitats=habitats,
+        living_backgrounds=living_backgrounds,
         specimen_images=specimens,
         reconstruction_images=reconstructions,
         backgrounds=backgrounds,
