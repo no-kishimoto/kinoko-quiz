@@ -41,6 +41,8 @@ PCブラウザでの確認項目は [Gradio版の動作確認](docs/GRADIO_CHECK
 
 ## Google Colabでの きどう
 
-[Colab用ノートブック](colab/launch_kinoko_quiz.ipynb)をひらき、さいしょのセルにGitHubリポジトリのURLをいれてから、上からじゅんに実行する。
+[最新版のColab用ノートブック](https://colab.research.google.com/github/no-kishimoto/kinoko-quiz/blob/main/colab/launch_kinoko_quiz.ipynb)をひらき、上からじゅんに実行する。最初のセルに「準備完了」が出てから起動セルを実行し、今回表示された新しいURLを開く。起動セルは遊んでいる間、実行中のままにする。
+
+取得は `main` の最新状態だけに絞り、進捗を表示する。Googleドライブへ以前コピーしたノートブックは自動更新されないため、手順が古い場合は上のリンクから最新版を開く。
 
 くわしい仕様は `docs/SPEC.md` を みてください。
