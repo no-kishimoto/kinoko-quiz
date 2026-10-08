@@ -39,10 +39,16 @@ python app.py
 
 PCブラウザでの確認項目は [Gradio版の動作確認](docs/GRADIO_CHECKLIST.md) にまとめています。
 
-## Google Colabでの きどう
+## Googleドライブ・Colabでの起動
 
-[最新版のColab用ノートブック](https://colab.research.google.com/github/no-kishimoto/kinoko-quiz/blob/main/colab/launch_kinoko_quiz.ipynb)をひらき、上からじゅんに実行する。最初のセルに「準備完了」が出てから起動セルを実行し、今回表示された新しいURLを開く。起動セルは遊んでいる間、実行中のままにする。
+家庭で使うコード・画像・音声・資料の原本をGoogleドライブで管理する。
 
-取得は `main` の最新状態だけに絞り、進捗を表示する。Googleドライブへ以前コピーしたノートブックは自動更新されないため、手順が古い場合は上のリンクから最新版を開く。
+1. 初回だけ[移行用ノートブック](https://colab.research.google.com/github/no-kishimoto/kinoko-quiz/blob/main/colab/migrate_to_drive.ipynb)を開き、上から実行する。
+2. 「移行完了」の後、ドライブ内の `kinoko_quiz/kinoko-quiz/colab/launch_kinoko_quiz.ipynb` をGoogle Colaboratoryで開く。
+3. 最初のセルに「準備完了」が出たら起動セルを実行し、今回表示された新しいURLを開く。
+
+以後はドライブに保存されたノートブックだけで起動でき、GitHubからコードや画像を取得しない。ライブラリのインストールと共有URLにはインターネット接続が必要。ゲームで遊ぶ間は起動セルを実行中にする。
+
+[移行・編集・バックアップの手順](docs/GOOGLE_DRIVE.md)を参照。以前Googleドライブへコピーした起動ノートブックは自動更新されないため、移行後は上記の新しいファイルを使う。
 
 くわしい仕様は `docs/SPEC.md` を みてください。
