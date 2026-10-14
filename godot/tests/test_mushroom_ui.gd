@@ -164,6 +164,11 @@ func _run() -> void:
 	app.show_title()
 	await _frames()
 	_check(app.sound_player.get_instance_id() == sound_id, "One persistent sound node")
+	# Dummy audio still has a playback buffer at this fast test's shutdown.
+	# Stop and let AudioServer release it before destroying the real scene.
+	app.sound_player.stop()
+	app.sound_player.stream = null
+	await create_timer(0.1).timeout
 	app.queue_free()
 	await _frames()
 	if failures.is_empty():
