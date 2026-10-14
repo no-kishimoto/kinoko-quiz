@@ -154,7 +154,16 @@
       }
     ]
   },
-  "game_integration": "Approved names and specimen images are used by Gradio fossil search on 2026-10-05. Reconstruction search remains gated until the existing 10 transparent reconstructions are approved. Quiz and encyclopedia are unchanged.",
+  "game_integration": "Gradio search, quiz and encyclopedia use all 18 species as of 2026-10-14.",
+  "quiz_hint_approval": {
+    "date": "2026-10-14",
+    "keys": ["coelacanth", "ankylosaurus", "parasaurolophus", "trilobite", "anomalocaris", "ottoia", "mammoth", "smilodon"]
+  },
+  "catalogue_integration": {
+    "date": "2026-10-14",
+    "active_species_count": 18,
+    "image_policy": "Approved v2 specimens/reconstructions copied byte-for-byte; existing 10 unchanged"
+  },
   "full_test_suite": {
     "passed": 39,
     "date": "2026-10-04"

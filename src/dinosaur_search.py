@@ -1,4 +1,4 @@
-"""Approved dinosaur search assets, separate from the existing quiz catalogue."""
+"""Approved dinosaur search assets and their independent approval records."""
 
 from __future__ import annotations
 
@@ -63,8 +63,15 @@ def load_dinosaur_search_assets(root: Path = PROJECT_ROOT) -> DinosaurSearchAsse
     if background_review.get("status") != "both_background_images_approved":
         raise ValueError("strata backgrounds need user approval")
 
-    existing = load_ready_subject_items(root / "data/kyouryuu.json")
-    existing_by_key = {item.key: item for item in existing}
+    catalogue = load_ready_subject_items(root / "data/kyouryuu.json")
+    additional_keys = {entry["key"] for entry in additions["items"]}
+    if additional_keys.intersection(entry["key"] for entry in old_review["items"]):
+        raise ValueError("duplicate dinosaur search key")
+    # The quiz catalogue now includes the additions. The original specimens
+    # still have their own approval record and must be validated separately.
+    existing_by_key = {
+        item.key: item for item in catalogue if item.key not in additional_keys
+    }
     items: list[SubjectItem] = []
     specimens: dict[str, Path] = {}
     reconstructions: dict[str, Path] = {}
@@ -72,6 +79,8 @@ def load_dinosaur_search_assets(root: Path = PROJECT_ROOT) -> DinosaurSearchAsse
         if entry.get("image_status") != "approved":
             raise ValueError("existing specimen needs user approval")
         base = existing_by_key[entry["key"]]
+        if base.key in specimens:
+            raise ValueError("duplicate dinosaur search key")
         items.append(SubjectItem(base.key, base.name, "", ""))
         specimens[base.key] = _transparent_png(
             _png_path(review_dir, entry["review_image"])

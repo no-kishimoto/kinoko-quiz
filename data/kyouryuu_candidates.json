@@ -7,7 +7,9 @@
     "description_status": "approved",
     "description_approval_date": "2026-10-04",
     "image_status": "approved",
-    "quiz_hint": "ひれの つけねが ふとい。あしの ように みえるよ。",
+    "quiz_hint": "ひれの つけねが ふとい。",
+    "quiz_hint_status": "approved",
+    "quiz_hint_approval_date": "2026-10-14",
     "zukan_text": "むかしから いる さかなの なかま。いまも うみに すんでいるよ。ふとい ひれを うごかして およぐよ。",
     "source_urls": [
       "https://www.nhm.ac.uk/discover/coelacanths-the-fish-that-outdid-the-loch-ness-monster.html"
@@ -19,6 +21,8 @@
     "key": "ankylosaurus",
     "name": "アンキロサウルス",
     "quiz_hint": "かたい よろい。しっぽの さきに おおきな かたまり。",
+    "quiz_hint_status": "approved",
+    "quiz_hint_approval_date": "2026-10-14",
     "zukan_text": "からだが ほねの よろいで おおわれた きょうりゅう。しょくぶつを たべ、4ほんの あしで あるいたよ。しっぽの さきに おおきな かたまりが あるよ。",
     "source_urls": [
       "https://www.nhm.ac.uk/discover/dino-directory/ankylosaurus.html"
@@ -33,6 +37,8 @@
     "key": "parasaurolophus",
     "name": "パラサウロロフス",
     "quiz_hint": "あたまから うしろへ のびる ながい とさか。",
+    "quiz_hint_status": "approved",
+    "quiz_hint_approval_date": "2026-10-14",
     "zukan_text": "ながい とさかの ある きょうりゅう。しょくぶつを たべたよ。2ほんや 4ほんの あしで あるいたよ。",
     "source_urls": [
       "https://www.nhm.ac.uk/discover/dino-directory/parasaurolophus.html"
@@ -52,6 +58,8 @@
     "name_origin_sentence": "まんなか・みぎ・ひだりの 3つに わかれた かたちから、この なまえが ついたよ。",
     "description_status": "approved",
     "quiz_hint": "からだに たくさんの ふし。そとが かたい から。",
+    "quiz_hint_status": "approved",
+    "quiz_hint_approval_date": "2026-10-14",
     "zukan_text": "むかしの うみで くらした いきもの。まんなか・みぎ・ひだりの 3つに わかれた かたちから、この なまえが ついたよ。たくさんの あしと しょっかくが あったよ。",
     "source_urls": [
       "https://www.amnh.org/explore/ology/ology-cards/037-trilobites",
@@ -67,7 +75,9 @@
   {
     "key": "anomalocaris",
     "name": "アノマロカリス",
-    "quiz_hint": "あたまの まえに とげの ついた 2ほんの うで。",
+    "quiz_hint": "おおきな め。からだの よこに ならぶ ひれ。",
+    "quiz_hint_status": "approved",
+    "quiz_hint_approval_date": "2026-10-14",
     "zukan_text": "とても むかしの うみを およいだ いきもの。おおきな めと、からだの よこに ならぶ ひれが めじるしだよ。",
     "source_urls": [
       "https://burgess-shale.rom.on.ca/fossils/anomalocaris-canadensis/"
@@ -81,7 +91,9 @@
   {
     "key": "ottoia",
     "name": "オットイア",
-    "quiz_hint": "あしの ない ながい からだ。くちの さきを のばせるよ。",
+    "quiz_hint": "ながい からだに たくさんの しわ。",
+    "quiz_hint_status": "approved",
+    "quiz_hint_approval_date": "2026-10-14",
     "zukan_text": "とても むかしの うみに いた いきもの。ながい からだに たくさんの しわが あるよ。くちの さきを のばしたり、ひっこめたり できたよ。",
     "source_urls": [
       "https://burgess-shale.rom.on.ca/fossils/ottoia-prolifica/"
@@ -98,6 +110,8 @@
     "scientific_name": "Mammuthus primigenius",
     "image_model_status": "confirmed",
     "quiz_hint": "ながく まがった 2ほんの きば。4ほんの あし。",
+    "quiz_hint_status": "approved",
+    "quiz_hint_approval_date": "2026-10-14",
     "zukan_text": "むかしの ゾウの なかま。ながい けで おおわれた からだと、ながく まがった きばが めじるしだよ。さむい ところで くらしたよ。",
     "source_urls": [
       "https://www.nhm.ac.uk/discover/were-all-mammoths-woolly.html"
@@ -114,6 +128,8 @@
     "scientific_name": "Smilodon fatalis",
     "image_model_status": "confirmed",
     "quiz_hint": "うえの あごから のびる ながい 2ほんの きば。",
+    "quiz_hint_status": "approved",
+    "quiz_hint_approval_date": "2026-10-14",
     "zukan_text": "むかしの ネコの なかま。うえの あごから ながい 2ほんの きばが のびているよ。がっしりした まえあしで えものを おさえたよ。",
     "source_urls": [
       "https://tarpits.org/stories/here-kitty-kitty",

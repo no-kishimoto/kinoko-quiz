@@ -1,4 +1,4 @@
-"""Approved search assets must not silently expand the quiz catalogue."""
+"""Catalogue additions require the separate description, image and hint approvals."""
 
 import json
 import re
@@ -24,8 +24,13 @@ def test_additions_review_contains_eight_description_and_image_pairs():
     assert review["approved_fields"] == [
         "zukan_text", "specimen_image", "reconstruction_image",
     ]
-    assert "Gradio fossil search" in review["game_integration"]
-    assert "Quiz and encyclopedia are unchanged" in review["game_integration"]
+    assert "Gradio search, quiz and encyclopedia use all 18 species" in review["game_integration"]
+    assert review["quiz_hint_approval"] == {
+        "date": "2026-10-14",
+        "keys": [item["key"] for item in candidates],
+    }
+    assert review["catalogue_integration"]["date"] == "2026-10-14"
+    assert review["catalogue_integration"]["active_species_count"] == 18
     assert len(review["items"]) == 8
     assert {item["key"] for item in review["items"]} == EXPECTED
     for item in review["items"]:
@@ -46,7 +51,15 @@ def test_additions_review_contains_eight_description_and_image_pairs():
                 assert sum(histogram[245:]) / total > 0.05, "Subject must not be a translucent ghost"
 
 
-def test_review_does_not_add_unapproved_species_to_the_game():
+def test_approved_additions_are_active_with_confirmed_quiz_hints():
     active = json.loads((ROOT / "data/kyouryuu.json").read_text())
-    assert len(active) == 10
-    assert not EXPECTED.intersection(item["key"] for item in active)
+    candidates = json.loads((ROOT / "data/kyouryuu_candidates.json").read_text())
+    active_by_key = {item["key"]: item for item in active}
+    assert len(active) == len(active_by_key) == 18
+    assert EXPECTED <= set(active_by_key)
+    for candidate in candidates:
+        item = active_by_key[candidate["key"]]
+        assert candidate["quiz_hint_status"] == "approved"
+        assert candidate["quiz_hint_approval_date"] == "2026-10-14"
+        assert item["quiz_hint"] == candidate["quiz_hint"]
+        assert item["zukan_text"] == candidate["zukan_text"]

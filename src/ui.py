@@ -81,7 +81,11 @@ APP_CSS = """
 .big-feedback * { color: #c1121f !important; }
 .choice, .choice *, .main-button, .main-button * { font-size: 1.5rem !important; }
 .choice, .main-button { min-height: 64px; }
-.explanation-card { font-size: 1.3rem; line-height: 1.45; }
+.explanation-card, .explanation-card * {
+    color: #000000 !important;
+    font-size: 1.3rem !important;
+    line-height: 1.45 !important;
+}
 .sound-effect {
     height: 1px !important;
     width: 1px !important;

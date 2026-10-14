@@ -1,7 +1,7 @@
 """Gradioのさがし画面で、モードと5問の進行を確かめる。"""
 
 import json
-from src.paths import KYOURYUU_DATA_PATH
+from src.paths import PROJECT_ROOT
 
 from pathlib import Path
 import re
@@ -80,7 +80,8 @@ def game_factory(monkeypatch):
             current_assets = assets
         else:
             # Keep the unapproved-image gate covered independently of live approvals.
-            pending = tuple(json.loads(KYOURYUU_DATA_PATH.read_text())[i]["key"] for i in range(10))
+            original_review = PROJECT_ROOT / "assets/images/kyouryuu/review/transparent/review-overrides.json"
+            pending = tuple(item["key"] for item in json.loads(original_review.read_text())["items"])
             current_assets = SimpleNamespace(
                 items=assets.items,
                 specimen_images=assets.specimen_images,
