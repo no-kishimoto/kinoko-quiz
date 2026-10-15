@@ -34,8 +34,8 @@ var zukan_next_button: Button
 var correct_sound_count := 0
 
 var _screen_root: Control
-var _feedback_panel: Panel
-var _explanation_panel: Panel
+var _feedback_panel: PanelContainer
+var _explanation_panel: PanelContainer
 var _quiz_generation := 0
 var _pending_correct_sounds := 0
 
@@ -75,18 +75,24 @@ func _build_theme() -> void:
 func show_title() -> void:
 	_quiz_generation += 1
 	_clear_screen("title")
-	_add_label("きのこクイズ", Rect2(100, 92, 1080, 106), 68)
-	_image(catalog.color_image_path("benitengutake"), Rect2(465, 218, 350, 245))
-	_add_button("クイズで あそぶ", Rect2(390, 478, 500, 88), ORANGE, show_quiz_select, 36)
-	_add_button("きのこ ずかん を みる", Rect2(390, 594, 500, 88), BLUE, show_zukan.bind(0), 34)
+	var page := _page()
+	var content := _centered_column(page, 560, 20)
+	heading_label = _label("きのこクイズ", 68, content, 560)
+	var title_image := _image(catalog.color_image_path("benitengutake"), content)
+	title_image.name = "TitleImage"
+	title_image.custom_minimum_size.y = 250
+	_button("クイズで あそぶ", ORANGE, show_quiz_select, content, 36, 88)
+	_button("きのこ ずかん を みる", BLUE, show_zukan.bind(0), content, 34, 88)
 
 
 func show_quiz_select() -> void:
 	_clear_screen("quiz_select")
-	heading_label = _add_label("なんもん あそぶ？", Rect2(110, 112, 1060, 100), 56)
-	_add_button("5もん", Rect2(330, 300, 620, 100), ORANGE, start_quiz.bind(5), 46)
-	_add_button("10もん", Rect2(330, 438, 620, 100), GREEN, start_quiz.bind(10), 46)
-	_add_button("タイトルへ もどる", Rect2(410, 662, 460, 72), PURPLE, show_title, 32)
+	var page := _page()
+	var content := _centered_column(page, 640, 24)
+	heading_label = _label("なんもん あそぶ？", 56, content, 640)
+	_button("5もん", ORANGE, start_quiz.bind(5), content, 46, 100)
+	_button("10もん", GREEN, start_quiz.bind(10), content, 46, 100)
+	_button("タイトルへ もどる", PURPLE, show_title, content, 32, 72)
 
 
 func start_quiz(question_count: int) -> void:
@@ -103,36 +109,52 @@ func _show_question() -> void:
 	_clear_screen("quiz")
 	var question: Dictionary = quiz_session.current_question()
 	var item: Dictionary = question["answer"]
-	heading_label = _add_label(quiz_session.progress_text(), Rect2(120, 23, 1040, 72), 46)
-	var image_panel := _add_panel(Rect2(32, 112, 546, 342), Color.WHITE)
-	question_image = _image(catalog.quiz_image_path(item["key"]), Rect2(12, 12, 522, 318), image_panel)
+	var page := _page(14)
+	heading_label = _label(quiz_session.progress_text(), 46, page, _content_width())
+	var columns := _row(page, 24)
+	columns.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var left := _column(columns, 12)
+	left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	left.size_flags_stretch_ratio = 0.45
+	var right := _column(columns, 12)
+	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	right.size_flags_stretch_ratio = 0.55
+	var left_width := (_content_width() - 24) * 0.45
+	var right_width := (_content_width() - 24) * 0.55
+	var image_panel := _panel(Color.WHITE, left)
+	image_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	image_panel.custom_minimum_size.y = 180
+	question_image = _image(catalog.quiz_image_path(item["key"]), _padding(image_panel, 12))
 	question_image.name = "QuestionImage"
-	var hints := _add_panel(Rect2(32, 469, 546, 284), BLUE)
-	_add_label("どくの ヒント", Rect2(14, 9, 518, 43), 32, HORIZONTAL_ALIGNMENT_CENTER, hints)
-	toxicity_hint_label = _add_label(catalog.toxicity_text(item), Rect2(14, 54, 518, 71), 32, HORIZONTAL_ALIGNMENT_CENTER, hints)
-	_add_label("かたちの ヒント", Rect2(14, 127, 518, 43), 32, HORIZONTAL_ALIGNMENT_CENTER, hints)
-	hint_label = _add_label(item["quiz_hint"], Rect2(14, 172, 518, 99), 32, HORIZONTAL_ALIGNMENT_CENTER, hints)
+	var hints := _column(_padding(_panel(BLUE, left), 12), 4)
+	_label("どくの ヒント", 32, hints, left_width - 24)
+	toxicity_hint_label = _label(catalog.toxicity_text(item), 32, hints, left_width - 24, true)
+	_label("かたちの ヒント", 32, hints, left_width - 24)
+	hint_label = _label(item["quiz_hint"], 32, hints, left_width - 24, true)
+	var choices := _column(right, 10)
 	for index in range(question["choices"].size()):
 		var choice: Dictionary = question["choices"][index]
-		var button := _add_button(choice["name"], Rect2(605, 112 + index * 76, 643, 66), ORANGE,
-			select_answer.bind(choice["key"], quiz_session.current_index, _quiz_generation), 32)
+		var button := _button(choice["name"], ORANGE,
+			select_answer.bind(choice["key"], quiz_session.current_index, _quiz_generation), choices, 32, 66)
 		button.name = "Choice%d" % index
 		choice_buttons.append(button)
-	_feedback_panel = _add_panel(Rect2(605, 348, 643, 82), GREEN)
-	feedback_label = _add_label("", Rect2(14, 7, 615, 68), 40, HORIZONTAL_ALIGNMENT_CENTER, _feedback_panel)
+	_feedback_panel = _panel(GREEN, right)
+	feedback_label = _label("", 40, _padding(_feedback_panel, 10), right_width - 20, true)
 	feedback_label.name = "Feedback"
 	_feedback_panel.visible = false
-	next_button = _add_button("つぎへ", Rect2(605, 442, 643, 64), ORANGE,
-		next_question.bind(quiz_session.current_index, _quiz_generation), 32)
+	next_button = _button("つぎへ", ORANGE,
+		next_question.bind(quiz_session.current_index, _quiz_generation), right, 32, 64)
 	next_button.name = "NextQuestion"
 	next_button.visible = false
 	next_button.disabled = true
-	_explanation_panel = _add_panel(Rect2(605, 520, 643, 192), Color.WHITE)
-	var explanation_scroll := _scroll(Rect2(12, 10, 619, 172), _explanation_panel)
-	explanation_label = _flow_label("", 26, explanation_scroll)
+	_explanation_panel = _panel(Color.WHITE, right)
+	_explanation_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var explanation_scroll := _scroll(_padding(_explanation_panel, 12))
+	explanation_label = _label("", 26, explanation_scroll, right_width - 48, true, HORIZONTAL_ALIGNMENT_LEFT)
+	explanation_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 	explanation_label.name = "Explanation"
 	_explanation_panel.visible = false
-	_add_button("タイトルへ もどる", Rect2(605, 728, 643, 56), PURPLE, show_title, 32)
+	_footer("タイトルへ もどる", PURPLE, show_title, page, 560, 64, true)
 
 
 func select_answer(selected_key: String, expected_index: int = -1, expected_generation: int = -1) -> void:
@@ -182,13 +204,15 @@ func _quiz_explanation(item: Dictionary) -> String:
 
 func _show_result() -> void:
 	_clear_screen("result")
-	heading_label = _add_label("けっか", Rect2(100, 95, 1080, 95), 64)
-	result_label = _add_label("%dもん ちゅう %dもん せいかい！" % [
+	var page := _page()
+	var content := _centered_column(page, 1080, 26)
+	heading_label = _label("けっか", 64, content, 1080)
+	result_label = _label("%dもん ちゅう %dもん せいかい！" % [
 		quiz_session.total_questions(), quiz_session.correct_count,
-	], Rect2(80, 266, 1120, 106), 52)
+	], 52, content, 1080, true)
 	if quiz_session.correct_count == quiz_session.total_questions():
-		_add_label("これで きみも\nきのこ はかせだ！！", Rect2(60, 414, 1160, 150), 52)
-	_add_button("タイトルへ もどる", Rect2(365, 658, 550, 84), PURPLE, show_title, 36)
+		_label("これで きみも\nきのこ はかせだ！！", 52, content, 1080)
+	_footer("タイトルへ もどる", PURPLE, show_title, content, 560, 84)
 
 
 func zukan_page_count() -> int:
@@ -198,28 +222,39 @@ func zukan_page_count() -> int:
 func show_zukan(page: int = 0) -> void:
 	zukan_page = clampi(page, 0, maxi(0, zukan_page_count() - 1))
 	_clear_screen("zukan")
-	heading_label = _add_label("きのこ ずかん", Rect2(220, 18, 840, 68), 48)
-	zukan_prev_button = _add_button("まえへ", Rect2(32, 102, 270, 64), BLUE, change_zukan_page.bind(-1), 32)
+	var layout := _page(16)
+	heading_label = _label("きのこ ずかん", 48, layout, _content_width())
+	var navigation := _row(layout, 18)
+	zukan_prev_button = _button("まえへ", BLUE, change_zukan_page.bind(-1), navigation, 32, 64)
+	zukan_prev_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	zukan_prev_button.disabled = zukan_page == 0
-	_add_label("%d / %d ページ" % [zukan_page + 1, zukan_page_count()], Rect2(322, 102, 636, 64), 32)
-	zukan_next_button = _add_button("つぎへ", Rect2(978, 102, 270, 64), ORANGE, change_zukan_page.bind(1), 32)
+	var page_label := _label("%d / %d ページ" % [zukan_page + 1, zukan_page_count()], 32, navigation, 340)
+	page_label.custom_minimum_size.x = 340
+	zukan_next_button = _button("つぎへ", ORANGE, change_zukan_page.bind(1), navigation, 32, 64)
+	zukan_next_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	zukan_next_button.disabled = zukan_page >= zukan_page_count() - 1
+	var cards := _row(layout, 24)
+	cards.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	for index in range(PAGE_SIZE):
 		var item_index := zukan_page * PAGE_SIZE + index
 		if item_index >= catalog.items.size():
 			break
 		var item: Dictionary = catalog.items[item_index]
-		var card := _add_button("", Rect2(32 + index * 416, 192, 384, 458), Color.WHITE,
-			show_zukan_detail.bind(item["key"]), 32)
+		var card := _button("", Color.WHITE, show_zukan_detail.bind(item["key"]), cards)
+		card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		card.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		card.name = "ZukanCard%d" % index
 		card.tooltip_text = item["name"]
-		var thumbnail := _image(catalog.color_image_path(item["key"]), Rect2(12, 14, 360, 326), card)
-		thumbnail.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		var name_label := _add_label(item["name"], Rect2(12, 346, 360, 96), 32, HORIZONTAL_ALIGNMENT_CENTER, card)
-		name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var card_padding := _padding(card, 12, true)
+		var card_content := _column(card_padding, 12)
+		card_content.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var thumbnail := _image(catalog.color_image_path(item["key"]), card_content)
+		thumbnail.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		thumbnail.custom_minimum_size.y = 160
+		_label(item["name"], 32, card_content, (_content_width() - 48) / 3 - 24, true)
 		zukan_cards.append(card)
-	_add_label("きのこを クリックしてね。", Rect2(260, 664, 760, 38), 26)
-	_add_button("タイトルへ もどる", Rect2(390, 719, 500, 65), PURPLE, show_title, 32)
+	_label("きのこを クリックしてね。", 26, layout, _content_width())
+	_footer("タイトルへ もどる", PURPLE, show_title, layout, 520, 64)
 
 
 func change_zukan_page(offset: int) -> void:
@@ -234,15 +269,26 @@ func show_zukan_detail(key: String) -> void:
 		return
 	detail_key = key
 	_clear_screen("zukan_detail")
-	heading_label = _add_label(item["name"], Rect2(40, 14, 1200, 78), 48)
-	var image_panel := _add_panel(Rect2(32, 112, 436, 580), Color.WHITE)
-	question_image = _image(catalog.color_image_path(key), Rect2(12, 12, 412, 556), image_panel)
-	var details_panel := _add_panel(Rect2(492, 112, 756, 580), Color.WHITE)
-	var details_scroll := _scroll(Rect2(20, 16, 716, 548), details_panel)
-	explanation_label = _flow_label(_detail_text(item), 28, details_scroll)
+	var page := _page(18)
+	heading_label = _label(item["name"], 48, page, _content_width())
+	var columns := _row(page, 24)
+	columns.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var image_panel := _panel(Color.WHITE, columns)
+	image_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	image_panel.size_flags_stretch_ratio = 0.38
+	question_image = _image(catalog.color_image_path(key), _padding(image_panel, 12))
+	var details_panel := _panel(Color.WHITE, columns)
+	details_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	details_panel.size_flags_stretch_ratio = 0.62
+	var details_scroll := _scroll(_padding(details_panel, 16))
+	explanation_label = _label(_detail_text(item), 28, details_scroll, (_content_width() - 24) * 0.62 - 52, true, HORIZONTAL_ALIGNMENT_LEFT)
+	explanation_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 	explanation_label.name = "DetailText"
-	_add_button("ずかんへ もどる", Rect2(175, 721, 450, 63), BLUE, show_zukan.bind(zukan_page), 32)
-	_add_button("タイトルへ もどる", Rect2(655, 721, 450, 63), PURPLE, show_title, 32)
+	var footer := _row(page, 24)
+	_spacer(footer)
+	_button("ずかんへ もどる", BLUE, show_zukan.bind(zukan_page), footer, 32, 64).custom_minimum_size.x = 450
+	_button("タイトルへ もどる", PURPLE, show_title, footer, 32, 64).custom_minimum_size.x = 450
+	_spacer(footer)
 
 
 func _detail_text(item: Dictionary) -> String:
@@ -290,7 +336,8 @@ func _on_correct_sound_finished() -> void:
 
 func _show_data_error() -> void:
 	_clear_screen("error")
-	_add_label("きのこデータが よめなかったよ。\nアプリを ひらきなおしてね。", Rect2(140, 220, 1000, 320), 40)
+	var content := _centered_column(_page(), 1000, 16)
+	_label("きのこデータが よめなかったよ。\nアプリを ひらきなおしてね。", 40, content, 1000, true)
 
 
 func _clear_screen(new_screen_name: String) -> void:
@@ -323,30 +370,98 @@ func _clear_screen(new_screen_name: String) -> void:
 	_screen_root.add_child(background)
 
 
-func _put(control: Control, rectangle: Rect2, parent: Control = null) -> void:
-	(parent if parent != null else _screen_root).add_child(control)
-	control.position = rectangle.position
-	control.size = rectangle.size
+func _content_width() -> float:
+	return maxf(size.x, 1280) - 64
 
 
-func _add_label(text: String, rectangle: Rect2, font_size: int,
-		alignment: HorizontalAlignment = HORIZONTAL_ALIGNMENT_CENTER, parent: Control = null) -> Label:
+func _page(spacing: int = 18) -> VBoxContainer:
+	var margin := _padding(_screen_root, 32, true)
+	margin.add_theme_constant_override("margin_top", 24)
+	margin.add_theme_constant_override("margin_bottom", 24)
+	return _column(margin, spacing)
+
+
+func _column(parent: Control, spacing: int = 12) -> VBoxContainer:
+	var column := VBoxContainer.new()
+	column.add_theme_constant_override("separation", spacing)
+	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	parent.add_child(column)
+	return column
+
+
+func _row(parent: Control, spacing: int = 18) -> HBoxContainer:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", spacing)
+	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	parent.add_child(row)
+	return row
+
+
+func _padding(parent: Control, amount: int, full_rect: bool = false) -> MarginContainer:
+	var padding := MarginContainer.new()
+	for side in ["left", "right", "top", "bottom"]:
+		padding.add_theme_constant_override("margin_%s" % side, amount)
+	padding.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if full_rect:
+		padding.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	parent.add_child(padding)
+	return padding
+
+
+func _centered_column(parent: Control, width: float, spacing: int) -> VBoxContainer:
+	var center := CenterContainer.new()
+	center.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	parent.add_child(center)
+	var content := _column(center, spacing)
+	content.custom_minimum_size.x = width
+	return content
+
+
+func _spacer(parent: Control) -> Control:
+	var spacer := Control.new()
+	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	parent.add_child(spacer)
+	return spacer
+
+
+func _footer(text: String, color: Color, callback: Callable, parent: Control,
+		width: float = 520, height: float = 64, align_right: bool = false) -> Button:
+	var row := _row(parent, 0)
+	_spacer(row)
+	var button := _button(text, color, callback, row, 32, height)
+	button.custom_minimum_size.x = width
+	if not align_right:
+		_spacer(row)
+	return button
+
+
+func _label(text: String, font_size: int, parent: Control, initial_width: float,
+		wrap: bool = false, alignment: HorizontalAlignment = HORIZONTAL_ALIGNMENT_CENTER) -> Label:
 	var label := Label.new()
-	label.text = text
+	# Seed the available width BEFORE text, theme or parent-tree notifications.
+	# A zero-width native CJK label can otherwise keep a one-character-per-line
+	# minimum height and visually overlap unrelated images or buttons.
+	label.size = Vector2(maxf(initial_width, 1), 1)
+	label.theme = theme
+	label.add_theme_font_size_override("font_size", font_size)
+	label.add_theme_color_override("font_color", BLACK)
 	label.horizontal_alignment = alignment
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART if wrap else TextServer.AUTOWRAP_OFF
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.size_flags_vertical = Control.SIZE_FILL
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	label.add_theme_color_override("font_color", BLACK)
-	label.add_theme_font_size_override("font_size", font_size)
-	_put(label, rectangle, parent)
+	label.text = text
+	parent.add_child(label)
 	return label
 
 
-func _add_button(text: String, rectangle: Rect2, color: Color, callback: Callable,
-		font_size: int = 32) -> Button:
+func _button(text: String, color: Color, callback: Callable, parent: Control,
+		font_size: int = 32, height: float = 64) -> Button:
 	var button := Button.new()
 	button.text = text
+	button.custom_minimum_size.y = height
 	button.add_theme_font_size_override("font_size", font_size)
 	button.add_theme_stylebox_override("normal", _style(color))
 	button.add_theme_stylebox_override("hover", _style(color.lightened(0.12)))
@@ -354,14 +469,19 @@ func _add_button(text: String, rectangle: Rect2, color: Color, callback: Callabl
 	button.add_theme_stylebox_override("disabled", _style(Color("e4e5de")))
 	button.add_theme_stylebox_override("focus", _style(Color(0, 0, 0, 0), Color("227d9b"), 4))
 	button.pressed.connect(callback)
-	_put(button, rectangle)
+	parent.add_child(button)
 	return button
 
 
-func _add_panel(rectangle: Rect2, color: Color) -> Panel:
-	var panel := Panel.new()
-	panel.add_theme_stylebox_override("panel", _style(color, color.darkened(0.17), 2))
-	_put(panel, rectangle)
+func _panel(color: Color, parent: Control) -> PanelContainer:
+	var panel := PanelContainer.new()
+	var panel_style := _style(color, color.darkened(0.17), 2)
+	panel_style.content_margin_left = 0
+	panel_style.content_margin_right = 0
+	panel_style.content_margin_top = 0
+	panel_style.content_margin_bottom = 0
+	panel.add_theme_stylebox_override("panel", panel_style)
+	parent.add_child(panel)
 	return panel
 
 
@@ -373,6 +493,8 @@ func _style(color: Color, border_color: Color = Color("bea16e"), border_width: i
 	style.set_corner_radius_all(18)
 	style.content_margin_left = 14
 	style.content_margin_right = 14
+	style.content_margin_top = 6
+	style.content_margin_bottom = 6
 	return style
 
 
@@ -380,32 +502,23 @@ func _texture(path: String) -> Texture2D:
 	return load(path) as Texture2D
 
 
-func _image(path: String, rectangle: Rect2, parent: Control = null) -> TextureRect:
+func _image(path: String, parent: Control) -> TextureRect:
 	var image := TextureRect.new()
 	image.texture = _texture(path)
 	image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	image.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	image.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	image.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_put(image, rectangle, parent)
+	parent.add_child(image)
 	return image
 
 
-func _scroll(rectangle: Rect2, parent: Control) -> ScrollContainer:
+func _scroll(parent: Control) -> ScrollContainer:
 	var scroll := ScrollContainer.new()
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
-	_put(scroll, rectangle, parent)
+	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	parent.add_child(scroll)
 	return scroll
-
-
-func _flow_label(text: String, font_size: int, parent: ScrollContainer) -> Label:
-	var label := Label.new()
-	label.text = text
-	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	label.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	label.add_theme_font_size_override("font_size", font_size)
-	label.add_theme_color_override("font_color", BLACK)
-	parent.add_child(label)
-	return label
