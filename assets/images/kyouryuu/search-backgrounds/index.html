@@ -1,1 +1,119 @@
-<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>古代の背景</title><style>body{font-family:sans-serif;background:#fff8df;margin:20px}article{background:white;padding:16px;margin:20px 0}img{width:49%}@media(max-width:700px){img{width:100%}}</style><h1>きょうりゅうさがしの背景</h1><p>海洋生物は海、陸上・飛行する生物は森か平原で探します。左：背景、右：配置例。</p><article><h2>古代の森</h2><img src="ancient_forest.png"><img src="ancient_forest-example.jpg"></article><article><h2>古代の平原</h2><img src="ancient_plain.png"><img src="ancient_plain-example.jpg"></article><article><h2>太古の海</h2><img src="primeval_sea.png"><img src="primeval_sea-example.jpg"></article>
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>古代の背景</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #fff8df;
+      margin: 20px;
+    }
+
+    article {
+      background: white;
+      padding: 16px;
+      margin: 20px 0;
+    }
+
+    article > img {
+      width: 49%;
+    }
+
+    .plain-comparison {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    figure {
+      margin: 0;
+      min-width: 0;
+    }
+
+    figcaption {
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .plain-background {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .placement-preview {
+      position: relative;
+      aspect-ratio: 3 / 2;
+    }
+
+    .placement-preview .dinosaur {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      width: var(--width);
+      height: var(--height);
+      object-fit: contain;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    @media (max-width: 700px) {
+      article > img {
+        width: 100%;
+      }
+
+      .plain-comparison {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>きょうりゅうさがしの背景</h1>
+  <p>海洋生物は海、陸上・飛行する生物は森か平原で探します。左：背景、右：配置例。</p>
+
+  <article>
+    <h2>古代の森</h2>
+    <img src="ancient_forest.png" alt="古代の森の背景">
+    <img src="ancient_forest-example.jpg" alt="古代の森の配置例">
+  </article>
+
+  <article id="ancient_plain">
+    <h2>古代の平原</h2>
+    <p>地平線を画像上端から約12～15%へ上げています。右の配置例はGodot版と同じ位置・遠近の大きさで、最上段の中心は上端から25%です。</p>
+    <div class="plain-comparison">
+      <figure>
+        <figcaption>背景</figcaption>
+        <img class="plain-background" src="ancient_plain.png" alt="地平線を上げた古代の平原の背景">
+      </figure>
+      <figure>
+        <figcaption>Godot版と同じ配置例</figcaption>
+        <div class="placement-preview">
+          <img class="plain-background" src="ancient_plain.png" alt="配置例の平原背景">
+          <!-- Godot: center=(x,y), size=(0.14,0.21) * (0.85 + 0.30*y). -->
+          <img class="dinosaur"
+               src="../review/transparent/ankylosaurus-reconstruction-v2.png"
+               alt="上段のアンキロサウルス"
+               style="--x: 18%; --y: 25%; --width: 12.95%; --height: 19.425%;">
+          <img class="dinosaur"
+               src="../review/transparent/reconstructions/tyrannosaurus-reconstruction-v1.png"
+               alt="中段のティラノサウルス"
+               style="--x: 50%; --y: 50%; --width: 14%; --height: 21%;">
+          <img class="dinosaur"
+               src="../review/transparent/reconstructions/brachiosaurus-reconstruction-v1.png"
+               alt="下段のブラキオサウルス"
+               style="--x: 82%; --y: 75%; --width: 15.05%; --height: 22.575%;">
+        </div>
+      </figure>
+    </div>
+  </article>
+
+  <article>
+    <h2>太古の海</h2>
+    <img src="primeval_sea.png" alt="太古の海の背景">
+    <img src="primeval_sea-example.jpg" alt="太古の海の配置例">
+  </article>
+</body>
+</html>

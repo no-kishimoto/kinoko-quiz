@@ -6,5 +6,19 @@
     "ancient_forest": "/workspace/generated_images/exec-04407127-fd2d-4713-bcbe-016ec8cbea8d.png",
     "ancient_plain": "/workspace/generated_images/exec-8aa78bef-397f-47da-ab47-bbc082db7cd4.png",
     "primeval_sea": "/workspace/generated_images/exec-fcdc6133-0a3d-4ec7-b886-2abe3f94e1f2.png"
-  }
+  },
+  "revisions": [
+    {
+      "date": "2026-10-15",
+      "asset": "ancient_plain.png",
+      "method": "image_gen",
+      "intent": "edit existing background; raise the horizon so upper-row Godot dinosaurs stand on land",
+      "source_file": "exec-12512857-c52c-4195-af79-28202a7389a2.png",
+      "size": [1536, 1024],
+      "horizon_target_from_top": 0.12,
+      "walkable_ground_from_top": 0.18,
+      "placement_unchanged": true,
+      "prompt": "Use case: precise-object-edit. Edit the existing ancient plain background, keeping its bright painted prehistoric style, warm ochre soil, greens, soft sunny light, distant blue mountains, ferns/cycads and natural ground detail. Use a gently elevated downward-looking view with the land/sky horizon about 10-12% from the top; keep sky and distant mountains inside the top 15%. From y=18% to the bottom, show continuous walkable terrestrial plain across the full width, including x=18%,50%,82% and y=25%,50%,75%. Put any retained river in the very distant upper band, away from playable positions. Change only the composition/horizon needed to support upper-row dinosaurs on ground. No dinosaurs, animals, people, bones, buildings, interface elements, markers, labels, text, logos, borders, watermarks or transparency. Output 1536x1024 landscape 3:2."
+    }
+  ]
 }
