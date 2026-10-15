@@ -1,0 +1,236 @@
+{
+  "date": "2026-10-15",
+  "records": [
+    {
+      "subject": "shokubutsu",
+      "key": "tanpopo",
+      "name": "たんぽぽ",
+      "staged_sha256": "6a06df3152ad0809304b6b288ae668566ed189773bacf324ad705d5240650407",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "asagao",
+      "name": "あさがお",
+      "staged_sha256": "6ea64c8ad33a97d2bc4b226bba55753d4e1742ef028e27a2a9f5ef886e0ea2bb",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "nekopanjya",
+      "name": "ねこじゃらし",
+      "staged_sha256": "a0e7279cf7f1d360d50f28e10363d4b91852e8b6112f80aebab939ce13ad701c",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "tomato",
+      "name": "トマト",
+      "staged_sha256": "1f661107727ec3c6ad3e91105fbae4c5e5034d248bc61a9a53def92b85e74e03",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "kyuuri",
+      "name": "きゅうり",
+      "staged_sha256": "896adbe422a4ed0a8630f5d05bc2a9e18791f342ac54f35c079fcf58ddc1eb28",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "jagaimo",
+      "name": "じゃがいも",
+      "staged_sha256": "9661b123ac38fdbd7a0feddab2f6f47f6f06d1a2524cc84875be12fedec1e54a",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "piiman",
+      "name": "ピーマン",
+      "staged_sha256": "a389787980e0d23d97cff27e40b1e0473221920afa09c6c9bfa3a40a482dcacf",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "edamame",
+      "name": "えだまめ",
+      "staged_sha256": "2edebdf6e037ba04eabf06440c53f680594813659bf5532c1632f5c05301cc1c",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "okura",
+      "name": "オクラ",
+      "staged_sha256": "a91d65edd9ea5ffdfbbaf77e8509c336d38f9dd5eaca42626db09803578b972c",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "ringo",
+      "name": "りんご",
+      "staged_sha256": "8f95b4abf233e84fccaf40507ece89e88528b0f3285743c4e08a509115ecb804",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "mikan",
+      "name": "みかん",
+      "staged_sha256": "ad8082f5332af3427a33b0eb7615cd8e0a53090ed2a98b29aa3473daede11303",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "banana",
+      "name": "バナナ",
+      "staged_sha256": "6970d07bc10c08c81437b175afaeebced42c35c859b4ca05bb5f67030138ad0e",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "ichigo",
+      "name": "いちご",
+      "staged_sha256": "79508af021942dd69bf4058486ad19db592ca6e72d70b2f68bd2151716b18207",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "budou",
+      "name": "ぶどう",
+      "staged_sha256": "306e0966ccc6936cc7214c31b9dd2caa3a0e169da632079c51455de3ed5c087a",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "momo",
+      "name": "もも",
+      "staged_sha256": "5df5b2cc489d0151024ae3506dd8184858806f2df5f7af5c68509f35342f08c3",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "nashi",
+      "name": "なし",
+      "staged_sha256": "6db6bdd6f322bd116bbb22bef72187bb835a1538572591ec0734a4d6bf3dd4c0",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "suika",
+      "name": "すいか",
+      "staged_sha256": "8fa1bb5deecdc06ff4431822d3e068c5f3407b86bb826ac8a4a637f4db367211",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "meron",
+      "name": "メロン",
+      "staged_sha256": "9cc386323a0be50313e4a862197ab659a578cae559d83d91b0d583198599b680",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "kaki",
+      "name": "かき",
+      "staged_sha256": "69b458a1c1d3c92914ca1bbad44f92635e609873452f7def5010fc6f73e82b2c",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "utsubokazura",
+      "name": "うつぼかずら",
+      "staged_sha256": "ed7887a25956580a0d8f895477182c8b0a96224e36c8eb543e128a3ca1b46df0",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "mousengoke",
+      "name": "モウセンゴケ",
+      "staged_sha256": "ad864d64b5dd554e0859c8d0bc89d5449c992947528e0385f48a1c652b218a20",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "matsu",
+      "name": "まつ",
+      "staged_sha256": "599e16dfd859d2234a7ad4387d40bf1d25dbe47489c00f592a63da1ccb2f4032",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "ichou",
+      "name": "いちょう",
+      "staged_sha256": "26ab2edb39135f188c3590a935fdc771a0f2c00a4c11f929d379b8ac43d40264",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "momiji",
+      "name": "もみじ",
+      "staged_sha256": "b8dfc96b64cf604c009b23e565d60505bde2a64932e69df692e47a8debfd34c6",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "take",
+      "name": "たけ",
+      "staged_sha256": "33138bd8782031fa65b19c4fcea0fe568cc47e3bbaa4b35f1b2053a2075ebacb",
+      "installed": true
+    },
+    {
+      "subject": "shokubutsu",
+      "key": "blueberry",
+      "name": "ブルーベリー",
+      "staged_sha256": "0d96db07180fd30c821eb421887875260970b054355b87e66f3ea2e8e873b0b3",
+      "installed": true
+    },
+    {
+      "subject": "konchuu",
+      "key": "kamakiri",
+      "name": "カマキリ",
+      "staged_sha256": "925cba45c078cd6a003e7feb73562274c8c4c96494135d03b4fdc7f6a8bdc732",
+      "installed": true
+    },
+    {
+      "subject": "konchuu",
+      "key": "ari",
+      "name": "アリ",
+      "staged_sha256": "58bf221ced67b85b2ad83aa6b8f0acb7430afe68b5e0e4a320d9882513ada1c5",
+      "installed": true
+    },
+    {
+      "subject": "konchuu",
+      "key": "batta",
+      "name": "バッタ",
+      "staged_sha256": "6bb7af3db0b4c8f82d45d71f3ba5c9542e1e6aaccf7b5b06b398faf902bceb47",
+      "installed": true
+    },
+    {
+      "subject": "konchuu",
+      "key": "koorogi",
+      "name": "コオロギ",
+      "staged_sha256": "ba29282e7460f0fb8e803d52128cfac01b4be31aa8d8ac87287f17374686ba1a",
+      "installed": true
+    },
+    {
+      "subject": "konchuu",
+      "key": "suzumebachi",
+      "name": "スズメバチ",
+      "staged_sha256": "900c58d7718e7343d5f969b209f4d49336a488d961bab6abec12f1a3b1f0c163",
+      "installed": true
+    },
+    {
+      "subject": "konchuu",
+      "key": "ka",
+      "name": "カ",
+      "staged_sha256": "7d947fbd3384c84d3c75d0a0c88781716e6a05670aa74bc72ea84e70e55d9cc8",
+      "installed": true
+    },
+    {
+      "subject": "konchuu",
+      "key": "girafanokogirikuwagata",
+      "name": "ギラファノコギリクワガタ",
+      "staged_sha256": "97ba9d38049bbe42eec48d262803e872a38c07e4ce272cb32530f605f1f4b912",
+      "installed": true
+    }
+  ]
+}

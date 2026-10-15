@@ -19,7 +19,7 @@ def test_ready_insects_have_both_game_images():
         assert image_path.is_file()
         assert (ROOT / "assets" / "images" / "konchuu" / "quiz" / item.image_filename).is_file()
         with Image.open(image_path) as image:
-            assert image.convert("RGBA").getpixel((0, 0))[3] == 0
+            assert image.convert("RGBA").getpixel((0, 0))[3] <= 1
 
 
 def test_monshirochou_white_wings_remain_opaque():

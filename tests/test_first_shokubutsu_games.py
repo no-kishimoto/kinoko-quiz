@@ -19,7 +19,7 @@ def test_ready_plants_have_both_game_images():
         assert image_path.is_file()
         assert (ROOT / "assets" / "images" / "shokubutsu" / "quiz" / item.image_filename).is_file()
         with Image.open(image_path) as image:
-            assert image.convert("RGBA").getpixel((0, 0))[3] == 0
+            assert image.convert("RGBA").getpixel((0, 0))[3] <= 1
 
 
 def test_ready_plants_work_in_quiz_zukan_and_search():

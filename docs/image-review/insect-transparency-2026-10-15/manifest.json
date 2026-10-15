@@ -1,0 +1,500 @@
+{
+  "date": "2026-10-15",
+  "original_assets_unchanged": true,
+  "metric_note": "White wings and body patterns can be legitimate; opaque pale percentage is not an automatic defect verdict.",
+  "records": [
+    {
+      "number": 1,
+      "key": "kabutomushi",
+      "name": "カブトムシ",
+      "source": "assets/images/konchuu/zukan/kabutomushi.png",
+      "quiz": "assets/images/konchuu/quiz/kabutomushi.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 79.14,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.46,
+      "alpha_matches_quiz": true,
+      "source_sha256": "095af2a5d4dd6bb7ddba8be816e25176d34032e0dc90f3074d6916e4f6738132",
+      "quiz_sha256": "4606b73078c1bcf8d4998abf30bd12be55efb95082f9645e4354bfa6ec4a3b36"
+    },
+    {
+      "number": 2,
+      "key": "hercules_ookabuto",
+      "name": "ヘラクレスオオカブト",
+      "source": "assets/images/konchuu/zukan/hercules_ookabuto.png",
+      "quiz": "assets/images/konchuu/quiz/hercules_ookabuto.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 83.94,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.35,
+      "alpha_matches_quiz": true,
+      "source_sha256": "93f6a9ce2be0503b286df1105083ca04756ca30052225533154f14072ac08297",
+      "quiz_sha256": "c5fc9a1c05426ab0a96ebc2e75f2c2ad87c78b6fcd9ef5e8b53f9c8af8e41621"
+    },
+    {
+      "number": 3,
+      "key": "caucasus_ookabuto",
+      "name": "コーカサスオオカブト",
+      "source": "assets/images/konchuu/zukan/caucasus_ookabuto.png",
+      "quiz": "assets/images/konchuu/quiz/caucasus_ookabuto.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 83.29,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.23,
+      "alpha_matches_quiz": true,
+      "source_sha256": "ca66ce6c94c76c3486f4205f38da9f1470c99a8522a6a3489699db30d6b290f7",
+      "quiz_sha256": "b146552801088b20c26b6e029e7f3aea720e8c2714d300e56f348d1589eef6c5"
+    },
+    {
+      "number": 4,
+      "key": "ookuwagata",
+      "name": "オオクワガタ",
+      "source": "assets/images/konchuu/zukan/ookuwagata.png",
+      "quiz": "assets/images/konchuu/quiz/ookuwagata.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 76.91,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.34,
+      "alpha_matches_quiz": true,
+      "source_sha256": "4297c7fed23f405af1c3dba66044efc01388be6d9d0d72606cb654bcf015a22c",
+      "quiz_sha256": "b5af94fbe9fcd6b8e51655c8086a3f963bb47f7e1fa6a5f1febfe98895d4f03d"
+    },
+    {
+      "number": 5,
+      "key": "nokogirikuwagata",
+      "name": "ノコギリクワガタ",
+      "source": "assets/images/konchuu/zukan/nokogirikuwagata.png",
+      "quiz": "assets/images/konchuu/quiz/nokogirikuwagata.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 81.34,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.07,
+      "alpha_matches_quiz": true,
+      "source_sha256": "805bb48bcddcf3b562566b3726673f23cc27d372db974903780e69e40743a07f",
+      "quiz_sha256": "617dfef8bcae110971ed96b0ff3ca83455ae905fe6d17259d29bab8243cecef1"
+    },
+    {
+      "number": 6,
+      "key": "miyamakuwagata",
+      "name": "ミヤマクワガタ",
+      "source": "assets/images/konchuu/zukan/miyamakuwagata.png",
+      "quiz": "assets/images/konchuu/quiz/miyamakuwagata.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "transparent_percent": 77.09,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.15,
+      "alpha_matches_quiz": true,
+      "source_sha256": "2396c80a7642ba498f6f6630d4fd18cbb7fa53cad6ad12949b17c6c033819194",
+      "quiz_sha256": "cfe3234a84f7b72f4fa95ff4df965d39f6c75035035b842925bbe8f6284a6b73"
+    },
+    {
+      "number": 7,
+      "key": "kokuwagata",
+      "name": "コクワガタ",
+      "source": "assets/images/konchuu/zukan/kokuwagata.png",
+      "quiz": "assets/images/konchuu/quiz/kokuwagata.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 85.16,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.1,
+      "alpha_matches_quiz": true,
+      "source_sha256": "3f2c0d3440599bb257035d4e5f71c73f76bc1e5c1b329ac12a9d323b7d1d38e1",
+      "quiz_sha256": "2c1ec4e6b80b4a0cf47c8c006b95fd75a2cead879e2bea030a920148555e7951"
+    },
+    {
+      "number": 8,
+      "key": "ogon_onikuwagata",
+      "name": "オウゴンオニクワガタ",
+      "source": "assets/images/konchuu/zukan/ogon_onikuwagata.png",
+      "quiz": "assets/images/konchuu/quiz/ogon_onikuwagata.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 79.99,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.01,
+      "alpha_matches_quiz": true,
+      "source_sha256": "31f072de6102f37ed93b3d217c95793a4e99ef7ae8e88703cd3814007e6e3cac",
+      "quiz_sha256": "26d55a5e8b281276f8a8e7dd4d00e446b6c5ecec8bc9239beb428f70a6a9addd"
+    },
+    {
+      "number": 9,
+      "key": "kamikirimushi",
+      "name": "カミキリムシ",
+      "source": "assets/images/konchuu/zukan/kamikirimushi.png",
+      "quiz": "assets/images/konchuu/quiz/kamikirimushi.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 91.31,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.52,
+      "alpha_matches_quiz": true,
+      "source_sha256": "26742626743ef1bc619b39f7738a34cea0c7f62619b5b87e12ac9e05d08704b1",
+      "quiz_sha256": "3a2b65e09f6b3e54a360fea992dae7fe369a4155fc005671ed4fbb13983ceef7"
+    },
+    {
+      "number": 10,
+      "key": "kamakiri",
+      "name": "カマキリ",
+      "source": "assets/images/konchuu/zukan/kamakiri.png",
+      "quiz": "assets/images/konchuu/quiz/kamakiri.png",
+      "size": [
+        1376,
+        1143
+      ],
+      "transparent_percent": 83.74,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.81,
+      "alpha_matches_quiz": true,
+      "source_sha256": "a75997203bcc9651ba9b50e1c647f612810674f9c751a64345bb1b4a4ee1ab69",
+      "quiz_sha256": "2b35b62f8c678e7fa7f6f7b635d7f741102745d5e4e62c06c8679dd48a40629d"
+    },
+    {
+      "number": 11,
+      "key": "oniyanma",
+      "name": "オニヤンマ",
+      "source": "assets/images/konchuu/zukan/oniyanma.png",
+      "quiz": "assets/images/konchuu/quiz/oniyanma.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 74.58,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 13.61,
+      "alpha_matches_quiz": true,
+      "source_sha256": "a263d3952bfda14c6197be070e6a56909c75c7927ba979e740ae3b807306c294",
+      "quiz_sha256": "fdd17862dc2e6224c10d8931fa2636cb5cc4e8c28099a3e30fb63f3f54d051b3"
+    },
+    {
+      "number": 12,
+      "key": "agehachou",
+      "name": "アゲハチョウ",
+      "source": "assets/images/konchuu/zukan/agehachou.png",
+      "quiz": "assets/images/konchuu/quiz/agehachou.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 59.63,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.0,
+      "alpha_matches_quiz": true,
+      "source_sha256": "b4ccf875c1c12a84ac4337171283526f1e882bebac61d5a03f8e32514bf136bf",
+      "quiz_sha256": "f3bb401e3fedd610344e03f6f755edd6dbba07637a05854d9223600bab888e1d"
+    },
+    {
+      "number": 13,
+      "key": "monshirochou",
+      "name": "モンシロチョウ",
+      "source": "assets/images/konchuu/zukan/monshirochou.png",
+      "quiz": "assets/images/konchuu/quiz/monshirochou.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 48.96,
+      "semitransparent_pixels": 802452,
+      "opaque_pale_percent": 0.0,
+      "alpha_matches_quiz": true,
+      "source_sha256": "464976d5143d6f86ef929208061daff6f8c87b02a12f9693db5d76fcb7b23894",
+      "quiz_sha256": "229f74d25b931ec19fc70512e3fdcea43f335e90274c455d3fc868d457b5dce3"
+    },
+    {
+      "number": 14,
+      "key": "aburazemi",
+      "name": "アブラゼミ",
+      "source": "assets/images/konchuu/zukan/aburazemi.png",
+      "quiz": "assets/images/konchuu/quiz/aburazemi.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 72.84,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 3.71,
+      "alpha_matches_quiz": true,
+      "source_sha256": "b0a5c8e384c64a08b5cba0af9c54d55d9868d7b946f0e7f2d247ee1c95b69b18",
+      "quiz_sha256": "04e23eb06aa9c14e9a53f3823019fc548c47d6d4e702091874339b71c732c03a"
+    },
+    {
+      "number": 15,
+      "key": "ari",
+      "name": "アリ",
+      "source": "assets/images/konchuu/zukan/ari.png",
+      "quiz": "assets/images/konchuu/quiz/ari.png",
+      "size": [
+        1402,
+        1122
+      ],
+      "transparent_percent": 84.02,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.51,
+      "alpha_matches_quiz": true,
+      "source_sha256": "708f258bc48af84c54dc9d65872df5e01f02e787f0daa31777b3fdd49b8846ed",
+      "quiz_sha256": "942c6c7040fa8310f501e797b4596b4b1f56c646ab5282cf0cc89105471033b7"
+    },
+    {
+      "number": 16,
+      "key": "mitsubachi",
+      "name": "ミツバチ",
+      "source": "assets/images/konchuu/zukan/mitsubachi.png",
+      "quiz": "assets/images/konchuu/quiz/mitsubachi.png",
+      "size": [
+        1402,
+        1122
+      ],
+      "transparent_percent": 69.55,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 2.68,
+      "alpha_matches_quiz": true,
+      "source_sha256": "9348709f3c6c2671e87ad3b630b1f15f235696da7eed9c58268622331d8dfc19",
+      "quiz_sha256": "c5e85da90df7b016d997210a92cb2f4c2282fee7133344480465fcb540fdb34b"
+    },
+    {
+      "number": 17,
+      "key": "tentoumushi",
+      "name": "テントウムシ",
+      "source": "assets/images/konchuu/zukan/tentoumushi.png",
+      "quiz": "assets/images/konchuu/quiz/tentoumushi.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 72.06,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.22,
+      "alpha_matches_quiz": true,
+      "source_sha256": "49c7d79c3ad21563fb8f8d315aea5951b83e7cf93cd5d83303ddb19148940c2c",
+      "quiz_sha256": "da5ce1f0f5e71084d67a72a7ab0d39803b446e1c3f336bd935219da65c04b4a7"
+    },
+    {
+      "number": 18,
+      "key": "batta",
+      "name": "バッタ",
+      "source": "assets/images/konchuu/zukan/batta.png",
+      "quiz": "assets/images/konchuu/quiz/batta.png",
+      "size": [
+        1351,
+        1164
+      ],
+      "transparent_percent": 75.42,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 2.14,
+      "alpha_matches_quiz": true,
+      "source_sha256": "43e8c0703daab4932645cc022e60966bdd6285e277de12de646f056ce7910c83",
+      "quiz_sha256": "2f6569856c5b25a7eaf51a1e8288745f56802c0965f5bec0a6fc4db9cbc548e8"
+    },
+    {
+      "number": 19,
+      "key": "koorogi",
+      "name": "コオロギ",
+      "source": "assets/images/konchuu/zukan/koorogi.png",
+      "quiz": "assets/images/konchuu/quiz/koorogi.png",
+      "size": [
+        1329,
+        1183
+      ],
+      "transparent_percent": 81.76,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.65,
+      "alpha_matches_quiz": true,
+      "source_sha256": "063a2a2b82968e0fa9faaa56dc28e29115d2e11d0809076b86ddd888e5730e54",
+      "quiz_sha256": "4c0100ddc8df4e168588ccd09754ef15dad409337242a0e33718023967345667"
+    },
+    {
+      "number": 20,
+      "key": "suzumushi",
+      "name": "スズムシ",
+      "source": "assets/images/konchuu/zukan/suzumushi.png",
+      "quiz": "assets/images/konchuu/quiz/suzumushi.png",
+      "size": [
+        1333,
+        1180
+      ],
+      "transparent_percent": 81.15,
+      "semitransparent_pixels": 295899,
+      "opaque_pale_percent": 0.0,
+      "alpha_matches_quiz": true,
+      "source_sha256": "6ba4117b363d6c0827ef3cfdf19c5bc062e796f4ac466000f4f89b042498293e",
+      "quiz_sha256": "0036b43b063ed9ca0dcc1539a402c5253d7df83b889f8ec89e66a546309ab2b2"
+    },
+    {
+      "number": 21,
+      "key": "hotaru",
+      "name": "ホタル",
+      "source": "assets/images/konchuu/zukan/hotaru.png",
+      "quiz": "assets/images/konchuu/quiz/hotaru.png",
+      "size": [
+        1306,
+        1205
+      ],
+      "transparent_percent": 81.1,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.12,
+      "alpha_matches_quiz": true,
+      "source_sha256": "56826c091bef612ca3c2b2db6a0c7c01486d829c36954f6142bf6248de60c859",
+      "quiz_sha256": "920296e2a340e4360b69dcc6f0a51608421b774795117701974039dffbe9bc79"
+    },
+    {
+      "number": 22,
+      "key": "kamemushi",
+      "name": "カメムシ",
+      "source": "assets/images/konchuu/zukan/kamemushi.png",
+      "quiz": "assets/images/konchuu/quiz/kamemushi.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 81.6,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.0,
+      "alpha_matches_quiz": true,
+      "source_sha256": "2c013dc565741cad1f8e1e30a62d9bf6b8a55fc513ae55ed6e755c6c1dccb4f7",
+      "quiz_sha256": "a04985dc14de23b65d7e27e861330c4b595e27e94827fec2b412148ab852db3a"
+    },
+    {
+      "number": 23,
+      "key": "suzumebachi",
+      "name": "スズメバチ",
+      "source": "assets/images/konchuu/zukan/suzumebachi.png",
+      "quiz": "assets/images/konchuu/quiz/suzumebachi.png",
+      "size": [
+        1330,
+        1182
+      ],
+      "transparent_percent": 76.38,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.44,
+      "alpha_matches_quiz": true,
+      "source_sha256": "f98164aa30c560f883b362319d079dc29f7890daad501f3e59c6bc0f09c9b407",
+      "quiz_sha256": "376d677b7a4c23a2fe6dfe3b7e0504ad1ec7d665c9225f58a6f33eaf65eb7fd4"
+    },
+    {
+      "number": 24,
+      "key": "kanabun",
+      "name": "カナブン",
+      "source": "assets/images/konchuu/zukan/kanabun.png",
+      "quiz": "assets/images/konchuu/quiz/kanabun.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 79.03,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.35,
+      "alpha_matches_quiz": true,
+      "source_sha256": "30b1369473021199a3af8bbba505766e5a8b55431c2fdce59a437ab4066b8300",
+      "quiz_sha256": "804389b68ab1fc2c2fbfd441d8f9e60e54505da9eec922f564b74d63f19c7a5c"
+    },
+    {
+      "number": 25,
+      "key": "hae",
+      "name": "ハエ",
+      "source": "assets/images/konchuu/zukan/hae.png",
+      "quiz": "assets/images/konchuu/quiz/hae.png",
+      "size": [
+        1324,
+        1188
+      ],
+      "transparent_percent": 77.67,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 3.01,
+      "alpha_matches_quiz": true,
+      "source_sha256": "bf43dc8be73eb2cd72711ae1329b5d3ab685a936c7441b9c8dc7b5b671807e69",
+      "quiz_sha256": "0c7ae7fc86792e43b32da58ae57cbe13f4822d57511c981eebe766c8419cec20"
+    },
+    {
+      "number": 26,
+      "key": "ka",
+      "name": "カ",
+      "source": "assets/images/konchuu/zukan/ka.png",
+      "quiz": "assets/images/konchuu/quiz/ka.png",
+      "size": [
+        1343,
+        1171
+      ],
+      "transparent_percent": 89.47,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 1.32,
+      "alpha_matches_quiz": true,
+      "source_sha256": "2462292fa47e9ef539a868bd24c901b1311404067b39f1851d0ab8ab0813828a",
+      "quiz_sha256": "24d2bf23e2384468ab3784ef0a2d9476552e6537328d6d153f7da4735aad4871"
+    },
+    {
+      "number": 27,
+      "key": "nijiirokuwagata",
+      "name": "ニジイロクワガタ",
+      "source": "assets/images/konchuu/zukan/nijiirokuwagata.png",
+      "quiz": "assets/images/konchuu/quiz/nijiirokuwagata.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 75.89,
+      "semitransparent_pixels": 378035,
+      "opaque_pale_percent": 0.0,
+      "alpha_matches_quiz": true,
+      "source_sha256": "f4f49f43967dca2d8c3dbaa5da1911d2d3d2e55041df8f1ac867078a18a5e2fe",
+      "quiz_sha256": "84323d9141aabd113f9ed72130ad9b6692ab2c3d53df5e9962eeb7e84825d6e6"
+    },
+    {
+      "number": 28,
+      "key": "girafanokogirikuwagata",
+      "name": "ギラファノコギリクワガタ",
+      "source": "assets/images/konchuu/zukan/girafanokogirikuwagata.png",
+      "quiz": "assets/images/konchuu/quiz/girafanokogirikuwagata.png",
+      "size": [
+        1402,
+        1122
+      ],
+      "transparent_percent": 83.73,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.4,
+      "alpha_matches_quiz": true,
+      "source_sha256": "cf527f89a49fe0462a3069ed1b52bf5a0da4cc92b0cecfbcd4e0ab1677d7e710",
+      "quiz_sha256": "48633792379a7737e64338b0d54e6b640dc59c6c8df14347644bce72e6f3215d"
+    },
+    {
+      "number": 29,
+      "key": "goliathus_goliatus",
+      "name": "ゴライアスオオツノハナムグリ",
+      "source": "assets/images/konchuu/zukan/goliathus_goliatus.png",
+      "quiz": "assets/images/konchuu/quiz/goliathus_goliatus.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 71.68,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 6.11,
+      "alpha_matches_quiz": true,
+      "source_sha256": "6aa829b5b2066486090de9de54bb446f8af6b67c9d1090176b3068e2f12f14d6",
+      "quiz_sha256": "9f70dd7ab1436bfdd4d6ed322ae4a858736214d21463879831181911fcacbc74"
+    }
+  ]
+}

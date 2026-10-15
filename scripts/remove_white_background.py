@@ -1,7 +1,8 @@
-"""白っぽい背景を透明化して、図鑑・クイズ用の素材を作り直す。"""
+"""旧式の色閾値による背景除去。明示オプションなしでは画像を変更しない。"""
 
 from __future__ import annotations
 
+import argparse
 import os
 import sys
 from pathlib import Path
@@ -159,7 +160,29 @@ def rebuild_kinoko_assets() -> None:
         os.replace(temporary_path, destination)
 
 
-if __name__ == "__main__":
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        allow_abbrev=False,
+        description=(
+            "旧式の白色閾値による背景除去です。白い花・翅などの本体や、"
+            "確認済みの透明度を壊す可能性があるため、通常の再生成には使用しないでください。"
+        ),
+    )
+    parser.add_argument(
+        "--legacy-color-threshold-removal",
+        action="store_true",
+        help="危険性を理解したうえで、旧方式の背景除去とクイズ画像の再生成を実行する",
+    )
+    args = parser.parse_args(argv)
+    if not args.legacy_color_threshold_removal:
+        parser.print_help(file=sys.stderr)
+        print(
+            "\n画像は変更していません。旧方式を実行するには "
+            "--legacy-color-threshold-removal の明示指定が必要です。",
+            file=sys.stderr,
+        )
+        return 2
+
     rebuild_subject_assets(
         SHOKUBUTSU_DATA_PATH,
         SHOKUBUTSU_ZUKAN_IMAGE_DIR,
@@ -168,3 +191,8 @@ if __name__ == "__main__":
     )
     rebuild_subject_assets(KONCHUU_DATA_PATH, KONCHUU_ZUKAN_IMAGE_DIR, KONCHUU_QUIZ_IMAGE_DIR, KONCHUU_HIGHLIGHTS)
     rebuild_kinoko_assets()
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

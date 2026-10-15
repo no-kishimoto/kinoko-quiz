@@ -1,0 +1,767 @@
+{
+  "date": "2026-10-15",
+  "original_assets_unchanged": true,
+  "metric_note": "Opaque pale pixels include legitimate white subject parts; not an automatic defect count.",
+  "records": [
+    {
+      "number": 1,
+      "key": "sakura",
+      "name": "さくら",
+      "quiz_hint": "うすい ピンクや しろの はな。はなびらは 5まい。",
+      "zukan_text": "はるに きに たくさん さく はな。はなびらが ひらひら おちるよ。",
+      "source": "assets/images/shokubutsu/zukan/sakura.png",
+      "quiz": "assets/images/shokubutsu/quiz/sakura.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 63.66,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 8.47,
+      "alpha_matches_quiz": true,
+      "source_sha256": "85e1e0d995a8d66429b0afa668e3567ebb9ba30e652669afb6ffd67b2f62c42b",
+      "quiz_sha256": "c18b21e5953da8e946c374f90b0d6287497ba6457689a2fe5764157c615323e1"
+    },
+    {
+      "number": 2,
+      "key": "tanpopo",
+      "name": "たんぽぽ",
+      "quiz_hint": "きいろい まるい はな。あとで しろい わたげに なる。",
+      "zukan_text": "みちばたや くさちに さく はな。わたげは かぜに のって とんでいくよ。",
+      "source": "assets/images/shokubutsu/zukan/tanpopo.png",
+      "quiz": "assets/images/shokubutsu/quiz/tanpopo.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 72.4,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 1.65,
+      "alpha_matches_quiz": true,
+      "source_sha256": "2cc50352abbed9b8c647131901c33f5a8b3d83b96a02905dfdaf3894b41b8ee7",
+      "quiz_sha256": "894f0a4ff53fbc9c8d8fb2e2729e957cddf80e65b0f40e21870631e837566f9a"
+    },
+    {
+      "number": 3,
+      "key": "himawari",
+      "name": "ひまわり",
+      "quiz_hint": "おおきな きいろい はな。まんなかは ちゃいろ。",
+      "zukan_text": "なつに さく、せの たかい はな。ひとつに みえる はなは、ちいさな はなが たくさん あつまっているよ。",
+      "source": "assets/images/shokubutsu/zukan/himawari.png",
+      "quiz": "assets/images/shokubutsu/quiz/himawari.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 75.23,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.09,
+      "alpha_matches_quiz": true,
+      "source_sha256": "15bf99a74330f8900c10fc15d672f4932bdcc01552cef339fa65e9b03a10206f",
+      "quiz_sha256": "e5c21b681d2a49a9763d03bb1f2dee240356ca6674acd8d463b6b42d6c5b5388"
+    },
+    {
+      "number": 4,
+      "key": "asagao",
+      "name": "あさがお",
+      "quiz_hint": "あさに ひらく、むらさきや あおの はな。つるが のびる。",
+      "zukan_text": "なつの あさに さく はな。つるを くるくる まきつけて のびるよ。",
+      "source": "assets/images/shokubutsu/zukan/asagao.png",
+      "quiz": "assets/images/shokubutsu/quiz/asagao.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 79.68,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 1.57,
+      "alpha_matches_quiz": true,
+      "source_sha256": "a67954e559775284f7d092ee74f294f3dcdd18e628507471f9a048a98c39a21b",
+      "quiz_sha256": "fa0294176ec1d5d55d14378b9eb572f8afff3fd0ee1a67ef350123b0544f0da8"
+    },
+    {
+      "number": 5,
+      "key": "chuurippu",
+      "name": "チューリップ",
+      "quiz_hint": "あか・きいろ・しろなどの はな。コップみたいな かたち。",
+      "zukan_text": "はるに さく はな。つちの なかの きゅうこんから めが でるよ。",
+      "source": "assets/images/shokubutsu/zukan/chuurippu.png",
+      "quiz": "assets/images/shokubutsu/quiz/chuurippu.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 84.16,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.05,
+      "alpha_matches_quiz": true,
+      "source_sha256": "412b31ca72911b81be626eff2be27c1c8aae712f86ba6beddd7f72f086bcdc19",
+      "quiz_sha256": "875ce3135e7e5761651bbec39aa77ab560cd712b77d9bd243a019b3c27c6ff37"
+    },
+    {
+      "number": 6,
+      "key": "bara",
+      "name": "ばら",
+      "quiz_hint": "はなびらが たくさん。くきには とげが ある。",
+      "zukan_text": "あかや ピンクなど、いろいろな いろの はなが さくよ。いい においの する なかまも いるよ。",
+      "source": "assets/images/shokubutsu/zukan/bara.png",
+      "quiz": "assets/images/shokubutsu/quiz/bara.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 74.34,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.29,
+      "alpha_matches_quiz": true,
+      "source_sha256": "89d48ddd2e8d097da0c0c7b98e58d408b51b5d6d435ba4860241e55a5dac6b2b",
+      "quiz_sha256": "a8bfae4aaf94c54a09436c194c62c00da0a0d69705548aad765768c223b20751"
+    },
+    {
+      "number": 7,
+      "key": "saracenia",
+      "name": "サラセニア",
+      "quiz_hint": "ながい つつみたいな は。なかに むしが おちる。",
+      "zukan_text": "むしを つかまえる しょくぶつ。つつの なかで むしから えいようを もらうよ。",
+      "source": "assets/images/shokubutsu/zukan/saracenia.png",
+      "quiz": "assets/images/shokubutsu/quiz/saracenia.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 71.92,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.53,
+      "alpha_matches_quiz": true,
+      "source_sha256": "7d1f6b92df76fa84409f76c62639f490be2bc97671c5e82da5261edc172d466f",
+      "quiz_sha256": "936a6deb514c8541b9f774544892291a2fb856abccc531796901c26e86603a57"
+    },
+    {
+      "number": 8,
+      "key": "shirotsumekusa",
+      "name": "しろつめくさ",
+      "quiz_hint": "しろい ちいさな はなが まるく あつまる。はは 3まい。",
+      "zukan_text": "クローバーとも よばれるよ。たまに はが 4まいの よつばが みつかることも あるよ。",
+      "source": "assets/images/shokubutsu/zukan/shirotsumekusa.png",
+      "quiz": "assets/images/shokubutsu/quiz/shirotsumekusa.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 78.84,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.8,
+      "alpha_matches_quiz": true,
+      "source_sha256": "b2eff825eb8d79547688ba0dc6073d223e9d158ba9fb53e0f67e5497a54b3efb",
+      "quiz_sha256": "6857e304ad86a6326de861f54fe758f840a83e2c9514aed120952d32983606e9"
+    },
+    {
+      "number": 9,
+      "key": "nekopanjya",
+      "name": "ねこじゃらし",
+      "quiz_hint": "みどりの ふわふわした ほ。ねこの しっぽみたい。",
+      "zukan_text": "なつから あきに、みちばたに はえる くさ。ほんとうの なまえは エノコログサだよ。",
+      "source": "assets/images/shokubutsu/zukan/nekopanjya.png",
+      "quiz": "assets/images/shokubutsu/quiz/nekopanjya.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 82.02,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 2.4,
+      "alpha_matches_quiz": true,
+      "source_sha256": "2621f5e3aa11cde6a0ed4861cf19eaf9e1aa3e9cb133e9d40466c1939a53268b",
+      "quiz_sha256": "d17f09147ab4809ba5bd42bf8852470180b8b0ad54477c1d7bd887a70f17179a"
+    },
+    {
+      "number": 10,
+      "key": "donguri",
+      "name": "どんぐり",
+      "quiz_hint": "ちゃいろい み。ぼうしを かぶっている。",
+      "zukan_text": "かしの きに なる み。どんぐりの ぼうしは、みの つけねの ぶぶんだよ。",
+      "source": "assets/images/shokubutsu/zukan/donguri.png",
+      "quiz": "assets/images/shokubutsu/quiz/donguri.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 60.07,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.0,
+      "alpha_matches_quiz": true,
+      "source_sha256": "708982e5d853b361b2ff79e03a696f432cf9782cc545a7530fadad324e62e76e",
+      "quiz_sha256": "057dba218d49440aac44f01d2520a1f3aecacf8e237f95dfb0b09d29535125c5"
+    },
+    {
+      "number": 11,
+      "key": "ninjin",
+      "name": "にんじん",
+      "quiz_hint": "ながい オレンジいろ。うえに みどりの はが ある。",
+      "zukan_text": "つちの なかに そだつ やさい。あまくて、ポリポリ たべられるよ。",
+      "source": "assets/images/shokubutsu/zukan/ninjin.png",
+      "quiz": "assets/images/shokubutsu/quiz/ninjin.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 87.0,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.97,
+      "alpha_matches_quiz": true,
+      "source_sha256": "298d0ec4687de5cbc77400418fdb93b7cd23568c5c3162565c54e145dffa7173",
+      "quiz_sha256": "215ad4a00c9b7158e99e4e62ed436ff4cfee1d2aaee561196826be2f240c377e"
+    },
+    {
+      "number": 12,
+      "key": "tomato",
+      "name": "トマト",
+      "quiz_hint": "まるくて あかい み。うえに みどりの へたが ある。",
+      "zukan_text": "なつに みのる やさい。きいろい はなから、あかい みが できるよ。",
+      "source": "assets/images/shokubutsu/zukan/tomato.png",
+      "quiz": "assets/images/shokubutsu/quiz/tomato.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 68.82,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 1.01,
+      "alpha_matches_quiz": true,
+      "source_sha256": "b54c4387856760d31aefde6e0c35ea88b2e9188b9d3dc3ab5a6882683bd8fccf",
+      "quiz_sha256": "5b427c895754e0f1fe3c79d6ff0836efca30de7cd22d7b2cb7ab1d1317d3d613"
+    },
+    {
+      "number": 13,
+      "key": "kyuuri",
+      "name": "きゅうり",
+      "quiz_hint": "ながくて みどり。ひょうめんに ちいさな とげが ある。",
+      "zukan_text": "つるを のばして そだつ やさい。きいろい はなが さいた あとに みが できるよ。",
+      "source": "assets/images/shokubutsu/zukan/kyuuri.png",
+      "quiz": "assets/images/shokubutsu/quiz/kyuuri.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 62.75,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 2.48,
+      "alpha_matches_quiz": true,
+      "source_sha256": "82bcfeb08bd5164f2d209f9676e80901de2ff71c4ea81d6c834e89c7ac226b2a",
+      "quiz_sha256": "fbe7c7048ae60db83b48f8be15a4fca931b5ecdf43cc8db31fa4238aede0a569"
+    },
+    {
+      "number": 14,
+      "key": "kabocha",
+      "name": "かぼちゃ",
+      "quiz_hint": "まるくて みどり。かたい かわに すじが ある。",
+      "zukan_text": "おおきな みが なる やさい。なかには たくさんの たねが かくれているよ。",
+      "source": "assets/images/shokubutsu/zukan/kabocha.png",
+      "quiz": "assets/images/shokubutsu/quiz/kabocha.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 47.29,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.01,
+      "alpha_matches_quiz": true,
+      "source_sha256": "5b878d55c75d5d18ccaa93fb0c4f59dc33c1179de3a1906f1acd59b2b10898f9",
+      "quiz_sha256": "7e8c7598a80fb0cdc4b71d1fc78c5d0d0d78977dd307e5a0ab648fe400e18464"
+    },
+    {
+      "number": 15,
+      "key": "jagaimo",
+      "name": "じゃがいも",
+      "quiz_hint": "まるい ちゃいろの いも。つちの なかに できる。",
+      "zukan_text": "つちの なかで そだつ やさい。しろや むらさきの ちいさな はなが さくことも あるよ。",
+      "source": "assets/images/shokubutsu/zukan/jagaimo.png",
+      "quiz": "assets/images/shokubutsu/quiz/jagaimo.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 72.11,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 1.27,
+      "alpha_matches_quiz": true,
+      "source_sha256": "e3eaad7ec3e19af5763f73d159737c466970d39d6fd394e52b8972446150d55d",
+      "quiz_sha256": "f4ba913bef8c90ca63ad729372978fa245a6785587f6604bc59bf6a578988b2d"
+    },
+    {
+      "number": 16,
+      "key": "tamanegi",
+      "name": "たまねぎ",
+      "quiz_hint": "まるい たまみたい。うすい かわを むく。",
+      "zukan_text": "ちかくの はが なんまいも かさなって まるくなる やさい。",
+      "source": "assets/images/shokubutsu/zukan/tamanegi.png",
+      "quiz": "assets/images/shokubutsu/quiz/tamanegi.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 84.35,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.39,
+      "alpha_matches_quiz": true,
+      "source_sha256": "092c6f630061f51491596506f25323a38857bc3af0fd9541edd6b08319781862",
+      "quiz_sha256": "fab00fe27c4e6baf812032f26be1c6f63a0f9b99acc6f32b6e06317fde772e38"
+    },
+    {
+      "number": 17,
+      "key": "daikon",
+      "name": "だいこん",
+      "quiz_hint": "ながくて しろい ね。うえに おおきな はが ある。",
+      "zukan_text": "つちの なかに おおきな ねが のびる やさい。からい あじの する なかまも いるよ。",
+      "source": "assets/images/shokubutsu/zukan/daikon.png",
+      "quiz": "assets/images/shokubutsu/quiz/daikon.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 74.39,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 2.8,
+      "alpha_matches_quiz": true,
+      "source_sha256": "730cbd6be217f7e1f7472e917946aad6b9d0ecff216f11818aa85580ca8e73fd",
+      "quiz_sha256": "6c81ee45bfedbae38871def58117d7d9bf0d1ebad4e75264ab90ebd1dabc621b"
+    },
+    {
+      "number": 18,
+      "key": "piiman",
+      "name": "ピーマン",
+      "quiz_hint": "みどりで つやつや。なかは からっぽみたい。",
+      "zukan_text": "しろい ちいさな はなから、みどりの みが できる やさい。",
+      "source": "assets/images/shokubutsu/zukan/piiman.png",
+      "quiz": "assets/images/shokubutsu/quiz/piiman.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 68.44,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 2.15,
+      "alpha_matches_quiz": true,
+      "source_sha256": "e7ff319163bbf6697396ce175234a47c40627f305feb0349e637d3c55d0009a4",
+      "quiz_sha256": "7957abd50958ff153681ff79df5492f2260fa8b1f8727f1c5e323881a0a2683d"
+    },
+    {
+      "number": 19,
+      "key": "toumorokoshi",
+      "name": "とうもろこし",
+      "quiz_hint": "きいろい つぶが ならんでいる。みどりの はで つつまれている。",
+      "zukan_text": "ながい くきに そだつ やさい。みの つぶは 1つずつが たねだよ。",
+      "source": "assets/images/shokubutsu/zukan/toumorokoshi.png",
+      "quiz": "assets/images/shokubutsu/quiz/toumorokoshi.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 81.63,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.05,
+      "alpha_matches_quiz": true,
+      "source_sha256": "f2f0759d2f3237ade93dc2b81f09ea76492e1cf7e6286a96911e3a889417acb5",
+      "quiz_sha256": "2daa63ff1ffbd268b4413886e453053d1aa1ece8a00da6b34c2146b8ccfc68f8"
+    },
+    {
+      "number": 20,
+      "key": "edamame",
+      "name": "えだまめ",
+      "quiz_hint": "みどりの さやの なかに、まるい まめが いる。",
+      "zukan_text": "だいずが まだ わかいときに たべる やさい。さやの なかに まめが ならんでいるよ。",
+      "source": "assets/images/shokubutsu/zukan/edamame.png",
+      "quiz": "assets/images/shokubutsu/quiz/edamame.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 65.68,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 2.58,
+      "alpha_matches_quiz": true,
+      "source_sha256": "ef40047e9a60bab63f60e98813afdd160278bccc2aa6f2ccfe81fa3a9d3b0dc8",
+      "quiz_sha256": "79dcbe333e86500743140a7dd2e9825e53a8d081433ea62f5f4030c623b9a383"
+    },
+    {
+      "number": 21,
+      "key": "okura",
+      "name": "オクラ",
+      "quiz_hint": "みどりで ながい さや。きると ほしの かたち。",
+      "zukan_text": "みどりの さやを たべる やさい。なかに まるい たねが ならんでいるよ。",
+      "source": "assets/images/shokubutsu/zukan/okura.png",
+      "quiz": "assets/images/shokubutsu/quiz/okura.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 62.6,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 1.07,
+      "alpha_matches_quiz": true,
+      "source_sha256": "94c3e8c1ad314ef3d71e850e8eeee04350ddbd9982b3969d6920c8390164dfe3",
+      "quiz_sha256": "b0a3e142532205d312ca7356e741d6785a76213a07b7988dd923946af5f08a14"
+    },
+    {
+      "number": 22,
+      "key": "ringo",
+      "name": "りんご",
+      "quiz_hint": "まるくて あかい み。うえに くぼみと へたが ある。",
+      "zukan_text": "きに なる くだもの。あかや きいろなど、いろいろな いろが あるよ。",
+      "source": "assets/images/shokubutsu/zukan/ringo.png",
+      "quiz": "assets/images/shokubutsu/quiz/ringo.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 59.65,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 3.47,
+      "alpha_matches_quiz": true,
+      "source_sha256": "ed9a710589b127d0cb0dbf8756c6aa6ff1ba9a0fe6724b853af39e9d69255c92",
+      "quiz_sha256": "c84c9235da2689fab24c3fef368fe374acb465d7b9048627a6819999ebf29695"
+    },
+    {
+      "number": 23,
+      "key": "mikan",
+      "name": "みかん",
+      "quiz_hint": "まるくて オレンジいろ。かわが むきやすい。",
+      "zukan_text": "きに なる くだもの。なかは いくつかの ふくろに わかれているよ。",
+      "source": "assets/images/shokubutsu/zukan/mikan.png",
+      "quiz": "assets/images/shokubutsu/quiz/mikan.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 67.93,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 1.49,
+      "alpha_matches_quiz": true,
+      "source_sha256": "f486168a53f4b65111c084f64b58f8b1326f12a92c6b29494cfd4e8a40b71dec",
+      "quiz_sha256": "d04551538523d3ffba063df03fd15a142e7b8b82a32f28a720390b3549df032a"
+    },
+    {
+      "number": 24,
+      "key": "banana",
+      "name": "バナナ",
+      "quiz_hint": "ながくて きいろ。かわを むいて たべる。",
+      "zukan_text": "あたたかい ところで そだつ くだもの。おおきな はっぱの ある しょくぶつに なるよ。",
+      "source": "assets/images/shokubutsu/zukan/banana.png",
+      "quiz": "assets/images/shokubutsu/quiz/banana.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 67.78,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.55,
+      "alpha_matches_quiz": true,
+      "source_sha256": "0d2d6b2d7e9383f0952a69e23d5ec8cf730ec81a92b3438434c476bcb77845c5",
+      "quiz_sha256": "c9df10e16d07add17498331ee3955790b9cb2d205f5772b962cd6710230478dc"
+    },
+    {
+      "number": 25,
+      "key": "ichigo",
+      "name": "いちご",
+      "quiz_hint": "あかくて ちいさな つぶつぶが ある。みどりの へた。",
+      "zukan_text": "しろい はなから できる くだもの。あかい ところの つぶつぶが たねだよ。",
+      "source": "assets/images/shokubutsu/zukan/ichigo.png",
+      "quiz": "assets/images/shokubutsu/quiz/ichigo.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 54.05,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 5.52,
+      "alpha_matches_quiz": true,
+      "source_sha256": "2adb9fb76672c6a251fdff9cb253fcf631e436b953397d8e31ac8c525949f416",
+      "quiz_sha256": "c536c7663f9c815537ed626b6fa7d31051c4bf209b3095754c83744bd019cb6e"
+    },
+    {
+      "number": 26,
+      "key": "budou",
+      "name": "ぶどう",
+      "quiz_hint": "まるい みが たくさん くっついている。",
+      "zukan_text": "つるを のばして そだつ くだもの。むらさきや みどりの みが あるよ。",
+      "source": "assets/images/shokubutsu/zukan/budou.png",
+      "quiz": "assets/images/shokubutsu/quiz/budou.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 66.68,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 1.37,
+      "alpha_matches_quiz": true,
+      "source_sha256": "0aeb2b3bf29bff3ec5018f599db8c0daae11a062f7eedc1c46e68bba18722633",
+      "quiz_sha256": "7fc96b5494bfcb63994895ac05dd07ffa103c775a5b5a89e7ce48a05c6f67145"
+    },
+    {
+      "number": 27,
+      "key": "momo",
+      "name": "もも",
+      "quiz_hint": "まるくて ピンク。かわに うぶげが ある。",
+      "zukan_text": "はるに ピンクの はなが さく きに なる くだもの。",
+      "source": "assets/images/shokubutsu/zukan/momo.png",
+      "quiz": "assets/images/shokubutsu/quiz/momo.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 64.81,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 3.36,
+      "alpha_matches_quiz": true,
+      "source_sha256": "74f5557d97f80d8baa7343f4265c7cfc086b893303e6b863babf009e842c2a17",
+      "quiz_sha256": "baf9fae14ceeced56aba6058ce8c6662b4286d337f62b62668136fe03d4561c1"
+    },
+    {
+      "number": 28,
+      "key": "nashi",
+      "name": "なし",
+      "quiz_hint": "まるくて ちゃいろ。あまくて みずみずしい。",
+      "zukan_text": "きに なる くだもの。シャリシャリした たべごこちが とくちょうだよ。",
+      "source": "assets/images/shokubutsu/zukan/nashi.png",
+      "quiz": "assets/images/shokubutsu/quiz/nashi.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 59.82,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 4.08,
+      "alpha_matches_quiz": true,
+      "source_sha256": "16d912f298cc67bb786001ed985dc802f0009ae54735ed452f93eb4b3b8436ed",
+      "quiz_sha256": "7da150a9045a47cb72ea2658241f5961615c3dafd732e7bc47b0c6d2f93c108c"
+    },
+    {
+      "number": 29,
+      "key": "suika",
+      "name": "すいか",
+      "quiz_hint": "おおきくて まるい。みどりの しまもよう。",
+      "zukan_text": "なつに たべる くだもの。あかい なかみに くろい たねが あるよ。",
+      "source": "assets/images/shokubutsu/zukan/suika.png",
+      "quiz": "assets/images/shokubutsu/quiz/suika.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 61.1,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 1.55,
+      "alpha_matches_quiz": true,
+      "source_sha256": "9c5ec744ee869dd74e9ce55390e6e18c8ddf918beaa1c727c7c0ef813e79723e",
+      "quiz_sha256": "6a98fbcea0fee6ff9bfeadba9116df9e32bf31314ece2720005bfed2831cd0e8"
+    },
+    {
+      "number": 30,
+      "key": "meron",
+      "name": "メロン",
+      "quiz_hint": "まるくて あみめもよう。あまい におい。",
+      "zukan_text": "つるを のばして そだつ くだもの。なかには たくさんの たねが あるよ。",
+      "source": "assets/images/shokubutsu/zukan/meron.png",
+      "quiz": "assets/images/shokubutsu/quiz/meron.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 65.04,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 1.14,
+      "alpha_matches_quiz": true,
+      "source_sha256": "28135dc8b458cf71c1a83da1b506b7de55c778a18629bdea4885cc3b733727ec",
+      "quiz_sha256": "c51bfc790a19805c443f60a3081f56a3c3ccb918137f1bee1ae416d551d2027b"
+    },
+    {
+      "number": 31,
+      "key": "kaki",
+      "name": "かき",
+      "quiz_hint": "オレンジいろで まるい み。うえに みどりの へた。",
+      "zukan_text": "あきに きに なる くだもの。あまくて やわらかい みになるよ。",
+      "source": "assets/images/shokubutsu/zukan/kaki.png",
+      "quiz": "assets/images/shokubutsu/quiz/kaki.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 62.6,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 2.31,
+      "alpha_matches_quiz": true,
+      "source_sha256": "a3fe7a424b2d5ea7170d86b6be02837224889e10cf72a539f32fcaf96e639962",
+      "quiz_sha256": "3f9e9dd91ce9fc5f1defff182e237c3bc4b7668a8817b3b18d15a37150e92109"
+    },
+    {
+      "number": 32,
+      "key": "haetorigusa",
+      "name": "はえとりぐさ",
+      "quiz_hint": "はが パクッと とじる。まわりに とげみたいな け。",
+      "zukan_text": "むしが はに ふれると、はを パクッと とじる しょくぶつ。",
+      "source": "assets/images/shokubutsu/zukan/haetorigusa.png",
+      "quiz": "assets/images/shokubutsu/quiz/haetorigusa.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 64.21,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.07,
+      "alpha_matches_quiz": true,
+      "source_sha256": "a51fe395cb4cba01c4a21b1459eaecc0a6a624f0611ae20b1af39c89c26d2d5d",
+      "quiz_sha256": "94e1f53b85fe873dd098e45ea4b05063f67256d7c28c84fb03ea055149ddaa61"
+    },
+    {
+      "number": 33,
+      "key": "utsubokazura",
+      "name": "うつぼかずら",
+      "quiz_hint": "ふくろみたいな はが ぶらさがる。ふたが ある。",
+      "zukan_text": "むしを つかまえる しょくぶつ。ふくろの なかに むしが おちるよ。",
+      "source": "assets/images/shokubutsu/zukan/utsubokazura.png",
+      "quiz": "assets/images/shokubutsu/quiz/utsubokazura.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 62.51,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 12.57,
+      "alpha_matches_quiz": true,
+      "source_sha256": "32ca7664ed64116339120c25245801375fa468c2c65dfe72b008dbb6c02d6f71",
+      "quiz_sha256": "0b970f5fd81f8e0faef6a2bfff1b40f441846f88e63e31463b9c57e66653c3cf"
+    },
+    {
+      "number": 34,
+      "key": "mousengoke",
+      "name": "モウセンゴケ",
+      "quiz_hint": "はに キラキラした ねばねばが ある。",
+      "zukan_text": "ねばねばした はで むしを つかまえる しょくぶつ。",
+      "source": "assets/images/shokubutsu/zukan/mousengoke.png",
+      "quiz": "assets/images/shokubutsu/quiz/mousengoke.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 56.81,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 2.7,
+      "alpha_matches_quiz": true,
+      "source_sha256": "f0d0b0542942c214dc27a156f9b84c5cade79f8297670212467db9ae4cb34819",
+      "quiz_sha256": "82e39ba7d1209b22ad102960cdcf04ff92445b25caa8eee5453d5fec1439d195"
+    },
+    {
+      "number": 35,
+      "key": "saboten",
+      "name": "サボテン",
+      "quiz_hint": "みどりで まるい。ちくちくした とげが ある。",
+      "zukan_text": "あめの すくない ところでも そだつ しょくぶつ。からだに みずを ためるよ。",
+      "source": "assets/images/shokubutsu/zukan/saboten.png",
+      "quiz": "assets/images/shokubutsu/quiz/saboten.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 71.32,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 0.35,
+      "alpha_matches_quiz": true,
+      "source_sha256": "2a7d2e6f3ef4d3f3575a60c9e9dee6000b830eb3a0588dfc45a9bbd74bcddd31",
+      "quiz_sha256": "643c639026c05243d87951b73ec5f801bced86e22885042e73a761c3d896b00c"
+    },
+    {
+      "number": 36,
+      "key": "matsu",
+      "name": "まつ",
+      "quiz_hint": "ほそくて とがった は。ちゃいろい まつぼっくり。",
+      "zukan_text": "1ねんじゅう みどりの はを つけている き。まつぼっくりの なかに たねが あるよ。",
+      "source": "assets/images/shokubutsu/zukan/matsu.png",
+      "quiz": "assets/images/shokubutsu/quiz/matsu.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 64.96,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 2.64,
+      "alpha_matches_quiz": true,
+      "source_sha256": "556df8c930cd4c8ac3219b4d820f5332e940d421bed36827614c2a51c524cb6a",
+      "quiz_sha256": "d3f689ed6e33c3f492ad676546f37d5326c72c8a0363aecbc83cb714017d75ff"
+    },
+    {
+      "number": 37,
+      "key": "ichou",
+      "name": "いちょう",
+      "quiz_hint": "うちわみたいな は。あきに きいろく なる。",
+      "zukan_text": "あきに はが きいろく なる おおきな き。はは うちわの ような かたちだよ。",
+      "source": "assets/images/shokubutsu/zukan/ichou.png",
+      "quiz": "assets/images/shokubutsu/quiz/ichou.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 63.33,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 2.71,
+      "alpha_matches_quiz": true,
+      "source_sha256": "bc2c078d8b892ec7553a6bda4fc681bce3aea6829338d0aaa6067343dc491b67",
+      "quiz_sha256": "78299c4fd65a4e4fc24781469ed0d342fa035345c06d045bb59aa630fa965454"
+    },
+    {
+      "number": 38,
+      "key": "momiji",
+      "name": "もみじ",
+      "quiz_hint": "てのひらみたいな は。あきに あかく なる。",
+      "zukan_text": "あきに はが あかや オレンジに なる き。はの かたちは てのひらみたいだよ。",
+      "source": "assets/images/shokubutsu/zukan/momiji.png",
+      "quiz": "assets/images/shokubutsu/quiz/momiji.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 65.78,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 6.39,
+      "alpha_matches_quiz": true,
+      "source_sha256": "0f20d299b61a445d68d8a4222600933d1b80a458c4749a5942143cc77c45035f",
+      "quiz_sha256": "96151d2e148d8de19d4f723dea9f9d276ee5a3ab6f95d07f4c75177aa1a0fafd"
+    },
+    {
+      "number": 39,
+      "key": "take",
+      "name": "たけ",
+      "quiz_hint": "まっすぐ のびる みどりの くき。ふしが ある。",
+      "zukan_text": "とても はやく のびる しょくぶつ。くきには きっちり ならんだ ふしが あるよ。",
+      "source": "assets/images/shokubutsu/zukan/take.png",
+      "quiz": "assets/images/shokubutsu/quiz/take.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 76.88,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 2.73,
+      "alpha_matches_quiz": true,
+      "source_sha256": "3321285146189dc7c5d061880075a3c1b5949bba1fc89ca9b5e302e4c5517ae6",
+      "quiz_sha256": "32cfb526557bbb6d5da628e3da1e7d3513fcaf67f9482017e1f22444814ad473"
+    },
+    {
+      "number": 40,
+      "key": "blueberry",
+      "name": "ブルーベリー",
+      "quiz_hint": "ちいさくて まるい あおむらさきの み。",
+      "zukan_text": "きに なる ちいさな くだもの。いくつも かたまって みのるよ。",
+      "source": "assets/images/shokubutsu/zukan/blueberry.png",
+      "quiz": "assets/images/shokubutsu/quiz/blueberry.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent_percent": 67.92,
+      "semitransparent_pixels": 0,
+      "opaque_pale_percent": 2.19,
+      "alpha_matches_quiz": true,
+      "source_sha256": "d346bc6e4b9328fcefa346e9cfffb508399b346076a4a711a88c986735aec8b2",
+      "quiz_sha256": "6540949a7f03caccd9f28b094feae5192d2f09a65b3a1af7d5779b44a60dc403"
+    }
+  ]
+}
