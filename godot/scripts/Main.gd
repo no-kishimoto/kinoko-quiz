@@ -1,8 +1,11 @@
 extends Control
-## Mushroom-only, offline PC prototype using the already approved game data.
+## Offline PC game using approved catalogues, cutouts and sounds.
 
-const CatalogModel = preload("res://scripts/KinokoCatalog.gd")
+const CatalogModel = preload("res://scripts/SubjectCatalog.gd")
 const QuizModel = preload("res://scripts/QuizSession.gd")
+const ArithmeticModel = preload("res://scripts/ArithmeticSession.gd")
+const SearchModel = preload("res://scripts/SearchSession.gd")
+const SearchCanvas = preload("res://scripts/SearchBoard.gd")
 const CORRECT_SOUND_PATH := "res://assets/sounds/correct_pingpong.wav"
 const PAGE_SIZE := 3
 const BLACK := Color("000000")
@@ -32,6 +35,13 @@ var zukan_cards: Array[Button] = []
 var zukan_prev_button: Button
 var zukan_next_button: Button
 var correct_sound_count := 0
+var math_session = ArithmeticModel.new()
+var search_session = SearchModel.new()
+var arithmetic_icons: Array[TextureRect] = []
+var equation_label: Label
+var search_board: Control
+var _arithmetic_operation := "addition"
+var _search_mode := "normal"
 
 var _screen_root: Control
 var _feedback_panel: PanelContainer
@@ -52,7 +62,7 @@ func _ready() -> void:
 		push_error(catalog.error_message)
 		_show_data_error()
 		return
-	show_title()
+	show_subject_select()
 
 
 func _build_theme() -> void:
@@ -72,17 +82,68 @@ func _build_theme() -> void:
 	theme = game_theme
 
 
+func show_subject_select() -> void:
+	_quiz_generation += 1
+	_clear_screen("subjects")
+	var content := _centered_column(_page(), 1000, 24)
+	heading_label = _label("なにで あそぶ？", 60, content, 1000)
+	var grid := GridContainer.new()
+	grid.columns = 2
+	grid.add_theme_constant_override("h_separation", 24)
+	grid.add_theme_constant_override("v_separation", 24)
+	content.add_child(grid)
+	var representatives := {"kinoko": "benitengutake", "shokubutsu": "tomato", "konchuu": "kabutomushi", "kyouryuu": "tyrannosaurus"}
+	for subject in ["kinoko", "shokubutsu", "konchuu", "kyouryuu"]:
+		var subject_data: Dictionary = catalog.subjects[subject]
+		var card := _button("", Color.WHITE, select_subject.bind(subject), grid, 36, 230)
+		card.custom_minimum_size.x = 488
+		var stack := _column(_padding(card, 12, true), 8)
+		stack.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var representative: Dictionary = subject_data["items"][0]
+		for item in subject_data["items"]:
+			if item["key"] == representatives[subject]:
+				representative = item
+		var thumbnail := _image(representative["color_image"], stack)
+		thumbnail.custom_minimum_size.y = 140
+		_label(subject_data["label"], 38, stack, 464)
+
+
+func select_subject(subject: String) -> void:
+	if not catalog.select_subject(subject):
+		return
+	zukan_page = 0
+	show_title()
+
+
 func show_title() -> void:
 	_quiz_generation += 1
 	_clear_screen("title")
 	var page := _page()
-	var content := _centered_column(page, 560, 20)
-	heading_label = _label("きのこクイズ", 68, content, 560)
-	var title_image := _image(catalog.color_image_path("benitengutake"), content)
+	var content := _centered_column(page, 1000, 16)
+	heading_label = _label("%sクイズ" % catalog.label, 56, content, 1000)
+	var title_key: String = "benitengutake" if catalog.subject_id == "kinoko" else catalog.items[0]["key"]
+	var title_image := _image(catalog.color_image_path(title_key), content)
 	title_image.name = "TitleImage"
-	title_image.custom_minimum_size.y = 250
-	_button("クイズで あそぶ", ORANGE, show_quiz_select, content, 36, 88)
-	_button("きのこ ずかん を みる", BLUE, show_zukan.bind(0), content, 34, 88)
+	title_image.custom_minimum_size.y = 120
+	var grid := GridContainer.new()
+	grid.columns = 2
+	grid.add_theme_constant_override("h_separation", 20)
+	grid.add_theme_constant_override("v_separation", 14)
+	content.add_child(grid)
+	var entries := [
+		["クイズで あそぶ", ORANGE, show_quiz_select],
+		["%s ずかん を みる" % catalog.label, BLUE, show_zukan.bind(0)],
+		["たしざんで あそぶ", GREEN, start_arithmetic.bind("addition")],
+		["ひきざんで あそぶ", PURPLE, start_arithmetic.bind("subtraction")],
+	]
+	if catalog.subject_id == "kyouryuu":
+		entries.append(["かせきさがし", BLUE, start_search.bind("fossil")])
+		entries.append(["きょうりゅうさがし", ORANGE, start_search.bind("reconstruction")])
+	else:
+		entries.append(["%s さがし" % catalog.label, ORANGE, start_search.bind("normal")])
+	for entry in entries:
+		_button(entry[0], entry[1], entry[2], grid, 32, 82).custom_minimum_size.x = 490
+	_footer("ぶんやを えらびなおす", PURPLE, show_subject_select, content, 560, 64)
 
 
 func show_quiz_select() -> void:
@@ -127,8 +188,9 @@ func _show_question() -> void:
 	question_image = _image(catalog.quiz_image_path(item["key"]), _padding(image_panel, 12))
 	question_image.name = "QuestionImage"
 	var hints := _column(_padding(_panel(BLUE, left), 12), 4)
-	_label("どくの ヒント", 32, hints, left_width - 24)
-	toxicity_hint_label = _label(catalog.toxicity_text(item), 32, hints, left_width - 24, true)
+	if catalog.subject_id == "kinoko":
+		_label("どくの ヒント", 32, hints, left_width - 24)
+		toxicity_hint_label = _label(catalog.toxicity_text(item), 32, hints, left_width - 24, true)
 	_label("かたちの ヒント", 32, hints, left_width - 24)
 	hint_label = _label(item["quiz_hint"], 32, hints, left_width - 24, true)
 	var choices := _column(right, 10)
@@ -197,6 +259,8 @@ func next_question(expected_index: int = -1, expected_generation: int = -1) -> v
 
 
 func _quiz_explanation(item: Dictionary) -> String:
+	if catalog.subject_id != "kinoko":
+		return "%s\n%s" % [item["name"], item["zukan_text"]]
 	return "%s\nはえる ばしょ　%s\nみため　%s\n%s　%s" % [
 		item["name"], item["habitat"], item["features"], catalog.toxicity_text(item), item["caution"],
 	]
@@ -211,8 +275,222 @@ func _show_result() -> void:
 		quiz_session.total_questions(), quiz_session.correct_count,
 	], 52, content, 1080, true)
 	if quiz_session.correct_count == quiz_session.total_questions():
-		_label("これで きみも\nきのこ はかせだ！！", 52, content, 1080)
+		_label("これで きみも\nきのこ はかせだ！！" if catalog.subject_id == "kinoko" else "ぜんもん せいかい！ すごい！", 52, content, 1080, true)
 	_footer("タイトルへ もどる", PURPLE, show_title, content, 560, 84)
+
+
+func start_arithmetic(operation: String = "addition") -> void:
+	_quiz_generation += 1
+	_arithmetic_operation = operation
+	math_session = ArithmeticModel.new()
+	if not math_session.start(catalog.items, operation):
+		push_error(math_session.error_message)
+		_show_data_error()
+		return
+	_show_arithmetic_question()
+
+
+func _show_arithmetic_question() -> void:
+	_clear_screen("arithmetic")
+	var question: Dictionary = math_session.current_question()
+	var page := _page(14)
+	heading_label = _label(math_session.progress_text(), 46, page, _content_width())
+	var columns := _row(page, 24)
+	columns.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var left := _column(columns, 20)
+	left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	left.size_flags_stretch_ratio = 0.60
+	var right := _column(columns, 12)
+	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	right.size_flags_stretch_ratio = 0.40
+	var left_width := (_content_width() - 24) * 0.60
+	var right_width := (_content_width() - 24) * 0.40
+	var symbol := "＋" if _arithmetic_operation == "addition" else "−"
+	equation_label = _label("%s %s %s ＝ ？" % [
+		math_session.display_number(question["left"]), symbol,
+		math_session.display_number(question["right"]),
+	], 56, left, left_width)
+	equation_label.name = "Equation"
+	var illustration_panel := _panel(Color.WHITE, left)
+	illustration_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var illustration_content := _column(_padding(illustration_panel, 16), 12)
+	illustration_content.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	if math_session.shows_icons():
+		var groups := _row(illustration_content, 12)
+		groups.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		_arithmetic_icon_group(question["left_icons"], groups)
+		var operator_label := _label(symbol, 46, groups, 50)
+		operator_label.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		operator_label.custom_minimum_size.x = 50
+		_arithmetic_icon_group(question["right_icons"], groups)
+	else:
+		var center := CenterContainer.new()
+		center.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		illustration_content.add_child(center)
+		# This short, explicit two-line prompt must keep its natural width inside
+		# CenterContainer, rather than wrapping at the container's startup width 0.
+		_label("え なしで\nかんがえてみよう！", 38, center, left_width - 32)
+	for value in question["choices"]:
+		var button := _button(math_session.display_number(value), ORANGE,
+			select_arithmetic_answer.bind(value, math_session.current_index, _quiz_generation), right, 40, 82)
+		choice_buttons.append(button)
+	_feedback_panel = _panel(GREEN, right)
+	feedback_label = _label("", 36, _padding(_feedback_panel, 12), right_width - 24, true)
+	_feedback_panel.visible = false
+	next_button = _button("つぎへ", ORANGE,
+		next_arithmetic_question.bind(math_session.current_index, _quiz_generation), right, 32, 64)
+	next_button.visible = false
+	next_button.disabled = true
+	var space := Control.new()
+	space.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	right.add_child(space)
+	_footer("タイトルへ もどる", PURPLE, show_title, page, 560, 64, true)
+
+
+func _arithmetic_icon_group(keys: Array, parent: Control) -> void:
+	var grid := GridContainer.new()
+	grid.columns = mini(3, keys.size())
+	grid.add_theme_constant_override("h_separation", 8)
+	grid.add_theme_constant_override("v_separation", 8)
+	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	grid.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	parent.add_child(grid)
+	for key in keys:
+		var icon := _image(catalog.color_image_path(key), grid)
+		icon.custom_minimum_size = Vector2(76, 76)
+		icon.tooltip_text = catalog.get_item(key)["name"]
+		icon.set_meta("item_key", key)
+		arithmetic_icons.append(icon)
+
+
+func select_arithmetic_answer(value: int, expected_index: int = -1, expected_generation: int = -1) -> void:
+	if screen_name != "arithmetic" or math_session.is_answered():
+		return
+	if expected_index >= 0 and expected_index != math_session.current_index:
+		return
+	if expected_generation >= 0 and expected_generation != _quiz_generation:
+		return
+	var result: Dictionary = math_session.answer(value)
+	if result.is_empty():
+		return
+	for button in choice_buttons:
+		button.disabled = true
+	feedback_label.text = "せいかい！" if result["is_correct"] else "こたえは %s だよ" % math_session.display_number(result["answer"])
+	_feedback_panel.visible = true
+	next_button.visible = true
+	next_button.disabled = false
+	if result["is_correct"]:
+		_play_correct_sound()
+
+
+func next_arithmetic_question(expected_index: int = -1, expected_generation: int = -1) -> void:
+	if screen_name != "arithmetic" or not math_session.is_answered():
+		return
+	if expected_index >= 0 and expected_index != math_session.current_index:
+		return
+	if expected_generation >= 0 and expected_generation != _quiz_generation:
+		return
+	if math_session.next_question():
+		_show_count_result(math_session.total_questions(), math_session.correct_count)
+	else:
+		_show_arithmetic_question()
+
+
+func _show_count_result(total: int, correct: int, searching: bool = false) -> void:
+	_clear_screen("result")
+	var content := _centered_column(_page(), 1080, 26)
+	heading_label = _label("けっか", 64, content, 1080)
+	var text := "ぜんぶで %dもん\nみつけたのは %dもん" % [total, correct] if searching else "%dもん ちゅう %dもん せいかい！" % [total, correct]
+	result_label = _label(text, 52, content, 1080, true)
+	if not searching and total == correct:
+		_label("ぜんもん せいかい！ すごい！", 48, content, 1080, true)
+	_footer("タイトルへ もどる", PURPLE, show_title, content, 560, 84)
+
+
+func start_search(mode: String = "normal") -> void:
+	if catalog.subject_id == "kyouryuu" and mode == "normal":
+		return
+	if catalog.subject_id != "kyouryuu" and mode != "normal":
+		return
+	_quiz_generation += 1
+	_search_mode = mode
+	search_session = SearchModel.new()
+	var subject: Dictionary = catalog.subjects[catalog.subject_id]
+	var backgrounds: Array = subject.get("fossil_backgrounds", []) if mode == "fossil" else subject.get("backgrounds", [])
+	if not search_session.start(catalog.items, backgrounds, mode,
+			subject.get("habitats", {}), subject.get("habitat_backgrounds", {})):
+		push_error(search_session.error_message)
+		_show_data_error()
+		return
+	_show_search_question()
+
+
+func _show_search_question() -> void:
+	_clear_screen("search")
+	var question: Dictionary = search_session.current_question()
+	var page := _page(12)
+	heading_label = _label(search_session.progress_text(), 38, page, _content_width())
+	_label("%sを さがせ！" % question["target"]["name"], 42, page, _content_width(), true)
+	var columns := _row(page, 20)
+	columns.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var board_panel := _panel(Color("e7ddc0"), columns)
+	board_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	board_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	search_board = SearchCanvas.new()
+	search_board.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	search_board.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	search_board.custom_minimum_size = Vector2(400, 240)
+	_padding(board_panel, 8).add_child(search_board)
+	search_board.configure(question, catalog, _search_mode)
+	search_board.picked.connect(select_search_position.bind(search_session.current_index, _quiz_generation))
+	var controls := _column(columns, 14)
+	controls.custom_minimum_size.x = 330
+	controls.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_feedback_panel = _panel(BLUE, controls)
+	feedback_label = _label("さがして\nクリックしてね。", 32, _padding(_feedback_panel, 14), 302, true)
+	next_button = _button("つぎの もんだい", ORANGE,
+		next_search_question.bind(search_session.current_index, _quiz_generation), controls, 32, 80)
+	next_button.visible = false
+	next_button.disabled = true
+	var space := Control.new()
+	space.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	controls.add_child(space)
+	_footer("タイトルへ もどる", PURPLE, show_title, page, 560, 64, true)
+
+
+func select_search_position(point: Vector2, expected_index: int = -1, expected_generation: int = -1) -> void:
+	if screen_name != "search" or search_session.is_answered():
+		return
+	if expected_index >= 0 and expected_index != search_session.current_index:
+		return
+	if expected_generation >= 0 and expected_generation != _quiz_generation:
+		return
+	var result: Dictionary = search_session.answer_at(point)
+	if result.is_empty():
+		# Background is a retry, but margins are filtered out by SearchBoard.
+		feedback_label.text = "もういちど\nさがしてみよう。"
+		return
+	if result["is_correct"]:
+		feedback_label.text = "せいかい！"
+		search_board.reveal_target()
+		next_button.disabled = false
+		next_button.visible = true
+		_play_correct_sound()
+	else:
+		feedback_label.text = "もういちど\nさがしてみよう。"
+
+
+func next_search_question(expected_index: int = -1, expected_generation: int = -1) -> void:
+	if screen_name != "search" or not search_session.is_answered():
+		return
+	if expected_index >= 0 and expected_index != search_session.current_index:
+		return
+	if expected_generation >= 0 and expected_generation != _quiz_generation:
+		return
+	if search_session.next_question():
+		_show_count_result(search_session.total_questions(), search_session.found_count, true)
+	else:
+		_show_search_question()
 
 
 func zukan_page_count() -> int:
@@ -223,7 +501,7 @@ func show_zukan(page: int = 0) -> void:
 	zukan_page = clampi(page, 0, maxi(0, zukan_page_count() - 1))
 	_clear_screen("zukan")
 	var layout := _page(16)
-	heading_label = _label("きのこ ずかん", 48, layout, _content_width())
+	heading_label = _label("%s ずかん" % catalog.label, 48, layout, _content_width())
 	var navigation := _row(layout, 18)
 	zukan_prev_button = _button("まえへ", BLUE, change_zukan_page.bind(-1), navigation, 32, 64)
 	zukan_prev_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -253,7 +531,7 @@ func show_zukan(page: int = 0) -> void:
 		thumbnail.custom_minimum_size.y = 160
 		_label(item["name"], 32, card_content, (_content_width() - 48) / 3 - 24, true)
 		zukan_cards.append(card)
-	_label("きのこを クリックしてね。", 26, layout, _content_width())
+	_label("がぞうを クリックしてね。", 26, layout, _content_width())
 	_footer("タイトルへ もどる", PURPLE, show_title, layout, 520, 64)
 
 
@@ -292,6 +570,8 @@ func show_zukan_detail(key: String) -> void:
 
 
 func _detail_text(item: Dictionary) -> String:
+	if catalog.subject_id != "kinoko":
+		return "%s\n\nかたちの ヒント\n%s" % [item["zukan_text"], item["quiz_hint"]]
 	var entries: Array[String] = [
 		"はえる ばしょ\n%s" % item["habitat"],
 		"みられる きせつ\n%s" % item["season"],
@@ -337,7 +617,7 @@ func _on_correct_sound_finished() -> void:
 func _show_data_error() -> void:
 	_clear_screen("error")
 	var content := _centered_column(_page(), 1000, 16)
-	_label("きのこデータが よめなかったよ。\nアプリを ひらきなおしてね。", 40, content, 1000, true)
+	_label("データが よめなかったよ。\nアプリを ひらきなおしてね。", 40, content, 1000, true)
 
 
 func _clear_screen(new_screen_name: String) -> void:
@@ -346,6 +626,9 @@ func _clear_screen(new_screen_name: String) -> void:
 		_screen_root.queue_free()
 	choice_buttons.clear()
 	zukan_cards.clear()
+	arithmetic_icons.clear()
+	equation_label = null
+	search_board = null
 	next_button = null
 	question_image = null
 	feedback_label = null
